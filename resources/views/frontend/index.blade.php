@@ -3,14 +3,14 @@
 
 @section('content')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
     :root {
-        --demanto-gold: #B39256;
+       
         --demanto-gold-light: #F7F4EB;
-        --demanto-dark: #232323;
-        --demanto-bg: #FDFBF7;
-        --demanto-muted: #6E6E6E;
+    --demanto-gold:#C5A15A;
+    --demanto-dark:#4F4033;
+    --demanto-bg:#FDFBF7;
+    --demanto-muted:#85715F;
         --luxury-border: rgba(179, 146, 86, 0.25);
         --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
@@ -19,22 +19,23 @@
     body {
         background-color: var(--demanto-bg);
         color: var(--demanto-dark);
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
         overflow-x: hidden;
         font-size: 13px;
     }
 
     /* Typography - Minimized */
     .luxury-heading {
-        font-family: 'Roboto', sans-serif;
+    font-family:"Cormorant Garamond",serif;
         font-weight: 500;
+          color:#6E5A46;
         letter-spacing: 1px;
         text-transform: uppercase;
         background: linear-gradient(135deg, var(--demanto-dark) 0%, var(--demanto-gold) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        font-size: 22px !important;
+        font-size: 32px !important;
     }
 
     .luxury-sub {
@@ -67,7 +68,7 @@
     
     /* Buttons - Minimized */
     .btn-demanto {
-        background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+        background: linear-gradient(135deg, var(--demanto-dark) 0%, #9a7b45 100%);
         color: #fff !important;
         font-size: 9px;
         letter-spacing: 1.5px;
@@ -125,508 +126,6 @@
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(179, 146, 86, 0.2);
     }
-
-    /* Cards - Minimized */
-    .luxury-arch-card {
-        background: #fff;
-        border: 1px solid var(--luxury-border);
-        border-radius: 60px 60px 15px 15px;
-        padding: 15px 12px 18px 12px;
-        text-align: center;
-        transition: var(--transition-smooth);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .luxury-arch-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--demanto-gold), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.6s ease;
-    }
-    
-    .luxury-arch-card:hover::before {
-        transform: translateX(0);
-    }
-    
-    .luxury-arch-card:hover {
-        border-color: var(--demanto-gold);
-        box-shadow: var(--box-shadow-luxury);
-        transform: translateY(-5px);
-    }
-    
-    .arch-image-wrap {
-        border-radius: 50px 50px 12px 12px;
-        overflow: hidden;
-        aspect-ratio: 1/1;
-        margin-bottom: 12px;
-        background: linear-gradient(135deg, #f8f6f0 0%, #fff 100%);
-        position: relative;
-    }
-    
-    .arch-image-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 12px;
-        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .luxury-arch-card:hover .arch-image-wrap img {
-        transform: scale(1.05) rotate(1deg);
-    }
-
-
-
-    /* Collections Section - Minimized */
-/*==================================================
-    LUXURY COLLECTIONS
-==================================================*/
-
-.signature-collections{
-    background:#f7f2eb;
-    padding:0px 0;
-}
-
-.collections-title{
-    text-align:center;
-    margin-bottom:0px;
-}
-
-.collections-title span{
-    display:block;
-    font-family:'Roboto';
-    font-weight: 600;
-    font-size:18px;
-    letter-spacing:4px;
-    color:#6f5d48;
-    text-transform:uppercase;
-}
-
-.divider{
-    width:120px;
-    height:25px;
-    margin:0px auto 0;
-    position:relative;
-}
-
-.divider:before{
-    content:"";
-    position:absolute;
-    left:0;
-    right:0;
-    top:50%;
-    height:1px;
-    background:#d7c4a2;
-}
-
-.divider span{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:12px;
-    height:12px;
-    background:#b39256;
-    transform:translate(-50%,-50%) rotate(45deg);
-}
-
-/* CARD */
-
-.collection-card{
-    display:block;
-    text-decoration:none;
-}
-
-.collection-inner{
-
-    position:relative;
-
-    height:330px;
-
-    overflow:hidden;
-
-    border-radius:145px 145px 6px 6px;
-
-    border:1px solid #d9cdb8;
-
-    background:
-        radial-gradient(circle at top,
-            rgba(255,255,255,.95) 0%,
-            rgba(255,255,255,.55) 22%,
-            rgba(255,255,255,0) 45%
-        ),
-
-        linear-gradient(
-            180deg,
-            #c9a96e40  0%,
-            #c9a96e40  45%,
-            #c9a96e40  100%
-        );
-
-    box-shadow:
-        inset 0 0 0 6px #faf8f3,
-        inset 0 0 0 7px #e5d9c8,
-        inset 0 -40px 50px rgba(208,189,161,.18),
-        inset 0 35px 40px rgba(255,255,255,.55),
-        0 12px 24px rgba(0,0,0,.05);
-
-    transition:all .45s ease;
-}
-
-.collection-inner::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:12px;
-
-    border-radius:132px 132px 3px 3px;
-
-    border:2px solid #ebe2d4;
-
-    box-shadow:
-
-        inset 0 0 0 1px rgba(178,147,94,.18),
-
-        inset 0 20px 30px rgba(255,255,255,.35);
-
-    pointer-events:none;
-}
-.collection-inner:hover{
-
-    transform:translateY(-8px);
-
-    border-color:#c8af7f;
-
-    box-shadow:
-
-        inset 0 0 0 6px #faf8f3,
-
-        inset 0 0 0 7px #dbc59b,
-
-        inset 0 -50px 60px rgba(208,189,161,.18),
-
-        0 20px 40px rgba(0,0,0,.08);
-}
-/* TITLE */
-
-.collection-inner h3{
-
-    margin-top:50px;
-
-    margin-bottom:14px;
-
-    font-family:'Roboto';
-
-    font-size:14px;
-
-    font-weight:600;
-
-    letter-spacing:1.8px;
-
-    color:#514437;
-
-    text-transform:uppercase;
-
-    text-align:center;
-}
-
-/* IMAGE */
-
-.collection-image{
-
-    height:170px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:0 30px;
-
-    position:relative;
-}
-
-/* shadow under product */
-
-.collection-image:after{
-
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-
-    height:35px;
-
-    left:50%;
-
-    bottom:22px;
-
-    transform:translateX(-50%);
-
-    background:radial-gradient(
-        ellipse at center,
-        rgba(0,0,0,.20) 0%,
-        rgba(0,0,0,.10) 45%,
-        rgba(0,0,0,0) 80%
-    );
-
-    filter:blur(10px);
-
-    opacity:.45;
-
-    z-index:1;
-}
-
-.collection-image img{
-
-    max-width:78%;
-
-    max-height:145px;
-
-    object-fit:contain;
-
-    position:relative;
-
-    z-index:2;
-
-    transition:.45s;
-
-    filter:
-
-        brightness(1.02)
-
-        drop-shadow(0 10px 10px rgba(0,0,0,.08))
-
-        drop-shadow(0 22px 18px rgba(0,0,0,.06));
-}
-.collection-inner:hover img{
-
-    transform:translateY(-8px) scale(1.04);
-
-    filter:
-        drop-shadow(0 12px 12px rgba(0,0,0,.12))
-        drop-shadow(0 24px 24px rgba(0,0,0,.10));
-}
-
-/* FOOTER */
-
-.discover-link{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:24px;
-
-    text-align:center;
-
-    font-family:'Montserrat',sans-serif;
-
-    font-size:8px;
-
-    font-weight:500;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    color:#76614a;
-}
-
-.discover-link span{
-
-    margin-left:8px;
-
-    transition:.3s;
-}
-
-.collection-inner:hover .discover-link span{
-
-    margin-left:16px;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.collection-inner{
-
-    height:240px;
-
-    border-radius:110px 110px 6px 6px;
-}
-
-.collection-inner::before{
-
-    inset:10px;
-
-    border-radius:100px 100px 4px 4px;
-}
-
-.collection-inner h3{
-
-    margin-top:30px;
-
-    font-size:12px;
-}
-
-.collection-image{
-
-    height:165px;
-}
-
-.collection-image img{
-
-    max-height:140px;
-
-    max-width:76%;
-}
-
-.collection-image::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:105px;
-
-    height:18px;
-
-    left:50%;
-
-    bottom:20px;
-
-    transform:translateX(-50%);
-
-    border-radius:50%;
-
-    background:#000;
-
-    opacity:.12;
-
-    filter:blur(13px);
-
-    z-index:1;
-}
-.discover-link{
-
-    bottom:16px;
-
-    font-size:7px;
-}
-
-.collections-title span{
-
-    font-size:16px;
-}
-
-}
-.signature-slider{
-    overflow:hidden;
-    padding:15px 0 25px;
-}
-
-.signature-prev,
-.signature-next{
-
-    width:42px;
-    height:42px;
-
-    border:1px solid #d7c7a4;
-    border-radius:50%;
-
-    background:#fff;
-
-    color:#B39256;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    position:absolute;
-    top:45%;
-    transform:translateY(-50%);
-
-    cursor:pointer;
-
-    z-index:10;
-
-    transition:.3s;
-}
-
-.signature-prev{
-
-    left:-20px;
-
-}
-
-.signature-next{
-
-    right:-20px;
-
-}
-
-.signature-prev:hover,
-.signature-next:hover{
-
-    background:#B39256;
-    color:#fff;
-
-}
-
-.signature-pagination{
-
-    margin-top:25px;
-    text-align:center;
-
-}
-
-.signature-pagination .swiper-pagination-bullet{
-
-    background:#B39256;
-    opacity:.35;
-
-}
-
-.signature-pagination .swiper-pagination-bullet-active{
-
-    opacity:1;
-
-}
-@media(max-width:768px){
-
-
-
-.signature-slider{
-
-    padding-bottom:10px;
-
-}
-
-}
-
-    .collection-content span {
-        font-size: 8px;
-        letter-spacing: 1.5px;
-        color: var(--demanto-gold);
-        font-weight: 500;
-    }
-
     /* About Section - Minimized */
     .about-editorial-section {
         background: linear-gradient(135deg, #FBF9F4 0%, #fff 100%);
@@ -636,7 +135,7 @@
     }
     
     .about-title {
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 24px;
         line-height: 1.2;
         color: var(--demanto-dark);
@@ -669,7 +168,7 @@
         font-size: 22px;
         margin-bottom: 4px;
         font-weight: 600;
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
     }
     
     .metric-item i {
@@ -734,14 +233,14 @@
     }
     
     .featured-content h4 {
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         margin-bottom: 6px;
-        color: #232323;
+        color: var(--boutique-dark);
     }
     
     .featured-content a {
-        color: #B39256;
+        color: var(--boutique-text);
         text-decoration: none;
         text-transform: uppercase;
         font-size: 9px;
@@ -755,7 +254,7 @@
     }
     
     .section-title-demanto {
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
         color: #B39256;
         font-size: 28px;
         letter-spacing: 1.5px;
@@ -987,9 +486,9 @@
 
     width:100%;
 
-    height:40vh;
+    height:50vh;
 
-    min-height:400px;
+    min-height:500px;
 
     overflow:hidden;
 }
@@ -1021,11 +520,11 @@
     z-index:2;
 
     background:linear-gradient(
-        100deg,
+        160deg,
         rgba(248,245,240,.98) 0%,
-        rgba(248,245,240,.85) 25%,
+        rgba(251, 251, 251, 0.85) 25%,
         rgba(248,245,240,.18) 55%,
-        rgba(248,245,240,0) 85%
+        rgba(0, 0, 0, 0) 85%
     );
 }
 .slider-content{
@@ -1040,19 +539,20 @@
 }
 
 .slider-title{
-    font-size:40px;
-
-    color:#ac7d4b;
+    font-family:"Cormorant Garamond",serif;
+    font-size:50px;
+text-transform: uppercase;
+    color:var(--boutique-text);
 
     margin-bottom:10px;
 }
 
 .slider-desc{
-
-    max-width:520px;
+font-family:"Cormorant Garamond",serif;
+    max-width:300px;
 
     font-size:14px;
-    color:#ac7d4b;
+    color:var(--boutique-dark);
 
     margin-bottom:15px;
 }
@@ -1340,7 +840,38 @@
 }
 
 }
- 
+ .default-slider-container{
+    width:100%;
+    height:100%;
+}
+
+.default-slider-container .swiper-slide{
+    height:auto;
+}
+
+.home-banner{
+    position:relative;
+    overflow:hidden;
+}
+
+.default-slider-container .swiper-pagination{
+    bottom:30px !important;
+}
+
+.default-slider-container .swiper-pagination-bullet{
+    width:12px;
+    height:12px;
+    background:#fff;
+    opacity:.45;
+    transition:.3s;
+}
+
+.default-slider-container .swiper-pagination-bullet-active{
+    opacity:1;
+    background:#B39256;
+    width:32px;
+    border-radius:20px;
+}
 </style>
 
 <!-- Hero Slider Section -->
@@ -1348,120 +879,103 @@
 <!-- Hero Banner -->
 <section class="home-banner">
 
-    @php
-        $hero = $sliders->first();
-    @endphp
-<div class="hero-banner-image"
-     style="background-image:url('{{ $hero && $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}');">
+    <div class="swiper default-slider-container">
+        <div class="swiper-wrapper">
 
-    <div class="hero-dark-overlay"></div>
+            @forelse($sliders as $hero)
 
-    <div class="slider-overlay"></div>
+                <div class="swiper-slide">
 
-    <div class="container-fluid h-100 p-4">
+                    <div class="hero-banner-image"
+                         style="background-image:url('{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}');">
 
-        <div class="row h-100 align-items-center">
+                        <div class="hero-dark-overlay"></div>
 
-            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                        <div class="slider-overlay"></div>
 
-                <div class="slider-content">
+                        <div class="container h-100 p-4">
 
-                    <h1 class="slider-title ani-left">
-                        {{ $hero->title ?? 'Timeless Luxury' }}
-                    </h1>
+                            <div class="row h-100 align-items-center">
 
-                    <p class="slider-desc ani-right">
-                        {{ $hero->description ?? 'Where diamonds become timeless masterpieces.' }}
-                    </p>
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
 
-                    <div class="slider-btn ani-bottom">
+                                    <div class="slider-content">
 
-                        <a href="{{ url('/collections') }}" class="btn-demanto">
-                            Discover Collections
-                        </a>
+                                        <h1 class="slider-title ani-left">
+                                            {{ $hero->title }}
+                                        </h1>
 
-                    </div>
+                                        <p class="slider-desc ani-right">
+                                            {{ $hero->description }}
+                                        </p>
 
-                </div>
+                                    </div>
 
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- Signature Collections Section -->
-<section class="signature-collections">
-
-    <div class="container-fluid p-4">
-
-        <div class="collections-title ">
-            <span>EXPLORE OUR COLLECTIONS</span>
-
-            <div class="divider">
-                <span></span>
-            </div>
-        </div>
-
-        {{-- ========================= COLLECTIONS ========================= --}}
-        @if($collections->count())
-
-
-
-        <div class="position-relative">
-
-            <div class="swiper signature-slider collections-slider">
-
-                <div class="swiper-wrapper">
-
-                    @foreach($collections as $categoryItem)
-
-                    <div class="swiper-slide">
-
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
-
-                            <div class="collection-inner">
-
-                                <h3>{{ strtoupper($categoryItem->name) }}</h3>
-
-                                <div class="collection-image">
-                                    <img src="{{ asset($categoryItem->image) }}"
-                                         alt="{{ $categoryItem->name }}">
-                                </div>
-
-                                <div class="discover-link">
-                                    DISCOVER MORE
-                                    <span>→</span>
                                 </div>
 
                             </div>
 
-                        </a>
+                        </div>
 
                     </div>
 
-                    @endforeach
+                </div>
+
+            @empty
+
+                <div class="swiper-slide">
+
+                    <div class="hero-banner-image"
+                         style="background-image:url('{{ asset('assets/img/slider-placeholder.jpg') }}');">
+
+                        <div class="hero-dark-overlay"></div>
+                        <div class="slider-overlay"></div>
+
+                        <div class="container h-100 p-4">
+
+                            <div class="row h-100 align-items-center">
+
+                                <div class="col-lg-7">
+
+                                    <div class="slider-content">
+
+                                        <h1 class="slider-title">
+                                            Timeless Luxury
+                                        </h1>
+
+                                        <p class="slider-desc">
+                                            Where diamonds become timeless masterpieces.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div>
+            @endforelse
 
         </div>
 
-        @endif
+        <div class="swiper-pagination"></div>
 
     </div>
 
 </section>
 
+<!-- Signature Collections Section -->
+@include('frontend.collections.category.index')
+
 <!-- About Editorial Section -->
 <section class="about-editorial-section">
-    <div class="container-fluid p-3">
-        <div class="row align-items-center g-3">
+    <div class="container p-3">
+        <div class="row align-items-start g-3">
             <div class="col-lg-6">
                 <div class="row g-2">
                     <div class="col-7">
@@ -1496,52 +1010,7 @@
                 
                 <hr class="my-2" style="border-color: var(--luxury-border);">
                 
-                <div class="row text-center g-2">
-                    <div class="col-3">
-                        <div class="metric-number">
-                            {{ $aboutData->years ?? 20 }}+
-                        </div>
-                        <div class="metric-label">
-                            YEARS OF<br>EXPERTISE
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->iconone))
-                                <i class="{{ $aboutData->iconone }}"></i>
-                            @else
-                                <i class="fa-solid fa-gem"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titleone ?? 'FINEST<br>MATERIALS' !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->icontwo))
-                                <i class="{{ $aboutData->icontwo }}"></i>
-                            @else
-                                <i class="fa-solid fa-award"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titletwo ?? 'EXPERT<br>CRAFTSMANSHIP' !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->iconthree))
-                                <i class="{{ $aboutData->iconthree }}"></i>
-                            @else
-                                <i class="fa-solid fa-earth-americas"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titlethree ?? 'GLOBAL<br>PRESENCE' !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
 
                 <div class="mt-3">
                     <a href="{{ url('/aboutus') }}" class="btn-demanto">Discover Our Story</a>
@@ -1553,7 +1022,7 @@
 
 <!-- Featured Products Section -->
 <section class="featured-products">
-    <div class="container-fluid ">
+    <div class="container">
         <div class="collections-title mb-3">
 
             <span>Featured Pieces</span>
@@ -1594,14 +1063,14 @@
         </div>
 
         <div class="text-center mt-3">
-            <a href="{{ url('/collections') }}" class="btn-demanto">View All Jewelry</a>
+            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
         </div>
     </div>
 </section>
 
 <!-- Exhibitions Section - UNCHANGED -->
 <section class="exhibitions-area">
-    <div class="container-fluid">
+    <div class="container">
         <div class="collections-title mb-3">
 
             <span>EXHIBITIONS & EVENTS</span>
@@ -1614,13 +1083,27 @@
         <div class="position-relative">
             <div class="swiper exhibitions-slider">
                 <div class="swiper-wrapper">
-                    @foreach($blogs as $exhibition)
-                    <div class="swiper-slide">
-                        <div class="demanto-exhibition-item">
-                            <img src="{{ asset($exhibition->image) }}" alt="{{ $exhibition->title }}">
-                        </div>
-                    </div>
-                    @endforeach
+@foreach($blogs as $exhibition)
+<div class="swiper-slide">
+
+    <a href="{{ url('blog/details/'.$exhibition->id) }}"
+       class="demanto-exhibition-link">
+
+        <div class="demanto-exhibition-item">
+
+            <img src="{{ asset($exhibition->image) }}"
+                 alt="{{ $exhibition->title }}">
+
+            <div class="demanto-exhibition-overlay">
+                <span>View Event</span>
+            </div>
+
+        </div>
+
+    </a>
+
+</div>
+@endforeach
                 </div>
             </div>
             <div class="demanto-prev"><i class="fa fa-angle-left"></i></div>
@@ -1628,7 +1111,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="{{ url('/exhibitions') }}" class="btn-demanto-outline">VIEW ALL EXHIBITIONS</a>
+            <a href="{{ url('/blogs') }}" class="btn-demanto">VIEW ALL </a>
         </div>
     </div>
 </section>
@@ -1644,9 +1127,9 @@
 
             <div class="col-lg-5 mb-5 mb-lg-0">
 
-                <span class="appointment-label">
+                {{-- <span class="appointment-label">
                     PRIVATE CONSULTATION
-                </span>
+                </span> --}}
 
                 <h2>Book An Appointment</h2>
 
@@ -1762,7 +1245,7 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" class="appointment-btn">
+                <button type="submit" class="btn-demanto">
                     BOOK APPOINTMENT
                 </button>
             </div>

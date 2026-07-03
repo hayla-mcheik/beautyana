@@ -50,19 +50,31 @@
 
 
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn-signin">
-                                    {{ __('Login') }}
-                                </button>
+             <div class="row mb-0">
+    <div class="col-md-8 offset-md-4">
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn-forgot mt-4" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
+        <button type="submit" class="btn-signin">
+            {{ __('Login') }}
+        </button>
+
+        @if (Route::has('password.request'))
+            <div class="mt-3">
+                <a class="btn-forgot" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            </div>
+        @endif
+
+        <div class="register-link mt-4">
+            <span>Don't have an account?</span>
+
+            <a href="{{ url('/register') }}">
+                Register
+            </a>
+        </div>
+
+    </div>
+</div>
                     </form>
                     </div>
                 </div>

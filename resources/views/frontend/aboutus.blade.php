@@ -19,7 +19,7 @@
 
     body {
         background-color: var(--demanto-bg);
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
     }
 
     /* About Section - Minimized */
@@ -55,7 +55,7 @@
     }
     
     .about-title {
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 24px;
         line-height: 1.2;
         color: var(--demanto-dark);
@@ -88,7 +88,7 @@
         font-size: 22px;
         margin-bottom: 4px;
         font-weight: 600;
-        font-family: 'Roboto', sans-serif;
+       font-family:"Cormorant Garamond",serif;
     }
     
     .metric-item {
@@ -228,7 +228,7 @@
 <!-- About Editorial Section -->
 <section class="about-editorial-section">
     <div class="container">
-        <div class="row align-items-center g-3">
+        <div class="row align-items-start g-3">
             <!-- Images -->
             <div class="col-lg-6">
                 <div class="row g-2">
@@ -265,52 +265,7 @@
                 
                 <hr class="my-2" style="border-color: var(--luxury-border);">
                 
-                <div class="row text-center g-2">
-                    <div class="col-3">
-                        <div class="metric-number">
-                            {{ $aboutData->years ?? 20 }}+
-                        </div>
-                        <div class="metric-label">
-                            YEARS OF<br>EXPERTISE
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->iconone))
-                                <i class="{{ $aboutData->iconone }}"></i>
-                            @else
-                                <i class="fa-solid fa-gem"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titleone ?? 'FINEST<br>MATERIALS' !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->icontwo))
-                                <i class="{{ $aboutData->icontwo }}"></i>
-                            @else
-                                <i class="fa-solid fa-award"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titletwo ?? 'EXPERT<br>CRAFTSMANSHIP' !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="metric-item">
-                            @if(!empty($aboutData->iconthree))
-                                <i class="{{ $aboutData->iconthree }}"></i>
-                            @else
-                                <i class="fa-solid fa-earth-americas"></i>
-                            @endif
-                            <div class="metric-label mt-1">
-                                {!! $aboutData->titlethree ?? 'GLOBAL<br>PRESENCE' !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+           
 
                 <div class="mt-3">
                     <a href="{{ url('/contact') }}" class="btn-demanto">

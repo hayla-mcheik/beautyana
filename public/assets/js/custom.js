@@ -193,7 +193,7 @@ new Swiper(".signature-slider", {
         },
 
         1200: {
-            slidesPerView: 4,
+            slidesPerView: 5,
             spaceBetween: 30
         }
 

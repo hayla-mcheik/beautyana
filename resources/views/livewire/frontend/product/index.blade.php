@@ -15,7 +15,7 @@
 
     body {
         background-color: var(--demanto-bg);
-        font-family: 'Roboto', sans-serif;
+        font-family:"Cormorant Garamond",serif;
     }
 
     /* Product Area */
@@ -79,7 +79,7 @@
     }
 
     .mobile-categories-header h4 {
-        font-family: 'Roboto', sans-serif;
+      font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         font-weight: 600;
         color: var(--demanto-dark);
@@ -153,7 +153,7 @@
     }
 
     .sidebar-title {
-        font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 12px;
@@ -255,7 +255,7 @@
 
     .total-products p {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         color: var(--demanto-muted);
     }
 
@@ -322,7 +322,7 @@
     }
 
     .featured-content h4 {
-        font-family: 'Roboto', sans-serif;
+     font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         margin-bottom: 6px;
         color: var(--demanto-dark);
@@ -333,7 +333,7 @@
     }
 
     .featured-content a {
-        color: var(--demanto-gold);
+        color: var(--boutique-text);
         text-decoration: none;
         text-transform: uppercase;
         font-size: 9px;
@@ -366,7 +366,7 @@
     }
 
     .empty-state h5 {
-        font-family: 'Roboto', sans-serif;
+      font-family:"Cormorant Garamond",serif;
         font-size: 16px;
         color: var(--demanto-dark);
         margin-bottom: 8px;
@@ -519,12 +519,12 @@
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: #9a7b45;
+        background: var(--boutique-text);
     }
 </style>
 
 <section class="product-area">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Mobile Categories Section - ABOVE Products -->
         <div class="mobile-categories-section">
             <div class="mobile-categories-header" id="mobileCategoriesHeader">
@@ -597,7 +597,7 @@
                 <div class="shop-sidebar-wrapper">
                     <div class="sidebar-item">
                         <h4 class="sidebar-title">
-                            <a href="{{ url('/collections') }}">All Categories</a>
+                            <a href="{{ url('/categories') }}">All Categories</a>
                         </h4>
                         <div class="sidebar-body">
                             <div class="category-sub-menu">

@@ -65,14 +65,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         }
 
         body {
-          font-family: 'Roboto', sans-serif;
+     font-family:"Cormorant Garamond",serif;
             color: #1A1A1A;
             background-color: #FFFFFF;
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
- font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
             font-weight: 500;
             letter-spacing: 0.02em;
         }
@@ -102,7 +102,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     right: 30px;
     width: 30px;
     height: 30px;
-    background: #C9A96E;
+    background: green;
     color: #fff;
     border-radius: 50%;
     display:flex;

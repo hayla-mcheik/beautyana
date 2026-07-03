@@ -52,7 +52,7 @@
         }
 
         .title {
-            font-family: 'Roboto', sans-serif;
+           font-family:"Cormorant Garamond",serif;
             font-size: 18px;
             font-weight: 500;
             color: var(--demanto-dark);
@@ -91,7 +91,7 @@
         }
 
         .product-content .title {
-            font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
             font-size: 13px;
             font-weight: 500;
             margin-bottom: 4px;
@@ -345,8 +345,18 @@
                 <div class="row g-3">
                     <div class="col-lg-8">
                         <div class="shopping-cart-content">
-                            <h4 class="title">Shopping Cart</h4>
+                       <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="title mb-0">Shopping Cart</h4>
 
+    @if(count($items) > 0)
+        <button
+            class="btn btn-danger btn-sm"
+            wire:click="clearCart"
+        >
+            <i class="fa fa-trash"></i> Clear Cart
+        </button>
+    @endif
+</div>
                             @if(count($items) > 0)
                                 @foreach($items as $item)
                                     <div class="shopping-cart-item" wire:key="cart-item-{{ $item['id'] }}">
@@ -388,7 +398,7 @@
                                                         <div class="col-md-2 col-xs-2 text-end">
                                                             <div class="product-close">
                                                                 <a href="#" wire:click="removeItem({{ $item['product_id'] }})" wire:loading.attr="disabled">
-                                                                    <i class="fa fa-trash-o"></i>
+                                                                  <i class="fa fa-trash"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -399,14 +409,14 @@
                                     </div>
                                 @endforeach
                                 
-                                <a class="btn-primary" href="{{ url('collections') }}">
+                                <a class="btn-primary" href="{{ url('categories') }}">
                                     <i class="fa fa-arrow-left"></i> Continue Shopping
                                 </a>
                             @else
                                 <div class="empty-cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     <p>Your cart is empty</p>
-                                    <a class="btn-primary" href="{{ url('collections') }}">Start Shopping</a>
+                                    <a class="btn-primary" href="{{ url('categories') }}">Start Shopping</a>
                                 </div>
                             @endif
                         </div>

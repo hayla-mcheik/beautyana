@@ -405,29 +405,53 @@
 
         </div>
 
-        @if($blogs->count() > 0)
-            <div class="exhibitions-grid">
-                @foreach($blogs as $index => $exhibition)
-                    <div class="exhibition-card" style="animation-delay: {{ $index * 0.05 }}s">
-                        <div class="exhibition-image">
-                            <img src="{{ asset($exhibition->image) }}" alt="{{ $exhibition->title }}" loading="lazy">
-                            <div class="exhibition-overlay">
-                                <span>Featured Event</span>
-                            </div>
-                        </div>
-                        <div class="exhibition-content">
-                            <div class="exhibition-icon">✧</div>
-                            <h3>{{ $exhibition->title ?? 'Luxury Exhibition' }}</h3>
-                            <div class="exhibition-date">
-                                <i class="fa fa-calendar"></i>
-                                <span>{{ $exhibition->created_at ? $exhibition->created_at->format('F d, Y') : 'Coming Soon' }}</span>
-                            </div>
-                            <p>{{ $exhibition->description ?? 'Experience the pinnacle of craftsmanship at our exclusive exhibition.' }}</p>
-                        </div>
-                    </div>
-                @endforeach
+@if($blogs->count() > 0)
+
+<div class="exhibitions-grid">
+
+@foreach($blogs as $index => $exhibition)
+
+<a href="{{ url('blog/details/'.$exhibition->id) }}"
+   class="exhibition-card-link"
+   style="text-decoration:none;color:inherit;display:block;">
+
+    <div class="exhibition-card"
+         style="animation-delay: {{ $index * 0.05 }}s">
+
+        <div class="exhibition-image">
+            <img src="{{ asset($exhibition->image) }}"
+                 alt="{{ $exhibition->title }}"
+                 loading="lazy">
+
+            <div class="exhibition-overlay">
+                <span>Featured Event</span>
             </div>
-        @else
+        </div>
+
+        <div class="exhibition-content">
+
+            <div class="exhibition-icon">✧</div>
+
+            <h3>{{ $exhibition->title }}</h3>
+
+            <div class="exhibition-date">
+                <i class="fa fa-calendar"></i>
+                <span>{{ $exhibition->created_at->format('F d, Y') }}</span>
+            </div>
+
+            <p>{{ Str::limit(strip_tags($exhibition->description),120) }}</p>
+
+        </div>
+
+    </div>
+
+</a>
+
+@endforeach
+
+</div>
+
+@else
             <div class="empty-state">
                 <i class="fa-regular fa-calendar"></i>
                 <h3>No Events Available</h3>

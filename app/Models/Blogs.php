@@ -10,4 +10,8 @@ class Blogs extends Model
     use HasFactory;
     protected $table='blogs';
     protected $fillable=['title','by','date','description','image'];
+    public function images()
+{
+    return $this->hasMany(BlogImage::class);
+}
 }

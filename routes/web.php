@@ -59,6 +59,7 @@ Route::get('/debug-cart-view', function() {
 Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
     Route::get('/','index');
     Route::get('/collections','categories');
+    Route::get('/categories','categoriescollections');
     Route::get('/collections/{category_slug}','products');
     Route::get('/collections/{category_slug}/{product_slug}','productView');
 Route::get('/new-arrivals', 'newArrival');
@@ -150,6 +151,10 @@ Route::controller(AboutDataController::class)->group(function () {
         Route::get('blogs/{blog}/edit','edit');
         Route::put('blogs/{blog}','update');
         Route::get('blogs/{blog}/delete','destroy');
+        Route::get(
+    'blogs/gallery/delete/{id}',
+    'deleteGalleryImage'
+);
             });
 
     Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {

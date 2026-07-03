@@ -65,6 +65,40 @@
                       </div>
                       <h2 class="title">{{$blog->title }}</h2>
                       <p class="p-text1">{{ $blog->description }}</p>
+                      @if($blog->images->count())
+
+    <div class="blog-gallery mt-5">
+
+        <div class="section-title mb-4">
+            <h3>Gallery</h3>
+        </div>
+
+        <div class="row g-4">
+
+            @foreach($blog->images as $gallery)
+
+                <div class="col-lg-4 col-md-6">
+
+                    <a href="{{ asset($gallery->image) }}"
+                       target="_blank"
+                       class="gallery-item">
+
+                        <img
+                            src="{{ asset($gallery->image) }}"
+                            alt="Gallery Image"
+                            class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+@endif
                     </div>
  
                   </div>

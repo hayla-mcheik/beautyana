@@ -69,8 +69,8 @@
         }
 
         .product-title {
-            font-family: 'Roboto', sans-serif;
-            font-size: 12px;
+           font-family:"Cormorant Garamond",serif;
+            font-size: 14px;
             font-weight: 500;
             color: #232323;
             flex: 1;
@@ -116,11 +116,11 @@
         }
 
         .cart-total .label {
-            font-family: 'Roboto', sans-serif;
-            font-size: 13px;
+           font-family:"Cormorant Garamond",serif;
+            font-size: 15px;
             font-weight: 600;
             color: #232323;
-            text-transform: uppercase;
+            text-transform: capitalize;
             letter-spacing: 0.5px;
         }
 
@@ -144,10 +144,10 @@
             padding: 8px 15px;
             border-radius: 25px;
             text-decoration: none;
-            font-family: 'Roboto', sans-serif;
-            font-size: 11px;
+      font-family:"Cormorant Garamond",serif;
+            font-size: 14px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: capitalize;
             letter-spacing: 1px;
             transition: all 0.3s ease;
             border: none;
@@ -176,7 +176,7 @@
         .empty-cart-message span {
             font-size: 12px;
             color: #999;
-            font-family: 'Roboto', sans-serif;
+      font-family:"Cormorant Garamond",serif;
         }
     </style>
 
@@ -190,7 +190,7 @@
                         <img src="{{ asset('assets/img/no-image.png') }}" alt="no-image">
                     @endif
                     <span class="product-title">{{ Str::limit($item['name'], 25) }}</span>
-                    <span class="product-quantity me-2">{{ $item['quantity'] }}x</span>
+                    <span class="product-quantity me-5">{{ $item['quantity'] }}x</span>
                 </a>
                 <span class="product-price ml-2">${{ number_format($item['price'], 2) }}</span>
                 <a class="product-close" href="#" wire:click.prevent="removeItem({{ $item['id'] }})" wire:loading.attr="disabled">

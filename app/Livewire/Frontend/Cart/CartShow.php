@@ -179,25 +179,54 @@ class CartShow extends Component
         count: count($this->cartItems)
     );
 }
-    public function removeItem($productId)
-    {
-        if (auth()->check()) {
-            \App\Models\Cart::where('user_id', auth()->id())
-                ->where('product_id', $productId)
-                ->delete();
-        } else {
-            CartHelper::removeItem($productId);
-        }
-        
-        $this->loadCart();
-        
-        // Dispatch events to update other components
-        $this->dispatch('cartUpdated', 
-            total: $this->totalPrice, 
-            count: count($this->cartItems)
-        );
+ public function removeItem($productId)
+{
+    if (auth()->check()) {
+        \App\Models\Cart::where('user_id', auth()->id())
+            ->where('product_id', $productId)
+            ->delete();
+    } else {
+        CartHelper::removeItem($productId);
     }
 
+    $this->loadCart();
+
+    $this->dispatch(
+        'cartUpdated',
+        total: $this->totalPrice,
+        count: count($this->cartItems)
+    );
+
+    $this->dispatch(
+        'message',
+        text: 'Product removed from cart.',
+        type: 'success',
+        status: 200
+    );
+}
+    public function clearCart()
+{
+    if (auth()->check()) {
+        \App\Models\Cart::where('user_id', auth()->id())->delete();
+    } else {
+        CartHelper::setGuestCart([]);
+    }
+
+    $this->loadCart();
+
+    $this->dispatch(
+        'cartUpdated',
+        total: $this->totalPrice,
+        count: count($this->cartItems)
+    );
+
+    $this->dispatch(
+        'message',
+        text: 'Cart cleared successfully.',
+        type: 'success',
+        status: 200
+    );
+}
     public function render()
     {
         return view('livewire.frontend.cart.cart-show', [

@@ -17,9 +17,8 @@
         </div>
 
         {{-- Middle Row: 3 Compact Columns --}}
-        <div class="footer-grid">
-            {{-- Column 1: Maison --}}
-            <div class="footer-col">
+  
+            {{-- <div class="footer-col">
                 <h4>MAISON</h4>
                 <ul>
                     <li><a href="{{ url('aboutus') }}">Our Story</a></li>
@@ -29,8 +28,7 @@
                 </ul>
             </div>
 
-            {{-- Column 2: Collections --}}
-       {{-- Column 2: Collections --}}
+ 
 <div class="footer-col">
 
     <h4>COLLECTIONS</h4>
@@ -51,7 +49,7 @@
 
 </div>
 
-            {{-- Column 3: Contact & Social (simplified) --}}
+
             <div class="footer-col">
                 <h4>ATELIER</h4>
                 <div class="contact-compact">
@@ -67,7 +65,6 @@
                 </div>
             </div>
 
-            {{-- Column 4: Newsletter (compact) --}}
             <div class="footer-col newsletter-compact">
                 <h4>THE CHRONICLE</h4>
                 <div class="newsletter-simple">
@@ -75,18 +72,14 @@
                     <button id="luxSubscribeSimpleBtn">Subscribe</button>
                 </div>
                 <p class="news-note">Exclusive previews & private events</p>
-            </div>
-        </div>
+            </div> --}}
+        </div> 
 
         {{-- Bottom Bar --}}
-        <div class="footer-bottom">
-            <span>© {{ date('Y') }} DEMANTO · All rights reserved.</span>
-            <div class="payment-simple">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fas fa-gem"></i>
-            </div>
+        <div class="footer-bottom container text-center">
+            <div> <span>© {{ date('Y') }} DEMANTO · All rights reserved.</span> </div>
+            
+ 
         </div>
     </div>
 </footer>
@@ -156,7 +149,7 @@
         min-width: 150px;
     }
     .footer-col h4 {
-  font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 1.5px;
@@ -260,7 +253,7 @@
         border-top: 1px solid rgba(201, 169, 110, 0.2);
         padding-top: 20px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;

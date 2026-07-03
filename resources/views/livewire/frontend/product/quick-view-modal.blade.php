@@ -55,7 +55,7 @@
             </ul>
           </div>
           <div class="prices">
-            <span class="price">€14.52</span>
+            <span class="price">$14.52</span>
             <div class="tax-label">Tax included</div>
           </div>
           <div class="product-description">

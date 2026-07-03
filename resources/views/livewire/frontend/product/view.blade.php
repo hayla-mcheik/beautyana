@@ -116,7 +116,7 @@
         }
 
         .title {
-            font-family: 'Roboto', sans-serif;
+            font-family:"Cormorant Garamond",serif;
             font-size: 24px;
             font-weight: 500;
             color: var(--demanto-dark);
@@ -137,14 +137,14 @@
             font-size: 22px;
             font-weight: 600;
             color: var(--demanto-gold);
-            font-family: 'Roboto', sans-serif;
+      font-family:"Cormorant Garamond",serif;
         }
 
         .old_price {
             font-size: 15px;
             color: #aaa;
             text-decoration: line-through;
-            font-family: 'Roboto', sans-serif;
+       font-family:"Cormorant Garamond",serif;
         }
 
         /* Stock Status - Minimized */
@@ -187,7 +187,7 @@
 
         .product-desc-list li {
             color: var(--demanto-muted);
-            font-size: 12px;
+            font-size: 14px;
             line-height: 1.6;
             margin-bottom: 8px;
             position: relative;
@@ -379,9 +379,9 @@
                                     
                                     <div class="prices">
                                         @if($product->original_price > $product->selling_price)
-                                            <span class="old_price">€{{ number_format($product->original_price, 2) }}</span>
+                                            <span class="old_price">${{ number_format($product->original_price, 2) }}</span>
                                         @endif
-                                        <span class="price">€{{ number_format($product->selling_price, 2) }}</span>
+                                        <span class="price">${{ number_format($product->selling_price, 2) }}</span>
                                     </div>
 
                                     <div class="stock-status">

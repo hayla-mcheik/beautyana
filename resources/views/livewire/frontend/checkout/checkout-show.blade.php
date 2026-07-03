@@ -48,7 +48,7 @@
             background: transparent;
             border: none;
             padding: 12px 0;
-        font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
             font-size: 16px;
             font-weight: 500;
             color: var(--demanto-dark);
@@ -141,7 +141,7 @@
         }
 
         .title {
-        font-family: 'Roboto', sans-serif;
+font-family:"Cormorant Garamond",serif;
             font-size: 18px;
             font-weight: 500;
             color: var(--demanto-dark);

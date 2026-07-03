@@ -1,4 +1,16 @@
+@extends('layouts.app')
+@section('title', 'About Us')
 
+@section('content')
+<!-- Dynamic Breadcrumb -->
+@include('layouts.inc.frontend.breadcrumb', [
+    'breadcrumbs' => [
+        [
+            'title' => 'Collections',
+            'url' => '#'
+        ]
+    ]
+])
 <!-- Signature Collections Section -->
 <section class="signature-collections">
 
@@ -461,3 +473,5 @@ document.addEventListener('DOMContentLoaded', function() {
         font-weight: 500;
     }
 </style>
+
+@endsection

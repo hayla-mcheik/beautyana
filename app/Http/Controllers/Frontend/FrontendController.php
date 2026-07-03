@@ -97,6 +97,29 @@ return redirect()->back()->with('message','Empty Search');
         )
     );
 }
+  public function categoriescollections()
+{
+    $collections = Category::where('status','0')
+        ->where('menu','Collections')
+        ->get();
+
+    $highJewelry = Category::where('status','0')
+        ->where('menu','High Jewelry')
+        ->get();
+
+    $adSignature = Category::where('status','0')
+        ->where('menu','AD Signature')
+        ->get();
+
+    return view(
+        'frontend.collections.category.collections',
+        compact(
+            'collections',
+            'highJewelry',
+            'adSignature'
+        )
+    );
+}
     public function products($category_slug)
     {
         $inStockCount = Product::where('quantity', '>', 0)->count();
@@ -163,13 +186,19 @@ public function blogs()
 
 public function blogdetails($id)
 {
-    // The specific blog being read
-    $blog = Blogs::findOrFail($id); 
+    // Load blog with gallery images
+    $blog = Blogs::with('images')->findOrFail($id);
 
-    // Fetch only the latest 4 posts for the sidebar
-    $latestBlogs = Blogs::latest()->take(4)->get(); 
+    // Latest posts for sidebar
+    $latestBlogs = Blogs::latest()
+        ->where('id', '!=', $id)
+        ->take(4)
+        ->get();
 
-    return view('frontend.blogs.blogdetails', compact('blog', 'latestBlogs')); 
+    return view(
+        'frontend.blogs.blogdetails',
+        compact('blog', 'latestBlogs')
+    );
 }
 public function contactus()
 {

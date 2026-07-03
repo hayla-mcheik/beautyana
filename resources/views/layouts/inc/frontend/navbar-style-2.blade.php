@@ -1,7 +1,7 @@
 <header class="header-area header-default header-style {{ request()->is('/') ? '' : 'header-white-links' }}">
  
     <div class="header-bottom sticky-header hidden-md-down to-be-sticky">
-        <div class="container-fluid px-4">
+        <div class="container px-4">
             <div class="row align-items-center">
                 <div class="col-12">
                     <div class="header-align align-default d-flex justify-content-between align-items-center">
@@ -16,7 +16,7 @@
                             <div class="header-navigation-area hidden-md-down">
                                 <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
                                     <li><a href="{{ url('/') }}">Home</a></li>
-                                    <li><a href="{{ url('aboutus') }}">About Us</a></li>
+                             
                                     
                               <li class="has-dropdown">
     <a href="#">
@@ -64,26 +64,62 @@
 </li>
 
                                     <li><a href="{{ url('blogs') }}">News</a></li>
-                                    <li><a href="{{ url('contactus') }}">Contact us</a></li>
+                              
                                 </ul>
                             </div>
                         </div>
 
-                    <div class="align-right d-flex align-items-center gap-3">
+<div class="align-right d-flex align-items-center gap-3">
 
-    @guest
+    <div class="desktop-social d-flex align-items-center">
 
-    <div class="account-links d-flex align-items-center gap-2">
+        @if($appSetting->instagram)
+            <a href="{{ $appSetting->instagram }}"
+               target="_blank"
+               class="desktop-social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        @endif
 
-        <a href="{{ url('login') }}">Login</a>
+        @if($appSetting->facebook)
+            <a href="{{ $appSetting->facebook }}"
+               target="_blank"
+               class="desktop-social-icon">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        @endif
 
-        <span>|</span>
+        @if($appSetting->tiktok)
+            <a href="{{ $appSetting->tiktok }}"
+               target="_blank"
+               class="desktop-social-icon">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        @endif
 
-        <a href="{{ url('register') }}">Register</a>
+        @if($appSetting->youtube)
+            <a href="{{ $appSetting->youtube }}"
+               target="_blank"
+               class="desktop-social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+        @endif
 
     </div>
 
-    @else
+@guest
+
+<div class="header-user-icon">
+
+    <a href="{{ url('login') }}" title="Login">
+
+        <i class="far fa-user"></i>
+
+    </a>
+
+</div>
+
+@else
 
     <div class="dropdown-wrapper">
 
@@ -141,11 +177,9 @@
                 <div class="position-relative">
 
                     <i class="icon-bag icon target-cart-icon"></i>
-
-                    <sup class="shop-count">
-                        <livewire:frontend.cart.cart-count />
-                    </sup>
-
+<span class="shop-count">
+    <livewire:frontend.cart.cart-count />
+</span>
                 </div>
 
             </a>
@@ -169,7 +203,7 @@
     </div>
 
     <div class="responsive-header d-lg-none py-0 border-bottom border-light-subtle">
-        <div class="container-fluid px-3">
+        <div class="container px-3">
             <div class="row align-items-center">
                 <div class="col-4">
                     <div class="header-item">
@@ -227,7 +261,7 @@
             <i class="icon-bag text-white target-mobile-cart-icon"></i>
 
             <span class="item-count position-absolute badge rounded-circle shop-count"
-                  style="top:-5px;right:-8px;font-size:8px;padding:2px 4px;">
+                  style="top:-5px;right:-8px;font-size:14px;padding:2px 4px;">
 
                 <livewire:frontend.cart.cart-count />
 
@@ -269,9 +303,7 @@
                 <a href="{{ url('/') }}">Home</a>
             </li>
 
-            <li>
-                <a href="{{ url('aboutus') }}">About Us</a>
-            </li>
+       
 
             {{-- Collections --}}
             <li class="has-mobile-dropdown">
@@ -337,9 +369,7 @@
                 <a href="{{ url('blogs') }}">News</a>
             </li>
 
-            <li>
-                <a href="{{ url('contactus') }}">Contact Us</a>
-            </li>
+          
 
         </ul>
 
@@ -410,16 +440,11 @@
 
 <div class="off-canvas-overlay" id="sidebarOverlay"></div>
 <style>
+    
     /* ==========================================================================
        1. CORE STRUCTURAL LAYOUT HYDRATION & REFINED DROPDOWN LOGIC FRAMEWORK
        ========================================================================== */
-    :root {
-        --boutique-pink: #C9A96E;
-        --boutique-dark: #232323;
-        --boutique-muted: #7e7e7e;
-        --boutique-light-border: #f2f2f2;
-    }
-    
+
     .header-area.header-default {
         position: absolute;
         top: 0;
@@ -439,7 +464,7 @@
     .header-top .account-links a,
     .header-top .dropdown-btn {
         color: #fff !important;
-        font-size: 10px !important;
+        font-size: 14px !important;
     }
 
     .header-top a:hover,
@@ -471,9 +496,11 @@
 .header-white-links .header-action-area a,
 .header-white-links .header-action-area .target-cart-icon {
     color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 15px;
 }
 .header-white-links .boutique-nav li  ul li a{
-color: #C9A96E !important;
+color: var(--boutique-text) !important; 
 }
 
 /* On hover, keep them white with gold accent */
@@ -505,7 +532,10 @@ color: #C9A96E !important;
         from { transform: translateY(-100%); }
         to { transform: translateY(0); }
     }
-
+.account-links a {
+    font-size: 14px;
+    font-weight: 600;
+}
 /* Enhanced Structural Dropdowns */
 .has-dropdown {
     position: relative;
@@ -538,7 +568,7 @@ color: #C9A96E !important;
 .has-dropdown i {
     display: inline-block;
     transition: transform 0.3s ease;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .has-dropdown:hover i {
@@ -613,7 +643,7 @@ color: #C9A96E !important;
 .boutique-dropdown li a {
     padding: 10px 25px !important;
     color: var(--boutique-dark) !important;
-    font-size: 11px !important;
+    font-size: 14px !important;
     font-weight: 500 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.8px;
@@ -631,7 +661,7 @@ color: #C9A96E !important;
     opacity: 0;
     transition: all 0.3s ease;
     color: var(--boutique-pink);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .boutique-dropdown li a:hover {
@@ -653,7 +683,7 @@ color: #C9A96E !important;
     position: relative;
     padding: 6px 14px !important;
     display: inline-block;
-    color: black !important;
+    color: var(--boutique-dark) !important;
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -696,7 +726,7 @@ color: #C9A96E !important;
 .has-dropdown i {
     display: inline-block;
     transition: transform 0.3s ease;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .has-dropdown:hover i {
@@ -777,7 +807,7 @@ color: #C9A96E !important;
 .boutique-dropdown li a {
     padding: 10px 25px !important;
     color: var(--boutique-dark) !important;
-    font-size: 11px !important;
+    font-size: 14px !important;
     font-weight: 500 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.8px;
@@ -795,7 +825,7 @@ color: #C9A96E !important;
     opacity: 0;
     transition: all 0.3s ease;
     color: var(--boutique-pink);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .boutique-dropdown li a:hover {
@@ -818,16 +848,16 @@ color: #C9A96E !important;
     background: #ffffff;
 }
 
-.header-white-links .boutique-nav li > a:hover {
-    color: var(--boutique-pink) !important;
+.header-white-links .boutique-nav li > a:hover{
+    color:var(--logo-pink-dark) !important;
 }
 
-.header-white-links .boutique-nav li > a:hover::after {
-    background: var(--boutique-pink);
+.header-white-links .boutique-nav li > a:hover::after{
+    background:var(--logo-pink-dark);
 }
 
 .header-white-links .boutique-nav li ul li a {
-    color: #C9A96E !important;
+    color: var(--boutique-text);
 }
 
 .header-white-links .boutique-nav li ul li a::after {
@@ -843,8 +873,12 @@ color: #C9A96E !important;
     background: var(--boutique-pink);
 }
 
-.header-white-links.header-sticky-active .boutique-nav li > a:hover {
-    color: var(--boutique-pink) !important;
+.header-white-links.header-sticky-active .boutique-nav li > a:hover{
+    color:var(--logo-pink-dark) !important;
+}
+
+.header-white-links.header-sticky-active .boutique-nav li > a:hover::after{
+    background:var(--logo-pink-dark);
 }
 
 /* Sticky Header - preserve hover underline */
@@ -856,8 +890,12 @@ color: #C9A96E !important;
     background: var(--boutique-pink);
 }
 
-.header-bottom.sticky-on .boutique-nav li > a:hover {
-    color: var(--boutique-pink) !important;
+.header-bottom.sticky-on .boutique-nav li > a:hover{
+    color:var(--logo-pink-dark) !important;
+}
+
+.header-bottom.sticky-on .boutique-nav li > a:hover::after{
+    background:var(--logo-pink-dark);
 }
 /* Mobile menu hover line removal */
 @media (max-width: 991px) {
@@ -894,7 +932,7 @@ color: #C9A96E !important;
         display: block;
         padding: 6px 18px;
         color: var(--boutique-dark) !important;
-        font-size: 10px !important;
+        font-size: 14px !important;
         text-transform: uppercase;
         text-decoration: none;
         font-weight: 600;
@@ -924,17 +962,19 @@ color: #C9A96E !important;
     .boutique-nav li a,
     .boutique-text-small a,
     .header-top .dropdown-btn {
-        font-size: 10px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 600;
-        text-decoration: none;
+        font-family:"Cormorant Garamond",serif !important;
+    font-size:16px !important;
+    font-weight:800 !important;
+    letter-spacing:.2px;
+    text-transform:none !important;
+    color:var(--boutique-text) !important;
+    transition:.35s;
     }
 
     .boutique-nav li a {
         padding: 6px 14px !important;
         display: inline-block;
-        color: black !important;
+        color: var(--boutique-dark) !important;
         transition: color 0.25s ease;
     }
 /* Default Header */
@@ -944,6 +984,7 @@ color: #C9A96E !important;
 .header-action-area .target-cart-icon{
     color: #fff;
     transition: color .3s ease;
+    font-size: 15px;
 }
 
 /* Sticky Header */
@@ -954,8 +995,8 @@ color: #C9A96E !important;
     color: #000;
 }
        .boutique-nav li ul li  a {
-       color: var(--demanto-gold) !important;
-         font-size: 9px !important;
+       color: var([--boutique-text]) !important;
+         font-size: 14px !important;
        } 
     .contact-email span {
         font-size: 10px !important;
@@ -976,20 +1017,47 @@ color: #C9A96E !important;
         transform: rotate(180deg);
     }
 
-    .shop-count {
-        background: var(--boutique-pink) !important;
-        color: #ffffff !important;
-        font-size: 8px !important;
-        font-weight: 600;
-        padding: 2px 5px !important;
-        border-radius: 50% !important;
-        min-width: 16px;
-        height: 16px;
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-    }
+.shop-count{
+    position:absolute;
+    top:-12px;
+    right:-8px;
 
+    min-width:18px;
+    width:18px;
+    height:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    font-size:12px !important;
+    font-weight:700;
+    line-height:1;
+
+    transition:.3s ease;
+    z-index:9999;
+
+    color:#fff !important;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.25);
+}
+
+/* Sticky header */
+.header-area.header-sticky-active .shop-count{
+    background:#fff;
+    color:var(--boutique-dark) !important;
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.12);
+}
+
+/* White pages after sticky */
+.header-white-links.header-sticky-active .shop-count{
+    background:#fff;
+    color:var(--boutique-dark) !important;
+}
     /* Mini Cart Dropdown Styles */
     .parent-cart-hover:hover .popup-cart-content {
         display: block;
@@ -1030,7 +1098,7 @@ color: #C9A96E !important;
         width: 100%;
     }
     .ticker-item {
-        font-size: 9px;
+        font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1.5px;
@@ -1120,7 +1188,7 @@ color: #C9A96E !important;
     .btn-menu-close {
         background: none;
         border: none;
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: 1.5px;
         cursor: pointer;
         font-weight: 600;
@@ -1157,17 +1225,17 @@ color: #C9A96E !important;
     gap:12px;
     color:#232323;
     text-decoration:none;
-    font-size:12px;
+    font-size:14px;
     margin-bottom:14px;
     transition:.3s;
 }
 
 .mobile-sidebar-footer a:hover{
-    color:#C9A96E;
+    color:var(--boutique-text);
 }
 
 .mobile-sidebar-footer i{
-    color:#C9A96E;
+    color:var(--boutique-text);
     width:20px;
     text-align:center;
 }
@@ -1193,8 +1261,8 @@ color: #C9A96E !important;
 }
 
 .sidebar-social a:hover{
-    background:#C9A96E;
-    border-color:#C9A96E;
+    background:var(--boutique-text);
+    border-color:var(--boutique-text);
     color:#fff;
 }
 
@@ -1205,7 +1273,7 @@ color: #C9A96E !important;
     .mobile-main-nav > li > a {
         display: block;
         padding: 14px 25px;
-        font-size: 10px;
+        font-size: 14px;
         font-weight: 600;
         color: var(--boutique-dark);
         text-decoration: none;
@@ -1229,7 +1297,7 @@ color: #C9A96E !important;
     .mobile-sub-categories li a {
         display: block;
         padding: 8px 0;
-        font-size: 9px;
+        font-size: 14px;
         color: var(--boutique-muted);
         text-decoration: none;
         text-transform: uppercase;
@@ -1263,12 +1331,12 @@ color: #C9A96E !important;
     }
     
     .cart-amount-summary {
-        font-size: 10px !important;
+        font-size: 14px !important;
         font-weight: 500 !important;
     }
     
     .phone a, .phone span {
-        font-size: 10px !important;
+        font-size: 14px !important;
     }
     .mobile-social-icon{
     color:#fff;
@@ -1277,7 +1345,7 @@ color: #C9A96E !important;
 }
 
 .mobile-social-icon:hover{
-    color:#C9A96E;
+    color:var(--boutique-text);
 }
 
 .header-area.header-sticky-active .mobile-social-icon{
@@ -1285,7 +1353,67 @@ color: #C9A96E !important;
 }
 
 .header-area.header-sticky-active .mobile-social-icon:hover{
-    color:#C9A96E;
+    color:var(--boutique-text);
+}
+.desktop-social{
+    gap:14px;
+}
+
+.desktop-social-icon{
+    color:#fff;
+    font-size:15px;
+    transition:.3s;
+    text-decoration:none;
+}
+
+.desktop-social-icon:hover{
+    color:var(--logo-pink-dark);
+}
+
+/* Sticky header */
+.header-area.header-sticky-active .desktop-social-icon{
+    color:var(--boutique-dark);
+}
+
+.header-area.header-sticky-active .desktop-social-icon:hover{
+    color:var(--boutique-text);
+}
+
+/* White links pages */
+.header-white-links .desktop-social-icon{
+    color:#fff;
+}
+
+.header-white-links.header-sticky-active .desktop-social-icon{
+    color:#000;
+}
+.header-user-icon a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:34px;
+    height:34px;
+
+    color:#fff;
+    text-decoration:none;
+    transition:.35s;
+}
+
+.header-user-icon i{
+    font-size:14px;
+}
+
+.header-user-icon a:hover{
+    color:var(--logo-pink-dark);
+}
+
+.header-area.header-sticky-active .header-user-icon a{
+    color:var(--boutique-dark);
+}
+
+.header-area.header-sticky-active .header-user-icon a:hover{
+    color:var(--logo-pink-dark);
 }
 </style>
 
