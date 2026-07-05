@@ -158,7 +158,7 @@
     
     .about-description {
         color: #666;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.6;
         margin-top: 15px;
     }
@@ -382,7 +382,7 @@
     @media (max-width: 768px) {
         .home-slider-area, .home-slider-container { height: 500px !important; }
         .slider-title { font-size: 22px !important; letter-spacing: 1px; }
-        .slider-desc { font-size: 10px !important; }
+        .slider-desc { font-size: 12px !important; }
         .luxury-heading { font-size: 18px !important; }
         .about-title { font-size: 20px; }
         .metric-number { font-size: 18px; }
@@ -551,7 +551,7 @@ text-transform: uppercase;
 font-family:"Cormorant Garamond",serif;
     max-width:300px;
 
-    font-size:14px;
+    font-size:15px;
     color:var(--boutique-dark);
 
     margin-bottom:15px;
@@ -600,7 +600,7 @@ font-family:"Cormorant Garamond",serif;
 
     margin:auto auto 30px;
 
-    font-size:15px;
+    font-size:16px;
 }
 
 .slider-btn{

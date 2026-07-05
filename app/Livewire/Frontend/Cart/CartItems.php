@@ -35,63 +35,102 @@ class CartItems extends Component
         }
     }
 
-    public function loadCart()
-    {
-        $this->loadCartData();
-        $this->calculateTotals();
-        
-        // Dispatch the updated totals to other components
-        $this->dispatch('cartUpdated', 
-            total: $this->total, 
-            count: $this->count
-        );
+public function loadCart()
+{
+    $this->loadCartData();
+    $this->calculateTotals();
+
+    $this->dispatch(
+        'cartUpdated',
+        total: $this->total,
+        count: $this->count
+    );
+}
+
+public function loadCartData()
+{
+    $items = [];
+
+    if (auth()->check()) {
+
+        $dbCarts = \App\Models\Cart::where('user_id', auth()->id())
+            ->with('product.productImages', 'product.category')
+            ->get();
+
+        foreach ($dbCarts as $cart) {
+
+            // Remove deleted, hidden or out-of-stock products
+            if (
+                !$cart->product ||
+                $cart->product->status != '0' ||
+                $cart->product->quantity <= 0
+            ) {
+                $cart->delete();
+                continue;
+            }
+
+            // Adjust quantity if stock has changed
+            if ($cart->quantity > $cart->product->quantity) {
+
+                $cart->update([
+                    'quantity' => $cart->product->quantity
+                ]);
+
+                $cart->refresh();
+            }
+
+            $items[] = [
+                'id' => $cart->product->id,
+                'name' => $cart->product->name,
+                'slug' => $cart->product->slug,
+                'price' => $cart->product->selling_price,
+                'quantity' => $cart->quantity,
+                'image' => $cart->product->productImages->first()->image ?? null,
+                'category_slug' => $cart->product->category->slug ?? 'all'
+            ];
+        }
+
+    } else {
+
+        $guestCart = CartHelper::getGuestCart();
+
+        foreach ($guestCart as $productId => $data) {
+
+            $product = Product::with('productImages', 'category')->find($productId);
+
+            // Remove invalid products
+            if (
+                !$product ||
+                $product->status != '0' ||
+                $product->quantity <= 0
+            ) {
+                unset($guestCart[$productId]);
+                continue;
+            }
+
+            // Adjust guest cart quantity
+            if ($data['quantity'] > $product->quantity) {
+
+                $guestCart[$productId]['quantity'] = $product->quantity;
+            }
+
+            $items[] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'price' => $product->selling_price,
+                'quantity' => $guestCart[$productId]['quantity'],
+                'image' => $product->productImages->first()->image ?? null,
+                'category_slug' => $product->category->slug ?? 'all'
+            ];
+        }
+
+        // Save updated guest cart
+        CartHelper::setGuestCart($guestCart);
     }
 
-    public function loadCartData()
-    {
-        if (auth()->check()) {
-            // For authenticated users - get from database
-            $dbCarts = \App\Models\Cart::where('user_id', auth()->id())
-                ->with('product.productImages', 'product.category')
-                ->get();
-            
-            $items = [];
-            foreach ($dbCarts as $cart) {
-                if ($cart->product) {
-                    $items[] = [
-                        'id' => $cart->product->id,
-                        'name' => $cart->product->name,
-                        'slug' => $cart->product->slug,
-                        'price' => $cart->product->selling_price,
-                        'quantity' => $cart->quantity,
-                        'image' => $cart->product->productImages->first()->image ?? null,
-                        'category_slug' => $cart->product->category->slug ?? 'all'
-                    ];
-                }
-            }
-            $this->cartData = $items;
-        } else {
-            // For guest users - get from cookie
-            $guestCart = CartHelper::getGuestCart();
-            $items = [];
-            
-            foreach ($guestCart as $productId => $data) {
-                $product = Product::with('productImages', 'category')->find($productId);
-                if ($product) {
-                    $items[] = [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'slug' => $product->slug,
-                        'price' => $product->selling_price,
-                        'quantity' => $data['quantity'],
-                        'image' => $product->productImages->first()->image ?? null,
-                        'category_slug' => $product->category->slug ?? 'all'
-                    ];
-                }
-            }
-            $this->cartData = $items;
-        }
-    }
+    $this->cartData = $items;
+}
 
     public function calculateTotals()
     {
