@@ -245,23 +245,35 @@
             </a>
         @endif
 
-        @if($appSetting->tiktok)
-            <a href="{{ $appSetting->tiktok }}"
-               target="_blank"
-               class="mobile-social-icon me-3">
+   @if($appSetting->tiktok)
+    <a href="{{ $appSetting->tiktok }}"
+       target="_blank"
+       class="mobile-social-icon me-3">
+        <i class="fab fa-tiktok"></i>
+    </a>
+@endif
 
-                <i class="fab fa-tiktok"></i>
+{{-- Mobile User --}}
+@guest
+    <a href="{{ url('login') }}" class="mobile-user-icon me-3">
+        <i class="far fa-user"></i>
+    </a>
+@else
+    <a href="{{ auth()->user()->role_as == '1'
+                ? url('admin/dashboard')
+                : url('account') }}"
+       class="mobile-user-icon m-2">
+        <i class="far fa-user"></i>
+    </a>
+@endguest
 
-            </a>
-        @endif
-
-        <button class="btn-cart bg-transparent border-0 position-relative"
-                onclick="window.location.href='{{ url('cart') }}'">
+<button class="btn-cart bg-transparent border-0 position-relative"
+        onclick="window.location.href='{{ url('cart') }}'">
 
             <i class="icon-bag text-white target-mobile-cart-icon"></i>
 
             <span class="item-count position-absolute badge rounded-circle shop-count"
-                  style="top:-5px;right:-8px;font-size:14px;padding:2px 4px;">
+                  style="top:-6px;right:-8px;font-size:14px;">
 
                 <livewire:frontend.cart.cart-count />
 
@@ -508,6 +520,24 @@ color: var(--boutique-text) !important;
     color: var(--boutique-pink) !important;
 }
 
+.mobile-user-icon{
+    color:#fff;
+    font-size:15px;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.mobile-user-icon:hover{
+    color:var(--logo-pink-dark);
+}
+
+.header-area.header-sticky-active .mobile-user-icon{
+    color:#000;
+}
+
+.header-area.header-sticky-active .mobile-user-icon:hover{
+    color:var(--boutique-text);
+}
 /* For sticky state on non-homepage */
 .header-white-links.header-sticky-active .boutique-nav li a,
 .header-white-links.header-sticky-active .dropdown-wrapper a,
@@ -686,6 +716,7 @@ color: var(--boutique-text) !important;
     color: var(--boutique-dark) !important;
     transition: all 0.3s ease;
     text-decoration: none;
+    text-transform: uppercase !important;
 }
 
 /* Hover underline effect for ALL menu items */
@@ -933,7 +964,7 @@ color: var(--boutique-text) !important;
         padding: 6px 18px;
         color: var(--boutique-dark) !important;
         font-size: 14px !important;
-        text-transform: uppercase;
+        text-transform: capitalize;
         text-decoration: none;
         font-weight: 600;
         transition: all 0.2s ease;
@@ -966,7 +997,7 @@ color: var(--boutique-text) !important;
     font-size:16px !important;
     font-weight:800 !important;
     letter-spacing:.2px;
-    text-transform:none !important;
+    /* text-transform:none !important; */
     color:var(--boutique-text) !important;
     transition:.35s;
     }
@@ -1019,7 +1050,7 @@ color: var(--boutique-text) !important;
 
 .shop-count{
     position:absolute;
-    top:-12px;
+    top:-14px;
     right:-8px;
 
     min-width:18px;
@@ -1212,7 +1243,7 @@ color: var(--boutique-text) !important;
 }
 
 .mobile-sidebar-footer{
-    margin-top:auto;
+margin-bottom: 40px;
     padding:25px;
     border-top:1px solid #ececec;
     background:#fff;
@@ -1328,7 +1359,10 @@ color: var(--boutique-text) !important;
         .header-area.header-sticky-active .target-mobile-cart-icon {
             color: var(--boutique-dark) !important;
         }
+        
     }
+
+        
     
     .cart-amount-summary {
         font-size: 14px !important;

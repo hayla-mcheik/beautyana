@@ -2613,20 +2613,7 @@ section .container-fluid {
   -ms-transition: all 0.4s ease-out;
   -o-transition: all 0.4s ease-out;
 }
-.responsive-header .header-item .btn-cart .item-count {
-  background-color: var(--logo-pink-dark);
-  color: #fff;
-  position: absolute;
-  bottom: 0px;
-  left: 10px;
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  line-height: 14px;
-  font-size: 9px;
-  border-radius: 100%;
-  text-align: center;
-}
+
 .responsive-header .header-item .btn-cart:hover {
   color: var(--logo-pink-dark);
 }
@@ -8196,7 +8183,9 @@ background-color: #fff;
         .section-title {
             font-size: 1.2rem;
         }
-        
+        .btndemantodiv{
+          text-align: center;
+        }
         .lead-text {
             font-size: 1rem;
         }

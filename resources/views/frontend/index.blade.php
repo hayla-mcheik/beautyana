@@ -382,7 +382,7 @@
     @media (max-width: 768px) {
         .home-slider-area, .home-slider-container { height: 500px !important; }
         .slider-title { font-size: 22px !important; letter-spacing: 1px; }
-        .slider-desc { font-size: 12px !important; }
+        .slider-desc { font-size: 14px !important; max-width: 190px !important;}
         .luxury-heading { font-size: 18px !important; }
         .about-title { font-size: 20px; }
         .metric-number { font-size: 18px; }
@@ -391,10 +391,16 @@
         .btn-demanto, .btn-demanto-outline { padding: 6px 16px; font-size: 8px; }
         .featured-image { height: 280px; }
         .demanto-exhibition-item img { height: 200px; }
+.slider-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(100deg, rgba(248, 245, 240, .98) 0%, rgba(251, 251, 251, 0.85) 25%, rgba(248, 245, 240, .18) 55%, rgba(0, 0, 0, 0.434) 85%) !important;
+}
     }
     
     @media (max-width: 576px) {
-        .slider-title { font-size: 18px !important; }
+        .slider-title { font-size: 28px !important; }
         .luxury-section-title { margin-bottom: 20px; }
         .metric-number { font-size: 16px; }
         .metric-label { font-size: 7px; }
@@ -549,10 +555,10 @@ text-transform: uppercase;
 
 .slider-desc{
 font-family:"Cormorant Garamond",serif;
-    max-width:300px;
+    max-width:250px;
 
     font-size:15px;
-    color:var(--boutique-dark);
+    color:var(--boutique-text);
 
     margin-bottom:15px;
 }
@@ -598,7 +604,7 @@ font-family:"Cormorant Garamond",serif;
 
 .slider-desc{
 
-    margin:auto auto 30px;
+    margin: 0px;
 
     font-size:16px;
 }
@@ -638,7 +644,7 @@ font-family:"Cormorant Garamond",serif;
 
     padding:12px 28px;
 
-    font-size:11px;
+    font-size:10px;
 }
 
 }
@@ -652,7 +658,7 @@ font-family:"Cormorant Garamond",serif;
 
 .slider-title{
 
-    font-size:24px;
+    font-size:28px;
 }
 
 .slider-desc{
@@ -663,8 +669,8 @@ font-family:"Cormorant Garamond",serif;
 .btn-demanto{
 
     width:100%;
-
-    max-width:240px;
+text-align: center;
+    max-width:200px;
 }
 
 }
@@ -1012,7 +1018,7 @@ font-family:"Cormorant Garamond",serif;
                 
             
 
-                <div class="mt-3">
+                <div class="mt-3 btndemantodiv">
                     <a href="{{ url('/aboutus') }}" class="btn-demanto">Discover Our Story</a>
                 </div>
             </div>
@@ -1094,9 +1100,7 @@ font-family:"Cormorant Garamond",serif;
             <img src="{{ asset($exhibition->image) }}"
                  alt="{{ $exhibition->title }}">
 
-            <div class="demanto-exhibition-overlay">
-                <span>View Event</span>
-            </div>
+ 
 
         </div>
 
