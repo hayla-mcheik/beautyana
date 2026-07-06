@@ -142,7 +142,6 @@ var carouselSlider = new Swiper('.default-slider-container', {
     }
 });
 
-  // Swiper Slider Js
 new Swiper(".signature-slider", {
 
     loop: true,
@@ -155,45 +154,57 @@ new Swiper(".signature-slider", {
 
     watchOverflow: true,
 
+    observer: true,
+
+    observeParents: true,
+
     autoplay: {
+
         delay: 3500,
-        disableOnInteraction: false,
-    },
 
-    pagination: {
-        el: ".signature-pagination",
-        clickable: true,
-    },
-
-    navigation: {
-        nextEl: ".signature-next",
-        prevEl: ".signature-prev",
+        disableOnInteraction: false
     },
 
     breakpoints: {
 
         0: {
+
             slidesPerView: 2,
+
             spaceBetween: 15
         },
 
         576: {
+
             slidesPerView: 2,
+
             spaceBetween: 20
         },
 
         768: {
-            slidesPerView: 2.5,
+
+            slidesPerView: 2,
+
             spaceBetween: 25
         },
 
         992: {
-            slidesPerView: 3,
+
+            slidesPerView: 4,
+
             spaceBetween: 25
         },
 
         1200: {
+
             slidesPerView: 5,
+
+            spaceBetween: 30
+        },
+              1600: {
+
+            slidesPerView: 6,
+
             spaceBetween: 30
         }
 

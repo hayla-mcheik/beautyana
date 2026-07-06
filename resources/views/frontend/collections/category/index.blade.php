@@ -1,61 +1,77 @@
-
 <!-- Signature Collections Section -->
 <section class="signature-collections">
 
-    <div class="container p-4">
+    <div class="container collections-container">
 
         <div class="collections-title">
+
             <span>EXPLORE OUR COLLECTIONS</span>
 
             <div class="divider">
                 <span></span>
             </div>
+
         </div>
 
+
         {{-- ========================= COLLECTIONS ========================= --}}
+
         @if($collections->count())
 
+            <div class="collections-slider-wrapper mt-4">
+
+                <div class="swiper signature-slider collections-slider">
+
+                    <div class="swiper-wrapper">
+
+                        @foreach($collections as $categoryItem)
+
+                            <div class="swiper-slide">
+
+                                <a
+                                    href="{{ url('/collections/'.$categoryItem->slug) }}"
+                                    class="collection-card"
+                                >
+
+                                    <div class="collection-inner">
+
+                                        <h3>
+                                            {{ strtoupper($categoryItem->name) }}
+                                        </h3>
 
 
-        <div class="position-relative mt-4">
+                                        <div class="collection-image">
 
-            <div class="swiper signature-slider collections-slider">
+                                            <img
+                                                src="{{ asset($categoryItem->image) }}"
+                                                alt="{{ $categoryItem->name }}"
+                                                loading="lazy"
+                                            >
 
-                <div class="swiper-wrapper">
+                                        </div>
 
-                    @foreach($collections as $categoryItem)
 
-                    <div class="swiper-slide">
+                                        <div class="discover-link">
 
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
+                                            DISCOVER MORE
 
-                            <div class="collection-inner">
+                                            <span>→</span>
 
-                                <h3>{{ strtoupper($categoryItem->name) }}</h3>
+                                        </div>
 
-                                <div class="collection-image">
-                                    <img src="{{ asset($categoryItem->image) }}"
-                                         alt="{{ $categoryItem->name }}">
-                                </div>
+                                    </div>
 
-                                <div class="discover-link">
-                                    DISCOVER MORE
-                                    <span>→</span>
-                                </div>
+                                </a>
 
                             </div>
 
-                        </a>
+                        @endforeach
 
                     </div>
-
-                    @endforeach
 
                 </div>
 
             </div>
-
-        </div>
 
         @endif
 
@@ -63,167 +79,218 @@
 
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Lazy loading for images
-    const images = document.querySelectorAll('.category-card-img img');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                }
-                observer.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-    
-    // Add fade-in animation to sections as they appear
-    const sections = document.querySelectorAll('.all-categories');
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'all 0.5s ease-out';
-        sectionObserver.observe(section);
-    });
-});
-</script>
 
 <style>
 
-    /* Collections Section - Minimized */
 /*==================================================
     LUXURY COLLECTIONS
 ==================================================*/
 
-.signature-collections{
-    background:#f7f2eb;
-    padding:0px 0;
+.signature-collections {
+
+    background: #f7f2eb;
+
+    padding: 20px 0;
+
+    overflow: hidden;
 }
 
-.collections-title{
-    text-align:center;
-    margin-bottom:0px;
+
+/*==================================================
+    CONTAINER
+==================================================*/
+
+.collections-container {
+
+    padding-left: 40px;
+
+    padding-right: 40px;
 }
 
-.collections-title span{
-    display:block;
-    font-family:'Roboto';
+
+/*==================================================
+    TITLE
+==================================================*/
+
+.collections-title {
+
+    text-align: center;
+
+    margin-bottom: 0;
+}
+
+
+.collections-title > span {
+
+    display: block;
+
+    font-family: 'Roboto';
+
     font-weight: 600;
-    font-size:18px;
-    letter-spacing:4px;
-    color:var(--boutique-dark);
-    text-transform:uppercase;
+
+    font-size: 18px;
+
+    letter-spacing: 4px;
+
+    color: var(--boutique-dark);
+
+    text-transform: uppercase;
 }
 
-.divider{
-    width:120px;
-    height:25px;
-    margin:0px auto 0;
-    position:relative;
+
+/*==================================================
+    DIVIDER
+==================================================*/
+
+.divider {
+
+    width: 120px;
+
+    height: 25px;
+
+    margin: 0 auto;
+
+    position: relative;
 }
 
-.divider:before{
-    content:"";
-    position:absolute;
-    left:0;
-    right:0;
-    top:50%;
-    height:1px;
-    background:#d7c4a2;
+
+.divider::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 50%;
+
+    height: 1px;
+
+    background: #d7c4a2;
 }
 
-.divider span{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:12px;
-    height:12px;
-    background:#b39256;
-    transform:translate(-50%,-50%) rotate(45deg);
+
+.divider span {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 12px;
+
+    height: 12px;
+
+    background: #b39256;
+
+    transform: translate(-50%, -50%) rotate(45deg);
 }
 
-/* CARD */
 
-.collection-card{
-    display:block;
-    text-decoration:none;
+/*==================================================
+    SWIPER WRAPPER
+==================================================*/
+
+.collections-slider-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
 }
 
-.collection-inner{
 
-    position:relative;
+/*==================================================
+    SWIPER
+==================================================*/
 
-    height:330px;
+.collections-slider {
 
-    overflow:hidden;
+    position: relative;
 
-    border-radius:145px 145px 6px 6px;
+    width: 100%;
 
-    border:1px solid #d9cdb8;
+    overflow: hidden;
+}
+
+
+.collections-slider .swiper-wrapper {
+
+    align-items: stretch;
+}
+
+
+.collections-slider .swiper-slide {
+
+    height: auto;
+
+    box-sizing: border-box;
+}
+
+
+/*==================================================
+    CARD
+==================================================*/
+
+.collection-card {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    text-decoration: none;
+}
+
+
+.collection-inner {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 330px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    border-radius: 145px 145px 6px 6px;
+
+    border: 1px solid #c8af7f;
+padding-top: 20px;
 
     background:
-        radial-gradient(circle at top,
-            rgba(255,255,255,.95) 0%,
-            rgba(255,255,255,.55) 22%,
-            rgba(255,255,255,0) 45%
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(255, 255, 255, .95) 0%,
+
+            rgba(255, 255, 255, .55) 22%,
+
+            rgba(255, 255, 255, 0) 45%
+
         ),
 
         linear-gradient(
+
             180deg,
-            #c9a96e40  0%,
-            #c9a96e40  45%,
-            #c9a96e40  100%
+
+            #c9a96e40 0%,
+
+            #c9a96e40 45%,
+
+            #c9a96e40 100%
+
         );
 
-    box-shadow:
-        inset 0 0 0 6px #faf8f3,
-        inset 20px 20px 20px 20px #bc7b18,
-     0 12px 24px #bc7b18,
-        inset 30px 35px 40px #bc7b18,
-        20px 12px 24px rgba(0,0,0,.05);
-
-    transition:all .45s ease;
-}
-
-.collection-inner::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:12px;
-
-    border-radius:132px 132px 3px 3px;
-
-    border:2px solid #ebe2d4;
-
-    box-shadow:
-
-        inset 0 0 0 1px rgba(178,147,94,.18),
-
-        inset 0 20px 30px rgba(255,255,255,.35);
-
-    pointer-events:none;
-}
-.collection-inner{
-
-    transform:translateY(-8px);
-
-    border-color:#c8af7f;
 
     box-shadow:
 
@@ -231,233 +298,430 @@ document.addEventListener('DOMContentLoaded', function() {
 
         inset 0 0 0 7px #dbc59b,
 
-        inset 0 -50px 60px rgba(208,189,161,.18),
+        inset 0 -50px 60px rgba(208, 189, 161, .18),
 
-        0 20px 40px rgba(0,0,0,.08);
-}
-/* TITLE */
+        0 20px 40px rgba(0, 0, 0, .08);
 
-.collection-inner h3{
 
-    margin-top:50px;
+    transition:
 
-    margin-bottom:14px;
+        transform .45s ease,
 
-    font-family:'Roboto';
+        box-shadow .45s ease,
 
-    font-size:14px;
-
-    font-weight:600;
-
-    letter-spacing:1.8px;
-
-    color:var(--boutique-dark);
-
-    text-transform:uppercase;
-
-    text-align:center;
+        border-color .45s ease;
 }
 
-/* IMAGE */
 
-.collection-image{
+/*==================================================
+    INNER BORDER
+==================================================*/
 
-    height:170px;
+.collection-inner::before {
 
-    display:flex;
+    content: "";
 
-    justify-content:center;
+    position: absolute;
 
-    align-items:center;
+    inset: 12px;
 
-    padding:0 30px;
+    border-radius: 132px 132px 3px 3px;
 
-    position:relative;
+    border: 2px solid #ebe2d4;
+
+
+    box-shadow:
+
+        inset 0 0 0 1px rgba(178, 147, 94, .18),
+
+        inset 0 20px 30px rgba(255, 255, 255, .35);
+
+
+    pointer-events: none;
+
+    z-index: 3;
 }
 
-/* shadow under product */
 
-.collection-image:after{
+/*==================================================
+    CARD HOVER
+==================================================*/
 
-    content:"";
+.collection-card:hover .collection-inner {
 
-    position:absolute;
+    transform: translateY(6px);
 
-    width:180px;
+    box-shadow:
 
-    height:35px;
+        inset 0 0 0 6px #faf8f3,
 
-    left:50%;
+        inset 0 0 0 7px #dbc59b,
 
-    bottom:22px;
+        inset 0 -50px 60px rgba(208, 189, 161, .18),
 
-    transform:translateX(-50%);
-
-    background:radial-gradient(
-        ellipse at center,
-        rgba(0,0,0,.20) 0%,
-        rgba(0,0,0,.10) 45%,
-        rgba(0,0,0,0) 80%
-    );
-
-    filter:blur(10px);
-
-    opacity:.45;
-
-    z-index:1;
+        0 25px 45px rgba(0, 0, 0, .12);
 }
 
-.collection-image img{
 
-    max-width:78%;
+/*==================================================
+    TITLE
+==================================================*/
 
-    max-height:145px;
+.collection-inner h3 {
 
-    object-fit:contain;
+    position: relative;
 
-    position:relative;
+    z-index: 4;
 
-    z-index:2;
+    margin-top: 50px;
 
-    transition:.45s;
+    margin-bottom: 14px;
+
+    padding: 0 15px;
+
+    font-family: 'Roboto';
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.8px;
+
+    color: var(--boutique-dark);
+
+    text-transform: uppercase;
+
+    text-align: center;
+}
+
+
+/*==================================================
+    IMAGE
+==================================================*/
+
+.collection-image {
+
+    position: relative;
+
+    height: 170px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 0 30px;
+}
+
+
+/*==================================================
+    SHADOW UNDER PRODUCT
+==================================================*/
+
+.collection-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 35px;
+
+    left: 50%;
+
+    bottom: 22px;
+
+    transform: translateX(-50%);
+
+
+    background:
+
+        radial-gradient(
+
+            ellipse at center,
+
+            rgba(0, 0, 0, .20) 0%,
+
+            rgba(0, 0, 0, .10) 45%,
+
+            rgba(0, 0, 0, 0) 80%
+
+        );
+
+
+    filter: blur(10px);
+
+    opacity: .45;
+
+    z-index: 1;
+}
+
+
+/*==================================================
+    PRODUCT IMAGE
+==================================================*/
+
+.collection-image img {
+
+    display: block;
+
+    max-width: 78%;
+
+    max-height: 145px;
+
+    object-fit: contain;
+
+    position: relative;
+
+    z-index: 2;
+
+    transform: translateY(-8px) scale(1.04);
+
+
+    transition:
+
+        transform .45s ease,
+
+        filter .45s ease;
+
 
     filter:
 
         brightness(1.02)
 
-        drop-shadow(0 10px 10px rgba(0,0,0,.08))
+        drop-shadow(0 10px 10px rgba(0, 0, 0, .08))
 
-        drop-shadow(0 22px 18px rgba(0,0,0,.06));
-}
-.collection-inner img{
-
-    transform:translateY(-8px) scale(1.04);
-
-    filter:
-        drop-shadow(32px 32px 32px rgba(0,0,0,.12))
-        drop-shadow(44px 44px 44px rgba(0,0,0,.10));
+        drop-shadow(0 22px 18px rgba(0, 0, 0, .06));
 }
 
-/* FOOTER */
 
-.discover-link{
+.collection-card:hover .collection-image img {
 
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:24px;
-
-    text-align:center;
-
-    font-family:'Montserrat',sans-serif;
-
-    font-size:8px;
-
-    font-weight:500;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    color:#76614a;
+    transform: translateY(-12px) scale(1.07);
 }
 
-.discover-link span{
 
-    margin-left:8px;
+/*==================================================
+    DISCOVER MORE
+==================================================*/
 
-    transition:.3s;
+.discover-link {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 24px;
+
+    z-index: 4;
+
+    text-align: center;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 8px;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #76614a;
 }
 
-.collection-inner:hover .discover-link span{
 
-    margin-left:16px;
+.discover-link span {
+
+    margin-left: 8px;
+
+    transition: margin-left .3s ease;
 }
 
-/* MOBILE */
 
-@media(max-width:768px){
+.collection-card:hover .discover-link span {
 
-.collection-inner{
-
-    height:240px;
-
-    border-radius:110px 110px 6px 6px;
+    margin-left: 16px;
 }
 
-.collection-inner::before{
 
-    inset:12px;
+/*==================================================
+    TABLET
+==================================================*/
 
-    border-radius:100px 100px 4px 4px;
-}
+@media (max-width: 991px) {
 
-.collection-inner h3{
+    .collections-container {
 
+        padding-left: 25px;
 
-    margin-top:30px;
-
-    font-size:12px;
-}
-
-.collection-image{
-
-    height:165px;
-}
-
-.collection-image img{
-
-    max-height:140px;
-
-    max-width:76%;
-}
-
-.collection-image::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:105px;
-
-    height:18px;
-
-    left:50%;
-
-    bottom:20px;
-
-    transform:translateX(-50%);
-
-    border-radius:50%;
-
-    background:#000;
-
-    opacity:.12;
-
-    filter:blur(13px);
-
-    z-index:1;
-}
-.discover-link{
-
-    bottom:16px;
-
-    font-size:7px;
-}
-
-.collections-title span{
-
-    font-size:16px;
-}
-
-}
-    .collection-content span {
-        font-size: 8px;
-        letter-spacing: 1.5px;
-        color: var(--demanto-gold);
-        font-weight: 500;
+        padding-right: 25px;
     }
+
+}
+
+
+/*==================================================
+    MOBILE
+==================================================*/
+
+@media (max-width: 767px) {
+
+    .signature-collections {
+
+        padding: 6px 0;
+    }
+
+
+    .collections-container {
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+
+    .collections-slider-wrapper {
+
+        width: 100%;
+margin-top: 20px;
+
+    }
+
+
+    .collections-slider {
+
+        width: 100%;
+
+        overflow: hidden;
+    }
+
+
+    .collection-inner {
+
+        height: 240px;
+
+        border-radius: 110px 110px 6px 6px;
+    }
+
+
+    .collection-inner::before {
+
+        inset: 10px;
+
+        border-radius: 100px 100px 4px 4px;
+    }
+
+
+    .collection-inner h3 {
+
+        margin-top: 30px;
+
+        margin-bottom: 5px;
+
+        padding: 0 10px;
+
+        font-size: 12px;
+
+        letter-spacing: 1.2px;
+    }
+
+
+    .collection-image {
+
+        height: 150px;
+
+        padding: 0 15px;
+    }
+
+
+    .collection-image img {
+
+        max-height: 130px;
+
+        max-width: 80%;
+    }
+
+
+    .collection-image::after {
+
+        width: 105px;
+
+        height: 18px;
+
+        bottom: 20px;
+
+        border-radius: 50%;
+
+        background: #000;
+
+        opacity: .12;
+
+        filter: blur(13px);
+    }
+
+
+    .discover-link {
+
+        bottom: 16px;
+
+        font-size: 7px;
+
+        letter-spacing: 1.2px;
+    }
+
+
+    .collections-title > span {
+
+        font-size: 16px;
+
+        letter-spacing: 3px;
+    }
+
+}
+
+
+/*==================================================
+    SMALL MOBILE
+==================================================*/
+
+@media (max-width: 400px) {
+
+    .collections-container {
+
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+
+    .collection-inner {
+
+        height: 225px;
+    }
+
+
+    .collection-inner h3 {
+
+        font-size: 10px;
+    }
+
+
+    .collection-image {
+
+        height: 140px;
+    }
+
+
+    .collection-image img {
+
+        max-height: 120px;
+    }
+
+}
+
 </style>

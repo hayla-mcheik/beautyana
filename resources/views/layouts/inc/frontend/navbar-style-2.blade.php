@@ -273,7 +273,7 @@
             <i class="icon-bag text-white target-mobile-cart-icon"></i>
 
             <span class="item-count position-absolute badge rounded-circle shop-count"
-                  style="top:-6px;right:-8px;font-size:14px;">
+                  style="font-size:15px;">
 
                 <livewire:frontend.cart.cart-count />
 
@@ -983,10 +983,10 @@ color: var(--boutique-text) !important;
         transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     @media (max-width: 991px) {
-        .logo-main { max-width: 70px !important; }
+        .logo-main { max-width: 90px !important; }
     }
     @media (min-width: 992px) {
-        .logo-main { max-width: 90px !important; }
+        .logo-main { max-width: 100px !important; }
         .logo-main:hover { transform: scale(1.02); }
     }
 
@@ -994,7 +994,7 @@ color: var(--boutique-text) !important;
     .boutique-text-small a,
     .header-top .dropdown-btn {
         font-family:"Cormorant Garamond",serif !important;
-    font-size:16px !important;
+    font-size:15px !important;
     font-weight:800 !important;
     letter-spacing:.2px;
     /* text-transform:none !important; */
@@ -1050,8 +1050,8 @@ color: var(--boutique-text) !important;
 
 .shop-count{
     position:absolute;
-    top:-14px;
-    right:-8px;
+    top:-10px;
+    right:-12px;
 
     min-width:18px;
     width:18px;

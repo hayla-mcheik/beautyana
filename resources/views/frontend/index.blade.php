@@ -156,13 +156,7 @@
         background: linear-gradient(90deg, var(--demanto-gold), transparent);
     }
     
-    .about-description {
-        color: #666;
-        font-size: 14px;
-        line-height: 1.6;
-        margin-top: 15px;
-    }
-    
+
     .metric-number {
         color: var(--demanto-gold);
         font-size: 22px;
@@ -653,7 +647,7 @@ font-family:"Cormorant Garamond",serif;
 
 .home-banner{
 
-    min-height:430px;
+    min-height:360px;
 }
 
 .slider-title{
@@ -805,11 +799,28 @@ text-align: center;
 
     background:#232323;
 }
-@media(max-width:991px){
+@media(min-width:991px){
+    .about-description {
+        color: var(--boutique-dark);
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 15px;
+        max-width: 90%;
+    }
+}
 
+    
+@media(max-width:991px){
+    .about-description {
+        color: var(--boutique-dark);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-top: 15px;
+        max-width: 100%;
+    }
 .appointment-section{
 
-    padding:70px 0;
+    padding:10px 0;
 }
 
 .appointment-section h2{
@@ -820,11 +831,7 @@ text-align: center;
 }
 
 .appointment-section p{
-
     text-align:center;
-
-    margin:auto auto 30px;
-
     font-size:13px;
 }
 
@@ -877,6 +884,54 @@ text-align: center;
     background:#B39256;
     width:32px;
     border-radius:20px;
+}
+.appointment-input-wrapper {
+    position: relative;
+}
+
+.appointment-input-label {
+    position: absolute;
+
+    top: 8px;
+    left: 13px;
+
+    font-size: 11px;
+    line-height: 1;
+
+    color: #777;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.appointment-date-time {
+    padding-top: 22px !important;
+    padding-bottom: 8px !important;
+
+    min-height: 58px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .appointment-input-label {
+        display: block;
+    }
+.footer-brand{
+    text-align: start;
+}
+.footer-brand img{ margin-bottom: 10px;}
+    .appointment-date-time {
+        width: 100%;
+        min-height: 58px;
+
+        appearance: auto;
+        -webkit-appearance: auto;
+    }
+
 }
 </style>
 
@@ -1221,23 +1276,44 @@ text-align: center;
                     required>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <input
-                    type="date"
-                    name="appointment_date"
-                    class="form-control"
-                    value="{{ old('appointment_date') }}"
-                    required>
-            </div>
+<div class="col-md-6 mb-3">
 
-            <div class="col-md-6 mb-3">
-                <input
-                    type="time"
-                    name="appointment_time"
-                    class="form-control"
-                    value="{{ old('appointment_time') }}"
-                    required>
-            </div>
+    <div class="appointment-input-wrapper">
+
+        <span class="appointment-input-label">
+            Appointment Date
+        </span>
+
+        <input
+            type="date"
+            name="appointment_date"
+            class="form-control appointment-date-time"
+            value="{{ old('appointment_date') }}"
+            required>
+
+    </div>
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <div class="appointment-input-wrapper">
+
+        <span class="appointment-input-label">
+            Appointment Time
+        </span>
+
+        <input
+            type="time"
+            name="appointment_time"
+            class="form-control appointment-date-time"
+            value="{{ old('appointment_time') }}"
+            required>
+
+    </div>
+
+</div>
 
             <div class="col-12 mb-4">
                 <textarea

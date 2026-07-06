@@ -2548,12 +2548,10 @@ section .container-fluid {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 80px;
+  height: 62px;
 }
 @media only screen and (max-width: 575px) {
-  .responsive-header .header-item {
-    height: 70px;
-  }
+
       .divider-area{
       height: 200px;
       padding-top: 100px;
@@ -2598,20 +2596,19 @@ section .container-fluid {
 .responsive-header .header-item .btn-cart {
   background-color: transparent;
   border: none;
-  color: #51555a;
-  font-size: 14px;
-  padding: 0;
-  height: 22px;
-  line-height: 22px;
-  margin-left: 14px;
+  font-size: 15px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 8px;
   position: relative;
-  padding-right: 12px;
   display: inline-block;
   transition: all 0.4s ease-out;
   -webkit-transition: all 0.4s ease-out;
   -moz-transition: all 0.4s ease-out;
   -ms-transition: all 0.4s ease-out;
   -o-transition: all 0.4s ease-out;
+  text-align: center;
+  margin-top: 4px;
 }
 
 .responsive-header .header-item .btn-cart:hover {
@@ -6340,21 +6337,8 @@ font-size: 12px;
 .shop-sidebar-wrapper .sidebar-item .sidebar-body .category-sub-menu ul li {
   position: relative;
 }
-.shop-sidebar-wrapper .sidebar-item .sidebar-body .category-sub-menu ul li a {
-  color: #666;
-  font-size: 14px;
-  font-weight: 300;
-  display: block;
-  line-height: 35px;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  text-transform: capitalize;
-  width: 100%;
-}
-.shop-sidebar-wrapper .sidebar-item .sidebar-body .category-sub-menu ul li a:hover {
-  color: var(--logo-pink-dark);
-}
+
+
 .shop-sidebar-wrapper .sidebar-item .sidebar-body .category-sub-menu ul li .collapse-icons {
   display: inline-block;
   height: 17px;
