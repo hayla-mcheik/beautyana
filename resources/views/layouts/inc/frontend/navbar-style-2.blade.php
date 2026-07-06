@@ -238,7 +238,7 @@
         @if($appSetting->facebook)
             <a href="{{ $appSetting->facebook }}"
                target="_blank"
-               class="mobile-social-icon me-1">
+               class="mobile-social-icon me-3">
 
                 <i class="fab fa-facebook-f"></i>
 
