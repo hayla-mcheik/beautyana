@@ -1243,7 +1243,7 @@ color: var(--boutique-text) !important;
 }
 
 .mobile-sidebar-footer{
-margin-bottom: 40px;
+margin-bottom: 60px;
     padding:25px;
     border-top:1px solid #ececec;
     background:#fff;
