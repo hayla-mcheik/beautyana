@@ -103,7 +103,7 @@
 
 @guest
 
-<div class="header-user-icon">
+{{-- <div class="header-user-icon">
 
     <a href="{{ url('login') }}" title="Login">
 
@@ -111,7 +111,7 @@
 
     </a>
 
-</div>
+</div> --}}
 
 @else
 
