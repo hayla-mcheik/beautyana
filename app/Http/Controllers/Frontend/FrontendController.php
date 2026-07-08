@@ -259,58 +259,115 @@ public function contactsubmit(Request $request)
 public function bookAppointment(Request $request)
 {
     $validator = Validator::make($request->all(), [
+
         'name' => 'required|string|max:255',
+
         'email' => 'nullable|email|max:255',
+
         'phone' => [
             'required',
+
             function ($attribute, $value, $fail) {
 
                 $digits = preg_replace('/\D/', '', $value);
 
-                if(strlen($digits) < 8 || strlen($digits) > 15){
-                    $fail('Phone number must be between 8 and 15 digits.');
+                if (strlen($digits) < 8 || strlen($digits) > 15) {
+
+                    $fail(
+                        'Phone number must be between 8 and 15 digits.'
+                    );
                 }
             }
         ],
+
         'subject' => 'required|string|max:255',
+
         'message' => 'required|string|max:1000',
+
         'appointment_date' => 'required|date',
-        'appointment_time' => 'required'
+
+        'appointment_time' => 'required|date_format:H:i',
+
     ]);
+
 
     if ($validator->fails()) {
 
-        return response()->json([
-            'success' => false,
-            'errors' => $validator->errors()
-        ],422);
-
+        return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validated Data
+    |--------------------------------------------------------------------------
+    */
+
+    $validatedData = $validator->validated();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prepare Email Data
+    |--------------------------------------------------------------------------
+    */
 
     $emailData = [
 
-        'name' => $request->name,
+        'name' => $validatedData['name'],
 
-      'email' => $request->email ?? 'Not Provided',
+        'email' => $validatedData['email'] ?? 'Not Provided',
 
-        'phone' => preg_replace('/\D/', '', $request->phone),
+        'phone' => preg_replace(
+            '/\D/',
+            '',
+            $validatedData['phone']
+        ),
 
-        'subject' => $request->subject,
+        'subject' => $validatedData['subject'],
 
-        'message' => $request->message,
+        'message' => $validatedData['message'],
 
-        'appointment_date' => $request->appointment_date,
-'appointment_time' => 'required|date_format:H:i'
+        'appointment_date' => $validatedData['appointment_date'],
+
+        /*
+         * IMPORTANT:
+         *
+         * Send the actual submitted time.
+         */
+
+        'appointment_time' => $validatedData['appointment_time'],
 
     ];
 
-    Mail::to('mcheikhayla26@gmail.com')
-        ->send(new AppointmentMail($emailData));
 
-return redirect()->back()->with(
-    'success',
-    'Your appointment has been booked successfully. We will contact you shortly.'
-);
+    /*
+    |--------------------------------------------------------------------------
+    | Send Email
+    |--------------------------------------------------------------------------
+    */
+
+    Mail::to('mcheikhayla26@gmail.com')
+        ->send(
+            new AppointmentMail($emailData)
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirect Back
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()
+        ->back()
+        ->with(
+            'success',
+            'Your appointment has been booked successfully. We will contact you shortly.'
+        );
 }
 public function subscribe(Request $request)
 {
