@@ -229,8 +229,8 @@
             </a>
         @endif
 
-        @if($appSetting->facebook)
-            <a href="{{ $appSetting->facebook }}"
+        @if($appSetting->youtube)
+            <a href="{{ $appSetting->youtube }}"
                target="_blank"
                class="mobile-social-icon me-3">
 
