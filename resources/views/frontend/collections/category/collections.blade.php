@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .collections-title span{
 
-    font-size:16px;
+    font-size:14px;
 }
 
 }

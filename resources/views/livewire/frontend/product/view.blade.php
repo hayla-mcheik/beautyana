@@ -319,15 +319,22 @@
     </style>
 
     <!-- Dynamic Breadcrumb -->
-    @include('layouts.inc.frontend.breadcrumb', [
-        'breadcrumbs' => [
-            [
-                'title' => 'Product Details',
-                'url' => '#'
-            ]
+@include('layouts.inc.frontend.breadcrumb', [
+    'breadcrumbs' => [
+        [
+            'title' => 'Collections',
+            'url' => url('/categories')
+        ],
+        [
+            'title' => $category->name,
+            'url' => url('/collections/' . $category->slug)
+        ],
+        [
+            'title' => $product->name,
+            'url' => '#'
         ]
-    ])
-
+    ]
+])
     <!-- Product Single Area -->
     <section class="product-area product-single-area">
         <div class="container">

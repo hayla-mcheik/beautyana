@@ -85,7 +85,7 @@
             <a href="{{ $appSetting->facebook }}"
                target="_blank"
                class="desktop-social-icon">
-                <i class="fab fa-facebook-f"></i>
+              <i class="fa-brands fa-snapchat"></i>
             </a>
         @endif
 
@@ -97,13 +97,7 @@
             </a>
         @endif
 
-        @if($appSetting->youtube)
-            <a href="{{ $appSetting->youtube }}"
-               target="_blank"
-               class="desktop-social-icon">
-                <i class="fab fa-youtube"></i>
-            </a>
-        @endif
+
 
     </div>
 
@@ -121,7 +115,7 @@
 
 @else
 
-    <div class="dropdown-wrapper">
+    {{-- <div class="dropdown-wrapper">
 
         <a class="dropdown-btn profile-trigger" href="#">
             {{ Auth::user()->name }}
@@ -158,7 +152,7 @@
 
         </ul>
 
-    </div>
+    </div> --}}
 
     @endguest
 
@@ -240,7 +234,7 @@
                target="_blank"
                class="mobile-social-icon me-3">
 
-                <i class="fab fa-facebook-f"></i>
+            <i class="fa-brands fa-snapchat"></i>
 
             </a>
         @endif
@@ -525,6 +519,7 @@ color: var(--boutique-text) !important;
     font-size:15px;
     text-decoration:none;
     transition:.3s;
+    display: none;
 }
 
 .mobile-user-icon:hover{

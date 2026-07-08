@@ -171,13 +171,7 @@ font-family:"Cormorant Garamond",serif;
     </main>
 
  @include('layouts.inc.frontend.footer')
- <a
-    href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
-    class="whatsapp-btn"
-    target="_blank"
->
-    <i class="fab fa-whatsapp"></i>
-</a>
+
 
     <!-- Scroll Top Button -->
     <div id="scroll-to-top" class="scroll-to-top">

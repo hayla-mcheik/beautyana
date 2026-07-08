@@ -23,7 +23,7 @@
     'breadcrumbs' => [
         [
             'title' => $category->menu,
-            'url' => url('/collections')
+            'url' => url('/categories')
         ],
         [
             'title' => $category->name,

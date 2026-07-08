@@ -240,6 +240,36 @@
         font-size: 9px;
         letter-spacing: 1px;
     }
+    /* Floating WhatsApp Button */
+.whatsapp-btn {
+    position: fixed;
+
+    right: 30px;
+    bottom: 30px;
+
+    width: 45px;
+    height: 45px;
+
+    background: #25D366;
+    color: #fff;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    font-size: 23px;
+
+    z-index: 9999;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
 
     /* Exhibitions Section - UNCHANGED */
     .exhibitions-area {
@@ -486,9 +516,9 @@
 
     width:100%;
 
-    height:50vh;
+    height:40vh;
 
-    min-height:500px;
+    min-height:400px;
 
     overflow:hidden;
 }
@@ -560,7 +590,7 @@ font-family:"Cormorant Garamond",serif;
 
 .home-banner{
 
-    min-height:650px;
+    min-height:550px;
 }
 
 .slider-title{
@@ -574,7 +604,7 @@ font-family:"Cormorant Garamond",serif;
 
 .home-banner{
 
-    min-height:580px;
+    min-height:480px;
 }
 
 .hero-banner-image{
@@ -616,7 +646,7 @@ font-family:"Cormorant Garamond",serif;
 
 .home-banner{
 
-    min-height:500px;
+    min-height:400px;
 }
 
 .hero-banner-image{
@@ -647,7 +677,7 @@ font-family:"Cormorant Garamond",serif;
 
 .home-banner{
 
-    min-height:360px;
+    min-height:316px;
 }
 
 .slider-title{
@@ -1027,7 +1057,14 @@ text-align: center;
         <div class="swiper-pagination"></div>
 
     </div>
-
+    <a
+        href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
+        class="whatsapp-btn"
+        target="_blank"
+        aria-label="Contact DEMANTO on WhatsApp"
+    >
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </section>
 
 <!-- Signature Collections Section -->
@@ -1346,6 +1383,29 @@ text-align: center;
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+        const hero = document.querySelector('.home-banner');
+    const whatsappButton = document.querySelector('.whatsapp-btn');
+
+    function positionWhatsappButton() {
+
+        if (!hero || !whatsappButton) return;
+
+        const heroRect = hero.getBoundingClientRect();
+
+        /*
+         * Position button 30px above
+         * the bottom of the hero slider.
+         */
+        const bottomPosition =
+            window.innerHeight - heroRect.bottom + 30;
+
+        whatsappButton.style.bottom =
+            Math.max(30, bottomPosition) + 'px';
+    }
+
+    positionWhatsappButton();
+
+    window.addEventListener('resize', positionWhatsappButton);
     const images = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1358,11 +1418,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     images.forEach(img => imageObserver.observe(img));
+
 });
 </script>
 
-<style>
 
 
-</style>
+
 @endsection

@@ -18,7 +18,7 @@
 
         @if($collections->count())
 
-            <div class="collections-slider-wrapper mt-4">
+            <div class="collections-slider-wrapper mt-2">
 
                 <div class="swiper signature-slider collections-slider">
 
@@ -90,7 +90,7 @@
 
     background: #f7f2eb;
 
-    padding: 20px 0;
+    padding: 0px 0;
 
     overflow: hidden;
 }
@@ -573,7 +573,7 @@ padding-top: 20px;
 
     .signature-collections {
 
-        padding: 6px 0;
+        padding: 2px 0;
     }
 
 
@@ -677,7 +677,7 @@ margin-top: 20px;
 
     .collections-title > span {
 
-        font-size: 16px;
+        font-size: 14px;
 
         letter-spacing: 3px;
     }

@@ -4,595 +4,1534 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Add Products
-                    <a href="{{ url('admin/products') }}" class="btn btn-danger btn-sm float-end">
-                        Back
-                    </a>
-                </h4>
+
+        {{-- PAGE HEADER --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+                <h3 class="mb-1">
+                    <i class="mdi mdi-package-variant-closed"></i>
+                    Add New Product
+                </h3>
+
+                <p class="text-muted mb-0">
+                    Complete the product information, pricing, stock, visibility and images.
+                </p>
             </div>
 
-            <div class="card-body">
-                @if($errors->any())
-                <div class="alert alert-warning">
-                    @foreach($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                    @endforeach
-                </div>
-                @endif
+            <a href="{{ url('admin/products') }}"
+               class="btn btn-outline-secondary">
 
-                @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-                @endif
+                <i class="mdi mdi-arrow-left"></i>
+                Back to Products
 
-                <form action="{{ url('admin/products') }}" method="POST" enctype="multipart/form-data" id="productForm">
-                    @csrf
+            </a>
 
-                    <!-- Hidden input to store active tab -->
-                    <input type="hidden" name="active_tab" id="activeTab" value="{{ old('active_tab', 'home-tab') }}">
-
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                                Home
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="seotag-tab" data-bs-toggle="tab" data-bs-target="#seotag-tab-pane" type="button" role="tab" aria-controls="seotag-tab-pane" aria-selected="false">
-                                SEO Tags
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details-tab-pane" type="button" role="tab" aria-controls="details-tab-pane" aria-selected="false">
-                                Details
-                            </button>
-                        </li> 
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
-                                Product Images <span class="text-danger">*</span>
-                            </button>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="myTabContent">
-                        <!-- Home Tab -->
-                        <div class="tab-pane fade border p-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                            <div class="mb-3">
-                                <label>Category</label>
-                                <select name="category_id" class="form-control">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Product Name</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Slug</label>
-                                <input type="text" class="form-control" name="slug" value="{{ old('slug') }}" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Small Description (500 words)</label>
-                                <textarea class="form-control" name="small_description" rows="4">{{ old('small_description') }}</textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Description</label>
-                                <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
-
-                        <!-- SEO Tags Tab -->
-                        <div class="tab-pane fade border p-3" id="seotag-tab-pane" role="tabpanel" aria-labelledby="seotag-tab" tabindex="0">
-                            <div class="mb-3">
-                                <label>Meta Title</label>
-                                <input type="text" class="form-control" name="meta_title" value="{{ old('meta_title') }}" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Meta Keyword</label>
-                                <textarea class="form-control" name="meta_keyword" rows="4">{{ old('meta_keyword') }}</textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Meta Description</label>
-                                <textarea class="form-control" name="meta_description" rows="4">{{ old('meta_description') }}</textarea>
-                            </div>
-                        </div>
-
-                        <!-- Details Tab -->
-                        <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab" tabindex="0">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Original Price</label>
-                                        <input type="text" class="form-control" name="original_price" value="{{ old('original_price') }}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Selling Price</label>
-                                        <input type="text" class="form-control" name="selling_price" value="{{ old('selling_price') }}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Quantity</label>
-                                        <input type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Trending</label>
-                                        <input type="checkbox" name="trending" style="width:30px; height:30px;" {{ old('trending') ? 'checked' : '' }} />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Featured</label>
-                                        <input type="checkbox" name="featured" style="width:30px; height:30px;" {{ old('featured') ? 'checked' : '' }} />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Status</label>
-                                        <input type="checkbox" name="status" style="width:30px; height:30px;" {{ old('status') ? 'checked' : '' }} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Images Tab -->
-                        <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
-                            <div class="alert alert-info">
-                                <strong><i class="fas fa-info-circle"></i> Important:</strong> You must upload at least 2 images - front view and back view of the product are required.
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label>Upload Product Images <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="file" name="image[]" multiple class="form-control" id="productImages" accept="image/*">
-                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('productImages').click()">
-                                        <i class="fas fa-folder-open"></i> Browse
-                                    </button>
-                                </div>
-                                <small class="text-muted">Select at least 2 images (front and back). Hold Ctrl/Cmd to select multiple files.</small>
-                                
-                                @error('image')
-                                <div class="text-danger mt-2">
-                                    <i class="fas fa-exclamation-triangle"></i> {{ $message }}
-                                </div>
-                                @enderror
-                                
-                                @error('image.*')
-                                <div class="text-danger mt-2">
-                                    <i class="fas fa-exclamation-triangle"></i> {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label>Selected Images:</label>
-                                    <span id="imageCountBadge" class="badge bg-secondary">0 images selected</span>
-                                </div>
-                                
-                                <div class="progress mt-2" style="height: 10px;">
-                                    <div id="imageProgressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                                </div>
-                            </div>
-
-                            <div id="imagePreview" class="row mb-3">
-                                <!-- Image previews will appear here -->
-                            </div>
-                            
-                            <div id="imageRequirements" class="alert alert-warning d-none">
-                                <i class="fas fa-exclamation-circle"></i> <span id="requirementMessage"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-primary" id="submitBtn">
-                            <i class="fas fa-save"></i> Submit Product
-                        </button>
-                        <button type="reset" class="btn btn-secondary">
-                            <i class="fas fa-redo"></i> Reset
-                        </button>
-                    </div>
-                </form>
-
-                <!-- Preview of uploaded images if there were errors -->
-                @if(old('image_previews') && is_array(old('image_previews')))
-                <div class="mt-4">
-                    <h5>Previously Selected Images:</h5>
-                    <div class="row">
-                        @foreach(old('image_previews') as $index => $preview)
-                        <div class="col-md-3 mb-3">
-                            <div class="card">
-                                <img src="data:image/jpeg;base64,{{ $preview }}" class="card-img-top" style="height: 150px; object-fit: cover;">
-                                <div class="card-body p-2">
-                                    <p class="card-text small">Image {{ $index + 1 }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-                @endif
-            </div>
         </div>
+
+
+        {{-- VALIDATION ERRORS --}}
+
+        @if($errors->any())
+
+            <div class="alert alert-danger">
+
+                <h6 class="mb-2">
+                    <i class="mdi mdi-alert-circle-outline"></i>
+                    Please correct the following errors:
+                </h6>
+
+                <ul class="mb-0">
+
+                    @foreach($errors->all() as $error)
+
+                        <li>
+                            {{ $error }}
+                        </li>
+
+                    @endforeach
+
+                </ul>
+
+            </div>
+
+        @endif
+
+
+        @if(session('error'))
+
+            <div class="alert alert-danger">
+
+                {{ session('error') }}
+
+            </div>
+
+        @endif
+
+
+
+        <form
+            action="{{ url('admin/products') }}"
+            method="POST"
+            enctype="multipart/form-data"
+            id="productForm"
+        >
+
+            @csrf
+
+
+            {{-- ========================================================= --}}
+            {{-- PRODUCT INFORMATION --}}
+            {{-- ========================================================= --}}
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-1">
+
+                        <i class="mdi mdi-information-outline"></i>
+
+                        Product Information
+
+                    </h5>
+
+                    <small class="text-muted">
+
+                        Select where the product appears and enter its main information.
+
+                    </small>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="row">
+
+
+                        {{-- CATEGORY --}}
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Category
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <select
+                                name="category_id"
+                                class="form-control @error('category_id') is-invalid @enderror"
+                                required
+                            >
+
+                                <option value="">
+
+                                    Select Product Category
+
+                                </option>
+
+
+                                @foreach ($categories as $category)
+
+                                    <option
+                                        value="{{ $category->id }}"
+
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                    >
+
+                                        {{ $category->menu }}
+                                        →
+                                        {{ $category->name }}
+
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+
+                            <small class="text-muted">
+
+                                The first name is the website menu and the second is the category.
+
+                            </small>
+
+
+                            @error('category_id')
+
+                                <div class="invalid-feedback">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+
+                        {{-- PRODUCT NAME --}}
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Product Name
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Example: Diamond Tennis Bracelet"
+                                required
+                            >
+
+
+                            <small class="text-muted">
+
+                                The product URL slug will be generated automatically.
+
+                            </small>
+
+
+                            @error('name')
+
+                                <div class="invalid-feedback">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+
+                        {{-- DESCRIPTION --}}
+
+                        <div class="col-md-12 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Product Description
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <textarea
+                                name="description"
+                                rows="6"
+                                class="form-control @error('description') is-invalid @enderror"
+                                placeholder="Enter product material, design, size, collection information and other useful details..."
+                            >{{ old('description') }}</textarea>
+
+
+                            @error('description')
+
+                                <div class="invalid-feedback">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            {{-- ========================================================= --}}
+            {{-- PRICING AND INVENTORY --}}
+            {{-- ========================================================= --}}
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-1">
+
+                        <i class="mdi mdi-cash-multiple"></i>
+
+                        Pricing & Inventory
+
+                    </h5>
+
+                    <small class="text-muted">
+
+                        Enter product prices and available stock quantity.
+
+                    </small>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="row">
+
+
+                        {{-- ORIGINAL PRICE --}}
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Original Price
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    $
+
+                                </span>
+
+
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    name="original_price"
+                                    value="{{ old('original_price') }}"
+                                    class="form-control @error('original_price') is-invalid @enderror"
+                                    placeholder="0.00"
+                                >
+
+                            </div>
+
+
+                            <small class="text-muted">
+
+                                Price before discount.
+
+                            </small>
+
+
+                            @error('original_price')
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+
+                        {{-- SELLING PRICE --}}
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Selling Price
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    $
+
+                                </span>
+
+
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    name="selling_price"
+                                    value="{{ old('selling_price') }}"
+                                    class="form-control @error('selling_price') is-invalid @enderror"
+                                    placeholder="0.00"
+                                >
+
+                            </div>
+
+
+                            <small class="text-muted">
+
+                                Current price displayed to customers.
+
+                            </small>
+
+
+                            @error('selling_price')
+
+                                <div class="text-danger small mt-1">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+
+                        {{-- QUANTITY --}}
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label fw-semibold">
+
+                                Stock Quantity
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <input
+                                type="number"
+                                min="0"
+                                name="quantity"
+                                value="{{ old('quantity', 0) }}"
+                                class="form-control @error('quantity') is-invalid @enderror"
+                            >
+
+
+                            <small class="text-muted">
+
+                                Total available product quantity.
+
+                            </small>
+
+
+                            @error('quantity')
+
+                                <div class="invalid-feedback">
+
+                                    {{ $message }}
+
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            {{-- ========================================================= --}}
+            {{-- PRODUCT VISIBILITY --}}
+            {{-- ========================================================= --}}
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-1">
+
+                        <i class="mdi mdi-eye-outline"></i>
+
+                        Product Visibility
+
+                    </h5>
+
+                    <small class="text-muted">
+
+                        Control where the product appears on the website.
+
+                    </small>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="row">
+
+
+                        {{-- TRENDING --}}
+
+                        {{-- <div class="col-md-4 mb-3">
+
+                            <div class="setting-option">
+
+                                <div>
+
+                                    <h6 class="mb-1">
+
+                                        Trending Product
+
+                                    </h6>
+
+                                    <small class="text-muted">
+
+                                        Show this product in the Trending section.
+
+                                    </small>
+
+                                </div>
+
+
+                                <div class="form-check form-switch">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="trending"
+                                        value="1"
+                                        id="trending"
+
+                                        {{ old('trending') ? 'checked' : '' }}
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div> --}}
+
+
+
+                        {{-- FEATURED --}}
+
+                        <div class="col-md-4 mb-3">
+
+                            <div class="setting-option">
+
+                                <div>
+
+                                    <h6 class="mb-1">
+
+                                        Featured Product
+
+                                    </h6>
+
+                                    <small class="text-muted">
+
+                                        Highlight this product as a featured item.
+
+                                    </small>
+
+                                </div>
+
+
+                                <div class="form-check form-switch">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="featured"
+                                        value="1"
+                                        id="featured"
+
+                                        {{ old('featured') ? 'checked' : '' }}
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        {{-- STATUS --}}
+
+                        <div class="col-md-4 mb-3">
+
+                            <div class="setting-option">
+
+                                <div>
+
+                                    <h6 class="mb-1">
+
+                                        Product Visible
+
+                                    </h6>
+
+                                    <small class="text-muted">
+
+                                        Enable to display the product to customers.
+
+                                    </small>
+
+                                </div>
+
+
+                                <div class="form-check form-switch">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="status"
+                                        value="1"
+                                        id="status"
+
+                                        {{ old('status', true) ? 'checked' : '' }}
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="alert alert-light border mb-0">
+
+                        <strong>Visibility explanation:</strong>
+
+                        Trending adds the product to your Trending section.
+
+                        Featured highlights the product in featured areas.
+
+                        Product Visible controls whether customers can see the product.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            {{-- ========================================================= --}}
+            {{-- PRODUCT IMAGES --}}
+            {{-- ========================================================= --}}
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-white">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <h5 class="mb-1">
+
+                                <i class="mdi mdi-image-multiple-outline"></i>
+
+                                Product Images
+
+                            </h5>
+
+                            <small class="text-muted">
+
+                                Upload at least two clear product images.
+
+                            </small>
+
+                        </div>
+
+
+                        <span
+                            id="imageCountBadge"
+                            class="badge bg-secondary"
+                        >
+
+                            0 images selected
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="alert alert-info">
+
+                        <strong>
+
+                            Image Requirements
+
+                        </strong>
+
+                        <div class="mt-1">
+
+                            Upload at least 2 images.
+
+                            The first selected image will be used as the primary product image.
+
+                            Recommended images: front view, back view and additional product details.
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- UPLOAD AREA --}}
+
+                    <div
+                        class="product-upload-area"
+                        onclick="document.getElementById('productImages').click()"
+                    >
+
+                        <i class="mdi mdi-cloud-upload-outline upload-icon"></i>
+
+
+                        <h5>
+
+                            Select Product Images
+
+                        </h5>
+
+
+                        <p class="text-muted mb-2">
+
+                            Click here to browse your device.
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary"
+                        >
+
+                            <i class="mdi mdi-folder-open-outline"></i>
+
+                            Browse Images
+
+                        </button>
+
+
+                        <input
+                            type="file"
+                            name="image[]"
+                            multiple
+                            id="productImages"
+                            accept="image/*"
+                            class="d-none"
+                        >
+
+                    </div>
+
+
+
+                    @error('image')
+
+                        <div class="text-danger mt-2">
+
+                            {{ $message }}
+
+                        </div>
+
+                    @enderror
+
+
+                    @error('image.*')
+
+                        <div class="text-danger mt-2">
+
+                            {{ $message }}
+
+                        </div>
+
+                    @enderror
+
+
+
+                    {{-- PROGRESS --}}
+
+                    <div class="mt-4">
+
+                        <div class="d-flex justify-content-between">
+
+                            <small>
+
+                                Minimum image requirement
+
+                            </small>
+
+
+                            <small id="imageRequirementText">
+
+                                0 / 2
+
+                            </small>
+
+                        </div>
+
+
+                        <div
+                            class="progress mt-2"
+                            style="height: 8px;"
+                        >
+
+                            <div
+                                id="imageProgressBar"
+                                class="progress-bar"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- IMAGE MESSAGE --}}
+
+                    <div
+                        id="imageRequirements"
+                        class="alert alert-warning mt-3"
+                    >
+
+                        <i class="mdi mdi-alert-outline"></i>
+
+                        <span id="requirementMessage">
+
+                            Please select at least 2 images.
+
+                        </span>
+
+                    </div>
+
+
+
+                    {{-- IMAGE PREVIEW --}}
+
+                    <div
+                        id="imagePreview"
+                        class="row mt-4"
+                    ></div>
+
+
+                </div>
+
+            </div>
+
+
+
+            {{-- ========================================================= --}}
+            {{-- ACTION BUTTONS --}}
+            {{-- ========================================================= --}}
+
+            <div class="card shadow-sm">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+
+                        <a
+                            href="{{ url('admin/products') }}"
+                            class="btn btn-outline-secondary"
+                        >
+
+                            Cancel
+
+                        </a>
+
+
+
+                        <div>
+
+
+                            <button
+                                type="reset"
+                                class="btn btn-light me-2"
+                            >
+
+                                <i class="mdi mdi-refresh"></i>
+
+                                Reset Form
+
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="submitBtn"
+                                disabled
+                            >
+
+                                <i class="mdi mdi-content-save-outline"></i>
+
+                                Save Product
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </form>
+
     </div>
 </div>
 
+
 @endsection
 
+
+
 @section('scripts')
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const productImages = document.getElementById('productImages');
-    const imagePreview = document.getElementById('imagePreview');
-    const imageCountBadge = document.getElementById('imageCountBadge');
-    const imageProgressBar = document.getElementById('imageProgressBar');
-    const imageRequirements = document.getElementById('imageRequirements');
-    const requirementMessage = document.getElementById('requirementMessage');
-    const submitBtn = document.getElementById('submitBtn');
-    const form = document.getElementById('productForm');
-    const activeTabInput = document.getElementById('activeTab');
-    
-    // Get all tab elements
-    const homeTab = document.getElementById('home-tab');
-    const seoTab = document.getElementById('seotag-tab');
-    const detailsTab = document.getElementById('details-tab');
-    const imagesTab = document.getElementById('image-tab');
-    const tabButtons = [homeTab, seoTab, detailsTab, imagesTab];
 
-    // Store all selected files
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    const productImages =
+        document.getElementById('productImages');
+
+
+    const imagePreview =
+        document.getElementById('imagePreview');
+
+
+    const imageCountBadge =
+        document.getElementById('imageCountBadge');
+
+
+    const imageProgressBar =
+        document.getElementById('imageProgressBar');
+
+
+    const imageRequirements =
+        document.getElementById('imageRequirements');
+
+
+    const requirementMessage =
+        document.getElementById('requirementMessage');
+
+
+    const imageRequirementText =
+        document.getElementById('imageRequirementText');
+
+
+    const submitBtn =
+        document.getElementById('submitBtn');
+
+
+    const form =
+        document.getElementById('productForm');
+
+
+
     let allSelectedFiles = [];
-    let uploadedImages = [];
 
-    // Function to save current tab
-    function saveActiveTab(tabId) {
-        activeTabInput.value = tabId;
-        sessionStorage.setItem('activeProductTab', tabId);
-    }
 
-    // Function to activate tab based on stored value
-    function activateStoredTab() {
-        const storedTab = sessionStorage.getItem('activeProductTab') || 'home-tab';
-        const tabToActivate = document.getElementById(storedTab);
-        
-        if (tabToActivate) {
-            const tab = new bootstrap.Tab(tabToActivate);
-            tab.show();
-            activeTabInput.value = storedTab;
-        }
-    }
 
-    // Add click handlers to all tabs
-    tabButtons.forEach(tabButton => {
-        tabButton.addEventListener('click', function() {
-            saveActiveTab(this.id);
-        });
-    });
+    /*
+    |--------------------------------------------------------------------------
+    | Update Actual File Input
+    |--------------------------------------------------------------------------
+    */
 
-    // Check for image validation errors and switch to images tab if needed
-    @if($errors->has('image') || $errors->has('image.*'))
-        const imagesTabBtn = document.getElementById('image-tab');
-        if (imagesTabBtn) {
-            const tab = new bootstrap.Tab(imagesTabBtn);
-            tab.show();
-            activeTabInput.value = 'image-tab';
-            sessionStorage.setItem('activeProductTab', 'image-tab');
-        }
-    @endif
+    function updateFileInput()
+    {
+        const dataTransfer =
+            new DataTransfer();
 
-    // Function to update the file input with all selected files
-    function updateFileInput() {
-        const dataTransfer = new DataTransfer();
-        
-        allSelectedFiles.forEach(file => {
+
+        allSelectedFiles.forEach(function (file) {
+
             dataTransfer.items.add(file);
+
         });
-        
-        productImages.files = dataTransfer.files;
+
+
+        productImages.files =
+            dataTransfer.files;
     }
 
-    // Function to update image count and progress
-    function updateImageCount() {
-        const count = allSelectedFiles.length;
-        
-        // Update badge
-        imageCountBadge.textContent = `${count} image${count !== 1 ? 's' : ''} selected`;
-        
-        // Update progress bar
-        const progressPercentage = Math.min((count / 2) * 100, 100);
-        imageProgressBar.style.width = `${progressPercentage}%`;
-        
-        // Update badge color and progress bar color
-        if (count < 2) {
-            imageCountBadge.className = 'badge bg-danger';
-            imageProgressBar.className = 'progress-bar bg-danger';
-            imageRequirements.classList.remove('d-none');
-            requirementMessage.textContent = `Please select ${2 - count} more image${2 - count !== 1 ? 's' : ''} (minimum 2 required)`;
-            submitBtn.disabled = true;
-        } else {
-            imageCountBadge.className = 'badge bg-success';
-            imageProgressBar.className = 'progress-bar bg-success';
-            imageRequirements.classList.add('d-none');
-            submitBtn.disabled = false;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update Image Requirement UI
+    |--------------------------------------------------------------------------
+    */
+
+    function updateImageCount()
+    {
+        const count =
+            allSelectedFiles.length;
+
+
+        imageCountBadge.textContent =
+            count
+            + ' image'
+            + (count !== 1 ? 's' : '')
+            + ' selected';
+
+
+        imageRequirementText.textContent =
+            Math.min(count, 2)
+            + ' / 2';
+
+
+        const progress =
+            Math.min(
+                (count / 2) * 100,
+                100
+            );
+
+
+        imageProgressBar.style.width =
+            progress + '%';
+
+
+
+        if (count < 2)
+        {
+            imageCountBadge.className =
+                'badge bg-danger';
+
+
+            imageProgressBar.className =
+                'progress-bar bg-danger';
+
+
+            imageRequirements.classList.remove(
+                'd-none'
+            );
+
+
+            requirementMessage.textContent =
+                'Please select '
+                + (2 - count)
+                + ' more image'
+                + ((2 - count) !== 1 ? 's' : '')
+                + '.';
+
+
+            submitBtn.disabled =
+                true;
+        }
+        else
+        {
+            imageCountBadge.className =
+                'badge bg-success';
+
+
+            imageProgressBar.className =
+                'progress-bar bg-success';
+
+
+            imageRequirements.classList.add(
+                'd-none'
+            );
+
+
+            submitBtn.disabled =
+                false;
         }
     }
 
-    // Function to remove a specific image
-    function removeImage(index) {
-        allSelectedFiles.splice(index, 1);
-        uploadedImages.splice(index, 1);
-        
-        // Refresh the preview
-        refreshImagePreview();
-        
-        // Update file input
-        updateFileInput();
-        
-        // Update count
-        updateImageCount();
-        
-        // Store in sessionStorage
-        sessionStorage.setItem('imageCount', allSelectedFiles.length);
-    }
 
-    // Function to refresh all image previews
-    async function refreshImagePreview() {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Render Image Previews
+    |--------------------------------------------------------------------------
+    */
+
+    function refreshImagePreview()
+    {
         imagePreview.innerHTML = '';
-        
-        for (let i = 0; i < allSelectedFiles.length; i++) {
-            const preview = await createImagePreview(allSelectedFiles[i], i);
-            if (preview) {
-                imagePreview.appendChild(preview);
-            }
-        }
-    }
 
-    // Function to convert file to base64
-    function fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-        });
-    }
 
-    // Function to create image preview with remove button
-    function createImagePreview(file, index) {
-        return new Promise((resolve) => {
-            if (file.type.match('image.*')) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const col = document.createElement('div');
-                    col.className = 'col-md-3 mb-3';
-                    col.dataset.index = index;
-                    
-                    const card = document.createElement('div');
-                    card.className = 'card h-100';
-                    
-                    const imgContainer = document.createElement('div');
-                    imgContainer.className = 'position-relative';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'card-img-top';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'cover';
-                    
-                    const badge = document.createElement('span');
-                    badge.className = 'position-absolute top-0 start-0 badge bg-primary';
-                    badge.textContent = `#${index + 1}`;
-                    badge.style.fontSize = '0.8em';
-                    
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className = 'btn btn-danger btn-sm position-absolute top-0 end-0 m-1';
-                    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    removeBtn.style.zIndex = '10';
-                    removeBtn.onclick = function(e) {
-                        e.preventDefault();
-                        removeImage(index);
+        allSelectedFiles.forEach(
+
+            function (file, index)
+            {
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event)
+                    {
+
+                        const column =
+                            document.createElement('div');
+
+
+                        column.className =
+                            'col-xl-3 col-lg-4 col-md-6 mb-3';
+
+
+
+                        column.innerHTML = `
+
+                            <div class="card product-image-card h-100">
+
+                                <div class="position-relative">
+
+                                    <img
+                                        src="${event.target.result}"
+                                        class="card-img-top"
+                                        alt="Product Preview"
+                                    >
+
+
+                                    <span
+                                        class="badge bg-primary position-absolute top-0 start-0 m-2"
+                                    >
+
+                                        ${
+                                            index === 0
+                                            ? 'Primary Image'
+                                            : 'Image ' + (index + 1)
+                                        }
+
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 remove-image-btn"
+                                        data-index="${index}"
+                                    >
+
+                                        <i class="mdi mdi-close"></i>
+
+                                    </button>
+
+                                </div>
+
+
+                                <div class="card-body p-2">
+
+                                    <div class="small text-truncate">
+
+                                        ${file.name}
+
+                                    </div>
+
+
+                                    <small class="text-muted">
+
+                                        ${Math.round(file.size / 1024)} KB
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+
+                        imagePreview.appendChild(
+                            column
+                        );
+
                     };
-                    
-                    imgContainer.appendChild(img);
-                    imgContainer.appendChild(badge);
-                    imgContainer.appendChild(removeBtn);
-                    
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body p-2';
-                    
-                    const fileName = document.createElement('p');
-                    fileName.className = 'card-text small text-truncate mb-0';
-                    fileName.textContent = file.name.length > 20 ? 
-                        file.name.substring(0, 20) + '...' : file.name;
-                    
-                    const fileSize = document.createElement('p');
-                    fileSize.className = 'card-text small text-muted';
-                    const sizeInKB = Math.round(file.size / 1024);
-                    fileSize.textContent = `${sizeInKB} KB`;
-                    
-                    cardBody.appendChild(fileName);
-                    cardBody.appendChild(fileSize);
-                    card.appendChild(imgContainer);
-                    card.appendChild(cardBody);
-                    col.appendChild(card);
-                    
-                    resolve(col);
-                };
-                
+
+
                 reader.readAsDataURL(file);
-            } else {
-                resolve(null);
+
             }
-        });
+
+        );
     }
 
-    // Handle new image selection (APPEND instead of REPLACE)
-    productImages.addEventListener('change', async function() {
-        const newFiles = Array.from(this.files);
-        
-        // Add new files to the cumulative list
-        allSelectedFiles = [...allSelectedFiles, ...newFiles];
-        
-        // Clear the file input to allow re-selecting the same files
-        this.value = '';
-        
-        // Update file input with all files
-        updateFileInput();
-        
-        // Update count and progress
-        updateImageCount();
-        
-        // Create previews for all files (refresh all)
-        await refreshImagePreview();
-        
-        // Store base64 for persistence
-        uploadedImages = [];
-        for (let i = 0; i < allSelectedFiles.length; i++) {
-            const base64 = await fileToBase64(allSelectedFiles[i]);
-            uploadedImages.push(base64);
-        }
-        
-        // Store in sessionStorage for persistence
-        sessionStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
-        sessionStorage.setItem('imageCount', allSelectedFiles.length);
-        
-        // Make sure we stay on images tab
-        const tab = new bootstrap.Tab(imagesTab);
-        tab.show();
-        saveActiveTab('image-tab');
-    });
 
-    // Form validation before submit
-    form.addEventListener('submit', function(e) {
-        if (allSelectedFiles.length < 2) {
-            e.preventDefault();
-            
-            // Switch to images tab
-            const tab = new bootstrap.Tab(imagesTab);
-            tab.show();
-            saveActiveTab('image-tab');
-            
-            // Show alert
-            Swal.fire({
-                icon: 'error',
-                title: 'Images Required',
-                html: `Please upload at least 2 images (front and back views).<br><br>
-                       <strong>Currently selected:</strong> ${allSelectedFiles.length} image${allSelectedFiles.length !== 1 ? 's' : ''}`,
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#3085d6',
-            });
-        } else {
-            // Store active tab before submit
-            saveActiveTab(activeTabInput.value);
-            
-            // Store image data in session for persistence after validation error
-            if (uploadedImages.length > 0) {
-                sessionStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+
+    /*
+    |--------------------------------------------------------------------------
+    | Select Images
+    |--------------------------------------------------------------------------
+    */
+
+    productImages.addEventListener(
+        'change',
+
+        function ()
+        {
+
+            const newFiles =
+                Array.from(
+                    this.files
+                );
+
+
+            /*
+             * Prevent selecting the same file twice.
+             */
+
+            newFiles.forEach(
+                function (newFile)
+                {
+
+                    const alreadyExists =
+                        allSelectedFiles.some(
+                            function (existingFile)
+                            {
+
+                                return (
+                                    existingFile.name
+                                    ===
+                                    newFile.name
+
+                                    &&
+
+                                    existingFile.size
+                                    ===
+                                    newFile.size
+                                );
+
+                            }
+                        );
+
+
+                    if (!alreadyExists)
+                    {
+                        allSelectedFiles.push(
+                            newFile
+                        );
+                    }
+
+                }
+            );
+
+
+            updateFileInput();
+
+            updateImageCount();
+
+            refreshImagePreview();
+
+        }
+    );
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Remove Image
+    |--------------------------------------------------------------------------
+    */
+
+    imagePreview.addEventListener(
+        'click',
+
+        function (event)
+        {
+
+            const button =
+                event.target.closest(
+                    '.remove-image-btn'
+                );
+
+
+            if (!button)
+            {
+                return;
             }
+
+
+            const index =
+                parseInt(
+                    button.dataset.index
+                );
+
+
+            allSelectedFiles.splice(
+                index,
+                1
+            );
+
+
+            updateFileInput();
+
+            updateImageCount();
+
+            refreshImagePreview();
+
         }
-    });
+    );
 
-    // Clear previews and session when form is reset
-    form.addEventListener('reset', function() {
-        allSelectedFiles = [];
-        uploadedImages = [];
-        imagePreview.innerHTML = '';
-        imageCountBadge.textContent = '0 images selected';
-        imageCountBadge.className = 'badge bg-secondary';
-        imageProgressBar.style.width = '0%';
-        imageProgressBar.className = 'progress-bar';
-        imageRequirements.classList.add('d-none');
-        submitBtn.disabled = true; // Disable submit because minimum images not met
-        
-        // Clear file input
-        productImages.value = '';
-        updateFileInput();
-        
-        // Clear session storage
-        sessionStorage.removeItem('uploadedImages');
-        sessionStorage.removeItem('imageCount');
-        sessionStorage.removeItem('activeProductTab');
-        
-        // Reset to home tab
-        const tab = new bootstrap.Tab(homeTab);
-        tab.show();
-        saveActiveTab('home-tab');
-    });
 
-    // Restore previously selected images if any (from session storage)
-    const storedImageCount = sessionStorage.getItem('imageCount');
-    if (storedImageCount && parseInt(storedImageCount) > 0) {
-        // Update UI to show count
-        imageCountBadge.textContent = `${storedImageCount} images selected`;
-        imageCountBadge.className = 'badge bg-success';
-        imageProgressBar.style.width = '100%';
-        imageProgressBar.className = 'progress-bar bg-success';
-        submitBtn.disabled = false;
-    }
 
-    // Activate the last active tab on page load
-    activateStoredTab();
+    /*
+    |--------------------------------------------------------------------------
+    | Validate Before Submit
+    |--------------------------------------------------------------------------
+    */
 
-    // Handle browser back/forward navigation
-    window.addEventListener('popstate', function() {
-        activateStoredTab();
-    });
+    form.addEventListener(
+        'submit',
+
+        function (event)
+        {
+
+            if (
+                allSelectedFiles.length
+                <
+                2
+            )
+            {
+                event.preventDefault();
+
+
+                Swal.fire({
+
+                    icon: 'error',
+
+                    title: 'Product Images Required',
+
+                    text:
+                        'Please upload at least 2 product images before saving the product.',
+
+                    confirmButtonText:
+                        'OK'
+
+                });
+
+
+                document
+                    .querySelector(
+                        '.product-upload-area'
+                    )
+                    .scrollIntoView({
+
+                        behavior:
+                            'smooth',
+
+                        block:
+                            'center'
+
+                    });
+
+
+                return;
+            }
+
+
+            /*
+             * Prevent double submission.
+             */
+
+            submitBtn.disabled =
+                true;
+
+
+            submitBtn.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-1"></span> Saving Product...';
+
+        }
+    );
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reset Form
+    |--------------------------------------------------------------------------
+    */
+
+    form.addEventListener(
+        'reset',
+
+        function ()
+        {
+
+            setTimeout(
+                function ()
+                {
+
+                    allSelectedFiles = [];
+
+
+                    productImages.value =
+                        '';
+
+
+                    updateFileInput();
+
+                    updateImageCount();
+
+                    refreshImagePreview();
+
+                },
+
+                0
+            );
+
+        }
+    );
+
+
+
+    updateImageCount();
+
 });
+
 </script>
 
+
+
 @if(!isset($swal))
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endif
 
+
+
 <style>
-    .progress-bar {
-        transition: width 0.3s ease;
+
+.product-upload-area
+{
+    border: 2px dashed #ced4da;
+
+    border-radius: 10px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    background: #fafafa;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+
+.product-upload-area:hover
+{
+    border-color: #0d6efd;
+
+    background: #f8fbff;
+}
+
+
+.upload-icon
+{
+    font-size: 48px;
+
+    color: #6c757d;
+}
+
+
+.setting-option
+{
+    border: 1px solid #dee2e6;
+
+    border-radius: 8px;
+
+    padding: 18px;
+
+    min-height: 115px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.setting-option .form-check-input
+{
+    width: 42px;
+
+    height: 22px;
+
+    cursor: pointer;
+}
+
+
+.product-image-card
+{
+    overflow: hidden;
+}
+
+
+.product-image-card img
+{
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+}
+
+
+.remove-image-btn
+{
+    z-index: 5;
+}
+
+
+@media (max-width: 767px)
+{
+    .setting-option
+    {
+        min-height: auto;
     }
-    
-    .card {
-        transition: transform 0.2s;
+
+
+    .product-upload-area
+    {
+        padding: 25px 15px;
     }
-    
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    #imagePreview img {
-        cursor: pointer;
-    }
-    
-    .nav-link.active {
-        font-weight: 600;
-        background-color: #f8f9fa !important;
-        border-bottom-color: transparent !important;
-    }
-    
-    /* Tab transition smoothness */
-    .tab-pane {
-        transition: opacity 0.15s linear;
-    }
+}
+
 </style>
+
 
 @endsection

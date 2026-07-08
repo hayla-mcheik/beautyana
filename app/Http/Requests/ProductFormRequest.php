@@ -46,14 +46,14 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'string'
             ],  
-            'slug' => [
-                'required',
-                'string'
-            ],         
-            'small_description' => [
-                'required',
-                'string',
-            ],           
+            // 'slug' => [
+            //     'required',
+            //     'string'
+            // ],         
+            // 'small_description' => [
+            //     'required',
+            //     'string',
+            // ],           
             'description' => [
                 'required',
                 'string',
@@ -70,25 +70,25 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'integer',  
             ],
-            'trending' => [
-                'nullable', 
-            ], 
+            // 'trending' => [
+            //     'nullable', 
+            // ], 
             'status' => [
                 'nullable', 
             ],  
-            'meta_title' => [
-                'required',
-                'string',
-                'max:255'  
-            ],  
-            'meta_keyword' => [
-                'nullable',
-                'string',
-            ],
-            'meta_description' => [
-                'nullable',
-                'string',
-            ],
+            // 'meta_title' => [
+            //     'required',
+            //     'string',
+            //     'max:255'  
+            // ],  
+            // 'meta_keyword' => [
+            //     'nullable',
+            //     'string',
+            // ],
+            // 'meta_description' => [
+            //     'nullable',
+            //     'string',
+            // ],
             'image' => $imageRules,
             'image.*' => [
                 'image',
