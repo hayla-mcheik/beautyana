@@ -81,8 +81,8 @@
             </a>
         @endif
 
-        @if($appSetting->facebook)
-            <a href="{{ $appSetting->facebook }}"
+        @if($appSetting->youtube)
+            <a href="{{ $appSetting->youtube }}"
                target="_blank"
                class="desktop-social-icon">
               <i class="fa-brands fa-snapchat"></i>
