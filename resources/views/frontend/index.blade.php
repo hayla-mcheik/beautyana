@@ -1747,9 +1747,9 @@ textarea.form-control {
 @media (min-width: 1600px) {
 
     .home-banner {
-        height: 72vh;
-        min-height: 720px;
-        max-height: 1000px;
+height: 61vh;
+        min-height: 678px;
+        max-height: 900px;
     }
 
     .hero-banner-image {
@@ -1779,9 +1779,9 @@ textarea.form-control {
 @media (min-width: 1800px) {
 
     .home-banner {
-        height: 72vh;
-        min-height: 720px;
-        max-height: 1000px;
+height: 61vh;
+        min-height: 678px;
+        max-height: 900px;
     }
 
     .hero-banner-image {
