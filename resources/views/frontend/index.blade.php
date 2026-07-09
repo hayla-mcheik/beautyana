@@ -1779,9 +1779,9 @@ height: 61vh;
 @media (min-width: 1800px) {
 
     .home-banner {
-height: 61vh;
-        min-height: 678px;
-        max-height: 900px;
+height: 58vh;
+        min-height: 648px;
+        max-height: 800px;
     }
 
     .hero-banner-image {
