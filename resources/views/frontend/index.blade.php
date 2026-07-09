@@ -1739,7 +1739,74 @@ textarea.form-control {
     background:
         #9A7B45;
 }
+/* ============================================================
+   LARGE DESKTOP SCREENS ONLY
+   Makes hero slider larger on screens like 1920px / 2560px
+============================================================ */
 
+@media (min-width: 1600px) {
+
+    .home-banner {
+        height: 72vh;
+        min-height: 720px;
+        max-height: 1000px;
+    }
+
+    .hero-banner-image {
+        background-size: cover;
+        background-position: 58% center;
+    }
+
+    .slider-content {
+        max-width: 700px;
+        padding-top: 100px;
+    }
+
+    .slider-title {
+        font-size: clamp(60px, 4vw, 90px);
+    }
+
+    .slider-desc {
+        max-width: 520px;
+        font-size: 17px;
+        line-height: 1.8;
+    }
+
+    .default-slider-container .swiper-pagination {
+        bottom: 40px !important;
+    }
+}
+@media (min-width: 1800px) {
+
+    .home-banner {
+        height: 72vh;
+        min-height: 720px;
+        max-height: 1000px;
+    }
+
+    .hero-banner-image {
+        background-size: cover;
+        background-position: 58% center;
+    }
+
+    .slider-content {
+        max-width: 700px;
+        padding-top: 110px;
+    }
+
+    .slider-title {
+        font-size: 78px;
+    }
+
+    .slider-desc {
+        max-width: 520px;
+        font-size: 17px;
+    }
+
+    .default-slider-container .swiper-pagination {
+        bottom: 40px !important;
+    }
+}
 
 /* ============================================================
    LARGE TABLET / SMALL DESKTOP

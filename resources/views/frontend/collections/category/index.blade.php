@@ -594,7 +594,7 @@ margin-top: 20px;
 
     .collection-inner {
 
-        height: 220px;
+        height: 210px;
 
         border-radius: 110px 110px 6px 6px;
     }
