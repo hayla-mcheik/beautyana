@@ -3,967 +3,2468 @@
 
 @section('content')
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
-    :root {
-       
-        --demanto-gold-light: #F7F4EB;
-    --demanto-gold:#C5A15A;
-    --demanto-dark:#4F4033;
-    --demanto-bg:#FDFBF7;
-    --demanto-muted:#85715F;
-        --luxury-border: rgba(179, 146, 86, 0.25);
-        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+
+/* ============================================================
+   DEMANTO HOME PAGE — COMPLETE CLEAN CSS
+============================================================ */
+
+:root {
+    --demanto-gold: #C5A15A;
+    --demanto-gold-light: #F7F4EB;
+    --demanto-dark: #4F4033;
+    --demanto-bg: #FDFBF7;
+    --demanto-muted: #85715F;
+
+    --luxury-border: rgba(179, 146, 86, 0.25);
+
+    --transition-smooth:
+        all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --box-shadow-luxury:
+        0 25px 45px rgba(179, 146, 86, 0.10);
+}
+
+
+/* ============================================================
+   GLOBAL
+============================================================ */
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+body {
+    margin: 0;
+
+    background:
+        var(--demanto-bg);
+
+    color:
+        var(--demanto-dark);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        13px;
+}
+
+
+section {
+    animation:
+        fadeInUp 0.6s ease-out;
+}
+
+
+@keyframes fadeInUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
     }
 
-    body {
-        background-color: var(--demanto-bg);
-        color: var(--demanto-dark);
-        font-family:"Cormorant Garamond",serif;
-        overflow-x: hidden;
-        font-size: 13px;
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
     }
 
-    /* Typography - Minimized */
-    .luxury-heading {
-    font-family:"Cormorant Garamond",serif;
-        font-weight: 500;
-          color:#6E5A46;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        background: linear-gradient(135deg, var(--demanto-dark) 0%, var(--demanto-gold) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 32px !important;
-    }
+}
 
-    .luxury-sub {
-        font-size: 9px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--demanto-gold);
-        font-weight: 500;
-        display: inline-block;
-        position: relative;
-        padding-bottom: 4px;
-    }
-    
-    .luxury-sub::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 25px;
-        height: 1.5px;
-        background: var(--demanto-gold);
-    }
 
-    .luxury-section-title {
-        text-align: center;
-        margin-bottom: 25px;
-        position: relative;
-    }
-    
-    /* Buttons - Minimized */
-    .btn-demanto {
-        background: linear-gradient(135deg, var(--demanto-dark) 0%, #9a7b45 100%);
-        color: #fff !important;
-        font-size: 9px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 8px 22px;
-        border: none;
-        border-radius: 25px;
-        transition: var(--transition-smooth);
-        display: inline-block;
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-    }
-    
-    .btn-demanto::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--demanto-dark) 0%, #1a1a1a 100%);
-        transition: all 0.5s ease;
-        z-index: -1;
-        border-radius: 25px;
-    }
-    
-    .btn-demanto:hover::before {
-        left: 0;
-    }
-    
-    .btn-demanto:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(179, 146, 86, 0.3);
-    }
+/* ============================================================
+   GENERAL TYPOGRAPHY
+============================================================ */
 
-    .btn-demanto-outline {
-        border: 1.5px solid var(--demanto-gold);
-        color: var(--demanto-gold);
-        font-size: 9px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 8px 20px;
-        background: transparent;
-        border-radius: 25px;
-        transition: var(--transition-smooth);
-        text-decoration: none;
-        display: inline-block;
-    }
-    
-    .btn-demanto-outline:hover {
-        background: var(--demanto-gold);
-        color: #fff !important;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(179, 146, 86, 0.2);
-    }
-    /* About Section - Minimized */
-    .about-editorial-section {
-        background: linear-gradient(135deg, #FBF9F4 0%, #fff 100%);
-        position: relative;
-        overflow: hidden;
-        padding: 30px 0;
-    }
-    
-    .about-title {
-        font-family:"Cormorant Garamond",serif;
-        font-size: 24px;
-        line-height: 1.2;
-        color: var(--demanto-dark);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    
-    .about-title::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 40px;
-        height: 2px;
-        background: linear-gradient(90deg, var(--demanto-gold), transparent);
-    }
-    
+.luxury-heading {
+    margin: 0;
 
-    .metric-number {
-        color: var(--demanto-gold);
-        font-size: 22px;
-        margin-bottom: 4px;
-        font-weight: 600;
-        font-family:"Cormorant Garamond",serif;
-    }
-    
-    .metric-item i {
-        font-size: 22px;
-        color: var(--demanto-gold);
-        transition: all 0.3s ease;
-    }
-    
-    .metric-label {
-        font-size: 8px;
-        letter-spacing: 1px;
-        color: #333;
-        text-transform: uppercase;
-        line-height: 1.3;
-        font-weight: 500;
-        margin-top: 6px;
-    }
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    /* Featured Products - Minimized */
-    .featured-products {
-        background: linear-gradient(180deg, #fff, #faf8f3);
-        overflow: hidden;
-        padding: 0px 0;
-    }
-    
-    .featured-product-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 1px solid rgba(179, 146, 86, 0.15);
-        overflow: hidden;
-        transition: 0.4s;
-        height: 100%;
-    }
-    
-    .featured-product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(179, 146, 86, 0.12);
-    }
-    
-    .featured-image {
-        height: 300px;
-        background: #f8f5ef;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .featured-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        padding: 20px;
-        transition: 0.5s;
-    }
-    
-    .featured-product-card:hover img {
-        transform: scale(1.05);
-    }
-    
-    .featured-content {
-        padding: 15px;
-        text-align: center;
-    }
-    
-    .featured-content h4 {
-        font-family:"Cormorant Garamond",serif;
-        font-size: 14px;
-        margin-bottom: 6px;
-        color: var(--boutique-dark);
-    }
-    
-    .featured-content a {
-        color: var(--boutique-text);
-        text-decoration: none;
-        text-transform: uppercase;
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-    /* Floating WhatsApp Button */
+    font-size:
+        32px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #6E5A46;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--demanto-dark) 0%,
+            var(--demanto-gold) 100%
+        );
+
+    -webkit-background-clip:
+        text;
+
+    -webkit-text-fill-color:
+        transparent;
+
+    background-clip:
+        text;
+}
+
+
+.luxury-section-title {
+    position:
+        relative;
+
+    margin-bottom:
+        25px;
+
+    text-align:
+        center;
+}
+
+
+.luxury-sub {
+    position:
+        relative;
+
+    display:
+        inline-block;
+
+    padding-bottom:
+        4px;
+
+    font-size:
+        9px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--demanto-gold);
+}
+
+
+.luxury-sub::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        0;
+
+    width:
+        25px;
+
+    height:
+        1.5px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        var(--demanto-gold);
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.btn-demanto {
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        9px 24px;
+
+    overflow:
+        hidden;
+
+    border:
+        0;
+
+    border-radius:
+        25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--demanto-dark) 0%,
+            #9A7B45 100%
+        );
+
+    color:
+        #FFFFFF !important;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.4;
+
+    letter-spacing:
+        1.5px;
+
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
+    text-transform:
+        uppercase;
+
+    cursor:
+        pointer;
+
+    transition:
+        var(--transition-smooth);
+}
+
+
+.btn-demanto::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        -100%;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    z-index:
+        -1;
+
+    border-radius:
+        inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--demanto-dark) 0%,
+            #1A1A1A 100%
+        );
+
+    transition:
+        left 0.5s ease;
+}
+
+
+.btn-demanto:hover::before {
+    left:
+        0;
+}
+
+
+.btn-demanto:hover {
+    color:
+        #FFFFFF !important;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(179, 146, 86, 0.30);
+}
+
+
+.btn-demanto-outline {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        8px 20px;
+
+    border:
+        1.5px solid var(--demanto-gold);
+
+    border-radius:
+        25px;
+
+    background:
+        transparent;
+
+    color:
+        var(--demanto-gold);
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        1.5px;
+
+    text-decoration:
+        none;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        var(--transition-smooth);
+}
+
+
+.btn-demanto-outline:hover {
+    background:
+        var(--demanto-gold);
+
+    color:
+        #FFFFFF !important;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(179, 146, 86, 0.20);
+}
+
+
+/* ============================================================
+   HEADER POSITION ON HOME PAGE
+============================================================ */
+
+.header-area.header-default {
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        100%;
+
+    z-index:
+        1050;
+
+    background:
+        transparent;
+}
+
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.home-banner {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        52vh;
+
+    min-height:
+        500px;
+
+    max-height:
+        760px;
+
+    overflow:
+        hidden;
+
+    z-index:
+        1;
+}
+
+
+.default-slider-container,
+.default-slider-container .swiper-wrapper,
+.default-slider-container .swiper-slide {
+    width:
+        100%;
+
+    height:
+        100%;
+}
+
+
+.default-slider-container .swiper-slide {
+    position:
+        relative;
+}
+
+
+.hero-banner-image {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    overflow:
+        hidden;
+
+    isolation:
+        isolate;
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+
+    background-position:
+        58% center;
+}
+
+
+/* ============================================================
+   HERO OVERLAY
+============================================================ */
+
+.slider-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    pointer-events:
+        none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(18, 27, 22, 0.78) 0%,
+            rgba(18, 27, 22, 0.60) 25%,
+            rgba(18, 27, 22, 0.28) 50%,
+            rgba(18, 27, 22, 0.06) 72%,
+            rgba(18, 27, 22, 0) 100%
+        );
+}
+
+
+.hero-dark-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    pointer-events:
+        none;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+}
+
+
+/* ============================================================
+   HERO CONTENT
+============================================================ */
+
+.hero-banner-image > .container {
+    position:
+        relative;
+
+    z-index:
+        5;
+}
+
+
+.slider-content {
+    position:
+        relative;
+
+    z-index:
+        5;
+
+    width:
+        100%;
+
+    max-width:
+        540px;
+
+    padding-top:
+        70px;
+}
+
+
+.slider-title {
+    margin:
+        0 0 18px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(42px, 4vw, 68px);
+
+    font-weight:
+        500;
+
+    line-height:
+        0.98;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        #F4E5C3;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.28);
+}
+
+
+.slider-desc {
+    max-width:
+        400px;
+
+    margin:
+        0;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        14px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.8;
+
+    letter-spacing:
+        0.3px;
+
+    color:
+        rgba(255, 255, 255, 0.92);
+}
+
+
+/* ============================================================
+   HERO PAGINATION
+============================================================ */
+
+.default-slider-container .swiper-pagination {
+    bottom:
+        30px !important;
+
+    z-index:
+        10;
+}
+
+
+.default-slider-container .swiper-pagination-bullet {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    margin:
+        0 5px !important;
+
+    border-radius:
+        50%;
+
+    background:
+        #FFFFFF;
+
+    opacity:
+        0.50;
+
+    transition:
+        all 0.3s ease;
+}
+
+
+.default-slider-container
+.swiper-pagination-bullet-active {
+
+    width:
+        30px;
+
+    border-radius:
+        20px;
+
+    opacity:
+        1;
+
+    background:
+        var(--demanto-gold);
+}
+
+
+/* ============================================================
+   WHATSAPP BUTTON
+============================================================ */
+
 .whatsapp-btn {
-    position: fixed;
+    position:
+        fixed;
 
-    right: 30px;
-    bottom: 30px;
+    right:
+        30px;
 
-    width: 45px;
-    height: 45px;
+    bottom:
+        30px;
 
-    background: #25D366;
-    color: #fff;
+    width:
+        45px;
 
-    border-radius: 50%;
+    height:
+        45px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    text-decoration: none;
-    font-size: 23px;
+    align-items:
+        center;
 
-    z-index: 9999;
+    justify-content:
+        center;
 
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius:
+        50%;
+
+    background:
+        var(--demanto-gold);
+
+    color:
+        #FFFFFF;
+
+    font-size:
+        23px;
+
+    text-decoration:
+        none;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.25);
 
     transition:
         transform 0.3s ease,
-        background 0.3s ease;
+        box-shadow 0.3s ease;
+
+    z-index:
+        9999;
 }
 
-    /* Exhibitions Section - UNCHANGED */
-    .exhibitions-area {
-        background: #FBF9F4;
-        padding: 10px 0;
-    }
-    
-    .section-title-demanto {
-        font-family:"Cormorant Garamond",serif;
-        color: #B39256;
-        font-size: 28px;
-        letter-spacing: 1.5px;
-        font-weight: 500;
-    }
-    
-    .demanto-exhibition-item {
-        overflow: hidden;
-        border-radius: 15px;
-    }
-    
-    .demanto-exhibition-item img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-        transition: 0.5s;
-    }
-    
-    .demanto-exhibition-item:hover img {
-        transform: scale(1.05);
-    }
-    
-    .swiper-slide-prev .demanto-exhibition-item img,
-    .swiper-slide-next .demanto-exhibition-item img {
-        opacity: 0.6;
-    }
-    
-    .demanto-prev,
-    .demanto-next {
-        width: 35px;
-        height: 35px;
-        border: 1px solid #d7c7a4;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff;
-        color: #b39256;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    
-    .demanto-prev {
-        left: -10px;
-    }
-    
-    .demanto-next {
-        right: -10px;
-    }
-    
-    .demanto-prev:hover,
-    .demanto-next:hover {
-        background: #B39256;
-        color: #fff;
-    }
 
-    /* Appointment Section - Minimized */
-    .appointment-marquee {
-        background: linear-gradient(135deg, rgba(179, 146, 86, 0.05) 0%, rgba(179, 146, 86, 0.02) 100%);
-        border-top: 1px solid var(--luxury-border);
-        border-bottom: 1px solid var(--luxury-border);
-        position: relative;
-        overflow: hidden;
-        padding: 10px 0;
-    }
-    
-    .appointment-marquee::before {
-        content: '✧';
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        font-size: 80px;
-        color: var(--demanto-gold);
-        opacity: 0.03;
-        font-family: serif;
-    }
-    
-    .appointment-marquee::after {
-        content: '✧';
-        position: absolute;
-        bottom: 15px;
-        right: 15px;
-        font-size: 80px;
-        color: var(--demanto-gold);
-        opacity: 0.03;
-        font-family: serif;
-    }
+.whatsapp-btn:hover {
+    color:
+        #FFFFFF;
 
-    /* Loading Animation */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    section {
-        animation: fadeInUp 0.6s ease-out;
-    }
+    transform:
+        translateY(-3px);
 
-    /* Responsive */
-    @media (max-width: 1200px) {
-        .slider-title { font-size: 30px; }
-        .about-title { font-size: 22px; }
-        .metric-number { font-size: 20px; }
-        .luxury-heading { font-size: 20px !important; }
-    }
-    
-    @media (max-width: 991px) {
-        .home-slider-area, .home-slider-container { height: 600px !important; }
-        .slider-title { font-size: 28px; }
-        .collection-image { height: 180px; }
-        .featured-image { height: 2800px; }
-        .demanto-exhibition-item img { height: 340px; }
-    }
-    
-    @media (max-width: 768px) {
-        .home-slider-area, .home-slider-container { height: 500px !important; }
-        .slider-title { font-size: 22px !important; letter-spacing: 1px; }
-        .slider-desc { font-size: 14px !important; max-width: 190px !important;}
-        .luxury-heading { font-size: 18px !important; }
-        .about-title { font-size: 20px; }
-        .metric-number { font-size: 18px; }
-        .collection-image { height: 150px; padding: 15px; }
-        .collection-content h4 { font-size: 13px; }
-        .btn-demanto, .btn-demanto-outline { padding: 6px 16px; font-size: 8px; }
-        .featured-image { height: 280px; }
-        .demanto-exhibition-item img { height: 200px; }
-.slider-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(100deg, rgba(248, 245, 240, .98) 0%, rgba(251, 251, 251, 0.85) 25%, rgba(248, 245, 240, .18) 55%, rgba(0, 0, 0, 0.434) 85%) !important;
-}
-    }
-    
-    @media (max-width: 576px) {
-        .slider-title { font-size: 28px !important; }
-        .luxury-section-title { margin-bottom: 20px; }
-        .metric-number { font-size: 16px; }
-        .metric-label { font-size: 7px; }
-        .collection-image { height: 120px; padding: 12px; }
-        .collection-content h4 { font-size: 12px; }
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--demanto-bg);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: var(--demanto-gold);
-        border-radius: 3px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #9a7b45;
-    }
-
-    .appointment-marquee {
-        position: relative;
-        min-height: 200px;
-        background: url('{{ asset("assets/img/appoint.jpg") }}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        align-items: center;
-    }
-
-    .appointment-overlay {
-        position: absolute;
-        background: linear-gradient(rgb(14 14 14 / 64%), rgb(98 98 98 / 45%));
-        z-index: 1;
-    }
-
-    .appointment-text {
-        color: #fff;
-        font-size: 13px;
-        line-height: 1.6;
-    }
-
-    .luxury-sub {
-        color: #fff;
-        letter-spacing: 4px;
-    }
-
-    .appointment-marquee .btn-demanto {
-        min-width: 180px;
-        padding: 10px 25px;
-        letter-spacing: 2px;
-        font-size: 9px;
-    }
-
-    .appointment-marquee .btn-demanto-outline {
-        min-width: 180px;
-        padding: 10px 25px;
-        letter-spacing: 2px;
-        font-size: 9px;
-    }
-    /* Additional utility classes */
-.header-area.header-default {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1050; 
-    background: transparent;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.30);
 }
 
-.home-slider-area {
-    position: relative;
-    z-index: 1;
+
+/* ============================================================
+   ABOUT SECTION
+============================================================ */
+
+.about-editorial-section {
+    position:
+        relative;
+
+    padding:
+        30px 0;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FBF9F4 0%,
+            #FFFFFF 100%
+        );
 }
 
-/*=========================================
-        HERO IMAGE
-=========================================*/
 
-.home-banner{
+.about-editorial-section img {
+    display:
+        block;
 
-    position:relative;
+    width:
+        100%;
 
-    width:100%;
-
-    height:40vh;
-
-    min-height:400px;
-
-    overflow:hidden;
+    transition:
+        transform 0.5s ease;
 }
 
-.hero-banner-image{
 
-    position:relative;
-
-    width:100%;
-
-    height:100%;
-
-    background-size:cover;
-
-    background-repeat:no-repeat;
-
-    background-position:center center;
-
-    display:flex;
-
-    align-items:center;
-}
-.slider-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:2;
-
-    background:linear-gradient(
-        160deg,
-        rgba(248,245,240,.98) 0%,
-        rgba(251, 251, 251, 0.85) 25%,
-        rgba(248,245,240,.18) 55%,
-        rgba(0, 0, 0, 0) 85%
-    );
-}
-.slider-content{
-
-    position:relative;
-
-    z-index:5;
-
-    max-width:620px;
-
-    padding-top:30px;
+.about-editorial-section img:hover {
+    transform:
+        scale(1.025);
 }
 
-.slider-title{
-    font-family:"Cormorant Garamond",serif;
-    font-size:50px;
-text-transform: uppercase;
-    color:var(--boutique-text);
 
-    margin-bottom:10px;
+.about-title {
+    position:
+        relative;
+
+    display:
+        inline-block;
+
+    margin:
+        0 0 18px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        26px;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.2;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--demanto-dark);
 }
 
-.slider-desc{
-font-family:"Cormorant Garamond",serif;
-    max-width:250px;
 
-    font-size:15px;
-    color:var(--boutique-text);
+.about-title::after {
+    content:
+        "";
 
-    margin-bottom:15px;
-}
-@media(max-width:1200px){
+    position:
+        absolute;
 
-.home-banner{
+    left:
+        0;
 
-    min-height:550px;
-}
+    bottom:
+        -8px;
 
-.slider-title{
+    width:
+        40px;
 
-    font-size:56px;
-}
+    height:
+        2px;
 
-}
-
-@media(max-width:991px){
-
-.home-banner{
-
-    min-height:480px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--demanto-gold),
+            transparent
+        );
 }
 
-.hero-banner-image{
 
-    background-position:65% center;
+.about-description {
+    max-width:
+        90%;
+
+    margin-top:
+        15px;
+
+    color:
+        var(--demanto-dark);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.7;
 }
 
-.slider-content{
 
-    text-align:start;
+/* ============================================================
+   METRICS
+============================================================ */
 
-    margin:auto;
+.metric-number {
+    margin-bottom:
+        4px;
 
-    padding-top:10px;
+    color:
+        var(--demanto-gold);
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        22px;
+
+    font-weight:
+        600;
 }
 
-.slider-title{
 
-    font-size:42px;
+.metric-item i {
+    color:
+        var(--demanto-gold);
+
+    font-size:
+        22px;
+
+    transition:
+        transform 0.3s ease;
 }
 
-.slider-desc{
 
-    margin: 0px;
-
-    font-size:16px;
+.metric-item:hover i {
+    transform:
+        translateY(-2px);
 }
 
-.slider-btn{
 
-    display:flex;
+.metric-label {
+    margin-top:
+        6px;
 
-    justify-content:start;
+    color:
+        #333333;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        8px;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.3;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
 }
 
+
+/* ============================================================
+   FEATURED PRODUCTS
+============================================================ */
+
+.featured-products {
+    padding:
+        28px 0 32px;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFFFFF,
+            #FAF8F3
+        );
 }
 
-@media(max-width:768px){
 
-.home-banner{
-
-    min-height:400px;
+.featured-products .position-relative {
+    padding:
+        0 2px;
 }
 
-.hero-banner-image{
 
-    background-position:70% center;
+.featured-products-slider {
+    overflow:
+        hidden;
 }
 
-.slider-title{
 
-    font-size:30px;
+.featured-products-slider .swiper-slide {
+    height:
+        auto;
+
+    padding-bottom:
+        4px;
 }
 
-.slider-desc{
 
-    font-size:14px;
+.featured-product-card {
+    height:
+        100%;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid rgba(179, 146, 86, 0.15);
+
+    border-radius:
+        20px;
+
+    background:
+        #FFFFFF;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
 }
 
-.btn-demanto{
 
-    padding:12px 28px;
+.featured-product-card:hover {
+    transform:
+        translateY(-5px);
 
-    font-size:10px;
+    box-shadow:
+        0 15px 30px rgba(179, 146, 86, 0.12);
 }
 
+
+.featured-image {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        300px;
+
+    overflow:
+        hidden;
+
+    background:
+        #F8F5EF;
 }
 
-@media(max-width:480px){
 
-.home-banner{
+.featured-image a {
+    display:
+        block;
 
-    min-height:316px;
+    width:
+        100%;
+
+    height:
+        100%;
 }
 
-.slider-title{
 
-    font-size:28px;
+.featured-image img {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    padding:
+        20px;
+
+    object-fit:
+        contain;
+
+    transition:
+        transform 0.5s ease;
 }
 
-.slider-desc{
 
-    font-size:13px;
+.featured-product-card:hover
+.featured-image img {
+
+    transform:
+        scale(1.05);
 }
 
-.btn-demanto{
 
-    width:100%;
-text-align: center;
-    max-width:200px;
+.featured-content {
+    padding:
+        15px;
+
+    text-align:
+        center;
 }
 
-}
-.hero-banner-image{
-    position:relative;
-    overflow:hidden;
-}
 
-.hero-dark-overlay{
-    position:absolute;
-    inset:0;
-  background:rgba(0,0,0,.45);
-    z-index:1;
-}
-        .appointment-section{
+.featured-content h4 {
+    margin:
+        0 0 7px;
 
-    position:relative;
+    color:
+        var(--demanto-dark);
 
-    padding:20px 0;
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    background:url('assets/img/appointment.jpg') center center;
+    font-size:
+        16px;
 
-    background-size:cover;
-}
+    font-weight:
+        600;
 
-.appointment-overlay{
-
-    position:absolute;
-
-    inset:0;
-
+    line-height:
+        1.3;
 }
 
-.appointment-section .container{
 
-    position:relative;
+.featured-content a {
+    color:
+        var(--demanto-muted);
 
-    z-index:2;
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        1px;
+
+    text-decoration:
+        none;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        color 0.3s ease;
 }
 
-.appointment-label{
 
-    color:#B39256;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
+.featured-content a:hover {
+    color:
+        var(--demanto-gold);
 }
 
-.appointment-section h2{
 
-    color:#fff;
+/* ============================================================
+   FEATURED PRODUCTS PAGINATION
+============================================================ */
 
-    font-size:36px;
+.featured-pagination {
+    position:
+        relative;
 
-    margin:15px 0;
-
-    font-weight:500;
+    text-align:
+        center;
 }
 
-.appointment-section p{
 
-    color:#d7d7d7;
+.featured-pagination
+.swiper-pagination-bullet {
 
-    font-size:14px;
+    width:
+        7px;
 
-    line-height:28px;
+    height:
+        7px;
 
-    max-width:420px;
+    margin:
+        0 4px !important;
+
+    background:
+        var(--demanto-muted);
+
+    opacity:
+        0.35;
+
+    transition:
+        all 0.3s ease;
 }
 
-.appointment-form{
 
-    background:rgba(255,255,255,.96);
+.featured-pagination
+.swiper-pagination-bullet-active {
 
-    padding:40px;
+    width:
+        22px;
 
-    border-radius:10px;
+    border-radius:
+        20px;
+
+    background:
+        var(--demanto-gold);
+
+    opacity:
+        1;
 }
 
-.appointment-form .form-control{
 
-    height:48px;
+/* ============================================================
+   FEATURED NAVIGATION BUTTONS
+============================================================ */
 
-    border:none;
+.featured-prev,
+.featured-next {
+    position:
+        absolute;
 
-    border-bottom:1px solid #ddd;
+    top:
+        50%;
 
-    border-radius:0;
+    z-index:
+        10;
 
-    background:transparent;
+    width:
+        36px;
 
-    font-size:13px;
+    height:
+        36px;
 
-    box-shadow:none;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid rgba(197, 161, 90, 0.35);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    color:
+        var(--demanto-gold);
+
+    cursor:
+        pointer;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        var(--transition-smooth);
 }
 
-.appointment-form textarea.form-control{
 
-    height:120px;
-
-    resize:none;
+.featured-prev {
+    left:
+        -14px;
 }
 
-.appointment-form .form-control:focus{
 
-    border-color:#B39256;
-
-    box-shadow:none;
+.featured-next {
+    right:
+        -14px;
 }
 
-.appointment-btn{
 
-    background:#B39256;
+.featured-prev:hover,
+.featured-next:hover {
+    border-color:
+        var(--demanto-gold);
 
-    color:#fff;
+    background:
+        var(--demanto-gold);
 
-    border:none;
-
-    padding:14px 45px;
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    transition:.3s;
+    color:
+        #FFFFFF;
 }
 
-.appointment-btn:hover{
 
-    background:#232323;
-}
-@media(min-width:991px){
-    .about-description {
-        color: var(--boutique-dark);
-        font-size: 16px;
-        line-height: 1.6;
-        margin-top: 15px;
-        max-width: 90%;
-    }
-}
+/* ============================================================
+   EXHIBITIONS
+============================================================ */
 
-    
-@media(max-width:991px){
-    .about-description {
-        color: var(--boutique-dark);
-        font-size: 14px;
-        line-height: 1.6;
-        margin-top: 15px;
-        max-width: 100%;
-    }
-.appointment-section{
+.exhibitions-area {
+    padding:
+        28px 0 32px;
 
-    padding:10px 0;
+    overflow:
+        hidden;
+
+    background:
+        #FBF9F4;
 }
 
-.appointment-section h2{
 
-    font-size:28px;
+.section-title-demanto {
+    color:
+        #B39256;
 
-    text-align:center;
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        28px;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        1.5px;
 }
 
-.appointment-section p{
-    text-align:center;
-    font-size:13px;
+
+.demanto-exhibition-link {
+    display:
+        block;
+
+    text-decoration:
+        none;
 }
 
-.appointment-label{
 
-    display:block;
+.demanto-exhibition-item {
+    width:
+        100%;
 
-    text-align:center;
+    overflow:
+        hidden;
+
+    border-radius:
+        15px;
+
+    background:
+        #F4F0E8;
 }
 
-.appointment-form{
 
-    padding:25px;
+.demanto-exhibition-item img {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        400px;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
 }
 
-.appointment-btn{
 
-    width:100%;
-}
-
-}
- .default-slider-container{
-    width:100%;
-    height:100%;
+.demanto-exhibition-item:hover img {
+    transform:
+        scale(1.05);
 }
 
-.default-slider-container .swiper-slide{
-    height:auto;
+
+.swiper-slide-prev
+.demanto-exhibition-item img,
+
+.swiper-slide-next
+.demanto-exhibition-item img {
+
+    opacity:
+        0.60;
 }
 
-.home-banner{
-    position:relative;
-    overflow:hidden;
+
+/* ============================================================
+   EXHIBITION NAVIGATION
+============================================================ */
+
+.demanto-prev,
+.demanto-next {
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    z-index:
+        10;
+
+    width:
+        35px;
+
+    height:
+        35px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid #D7C7A4;
+
+    border-radius:
+        50%;
+
+    background:
+        #FFFFFF;
+
+    color:
+        #B39256;
+
+    cursor:
+        pointer;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        var(--transition-smooth);
 }
 
-.default-slider-container .swiper-pagination{
-    bottom:30px !important;
+
+.demanto-prev {
+    left:
+        -10px;
 }
 
-.default-slider-container .swiper-pagination-bullet{
-    width:12px;
-    height:12px;
-    background:#fff;
-    opacity:.45;
-    transition:.3s;
+
+.demanto-next {
+    right:
+        -10px;
 }
 
-.default-slider-container .swiper-pagination-bullet-active{
-    opacity:1;
-    background:#B39256;
-    width:32px;
-    border-radius:20px;
+
+.demanto-prev:hover,
+.demanto-next:hover {
+    border-color:
+        #B39256;
+
+    background:
+        #B39256;
+
+    color:
+        #FFFFFF;
 }
+
+
+/* ============================================================
+   APPOINTMENT SECTION
+============================================================ */
+
+.appointment-section {
+    position:
+        relative;
+
+    padding:
+        45px 0;
+
+    overflow:
+        hidden;
+
+    background:
+        url('assets/img/appointment.jpg')
+        center center / cover
+        no-repeat;
+}
+
+
+.appointment-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(14, 14, 14, 0.72),
+            rgba(50, 45, 39, 0.52)
+        );
+}
+
+
+.appointment-section .container {
+    position:
+        relative;
+
+    z-index:
+        2;
+}
+
+
+.appointment-label {
+    color:
+        #B39256;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        4px;
+
+    text-transform:
+        uppercase;
+}
+
+
+.appointment-section h2 {
+    margin:
+        15px 0;
+
+    color:
+        #FFFFFF;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        38px;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.1;
+}
+
+
+.appointment-section p {
+    max-width:
+        420px;
+
+    margin:
+        0;
+
+    color:
+        #E0E0E0;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+}
+
+
+/* ============================================================
+   APPOINTMENT FORM
+============================================================ */
+
+.appointment-form {
+    padding:
+        38px;
+
+    border:
+        1px solid rgba(197, 161, 90, 0.14);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+
+.appointment-form .form-control {
+    width:
+        100%;
+
+    height:
+        50px;
+
+    padding:
+        10px 12px;
+
+    border:
+        0;
+
+    border-bottom:
+        1px solid #DDDDDD;
+
+    border-radius:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        var(--demanto-dark);
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        13px;
+
+    box-shadow:
+        none;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+
+.appointment-form
+.form-control:focus {
+
+    border-color:
+        #B39256;
+
+    outline:
+        none;
+
+    box-shadow:
+        none;
+}
+
+
+.appointment-form
+textarea.form-control {
+
+    height:
+        120px;
+
+    padding-top:
+        14px;
+
+    resize:
+        none;
+}
+
+
+.appointment-form
+.form-control::placeholder {
+
+    color:
+        #888888;
+
+    opacity:
+        1;
+}
+
+
+/* ============================================================
+   DATE + TIME INPUTS
+============================================================ */
+
 .appointment-input-wrapper {
-    position: relative;
+    position:
+        relative;
+
+    width:
+        100%;
 }
+
 
 .appointment-input-label {
-    position: absolute;
+    position:
+        absolute;
 
-    top: 8px;
-    left: 13px;
+    top:
+        7px;
 
-    font-size: 11px;
-    line-height: 1;
+    left:
+        12px;
 
-    color: #777;
+    z-index:
+        2;
 
-    pointer-events: none;
+    color:
+        #777777;
 
-    z-index: 2;
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    line-height:
+        1;
+
+    pointer-events:
+        none;
 }
+
 
 .appointment-date-time {
-    padding-top: 22px !important;
-    padding-bottom: 8px !important;
+    min-height:
+        58px;
 
-    min-height: 58px;
+    padding-top:
+        23px !important;
+
+    padding-bottom:
+        7px !important;
 }
 
 
-/* Mobile */
+/* ============================================================
+   CUSTOM SCROLLBAR
+============================================================ */
+
+::-webkit-scrollbar {
+    width:
+        6px;
+}
+
+
+::-webkit-scrollbar-track {
+    background:
+        var(--demanto-bg);
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius:
+        3px;
+
+    background:
+        var(--demanto-gold);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        #9A7B45;
+}
+
+
+/* ============================================================
+   LARGE TABLET / SMALL DESKTOP
+============================================================ */
+
+@media (max-width: 1200px) {
+
+    .luxury-heading {
+        font-size:
+            28px;
+    }
+
+
+    .about-title {
+        font-size:
+            24px;
+    }
+
+
+    .metric-number {
+        font-size:
+            20px;
+    }
+
+
+    .featured-prev {
+        left:
+            4px;
+    }
+
+
+    .featured-next {
+        right:
+            4px;
+    }
+
+
+    .demanto-prev {
+        left:
+            4px;
+    }
+
+
+    .demanto-next {
+        right:
+            4px;
+    }
+
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 991px) {
+
+    /* HERO */
+
+    .home-banner {
+        height:
+            600px;
+
+        min-height:
+            600px;
+
+        max-height:
+            none;
+    }
+
+
+    .hero-banner-image {
+        background-position:
+            63% center;
+    }
+
+
+    .slider-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(18, 27, 22, 0.82) 0%,
+                rgba(18, 27, 22, 0.65) 40%,
+                rgba(18, 27, 22, 0.22) 75%,
+                rgba(18, 27, 22, 0.02) 100%
+            );
+    }
+
+
+    .slider-content {
+        max-width:
+            460px;
+
+        padding-top:
+            70px;
+    }
+
+
+    .slider-title {
+        font-size:
+            48px;
+    }
+
+
+    .slider-desc {
+        max-width:
+            350px;
+    }
+
+
+    /* ABOUT */
+
+    .about-description {
+        max-width:
+            100%;
+
+        font-size:
+            14px;
+    }
+
+
+    .about-editorial-section
+    .col-lg-6.ps-lg-3 {
+
+        margin-top:
+            24px;
+    }
+
+
+    /* FEATURED */
+
+    .featured-image {
+        height:
+            300px;
+    }
+
+
+    /* EXHIBITIONS */
+
+    .demanto-exhibition-item img {
+        height:
+            340px;
+    }
+
+
+    /* APPOINTMENT */
+
+    .appointment-section {
+        padding:
+            38px 0;
+    }
+
+
+    .appointment-section h2 {
+        font-size:
+            32px;
+
+        text-align:
+            center;
+    }
+
+
+    .appointment-section p {
+        max-width:
+            650px;
+
+        margin:
+            0 auto;
+
+        text-align:
+            center;
+    }
+
+
+    .appointment-label {
+        display:
+            block;
+
+        text-align:
+            center;
+    }
+
+
+    .appointment-form {
+        padding:
+            30px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
 
 @media (max-width: 767px) {
 
-    .appointment-input-label {
-        display: block;
+    /* GENERAL */
+
+    .luxury-heading {
+        font-size:
+            24px;
     }
-.footer-brand{
-    text-align: start;
-}
-.footer-brand img{ margin-bottom: 10px;}
+
+
+    .luxury-section-title {
+        margin-bottom:
+            20px;
+    }
+
+
+    /* HERO */
+
+    .home-banner {
+        height:
+            520px;
+
+        min-height:
+            520px;
+
+        max-height:
+            none;
+    }
+
+
+    .hero-banner-image {
+        background-position:
+            67% center;
+    }
+
+
+    .slider-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(17, 24, 20, 0.88) 0%,
+                rgba(17, 24, 20, 0.70) 48%,
+                rgba(17, 24, 20, 0.30) 78%,
+                rgba(17, 24, 20, 0.06) 100%
+            );
+    }
+
+
+    .hero-banner-image > .container {
+        padding-left:
+            20px !important;
+
+        padding-right:
+            20px !important;
+    }
+
+
+    .slider-content {
+        max-width:
+            300px;
+
+        padding-top:
+            72px;
+    }
+
+
+    .slider-title {
+        margin-bottom:
+            14px;
+
+        font-size:
+            36px;
+
+        line-height:
+            1;
+
+        letter-spacing:
+            1px;
+    }
+
+
+    .slider-desc {
+        max-width:
+            265px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.65;
+    }
+
+
+    .default-slider-container
+    .swiper-pagination {
+
+        bottom:
+            20px !important;
+    }
+
+
+    /* ABOUT */
+
+    .about-editorial-section {
+        padding:
+            26px 0;
+    }
+
+
+    .about-title {
+        font-size:
+            22px;
+    }
+
+
+    .about-description {
+        font-size:
+            14px;
+
+        line-height:
+            1.65;
+    }
+
+
+    .btndemantodiv {
+        text-align:
+            center;
+    }
+
+
+    /* FEATURED PRODUCTS */
+
+    .featured-products {
+        padding:
+            24px 0 28px;
+    }
+
+
+    .featured-image {
+        height:
+            280px;
+    }
+
+
+    .featured-image img {
+        padding:
+            15px;
+    }
+
+
+    .featured-prev,
+    .featured-next {
+
+        width:
+            32px;
+
+        height:
+            32px;
+    }
+
+
+    /* EXHIBITIONS */
+
+    .exhibitions-area {
+        padding:
+            24px 0 28px;
+    }
+
+
+    .demanto-exhibition-item img {
+        height:
+            250px;
+    }
+
+
+    .demanto-prev,
+    .demanto-next {
+
+        width:
+            32px;
+
+        height:
+            32px;
+    }
+
+
+    /* APPOINTMENT */
+
+    .appointment-section {
+        padding:
+            32px 0;
+    }
+
+
+    .appointment-section h2 {
+        font-size:
+            29px;
+    }
+
+
+    .appointment-section p {
+        font-size:
+            13px;
+
+        line-height:
+            1.75;
+    }
+
+
+    .appointment-form {
+        margin-top:
+            5px;
+
+        padding:
+            25px 20px;
+    }
+
+
     .appointment-date-time {
-        width: 100%;
-        min-height: 58px;
+        width:
+            100%;
 
-        appearance: auto;
-        -webkit-appearance: auto;
+        appearance:
+            auto;
+
+        -webkit-appearance:
+            auto;
+    }
+
+
+    .appointment-form
+    .btn-demanto {
+
+        width:
+            100%;
+    }
+
+
+    /* WHATSAPP */
+
+    .whatsapp-btn {
+        right:
+            18px;
+
+        bottom:
+            18px;
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        font-size:
+            22px;
+    }
+
+
+    /* FOOTER */
+
+    .footer-brand {
+        text-align:
+            start;
+    }
+
+
+    .footer-brand img {
+        margin-bottom:
+            10px;
     }
 
 }
-</style>
+
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width: 575px) {
+
+    /* HERO */
+
+    .home-banner {
+        height:
+            400px;
+
+        min-height:
+            400px;
+    }
+
+
+    .hero-banner-image {
+        background-position:
+            70% center;
+    }
+
+
+    .hero-banner-image > .container {
+        padding-left:
+            16px !important;
+
+        padding-right:
+            16px !important;
+    }
+
+
+    .slider-content {
+        max-width:
+            270px;
+
+        padding-top:
+            68px;
+    }
+
+
+    .slider-title {
+        font-size:
+            32px;
+    }
+
+
+    .slider-desc {
+        max-width:
+            235px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.55;
+    }
+
+
+    /* ABOUT */
+
+    .about-editorial-section {
+        padding:
+            22px 0;
+    }
+
+
+    .about-title {
+        font-size:
+            21px;
+    }
+
+
+    .about-description {
+        font-size:
+            13px;
+    }
+
+
+    /* PRODUCTS */
+
+    .featured-image {
+        height:
+            255px;
+    }
+
+
+    .featured-content h4 {
+        font-size:
+            15px;
+    }
+
+
+    /* EXHIBITIONS */
+
+    .demanto-exhibition-item img {
+        height:
+            215px;
+    }
+
+
+    /* APPOINTMENT */
+
+    .appointment-section h2 {
+        font-size:
+            27px;
+    }
+
+
+    .appointment-form {
+        padding:
+            22px 16px;
+    }
+
+
+    .appointment-form
+    .form-control {
+
+        font-size:
+            12px;
+    }
+
+
+    /* WHATSAPP */
+
+    .whatsapp-btn {
+        right:
+            14px;
+
+        bottom:
+            14px;
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        font-size:
+            21px;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+============================================================ */
+
+@media (max-width: 400px) {
+
+    /* HERO */
+
+    .home-banner {
+        height:
+            420px;
+
+        min-height:
+            420px;
+    }
+
+
+    .hero-banner-image {
+        background-position:
+            72% center;
+    }
+
+
+    .slider-content {
+        max-width:
+            235px;
+
+        padding-top:
+            65px;
+    }
+
+
+    .slider-title {
+        font-size:
+            28px;
+    }
+
+
+    .slider-desc {
+        max-width:
+            210px;
+
+        font-size:
+            11px;
+    }
+
+
+    .default-slider-container
+    .swiper-pagination-bullet {
+
+        width:
+            7px;
+
+        height:
+            7px;
+    }
+
+
+    .default-slider-container
+    .swiper-pagination-bullet-active {
+
+        width:
+            24px;
+    }
+
+
+    /* ABOUT */
+
+    .about-title {
+        font-size:
+            20px;
+    }
+
+
+    /* PRODUCTS */
+
+    .featured-image {
+        height:
+            235px;
+    }
+
+
+    /* EXHIBITIONS */
+
+    .demanto-exhibition-item img {
+        height:
+            195px;
+    }
+
+
+    /* APPOINTMENT */
+
+    .appointment-section {
+        padding:
+            28px 0;
+    }
+
+
+    .appointment-section h2 {
+        font-size:
+            25px;
+    }
+
+
+    .appointment-form {
+        padding:
+            20px 14px;
+    }
+
+}
+    </style>
 
 <!-- Hero Slider Section -->
 <!-- Hero Slider Section -->
@@ -980,9 +2481,7 @@ text-align: center;
                     <div class="hero-banner-image"
                          style="background-image:url('{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}');">
 
-                        <div class="hero-dark-overlay"></div>
-
-                        <div class="slider-overlay"></div>
+               <div class="slider-overlay"></div>
 
                         <div class="container h-100 p-4">
 

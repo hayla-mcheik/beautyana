@@ -53,29 +53,59 @@ h1, h2, h3, h4, h5, h6,
     }
 
 :root {
-    --logo-pink-dark: #C9A96E;
-    --logo-pink-light: #F5C8DA;
-    --logo-pink-darklight: #f5c8dab7;
-    --logo-text-pink: #E28FB2;
-        --primary-gold:#C9A96E;
-    --light-beige:#F8F4EF;
-    --dark:#1F1F1F;
-    --text:#6D6D6D;
-        --boutique-gold:#C5A15A;
-    --boutique-text:#76522e;
-    --boutique-dark:#6f5d48;
-    --boutique-muted:#8B7765;
-    --boutique-light:#F8F3EC;
-            --demanto-gold: #B39256;
-        --demanto-gold-light: #F7F4EB;
-        --demanto-dark: #6f5d48;
-        --demanto-bg: #FDFBF7;
-        --demanto-muted: #6E6E6E;
-        --luxury-border: rgba(179, 146, 86, 0.25);
-        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
+    --demanto-gold: #C5A15A;
+    --demanto-gold-dark: #9B7738;
 
-  }
+    --demanto-cream: #F8F3EA;
+    --demanto-bg: #FDFBF7;
+
+    --demanto-dark: #342A22;
+
+    --demanto-text: #5D5147;
+    --demanto-muted: #85786D;
+
+    --demanto-white: #FFFFFF;
+
+    --luxury-border: rgba(197, 161, 90, 0.25);
+
+    --transition-smooth:
+        all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+body {
+    margin: 0;
+
+    background: var(--demanto-bg);
+
+    color: var(--demanto-text);
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 400;
+
+    line-height: 1.7;
+
+    overflow-x: hidden;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Cormorant Garamond", serif;
+
+    color: var(--demanto-dark);
+
+    font-weight: 600;
+
+    line-height: 1.15;
+}
 a {
   color: #C9A96E;
   text-decoration: none;
@@ -1985,14 +2015,7 @@ section .container-fluid {
 .header-area.header-default .header-align .header-navigation-area .main-menu.nav > li.active > a:before {
   color: var(--logo-pink-dark) !important;
 }
-.header-area.header-default .header-align .header-navigation-area .main-menu.nav > li > a {
-  color: #51555a;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.1;
-  padding: 0 15px 0 0;
-  text-transform: capitalize;
-}
+
 .header-area.header-default .header-align .header-navigation-area .main-menu.nav > li > a:last-child {
   padding-right: 0;
 }

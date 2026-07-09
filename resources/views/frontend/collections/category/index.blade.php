@@ -3,7 +3,7 @@
 
     <div class="container collections-container">
 
-        <div class="collections-title">
+        <div class="collections-title d-none">
 
             <span>EXPLORE OUR COLLECTIONS</span>
 
@@ -18,7 +18,7 @@
 
         @if($collections->count())
 
-            <div class="collections-slider-wrapper mt-2">
+            <div class="collections-slider-wrapper mt-0">
 
                 <div class="swiper signature-slider collections-slider">
 
@@ -47,15 +47,6 @@
                                                 alt="{{ $categoryItem->name }}"
                                                 loading="lazy"
                                             >
-
-                                        </div>
-
-
-                                        <div class="discover-link">
-
-                                            DISCOVER MORE
-
-                                            <span>→</span>
 
                                         </div>
 
@@ -254,7 +245,7 @@
 
     width: 100%;
 
-    height: 330px;
+    height: 260px;
 
     overflow: hidden;
 
@@ -373,17 +364,17 @@ padding-top: 20px;
 
     z-index: 4;
 
-    margin-top: 50px;
+    margin-top: 40px;
 
-    margin-bottom: 14px;
+    margin-bottom: 8px;
 
-    padding: 0 15px;
+    padding: 0 8px;
 
     font-family: 'Roboto';
 
-    font-size: 14px;
+    font-size: 12px;
 
-    font-weight: 600;
+    font-weight: 800;
 
     letter-spacing: 1.8px;
 
@@ -403,7 +394,7 @@ padding-top: 20px;
 
     position: relative;
 
-    height: 170px;
+    height: 160px;
 
     display: flex;
 
@@ -467,7 +458,7 @@ padding-top: 20px;
 
     display: block;
 
-    max-width: 78%;
+    max-width: 60%;
 
     max-height: 145px;
 
@@ -603,7 +594,7 @@ margin-top: 20px;
 
     .collection-inner {
 
-        height: 240px;
+        height: 220px;
 
         border-radius: 110px 110px 6px 6px;
     }
@@ -633,7 +624,7 @@ margin-top: 20px;
 
     .collection-image {
 
-        height: 150px;
+        height: 140px;
 
         padding: 0 15px;
     }
@@ -641,9 +632,9 @@ margin-top: 20px;
 
     .collection-image img {
 
-        max-height: 130px;
+        max-height: 100px;
 
-        max-width: 80%;
+        max-width: 60%;
     }
 
 
@@ -701,7 +692,7 @@ margin-top: 20px;
 
     .collection-inner {
 
-        height: 225px;
+        height: 220px;
     }
 
 
