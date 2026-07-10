@@ -7,12 +7,14 @@
 
 
 /* ============================================================
-   DEMANTO HOME PAGE — COMPLETE CLEAN CSS
+   DEMANTO HOME PAGE
 ============================================================ */
 
 :root {
     --demanto-gold: #C5A15A;
+    --demanto-gold-dark: #9A7B45;
     --demanto-gold-light: #F7F4EB;
+
     --demanto-dark: #4F4033;
     --demanto-bg: #FDFBF7;
     --demanto-muted: #85715F;
@@ -34,31 +36,26 @@
 html,
 body {
     width: 100%;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
 
 body {
-    margin: 0;
-
-    background:
-        var(--demanto-bg);
-
-    color:
-        var(--demanto-dark);
+    background: var(--demanto-bg);
+    color: var(--demanto-dark);
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
 
 section {
-    animation:
-        fadeInUp 0.6s ease-out;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 
@@ -66,18 +63,13 @@ section {
 
     from {
         opacity: 0;
-
-        transform:
-            translateY(20px);
+        transform: translateY(20px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
-
 }
 
 
@@ -92,20 +84,13 @@ section {
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        32px;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 1px;
 
-    font-weight:
-        500;
+    text-transform: uppercase;
 
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-    color:
-        #6E5A46;
+    color: #6E5A46;
 
     background:
         linear-gradient(
@@ -114,80 +99,52 @@ section {
             var(--demanto-gold) 100%
         );
 
-    -webkit-background-clip:
-        text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-    -webkit-text-fill-color:
-        transparent;
-
-    background-clip:
-        text;
+    background-clip: text;
 }
 
 
 .luxury-section-title {
-    position:
-        relative;
-
-    margin-bottom:
-        25px;
-
-    text-align:
-        center;
+    position: relative;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 
 .luxury-sub {
-    position:
-        relative;
+    position: relative;
 
-    display:
-        inline-block;
+    display: inline-block;
 
-    padding-bottom:
-        4px;
+    padding-bottom: 4px;
 
-    font-size:
-        9px;
+    color: var(--demanto-gold);
 
-    font-weight:
-        500;
+    font-size: 9px;
+    font-weight: 500;
 
-    letter-spacing:
-        2px;
+    letter-spacing: 2px;
 
-    text-transform:
-        uppercase;
-
-    color:
-        var(--demanto-gold);
+    text-transform: uppercase;
 }
 
 
 .luxury-sub::after {
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        50%;
+    left: 50%;
+    bottom: 0;
 
-    bottom:
-        0;
+    width: 25px;
+    height: 1.5px;
 
-    width:
-        25px;
+    transform: translateX(-50%);
 
-    height:
-        1.5px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        var(--demanto-gold);
+    background: var(--demanto-gold);
 }
 
 
@@ -196,125 +153,88 @@ section {
 ============================================================ */
 
 .btn-demanto {
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        1;
+    z-index: 1;
 
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    padding: 9px 24px;
 
-    padding:
-        9px 24px;
+    overflow: hidden;
 
-    overflow:
-        hidden;
+    border: 0;
 
-    border:
-        0;
-
-    border-radius:
-        25px;
+    border-radius: 25px;
 
     background:
         linear-gradient(
             135deg,
-            var(--demanto-dark) 0%,
-            #9A7B45 100%
+            var(--demanto-dark),
+            var(--demanto-gold-dark)
         );
 
-    color:
-        #FFFFFF !important;
+    color: #FFFFFF !important;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        9px;
+    font-size: 9px;
+    font-weight: 500;
 
-    font-weight:
-        500;
+    line-height: 1.4;
 
-    line-height:
-        1.4;
+    letter-spacing: 1.5px;
 
-    letter-spacing:
-        1.5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
 
-    text-align:
-        center;
+    cursor: pointer;
 
-    text-decoration:
-        none;
-
-    text-transform:
-        uppercase;
-
-    cursor:
-        pointer;
-
-    transition:
-        var(--transition-smooth);
+    transition: var(--transition-smooth);
 }
 
 
 .btn-demanto::before {
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        0;
+    top: 0;
+    left: -100%;
 
-    left:
-        -100%;
+    width: 100%;
+    height: 100%;
 
-    width:
-        100%;
+    z-index: -1;
 
-    height:
-        100%;
-
-    z-index:
-        -1;
-
-    border-radius:
-        inherit;
+    border-radius: inherit;
 
     background:
         linear-gradient(
             135deg,
-            var(--demanto-dark) 0%,
-            #1A1A1A 100%
+            var(--demanto-dark),
+            #1A1A1A
         );
 
-    transition:
-        left 0.5s ease;
+    transition: left 0.5s ease;
 }
 
 
 .btn-demanto:hover::before {
-    left:
-        0;
+    left: 0;
 }
 
 
 .btn-demanto:hover {
-    color:
-        #FFFFFF !important;
+    color: #FFFFFF !important;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
         0 5px 15px rgba(179, 146, 86, 0.30);
@@ -322,63 +242,44 @@ section {
 
 
 .btn-demanto-outline {
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:
-        center;
-
-    padding:
-        8px 20px;
+    padding: 8px 20px;
 
     border:
         1.5px solid var(--demanto-gold);
 
-    border-radius:
-        25px;
+    border-radius: 25px;
 
-    background:
-        transparent;
+    background: transparent;
 
-    color:
-        var(--demanto-gold);
+    color: var(--demanto-gold);
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        9px;
+    font-size: 9px;
+    font-weight: 500;
 
-    font-weight:
-        500;
+    letter-spacing: 1.5px;
 
-    letter-spacing:
-        1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
 
-    text-decoration:
-        none;
-
-    text-transform:
-        uppercase;
-
-    transition:
-        var(--transition-smooth);
+    transition: var(--transition-smooth);
 }
 
 
 .btn-demanto-outline:hover {
-    background:
-        var(--demanto-gold);
+    background: var(--demanto-gold);
 
-    color:
-        #FFFFFF !important;
+    color: #FFFFFF !important;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
         0 5px 15px rgba(179, 146, 86, 0.20);
@@ -386,27 +287,20 @@ section {
 
 
 /* ============================================================
-   HEADER POSITION ON HOME PAGE
+   HEADER
 ============================================================ */
 
 .header-area.header-default {
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        0;
+    top: 0;
+    left: 0;
 
-    left:
-        0;
+    width: 100%;
 
-    width:
-        100%;
+    z-index: 1050;
 
-    z-index:
-        1050;
-
-    background:
-        transparent;
+    background: transparent;
 }
 
 
@@ -415,123 +309,62 @@ section {
 ============================================================ */
 
 .home-banner {
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        52vh;
+    height: 52vh;
 
-    min-height:
-        500px;
+    min-height: 500px;
+    max-height: 760px;
 
-    max-height:
-        760px;
+    overflow: hidden;
 
-    overflow:
-        hidden;
-
-    z-index:
-        1;
+    z-index: 1;
 }
 
 
-.default-slider-container,
+.home-banner .default-slider-container {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
 .default-slider-container .swiper-wrapper,
 .default-slider-container .swiper-slide {
-    width:
-        100%;
-
-    height:
-        100%;
+    width: 100%;
+    height: 100%;
 }
 
 
 .default-slider-container .swiper-slide {
-    position:
-        relative;
+    position: relative;
 }
 
 
 .hero-banner-image {
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
+    height: 100%;
 
-    height:
-        100%;
+    display: flex;
 
-    display:
-        flex;
+    align-items: center;
 
-    align-items:
-        center;
+    overflow: hidden;
 
-    overflow:
-        hidden;
+    isolation: isolate;
 
-    isolation:
-        isolate;
+    background-size: cover;
 
-    background-size:
-        cover;
+    background-repeat: no-repeat;
 
-    background-repeat:
-        no-repeat;
-
-    background-position:
-        58% center;
-}
-
-
-/* ============================================================
-   HERO OVERLAY
-============================================================ */
-
-.slider-overlay {
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    z-index:
-        1;
-
-    pointer-events:
-        none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(18, 27, 22, 0.78) 0%,
-            rgba(18, 27, 22, 0.60) 25%,
-            rgba(18, 27, 22, 0.28) 50%,
-            rgba(18, 27, 22, 0.06) 72%,
-            rgba(18, 27, 22, 0) 100%
-        );
-}
-
-
-.hero-dark-overlay {
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    z-index:
-        1;
-
-    pointer-events:
-        none;
-
-    background:
-        rgba(0, 0, 0, 0.35);
+    background-position: 58% center;
 }
 
 
@@ -540,35 +373,27 @@ section {
 ============================================================ */
 
 .hero-banner-image > .container {
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        5;
+    z-index: 5;
 }
 
 
 .slider-content {
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        5;
+    z-index: 5;
 
-    width:
-        100%;
+    width: 100%;
 
-    max-width:
-        540px;
+    max-width: 540px;
 
-    padding-top:
-        70px;
+    padding-top: 70px;
 }
 
 
 .slider-title {
-    margin:
-        0 0 18px;
+    margin: 0 0 18px;
 
     font-family:
         "Cormorant Garamond",
@@ -577,20 +402,15 @@ section {
     font-size:
         clamp(42px, 4vw, 68px);
 
-    font-weight:
-        500;
+    font-weight: 500;
 
-    line-height:
-        0.98;
+    line-height: 0.98;
 
-    letter-spacing:
-        2px;
+    letter-spacing: 2px;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 
-    color:
-        #F4E5C3;
+    color: #F4E5C3;
 
     text-shadow:
         0 2px 12px rgba(0, 0, 0, 0.28);
@@ -598,30 +418,26 @@ section {
 
 
 .slider-desc {
-    max-width:
-        400px;
+    max-width: 400px;
 
-    margin:
-        0;
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.95);
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        14px;
+    font-size: 14px;
+    font-weight: 400;
 
-    font-weight:
-        400;
+    line-height: 1.8;
 
-    line-height:
-        1.8;
+    letter-spacing: 0.3px;
 
-    letter-spacing:
-        0.3px;
-
-    color:
-        rgba(255, 255, 255, 0.92);
+    text-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -630,120 +446,121 @@ section {
 ============================================================ */
 
 .default-slider-container .swiper-pagination {
-    bottom:
-        30px !important;
+    bottom: 30px !important;
 
-    z-index:
-        10;
+    z-index: 10;
 }
 
 
-.default-slider-container .swiper-pagination-bullet {
-    width:
-        9px;
+.default-slider-container
+.swiper-pagination-bullet {
+    width: 9px;
+    height: 9px;
 
-    height:
-        9px;
+    margin: 0 5px !important;
 
-    margin:
-        0 5px !important;
+    border-radius: 50%;
 
-    border-radius:
-        50%;
+    background: #FFFFFF;
 
-    background:
-        #FFFFFF;
+    opacity: 0.55;
 
-    opacity:
-        0.50;
-
-    transition:
-        all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 
 .default-slider-container
 .swiper-pagination-bullet-active {
+    width: 30px;
 
-    width:
-        30px;
+    border-radius: 20px;
 
-    border-radius:
-        20px;
+    background: var(--demanto-gold);
 
-    opacity:
-        1;
-
-    background:
-        var(--demanto-gold);
+    opacity: 1;
 }
 
 
 /* ============================================================
-   WHATSAPP BUTTON
+   FIXED WHATSAPP BUTTON
 ============================================================ */
 
 .whatsapp-btn {
-    position:
-        fixed;
+    position: fixed !important;
 
-    right:
-        30px;
+    /*
+    JavaScript controls the vertical position.
 
-    bottom:
-        30px;
+    This fallback is used before JavaScript executes.
+    */
 
-    width:
-        45px;
+    top: 500px;
 
-    height:
-        45px;
+    right: 22px;
 
-    display:
-        flex;
+    width: 52px;
+    height: 52px;
 
-    align-items:
-        center;
+    display: flex;
 
-    justify-content:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    border-radius:
-        50%;
+    padding: 0;
 
-    background:
-        var(--demanto-gold);
 
-    color:
-        #FFFFFF;
 
-    font-size:
-        23px;
+    border-radius: 50%;
 
-    text-decoration:
-        none;
+    background: #25D366;
+
+    color: #FFFFFF !important;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    text-decoration: none;
 
     box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.25);
+        0 6px 20px rgba(0, 0, 0, 0.22);
+
+    z-index: 99999;
+
+    transform: translateY(-50%);
 
     transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
 
-    z-index:
-        9999;
+
+.whatsapp-btn i {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+
+    color: #FFFFFF;
+
+    line-height: 1;
 }
 
 
 .whatsapp-btn:hover {
-    color:
-        #FFFFFF;
+    background: #1EBE5D;
+
+    color: #FFFFFF !important;
 
     transform:
-        translateY(-3px);
+        translateY(-50%)
+        scale(1.08);
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.30);
+        0 10px 25px rgba(0, 0, 0, 0.28);
 }
 
 
@@ -752,14 +569,11 @@ section {
 ============================================================ */
 
 .about-editorial-section {
-    position:
-        relative;
+    position: relative;
 
-    padding:
-        30px 0;
+    padding: 30px 0;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         linear-gradient(
@@ -771,75 +585,54 @@ section {
 
 
 .about-editorial-section img {
-    display:
-        block;
+    display: block;
 
-    width:
-        100%;
+    width: 100%;
 
-    transition:
-        transform 0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 
 .about-editorial-section img:hover {
-    transform:
-        scale(1.025);
+    transform: scale(1.025);
 }
 
 
 .about-title {
-    position:
-        relative;
+    position: relative;
 
-    display:
-        inline-block;
+    display: inline-block;
 
-    margin:
-        0 0 18px;
+    margin: 0 0 18px;
+
+    color: var(--demanto-dark);
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        26px;
+    font-size: 26px;
+    font-weight: 500;
 
-    font-weight:
-        500;
+    line-height: 1.2;
 
-    line-height:
-        1.2;
+    letter-spacing: 1px;
 
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-    color:
-        var(--demanto-dark);
+    text-transform: uppercase;
 }
 
 
 .about-title::after {
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        0;
+    left: 0;
 
-    bottom:
-        -8px;
+    bottom: -8px;
 
-    width:
-        40px;
-
-    height:
-        2px;
+    width: 40px;
+    height: 2px;
 
     background:
         linear-gradient(
@@ -851,24 +644,19 @@ section {
 
 
 .about-description {
-    max-width:
-        90%;
+    max-width: 90%;
 
-    margin-top:
-        15px;
+    margin-top: 15px;
 
-    color:
-        var(--demanto-dark);
+    color: var(--demanto-dark);
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        16px;
+    font-size: 16px;
 
-    line-height:
-        1.7;
+    line-height: 1.7;
 }
 
 
@@ -877,67 +665,50 @@ section {
 ============================================================ */
 
 .metric-number {
-    margin-bottom:
-        4px;
+    margin-bottom: 4px;
 
-    color:
-        var(--demanto-gold);
+    color: var(--demanto-gold);
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        22px;
-
-    font-weight:
-        600;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 
 .metric-item i {
-    color:
-        var(--demanto-gold);
+    color: var(--demanto-gold);
 
-    font-size:
-        22px;
+    font-size: 22px;
 
-    transition:
-        transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 
 .metric-item:hover i {
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
 
 
 .metric-label {
-    margin-top:
-        6px;
+    margin-top: 6px;
 
-    color:
-        #333333;
+    color: #333333;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        8px;
+    font-size: 8px;
+    font-weight: 500;
 
-    font-weight:
-        500;
+    line-height: 1.3;
 
-    line-height:
-        1.3;
+    letter-spacing: 1px;
 
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 }
 
 
@@ -946,11 +717,9 @@ section {
 ============================================================ */
 
 .featured-products {
-    padding:
-        28px 0 32px;
+    padding: 28px 0 32px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         linear-gradient(
@@ -962,41 +731,33 @@ section {
 
 
 .featured-products .position-relative {
-    padding:
-        0 2px;
+    padding: 0 2px;
 }
 
 
 .featured-products-slider {
-    overflow:
-        hidden;
+    overflow: hidden;
 }
 
 
 .featured-products-slider .swiper-slide {
-    height:
-        auto;
+    height: auto;
 
-    padding-bottom:
-        4px;
+    padding-bottom: 4px;
 }
 
 
 .featured-product-card {
-    height:
-        100%;
+    height: 100%;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     border:
         1px solid rgba(179, 146, 86, 0.15);
 
-    border-radius:
-        20px;
+    border-radius: 20px;
 
-    background:
-        #FFFFFF;
+    background: #FFFFFF;
 
     transition:
         transform 0.4s ease,
@@ -1005,8 +766,7 @@ section {
 
 
 .featured-product-card:hover {
-    transform:
-        translateY(-5px);
+    transform: translateY(-5px);
 
     box-shadow:
         0 15px 30px rgba(179, 146, 86, 0.12);
@@ -1014,257 +774,186 @@ section {
 
 
 .featured-image {
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        300px;
+    height: 300px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    background:
-        #F8F5EF;
+    background: #F8F5EF;
 }
 
 
 .featured-image a {
-    display:
-        block;
+    display: block;
 
-    width:
-        100%;
-
-    height:
-        100%;
+    width: 100%;
+    height: 100%;
 }
 
 
 .featured-image img {
-    display:
-        block;
+    display: block;
 
-    width:
-        100%;
+    width: 100%;
+    height: 100%;
 
-    height:
-        100%;
+    padding: 20px;
 
-    padding:
-        20px;
+    object-fit: contain;
 
-    object-fit:
-        contain;
-
-    transition:
-        transform 0.5s ease;
+    transition: transform 0.5s ease;
 }
 
 
 .featured-product-card:hover
 .featured-image img {
-
-    transform:
-        scale(1.05);
+    transform: scale(1.05);
 }
 
 
 .featured-content {
-    padding:
-        15px;
+    padding: 15px;
 
-    text-align:
-        center;
+    text-align: center;
 }
 
 
 .featured-content h4 {
-    margin:
-        0 0 7px;
+    margin: 0 0 7px;
 
-    color:
-        var(--demanto-dark);
+    color: var(--demanto-dark);
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        16px;
+    font-size: 16px;
+    font-weight: 600;
 
-    font-weight:
-        600;
-
-    line-height:
-        1.3;
+    line-height: 1.3;
 }
 
 
 .featured-content a {
-    color:
-        var(--demanto-muted);
+    color: var(--demanto-muted);
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        9px;
+    font-size: 9px;
+    font-weight: 500;
 
-    font-weight:
-        500;
+    letter-spacing: 1px;
 
-    letter-spacing:
-        1px;
+    text-decoration: none;
+    text-transform: uppercase;
 
-    text-decoration:
-        none;
-
-    text-transform:
-        uppercase;
-
-    transition:
-        color 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 
 .featured-content a:hover {
-    color:
-        var(--demanto-gold);
+    color: var(--demanto-gold);
 }
 
 
 /* ============================================================
-   FEATURED PRODUCTS PAGINATION
+   FEATURED PAGINATION
 ============================================================ */
 
 .featured-pagination {
-    position:
-        relative;
+    position: relative;
 
-    text-align:
-        center;
+    text-align: center;
 }
 
 
 .featured-pagination
 .swiper-pagination-bullet {
+    width: 7px;
+    height: 7px;
 
-    width:
-        7px;
+    margin: 0 4px !important;
 
-    height:
-        7px;
+    background: var(--demanto-muted);
 
-    margin:
-        0 4px !important;
+    opacity: 0.35;
 
-    background:
-        var(--demanto-muted);
-
-    opacity:
-        0.35;
-
-    transition:
-        all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 
 .featured-pagination
 .swiper-pagination-bullet-active {
+    width: 22px;
 
-    width:
-        22px;
+    border-radius: 20px;
 
-    border-radius:
-        20px;
+    background: var(--demanto-gold);
 
-    background:
-        var(--demanto-gold);
-
-    opacity:
-        1;
+    opacity: 1;
 }
 
 
 /* ============================================================
-   FEATURED NAVIGATION BUTTONS
+   FEATURED NAVIGATION
 ============================================================ */
 
 .featured-prev,
 .featured-next {
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        50%;
+    top: 50%;
 
-    z-index:
-        10;
+    z-index: 10;
 
-    width:
-        36px;
+    width: 36px;
+    height: 36px;
 
-    height:
-        36px;
+    display: flex;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    align-items: center;
+    justify-content: center;
 
     border:
         1px solid rgba(197, 161, 90, 0.35);
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
         rgba(255, 255, 255, 0.95);
 
-    color:
-        var(--demanto-gold);
+    color: var(--demanto-gold);
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    transform:
-        translateY(-50%);
+    transform: translateY(-50%);
 
-    transition:
-        var(--transition-smooth);
+    transition: var(--transition-smooth);
 }
 
 
 .featured-prev {
-    left:
-        -14px;
+    left: -14px;
 }
 
 
 .featured-next {
-    right:
-        -14px;
+    right: -14px;
 }
 
 
 .featured-prev:hover,
 .featured-next:hover {
-    border-color:
-        var(--demanto-gold);
+    border-color: var(--demanto-gold);
 
-    background:
-        var(--demanto-gold);
+    background: var(--demanto-gold);
 
-    color:
-        #FFFFFF;
+    color: #FFFFFF;
 }
 
 
@@ -1273,72 +962,53 @@ section {
 ============================================================ */
 
 .exhibitions-area {
-    padding:
-        28px 0 32px;
+    padding: 28px 0 32px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    background:
-        #FBF9F4;
+    background: #FBF9F4;
 }
 
 
 .section-title-demanto {
-    color:
-        #B39256;
+    color: #B39256;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        28px;
+    font-size: 28px;
+    font-weight: 500;
 
-    font-weight:
-        500;
-
-    letter-spacing:
-        1.5px;
+    letter-spacing: 1.5px;
 }
 
 
 .demanto-exhibition-link {
-    display:
-        block;
+    display: block;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 }
 
 
 .demanto-exhibition-item {
-    width:
-        100%;
+    width: 100%;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
-    background:
-        #F4F0E8;
+    background: #F4F0E8;
 }
 
 
 .demanto-exhibition-item img {
-    display:
-        block;
+    display: block;
 
-    width:
-        100%;
+    width: 100%;
+    height: 400px;
 
-    height:
-        400px;
-
-    object-fit:
-        cover;
+    object-fit: cover;
 
     transition:
         transform 0.5s ease,
@@ -1347,8 +1017,7 @@ section {
 
 
 .demanto-exhibition-item:hover img {
-    transform:
-        scale(1.05);
+    transform: scale(1.05);
 }
 
 
@@ -1357,9 +1026,7 @@ section {
 
 .swiper-slide-next
 .demanto-exhibition-item img {
-
-    opacity:
-        0.60;
+    opacity: 0.60;
 }
 
 
@@ -1369,75 +1036,53 @@ section {
 
 .demanto-prev,
 .demanto-next {
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        50%;
+    top: 50%;
 
-    z-index:
-        10;
+    z-index: 10;
 
-    width:
-        35px;
+    width: 35px;
+    height: 35px;
 
-    height:
-        35px;
+    display: flex;
 
-    display:
-        flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items:
-        center;
+    border: 1px solid #D7C7A4;
 
-    justify-content:
-        center;
+    border-radius: 50%;
 
-    border:
-        1px solid #D7C7A4;
+    background: #FFFFFF;
 
-    border-radius:
-        50%;
+    color: #B39256;
 
-    background:
-        #FFFFFF;
+    cursor: pointer;
 
-    color:
-        #B39256;
+    transform: translateY(-50%);
 
-    cursor:
-        pointer;
-
-    transform:
-        translateY(-50%);
-
-    transition:
-        var(--transition-smooth);
+    transition: var(--transition-smooth);
 }
 
 
 .demanto-prev {
-    left:
-        -10px;
+    left: -10px;
 }
 
 
 .demanto-next {
-    right:
-        -10px;
+    right: -10px;
 }
 
 
 .demanto-prev:hover,
 .demanto-next:hover {
-    border-color:
-        #B39256;
+    border-color: #B39256;
 
-    background:
-        #B39256;
+    background: #B39256;
 
-    color:
-        #FFFFFF;
+    color: #FFFFFF;
 }
 
 
@@ -1446,14 +1091,11 @@ section {
 ============================================================ */
 
 .appointment-section {
-    position:
-        relative;
+    position: relative;
 
-    padding:
-        45px 0;
+    padding: 45px 0;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         url('assets/img/appointment.jpg')
@@ -1463,14 +1105,11 @@ section {
 
 
 .appointment-overlay {
-    position:
-        absolute;
+    position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    z-index:
-        1;
+    z-index: 1;
 
     background:
         linear-gradient(
@@ -1482,74 +1121,57 @@ section {
 
 
 .appointment-section .container {
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        2;
+    z-index: 2;
 }
 
 
 .appointment-label {
-    color:
-        #B39256;
+    color: #B39256;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    letter-spacing:
-        4px;
+    letter-spacing: 4px;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 }
 
 
 .appointment-section h2 {
-    margin:
-        15px 0;
+    margin: 15px 0;
 
-    color:
-        #FFFFFF;
+    color: #FFFFFF;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        38px;
+    font-size: 38px;
+    font-weight: 500;
 
-    font-weight:
-        500;
-
-    line-height:
-        1.1;
+    line-height: 1.1;
 }
 
 
 .appointment-section p {
-    max-width:
-        420px;
+    max-width: 420px;
 
-    margin:
-        0;
+    margin: 0;
 
-    color:
-        #E0E0E0;
+    color: #E0E0E0;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        14px;
+    font-size: 14px;
 
-    line-height:
-        1.9;
+    line-height: 1.9;
 }
 
 
@@ -1558,14 +1180,12 @@ section {
 ============================================================ */
 
 .appointment-form {
-    padding:
-        38px;
+    padding: 38px;
 
     border:
         1px solid rgba(197, 161, 90, 0.14);
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     background:
         rgba(255, 255, 255, 0.97);
@@ -1576,285 +1196,266 @@ section {
 
 
 .appointment-form .form-control {
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        50px;
+    height: 50px;
 
-    padding:
-        10px 12px;
+    padding: 10px 12px;
 
-    border:
-        0;
+    border: 0;
 
     border-bottom:
         1px solid #DDDDDD;
 
-    border-radius:
-        0;
+    border-radius: 0;
 
-    background:
-        transparent;
+    background: transparent;
 
-    color:
-        var(--demanto-dark);
+    color: var(--demanto-dark);
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        13px;
+    font-size: 13px;
 
-    box-shadow:
-        none;
+    box-shadow: none;
 
-    transition:
-        border-color 0.3s ease;
+    transition: border-color 0.3s ease;
 }
 
 
-.appointment-form
-.form-control:focus {
+.appointment-form .form-control:focus {
+    border-color: var(--demanto-gold);
 
-    border-color:
-        #B39256;
+    outline: none;
 
-    outline:
-        none;
-
-    box-shadow:
-        none;
+    box-shadow: none;
 }
 
 
-.appointment-form
-textarea.form-control {
+.appointment-form textarea.form-control {
+    height: 120px;
 
-    height:
-        120px;
+    padding-top: 14px;
 
-    padding-top:
-        14px;
-
-    resize:
-        none;
+    resize: none;
 }
 
 
-.appointment-form
-.form-control::placeholder {
+.appointment-form .form-control::placeholder {
+    color: #888888;
 
-    color:
-        #888888;
-
-    opacity:
-        1;
+    opacity: 1;
 }
 
 
 /* ============================================================
-   DATE + TIME INPUTS
+   DATE + TIME
 ============================================================ */
 
 .appointment-input-wrapper {
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 }
 
 
 .appointment-input-label {
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        7px;
+    top: 7px;
+    left: 12px;
 
-    left:
-        12px;
+    z-index: 2;
 
-    z-index:
-        2;
-
-    color:
-        #777777;
+    color: #777777;
 
     font-family:
         "Montserrat",
         sans-serif;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 }
 
 
 .appointment-date-time {
-    min-height:
-        58px;
+    min-height: 58px;
 
-    padding-top:
-        23px !important;
+    padding-top: 23px !important;
 
-    padding-bottom:
-        7px !important;
+    padding-bottom: 7px !important;
 }
 
 
 /* ============================================================
-   CUSTOM SCROLLBAR
+   SCROLLBAR
 ============================================================ */
 
 ::-webkit-scrollbar {
-    width:
-        6px;
+    width: 6px;
 }
 
 
 ::-webkit-scrollbar-track {
-    background:
-        var(--demanto-bg);
+    background: var(--demanto-bg);
 }
 
 
 ::-webkit-scrollbar-thumb {
-    border-radius:
-        3px;
+    border-radius: 3px;
 
-    background:
-        var(--demanto-gold);
+    background: var(--demanto-gold);
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
-    background:
-        #9A7B45;
+    background: var(--demanto-gold-dark);
 }
+
+
 /* ============================================================
-   LARGE DESKTOP SCREENS ONLY
-   Makes hero slider larger on screens like 1920px / 2560px
+   LARGE DESKTOP
+   1600PX+
 ============================================================ */
 
 @media (min-width: 1600px) {
 
     .home-banner {
-height: 61vh;
+        height: 61vh;
+
         min-height: 678px;
+
         max-height: 900px;
     }
 
+
     .hero-banner-image {
-        background-size: cover;
         background-position: 58% center;
     }
 
+
     .slider-content {
         max-width: 700px;
+
         padding-top: 100px;
     }
 
+
     .slider-title {
-        font-size: clamp(60px, 4vw, 90px);
+        font-size:
+            clamp(60px, 4vw, 90px);
     }
+
 
     .slider-desc {
         max-width: 520px;
+
         font-size: 17px;
-        line-height: 1.8;
     }
 
-    .default-slider-container .swiper-pagination {
+
+    .default-slider-container
+    .swiper-pagination {
         bottom: 40px !important;
     }
+
+
+    .whatsapp-btn {
+        right: 30px;
+
+        width: 58px;
+        height: 58px;
+
+        font-size: 28px;
+    }
 }
+
+
+/* ============================================================
+   EXTRA LARGE DESKTOP
+   1800PX+
+============================================================ */
+
 @media (min-width: 1800px) {
 
     .home-banner {
-height: 58vh;
+        height: 58vh;
+
         min-height: 648px;
+
         max-height: 800px;
     }
 
-    .hero-banner-image {
-        background-size: cover;
-        background-position: 58% center;
-    }
 
     .slider-content {
         max-width: 700px;
+
         padding-top: 110px;
     }
+
 
     .slider-title {
         font-size: 78px;
     }
 
+
     .slider-desc {
         max-width: 520px;
+
         font-size: 17px;
     }
 
-    .default-slider-container .swiper-pagination {
-        bottom: 40px !important;
+
+    .whatsapp-btn {
+        right: 35px;
     }
 }
 
+
 /* ============================================================
-   LARGE TABLET / SMALL DESKTOP
+   SMALL DESKTOP
 ============================================================ */
 
 @media (max-width: 1200px) {
 
     .luxury-heading {
-        font-size:
-            28px;
+        font-size: 28px;
     }
 
 
     .about-title {
-        font-size:
-            24px;
+        font-size: 24px;
     }
 
 
     .metric-number {
-        font-size:
-            20px;
+        font-size: 20px;
     }
 
 
     .featured-prev {
-        left:
-            4px;
+        left: 4px;
     }
 
 
     .featured-next {
-        right:
-            4px;
+        right: 4px;
     }
 
 
     .demanto-prev {
-        left:
-            4px;
+        left: 4px;
     }
 
 
     .demanto-next {
-        right:
-            4px;
+        right: 4px;
     }
-
 }
 
 
@@ -1864,137 +1465,107 @@ height: 58vh;
 
 @media (max-width: 991px) {
 
-    /* HERO */
-
     .home-banner {
-        height:
-            600px;
+        height: 600px;
 
-        min-height:
-            600px;
+        min-height: 600px;
 
-        max-height:
-            none;
+        max-height: none;
     }
 
 
     .hero-banner-image {
-        background-position:
-            63% center;
-    }
-
-
-    .slider-overlay {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(18, 27, 22, 0.82) 0%,
-                rgba(18, 27, 22, 0.65) 40%,
-                rgba(18, 27, 22, 0.22) 75%,
-                rgba(18, 27, 22, 0.02) 100%
-            );
+        background-position: 63% center;
     }
 
 
     .slider-content {
-        max-width:
-            460px;
+        max-width: 460px;
 
-        padding-top:
-            70px;
+        padding-top: 70px;
     }
 
 
     .slider-title {
-        font-size:
-            48px;
+        font-size: 48px;
     }
 
 
     .slider-desc {
-        max-width:
-            350px;
+        max-width: 350px;
     }
 
 
-    /* ABOUT */
+    .default-slider-container
+    .swiper-pagination {
+        bottom: 25px !important;
+    }
+
+
+    .whatsapp-btn {
+        right: 18px;
+
+        width: 50px;
+        height: 50px;
+
+        font-size: 24px;
+    }
+
 
     .about-description {
-        max-width:
-            100%;
+        max-width: 100%;
 
-        font-size:
-            14px;
+        font-size: 14px;
     }
 
 
     .about-editorial-section
     .col-lg-6.ps-lg-3 {
-
-        margin-top:
-            24px;
+        margin-top: 24px;
     }
 
-
-    /* FEATURED */
 
     .featured-image {
-        height:
-            300px;
+        height: 300px;
     }
 
-
-    /* EXHIBITIONS */
 
     .demanto-exhibition-item img {
-        height:
-            340px;
+        height: 340px;
     }
 
 
-    /* APPOINTMENT */
-
     .appointment-section {
-        padding:
-            38px 0;
+        padding: 38px 0;
     }
 
 
     .appointment-section h2 {
-        font-size:
-            32px;
+        font-size: 32px;
 
-        text-align:
-            center;
+        text-align: center;
     }
 
 
     .appointment-section p {
-        max-width:
-            650px;
+        max-width: 650px;
 
-        margin:
-            0 auto;
+        margin: 0 auto;
 
-        text-align:
-            center;
+        text-align: center;
     }
 
 
     .appointment-label {
-        display:
-            block;
+        display: block;
 
-        text-align:
-            center;
+        text-align: center;
     }
 
 
     .appointment-form {
-        padding:
-            30px;
+        padding: 30px;
     }
-
 }
 
 
@@ -2004,275 +1575,188 @@ height: 58vh;
 
 @media (max-width: 767px) {
 
-    /* GENERAL */
-
     .luxury-heading {
-        font-size:
-            24px;
+        font-size: 24px;
     }
 
 
     .luxury-section-title {
-        margin-bottom:
-            20px;
+        margin-bottom: 20px;
     }
 
 
     /* HERO */
 
     .home-banner {
-        height:
-            520px;
+        height: 520px;
 
-        min-height:
-            520px;
+        min-height: 520px;
 
-        max-height:
-            none;
+        max-height: none;
     }
 
 
     .hero-banner-image {
-        background-position:
-            67% center;
-    }
-
-
-    .slider-overlay {
-        background:
-            linear-gradient(
-                90deg,
-                rgba(17, 24, 20, 0.88) 0%,
-                rgba(17, 24, 20, 0.70) 48%,
-                rgba(17, 24, 20, 0.30) 78%,
-                rgba(17, 24, 20, 0.06) 100%
-            );
+        background-position: 67% center;
     }
 
 
     .hero-banner-image > .container {
-        padding-left:
-            20px !important;
+        padding-left: 20px !important;
 
-        padding-right:
-            20px !important;
+        padding-right: 20px !important;
     }
 
 
     .slider-content {
-        max-width:
-            300px;
+        max-width: 300px;
 
-        padding-top:
-            72px;
+        padding-top: 72px;
     }
 
 
     .slider-title {
-        margin-bottom:
-            14px;
+        margin-bottom: 14px;
 
-        font-size:
-            36px;
+        font-size: 36px;
 
-        line-height:
-            1;
+        line-height: 1;
 
-        letter-spacing:
-            1px;
+        letter-spacing: 1px;
     }
 
 
     .slider-desc {
-        max-width:
-            265px;
+        max-width: 265px;
 
-        font-size:
-            12px;
+        font-size: 12px;
 
-        line-height:
-            1.65;
+        line-height: 1.65;
     }
 
 
     .default-slider-container
     .swiper-pagination {
+        bottom: 20px !important;
+    }
 
-        bottom:
-            20px !important;
+
+    .whatsapp-btn {
+        right: 14px;
+
+        width: 47px;
+        height: 47px;
+
+        font-size: 23px;
     }
 
 
     /* ABOUT */
 
     .about-editorial-section {
-        padding:
-            26px 0;
+        padding: 26px 0;
     }
 
 
     .about-title {
-        font-size:
-            22px;
+        font-size: 22px;
     }
 
 
     .about-description {
-        font-size:
-            14px;
+        font-size: 14px;
 
-        line-height:
-            1.65;
+        line-height: 1.65;
     }
 
 
     .btndemantodiv {
-        text-align:
-            center;
+        text-align: center;
     }
 
 
-    /* FEATURED PRODUCTS */
+    /* FEATURED */
 
     .featured-products {
-        padding:
-            24px 0 28px;
+        padding: 24px 0 28px;
     }
 
 
     .featured-image {
-        height:
-            280px;
+        height: 280px;
     }
 
 
     .featured-image img {
-        padding:
-            15px;
+        padding: 15px;
     }
 
 
     .featured-prev,
     .featured-next {
-
-        width:
-            32px;
-
-        height:
-            32px;
+        width: 32px;
+        height: 32px;
     }
 
 
     /* EXHIBITIONS */
 
     .exhibitions-area {
-        padding:
-            24px 0 28px;
+        padding: 24px 0 28px;
     }
 
 
     .demanto-exhibition-item img {
-        height:
-            250px;
+        height: 250px;
     }
 
 
     .demanto-prev,
     .demanto-next {
-
-        width:
-            32px;
-
-        height:
-            32px;
+        width: 32px;
+        height: 32px;
     }
 
 
     /* APPOINTMENT */
 
     .appointment-section {
-        padding:
-            32px 0;
+        padding: 32px 0;
     }
 
 
     .appointment-section h2 {
-        font-size:
-            29px;
+        font-size: 29px;
     }
 
 
     .appointment-section p {
-        font-size:
-            13px;
+        font-size: 13px;
 
-        line-height:
-            1.75;
+        line-height: 1.75;
     }
 
 
     .appointment-form {
-        margin-top:
-            5px;
+        margin-top: 5px;
 
-        padding:
-            25px 20px;
+        padding: 25px 20px;
     }
 
 
     .appointment-date-time {
-        width:
-            100%;
+        width: 100%;
 
-        appearance:
-            auto;
+        appearance: auto;
 
-        -webkit-appearance:
-            auto;
+        -webkit-appearance: auto;
     }
 
 
     .appointment-form
     .btn-demanto {
-
-        width:
-            100%;
+        width: 100%;
     }
-
-
-    /* WHATSAPP */
-
-    .whatsapp-btn {
-        right:
-            18px;
-
-        bottom:
-            18px;
-
-        width:
-            44px;
-
-        height:
-            44px;
-
-        font-size:
-            22px;
-    }
-
-
-    /* FOOTER */
-
-    .footer-brand {
-        text-align:
-            start;
-    }
-
-
-    .footer-brand img {
-        margin-bottom:
-            10px;
-    }
-
 }
 
 
@@ -2282,142 +1766,108 @@ height: 58vh;
 
 @media (max-width: 575px) {
 
-    /* HERO */
-
     .home-banner {
-        height:
-            400px;
+        height: 400px;
 
-        min-height:
-            400px;
+        min-height: 400px;
     }
 
 
     .hero-banner-image {
-        background-position:
-            70% center;
+        background-position: 70% center;
     }
 
 
     .hero-banner-image > .container {
-        padding-left:
-            16px !important;
+        padding-left: 16px !important;
 
-        padding-right:
-            16px !important;
+        padding-right: 16px !important;
     }
 
 
     .slider-content {
-        max-width:
-            270px;
+        max-width: 270px;
 
-        padding-top:
-            68px;
+        padding-top: 68px;
     }
 
 
     .slider-title {
-        font-size:
-            32px;
+        font-size: 32px;
     }
 
 
     .slider-desc {
-        max-width:
-            235px;
+        max-width: 235px;
 
-        font-size:
-            12px;
+        font-size: 12px;
 
-        line-height:
-            1.55;
+        line-height: 1.55;
+    }
+
+
+    .whatsapp-btn {
+        right: 12px;
+
+        width: 45px;
+        height: 45px;
+
+        font-size: 22px;
     }
 
 
     /* ABOUT */
 
     .about-editorial-section {
-        padding:
-            22px 0;
+        padding: 22px 0;
     }
 
 
     .about-title {
-        font-size:
-            21px;
+        font-size: 21px;
     }
 
 
     .about-description {
-        font-size:
-            13px;
+        font-size: 13px;
     }
 
 
     /* PRODUCTS */
 
     .featured-image {
-        height:
-            255px;
+        height: 255px;
     }
 
 
     .featured-content h4 {
-        font-size:
-            15px;
+        font-size: 15px;
     }
 
 
     /* EXHIBITIONS */
 
     .demanto-exhibition-item img {
-        height:
-            215px;
+        height: 215px;
     }
 
 
     /* APPOINTMENT */
 
     .appointment-section h2 {
-        font-size:
-            27px;
+        font-size: 27px;
     }
 
 
     .appointment-form {
-        padding:
-            22px 16px;
+        padding: 22px 16px;
     }
 
 
     .appointment-form
     .form-control {
-
-        font-size:
-            12px;
+        font-size: 12px;
     }
-
-
-    /* WHATSAPP */
-
-    .whatsapp-btn {
-        right:
-            14px;
-
-        bottom:
-            14px;
-
-        width:
-            42px;
-
-        height:
-            42px;
-
-        font-size:
-            21px;
-    }
-
 }
 
 
@@ -2427,109 +1877,97 @@ height: 58vh;
 
 @media (max-width: 400px) {
 
-    /* HERO */
-
     .home-banner {
-        height:
-            420px;
+        height: 420px;
 
-        min-height:
-            420px;
+        min-height: 420px;
     }
 
 
     .hero-banner-image {
-        background-position:
-            72% center;
+        background-position: 72% center;
     }
 
 
     .slider-content {
-        max-width:
-            235px;
+        max-width: 235px;
 
-        padding-top:
-            65px;
+        padding-top: 65px;
     }
 
 
     .slider-title {
-        font-size:
-            28px;
+        font-size: 28px;
     }
 
 
     .slider-desc {
-        max-width:
-            210px;
+        max-width: 210px;
 
-        font-size:
-            11px;
+        font-size: 11px;
     }
 
 
     .default-slider-container
     .swiper-pagination-bullet {
+        width: 7px;
 
-        width:
-            7px;
-
-        height:
-            7px;
+        height: 7px;
     }
 
 
     .default-slider-container
     .swiper-pagination-bullet-active {
+        width: 24px;
+    }
 
-        width:
-            24px;
+
+    .whatsapp-btn {
+        right: 10px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
     }
 
 
     /* ABOUT */
 
     .about-title {
-        font-size:
-            20px;
+        font-size: 20px;
     }
 
 
     /* PRODUCTS */
 
     .featured-image {
-        height:
-            235px;
+        height: 235px;
     }
 
 
     /* EXHIBITIONS */
 
     .demanto-exhibition-item img {
-        height:
-            195px;
+        height: 195px;
     }
 
 
     /* APPOINTMENT */
 
     .appointment-section {
-        padding:
-            28px 0;
+        padding: 28px 0;
     }
 
 
     .appointment-section h2 {
-        font-size:
-            25px;
+        font-size: 25px;
     }
 
 
     .appointment-form {
-        padding:
-            20px 14px;
+        padding: 20px 14px;
     }
-
 }
     </style>
 
@@ -2539,16 +1977,19 @@ height: 58vh;
 <section class="home-banner">
 
     <div class="swiper default-slider-container">
+
         <div class="swiper-wrapper">
 
             @forelse($sliders as $hero)
 
                 <div class="swiper-slide">
 
-                    <div class="hero-banner-image"
-                         style="background-image:url('{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}');">
-
-               <div class="slider-overlay"></div>
+                    <div
+                        class="hero-banner-image"
+                        style="background-image:url('{{ $hero->image
+                            ? asset($hero->image)
+                            : asset('assets/img/slider-placeholder.jpg') }}');"
+                    >
 
                         <div class="container h-100 p-4">
 
@@ -2558,11 +1999,11 @@ height: 58vh;
 
                                     <div class="slider-content">
 
-                                        <h1 class="slider-title ani-left">
+                                        <h1 class="slider-title">
                                             {{ $hero->title }}
                                         </h1>
 
-                                        <p class="slider-desc ani-right">
+                                        <p class="slider-desc">
                                             {{ $hero->description }}
                                         </p>
 
@@ -2582,11 +2023,10 @@ height: 58vh;
 
                 <div class="swiper-slide">
 
-                    <div class="hero-banner-image"
-                         style="background-image:url('{{ asset('assets/img/slider-placeholder.jpg') }}');">
-
-                        <div class="hero-dark-overlay"></div>
-                        <div class="slider-overlay"></div>
+                    <div
+                        class="hero-banner-image"
+                        style="background-image:url('{{ asset('assets/img/slider-placeholder.jpg') }}');"
+                    >
 
                         <div class="container h-100 p-4">
 
@@ -2623,16 +2063,22 @@ height: 58vh;
         <div class="swiper-pagination"></div>
 
     </div>
+
+
+    <!-- WHATSAPP BUTTON -->
+
+
+
+</section>
     <a
         href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
         class="whatsapp-btn"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="Contact DEMANTO on WhatsApp"
     >
         <i class="fab fa-whatsapp"></i>
     </a>
-</section>
-
 <!-- Signature Collections Section -->
 @include('frontend.collections.category.index')
 
@@ -2948,42 +2394,172 @@ height: 58vh;
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-        const hero = document.querySelector('.home-banner');
-    const whatsappButton = document.querySelector('.whatsapp-btn');
+document.addEventListener('DOMContentLoaded', function () {
+
+    /*
+    ============================================================
+    WHATSAPP BUTTON POSITION
+    ============================================================
+    */
+
+    const whatsappButton =
+        document.querySelector('.whatsapp-btn');
+
+    const homeBanner =
+        document.querySelector('.home-banner');
+
 
     function positionWhatsappButton() {
 
-        if (!hero || !whatsappButton) return;
+        if (!whatsappButton || !homeBanner) {
+            return;
+        }
 
-        const heroRect = hero.getBoundingClientRect();
 
         /*
-         * Position button 30px above
-         * the bottom of the hero slider.
-         */
-        const bottomPosition =
-            window.innerHeight - heroRect.bottom + 30;
+        Get slider position relative to browser viewport.
+        */
 
-        whatsappButton.style.bottom =
-            Math.max(30, bottomPosition) + 'px';
+        const bannerRect =
+            homeBanner.getBoundingClientRect();
+
+
+        /*
+        Desired position:
+
+        Put the CENTER of WhatsApp button
+        20px above the bottom of the slider.
+        */
+
+        const distanceFromSliderBottom = -45;
+
+
+        let buttonTop =
+            bannerRect.bottom - distanceFromSliderBottom;
+
+
+        /*
+        Prevent button from disappearing above browser.
+        */
+
+        const minimumTop = 80;
+
+
+        /*
+        Prevent button from disappearing below browser.
+        */
+
+        const maximumTop =
+            window.innerHeight - 40;
+
+
+        buttonTop = Math.max(
+            minimumTop,
+            Math.min(buttonTop, maximumTop)
+        );
+
+
+        whatsappButton.style.top =
+            buttonTop + 'px';
     }
+
+
+    /*
+    Run when page loads.
+    */
 
     positionWhatsappButton();
 
-    window.addEventListener('resize', positionWhatsappButton);
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
-            }
+
+    /*
+    Run after all images/fonts/resources finish loading.
+    */
+
+    window.addEventListener(
+        'load',
+        positionWhatsappButton
+    );
+
+
+    /*
+    Run when browser size changes.
+    */
+
+    window.addEventListener(
+        'resize',
+        positionWhatsappButton
+    );
+
+
+    /*
+    Run when device orientation changes.
+    */
+
+    window.addEventListener(
+        'orientationchange',
+        positionWhatsappButton
+    );
+
+
+    /*
+    ============================================================
+    LAZY LOADING IMAGES
+    ============================================================
+    */
+
+    const images =
+        document.querySelectorAll('img[data-src]');
+
+
+    if ('IntersectionObserver' in window) {
+
+        const imageObserver =
+            new IntersectionObserver((entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        const img =
+                            entry.target;
+
+                        img.src =
+                            img.dataset.src;
+
+                        img.classList.add(
+                            'loaded'
+                        );
+
+                        imageObserver.unobserve(
+                            img
+                        );
+                    }
+
+                });
+
+            });
+
+
+        images.forEach((img) => {
+
+            imageObserver.observe(img);
+
         });
-    });
-    images.forEach(img => imageObserver.observe(img));
+
+    } else {
+
+        images.forEach((img) => {
+
+            img.src =
+                img.dataset.src;
+
+            img.classList.add(
+                'loaded'
+            );
+
+        });
+
+    }
 
 });
 </script>

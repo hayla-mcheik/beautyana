@@ -458,7 +458,7 @@ padding-top: 20px;
 
     display: block;
 
-    max-width: 60%;
+    max-width: 80%;
 
     max-height: 145px;
 
@@ -634,7 +634,7 @@ margin-top: 20px;
 
         max-height: 100px;
 
-        max-width: 60%;
+        max-width: 80%;
     }
 
 
