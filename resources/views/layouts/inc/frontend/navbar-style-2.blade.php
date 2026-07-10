@@ -2230,7 +2230,7 @@
     .logo-main {
 
         max-width:
-            68px !important;
+            90px !important;
     }
 
 
