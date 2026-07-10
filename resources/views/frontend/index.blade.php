@@ -512,7 +512,7 @@ section {
 
     border-radius: 50%;
 
-    background: #25D366;
+    background: var(--demanto-gold);
 
     color: #FFFFFF !important;
 
@@ -551,7 +551,7 @@ section {
 
 
 .whatsapp-btn:hover {
-    background: #1EBE5D;
+    background: var(--demanto-gold-dark);
 
     color: #FFFFFF !important;
 

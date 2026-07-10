@@ -458,9 +458,9 @@ padding-top: 20px;
 
     display: block;
 
-    max-width: 80%;
+    max-width: 100%;
 
-    max-height: 145px;
+    max-height: 160px;
 
     object-fit: contain;
 
@@ -632,9 +632,9 @@ margin-top: 20px;
 
     .collection-image img {
 
-        max-height: 100px;
+        max-height: 130px;
 
-        max-width: 80%;
+        max-width: 100%;
     }
 
 
