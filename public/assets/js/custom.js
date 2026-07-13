@@ -142,74 +142,42 @@ var carouselSlider = new Swiper('.default-slider-container', {
     }
 });
 
-new Swiper(".signature-slider", {
-
-    loop: true,
-
-    speed: 900,
-
-    centeredSlides: false,
-
-    grabCursor: true,
+const signatureSlider = new Swiper('.signature-slider', {
+    loop: false,
+    rewind: false,
+    autoplay: false,
 
     watchOverflow: true,
 
-    observer: true,
-
-    observeParents: true,
-
-    autoplay: {
-
-        delay: 3500,
-
-        disableOnInteraction: false
-    },
+    slidesPerView: 1,
+    spaceBetween: 12,
 
     breakpoints: {
-
-        0: {
-
+        400: {
             slidesPerView: 2,
-
-            spaceBetween: 15
+            spaceBetween: 12,
         },
 
         576: {
-
-            slidesPerView: 2,
-
-            spaceBetween: 20
+            slidesPerView: 3,
+            spaceBetween: 14,
         },
 
         768: {
-
-            slidesPerView: 2,
-
-            spaceBetween: 25
+            slidesPerView: 4,
+            spaceBetween: 16,
         },
 
         992: {
-
-            slidesPerView: 4,
-
-            spaceBetween: 25
+            slidesPerView: 5,
+            spaceBetween: 18,
         },
 
         1200: {
-
-            slidesPerView: 5,
-
-            spaceBetween: 30
-        },
-              1600: {
-
             slidesPerView: 6,
-
-            spaceBetween: 30
+            spaceBetween: 20,
         }
-
     }
-
 });
 
   // Featured Products Luxury Slider

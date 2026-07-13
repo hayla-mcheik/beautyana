@@ -398,7 +398,7 @@ section .container-fluid {
   font-size: 16px;
 }
 .breadcrumb-area .breadcrumb li {
-  color: var(--logo-pink-dark);
+  color: wheat;
   display: inline-block;
   font-size: 16px;
   font-weight: 700;

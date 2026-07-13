@@ -436,7 +436,9 @@
 
             <div class="exhibition-date">
                 <i class="fa fa-calendar"></i>
-                <span>{{ $exhibition->created_at->format('F d, Y') }}</span>
+   <span>
+    {{ $exhibition->date?->format('F d, Y') }}
+</span>
             </div>
 
             <p>{{ Str::limit(strip_tags($exhibition->description),120) }}</p>
