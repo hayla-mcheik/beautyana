@@ -5359,9 +5359,7 @@ height: 30vh;
   top: 5px;
   width: 40px;
 }
-.product-single-item .product-single-info .product-quick-action .btn-product-add:hover {
-  color: #fff;
-}
+
 .product-single-item .product-single-info .product-quick-action .btn-product-add:hover:after {
   left: 0;
   right: auto;
