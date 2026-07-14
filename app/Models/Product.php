@@ -16,18 +16,18 @@ class Product extends Model
         'category_id',
         'name',
         'slug',
-        'brand',
-        'small_description',
+        // 'brand',
+        // 'small_description',
         'description',
         'original_price',
         'selling_price',
         'quantity',
-        'trending',
+        // 'trending',
         'featured',
         'status',
-        'meta_title',
-        'meta_keyword',
-        'meta_description'
+        // 'meta_title',
+        // 'meta_keyword',
+        // 'meta_description'
     ];
     public function category()
     {
