@@ -446,8 +446,9 @@
 
 <div class="off-canvas-overlay" id="sidebarOverlay"></div>
 <style>
-    /* ============================================================
-   DEMANTO HEADER — CLEAN RESPONSIVE CSS
+
+/* ============================================================
+   DEMANTO HEADER — BLACK LUXURY GRADIENT DESIGN
 ============================================================ */
 
 :root {
@@ -509,23 +510,50 @@
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| BLACK LUXURY GRADIENT
+|--------------------------------------------------------------------------
+|
+| Strong black behind navbar.
+| Gradually disappears into the hero image.
+|
+*/
+
 .header-bottom:not(.sticky-on)::before {
     content: "";
 
     position: absolute;
 
-    inset: 0;
+    /*
+     * Extend below navbar so the gradient
+     * fades naturally into the hero.
+     */
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 150px;
 
     z-index: 0;
 
     pointer-events: none;
 
     background:
+
         linear-gradient(
             180deg,
-            rgba(9, 15, 12, 0.58) 0%,
-            rgba(9, 15, 12, 0.28) 55%,
-            rgba(9, 15, 12, 0) 100%
+
+            rgba(0, 0, 0, 0.96) 0%,
+
+            rgba(0, 0, 0, 0.88) 30%,
+
+            rgba(0, 0, 0, 0.65) 60%,
+
+            rgba(0, 0, 0, 0.28) 82%,
+
+            rgba(0, 0, 0, 0) 100%
         );
 }
 
@@ -618,12 +646,28 @@
 ============================================================ */
 
 .header-logo-area {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     flex-shrink: 0;
+
+    padding: 7px 10px;
+
+    isolation: isolate;
 }
 
 
 .boutique-logo,
 .logo-main {
+    position: relative;
+
+    z-index: 2;
+
     display: block;
 
     width: auto;
@@ -632,6 +676,55 @@
 
     transition:
         transform 0.35s ease;
+
+    filter:
+        brightness(1.15)
+        contrast(1.08)
+        saturate(1.12)
+        drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SUBTLE GOLD GLOW BEHIND LOGO
+|--------------------------------------------------------------------------
+*/
+
+.header-logo-area::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 135px;
+    height: 75px;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+
+            rgba(255, 230, 170, 0.16) 0%,
+
+            rgba(197, 161, 90, 0.08) 42%,
+
+            rgba(197, 161, 90, 0.02) 65%,
+
+            transparent 76%
+        );
+
+    filter:
+        blur(5px);
+
+    pointer-events: none;
+
+    z-index: -1;
 }
 
 
@@ -681,7 +774,8 @@
 .boutique-nav > li {
     position: relative;
 
-    padding: 0 5px;
+    padding:
+        0 5px;
 }
 
 
@@ -720,11 +814,16 @@
     white-space:
         nowrap;
 
+    /*
+     * Ivory white gives better contrast
+     * against black gradient.
+     */
+
     color:
-        #F3DFC0 !important;
+        #FAF7F1 !important;
 
     text-shadow:
-        0 1px 9px rgba(0, 0, 0, 0.55);
+        0 2px 9px rgba(0, 0, 0, 0.80);
 
     transition:
         color 0.3s ease;
@@ -768,7 +867,7 @@
 
 
 /* ============================================================
-   DESKTOP DROPDOWN
+   DESKTOP DROPDOWNS
 ============================================================ */
 
 .has-dropdown {
@@ -797,19 +896,25 @@
 .boutique-dropdown {
     position: absolute;
 
-    top: calc(100% + 15px);
+    top:
+        calc(100% + 15px);
 
     left: 50%;
 
-    min-width: 230px;
+    min-width:
+        230px;
 
-    padding: 8px 0;
+    padding:
+        8px 0;
 
-    margin: 0;
+    margin:
+        0;
 
-    list-style: none;
+    list-style:
+        none;
 
-    text-align: left;
+    text-align:
+        left;
 
     background:
         rgba(255, 255, 255, 0.99);
@@ -821,11 +926,13 @@
         6px;
 
     box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.13);
+        0 18px 45px rgba(0, 0, 0, 0.18);
 
-    opacity: 0;
+    opacity:
+        0;
 
-    visibility: hidden;
+    visibility:
+        hidden;
 
     transform:
         translateX(-50%)
@@ -849,7 +956,6 @@
     top: -18px;
 
     left: 0;
-
     right: 0;
 
     height: 18px;
@@ -866,7 +972,6 @@
     left: 50%;
 
     width: 14px;
-
     height: 14px;
 
     transform:
@@ -1025,7 +1130,51 @@
 
 
 /* ============================================================
-   DESKTOP STICKY COLORS
+   DESKTOP RIGHT SIDE ICONS
+============================================================ */
+
+.desktop-social {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.desktop-social-icon,
+.theme-currency > a,
+.header-action-area a,
+.target-cart-icon {
+
+    color:
+        #FAF7F1 !important;
+
+    text-decoration:
+        none;
+
+    font-size:
+        15px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.80);
+
+    transition:
+        color 0.3s ease;
+}
+
+
+.desktop-social-icon:hover,
+.theme-currency > a:hover,
+.header-action-area a:hover {
+
+    color:
+        var(--demanto-gold-light) !important;
+}
+
+
+/* ============================================================
+   STICKY HEADER COLORS
 ============================================================ */
 
 .header-bottom.sticky-on
@@ -1055,84 +1204,6 @@
 }
 
 
-/* ============================================================
-   NON-HOMEPAGE HEADER COLORS
-============================================================ */
-
-.header-white-links:not(.header-sticky-active)
-.boutique-nav > li > a {
-
-    color:
-        #FFFFFF !important;
-
-    text-shadow:
-        0 1px 8px rgba(0, 0, 0, 0.45);
-}
-
-
-.header-white-links:not(.header-sticky-active)
-.boutique-nav > li > a:hover {
-
-    color:
-        var(--demanto-gold-light) !important;
-}
-
-
-.header-white-links.header-sticky-active
-.boutique-nav > li > a {
-
-    color:
-        var(--demanto-dark) !important;
-
-    text-shadow:
-        none;
-}
-
-
-/* ============================================================
-   DESKTOP RIGHT SIDE
-============================================================ */
-
-.desktop-social {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-
-.desktop-social-icon,
-.theme-currency > a,
-.header-action-area a,
-.target-cart-icon {
-
-    color:
-        #FFFFFF !important;
-
-    text-decoration:
-        none;
-
-    font-size:
-        15px;
-
-    text-shadow:
-        0 1px 8px rgba(0, 0, 0, 0.45);
-
-    transition:
-        color 0.3s ease;
-}
-
-
-.desktop-social-icon:hover,
-.theme-currency > a:hover,
-.header-action-area a:hover {
-
-    color:
-        var(--demanto-gold-light) !important;
-}
-
-
 .header-bottom.sticky-on
 .desktop-social-icon,
 
@@ -1150,17 +1221,6 @@
 
     text-shadow:
         none;
-}
-
-
-.header-bottom.sticky-on
-.desktop-social-icon:hover,
-
-.header-bottom.sticky-on
-.theme-currency > a:hover {
-
-    color:
-        var(--demanto-gold) !important;
 }
 
 
@@ -1241,34 +1301,19 @@
 }
 
 
-.header-bottom.sticky-on
-.shop-count,
-
-.header-area.header-sticky-active
-.shop-count {
-
-    background:
-        var(--demanto-gold);
-
-    border-color:
-        var(--demanto-gold);
-
-    color:
-        #FFFFFF !important;
-}
-
-
 /* ============================================================
    MINI CART
 ============================================================ */
 
 .parent-cart-hover {
-    position: relative;
+    position:
+        relative;
 }
 
 
 .popup-cart-content {
-    position: absolute;
+    position:
+        absolute;
 
     top:
         calc(100% + 18px);
@@ -1341,15 +1386,30 @@
     min-height:
         var(--mobile-header-height);
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
+
+    /*
+     * Same black luxury gradient on mobile.
+     */
 
     background:
-        rgba(10, 15, 12, 0.48);
+
+        linear-gradient(
+            180deg,
+
+            rgba(0, 0, 0, 0.96) 0%,
+
+            rgba(0, 0, 0, 0.84) 55%,
+
+            rgba(0, 0, 0, 0.58) 100%
+        );
 
     border-bottom:
-        1px solid rgba(255, 255, 255, 0.12) !important;
+        1px solid rgba(197, 161, 90, 0.20) !important;
 
     backdrop-filter:
         blur(5px);
@@ -1369,9 +1429,11 @@
 
 
 .responsive-header .header-item {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 }
 
 
@@ -1394,6 +1456,9 @@
 
     text-decoration:
         none;
+
+    text-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.65);
 
     transition:
         color 0.3s ease;
@@ -1548,14 +1613,9 @@
 
         color:
             var(--demanto-dark) !important;
-    }
 
-
-    .header-area.header-sticky-active
-    .mobile-social-icon:hover {
-
-        color:
-            var(--demanto-gold) !important;
+        text-shadow:
+            none;
     }
 
 }
@@ -1979,15 +2039,6 @@
 
     text-decoration:
         none;
-
-    transition:
-        color 0.25s ease;
-}
-
-
-.mobile-sidebar-footer > a:hover {
-    color:
-        var(--demanto-gold);
 }
 
 
@@ -2100,10 +2151,7 @@
     .header-bottom .container {
         max-width:
             100%;
-    }
 
-
-    .header-bottom .container {
         padding-left:
             18px !important;
 
@@ -2151,7 +2199,7 @@
 
 
 /* ============================================================
-   MOBILE <= 767px
+   MOBILE <= 767PX
 ============================================================ */
 
 @media (max-width: 767px) {
@@ -2194,17 +2242,11 @@
             20px;
     }
 
-
-    .btn-cart {
-        margin-left:
-            2px;
-    }
-
 }
 
 
 /* ============================================================
-   SMALL MOBILE <= 575px
+   SMALL MOBILE <= 575PX
 ============================================================ */
 
 @media (max-width: 575px) {
@@ -2312,7 +2354,7 @@
 
 
 /* ============================================================
-   VERY SMALL MOBILE <= 400px
+   VERY SMALL MOBILE <= 400PX
 ============================================================ */
 
 @media (max-width: 400px) {
@@ -2418,153 +2460,6 @@
 
 }
 
-/* ============================================================
-   LOGO VISIBILITY ENHANCEMENT
-============================================================ */
-
-.header-logo-area {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 7px 10px;
-
-    isolation: isolate;
-}
-
-
-/* Soft warm glow behind logo */
-
-.header-logo-area::before {
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    width: 135px;
-    height: 75px;
-
-    transform: translate(-50%, -50%);
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(255, 244, 220, 0.18) 0%,
-            rgba(197, 161, 90, 0.10) 40%,
-            rgba(197, 161, 90, 0.03) 65%,
-            transparent 75%
-        );
-
-    filter: blur(5px);
-
-    pointer-events: none;
-
-    z-index: -1;
-}
-
-
-.header-logo-area .logo-main {
-    position: relative;
-
-    z-index: 2;
-
-    filter:
-        brightness(1.15)
-        contrast(1.08)
-        saturate(1.12)
-        drop-shadow(0 2px 5px rgba(0, 0, 0, 0.30));
-}
-
-
-/* Sticky header does not need a strong glow */
-
-.header-bottom.sticky-on
-.header-logo-area::before {
-
-    opacity: 0.35;
-}
-
-
-.header-bottom.sticky-on
-.header-logo-area .logo-main {
-
-    filter:
-        brightness(1.02)
-        contrast(1.05)
-        saturate(1.05);
-}
-
-
-/* ============================================================
-   MOBILE LOGO
-============================================================ */
-
-@media (max-width: 991px) {
-
-    .responsive-header
-    .header-logo-area {
-
-        padding:
-            5px 7px;
-    }
-
-
-    .responsive-header
-    .header-logo-area::before {
-
-        width:
-            105px;
-
-        height:
-            60px;
-
-        background:
-            radial-gradient(
-                ellipse at center,
-                rgba(255, 244, 220, 0.20) 0%,
-                rgba(197, 161, 90, 0.10) 42%,
-                transparent 75%
-            );
-    }
-
-
-    .responsive-header
-    .logo-main {
-
-        filter:
-            brightness(1.16)
-            contrast(1.08)
-            saturate(1.12)
-            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.30));
-    }
-
-
-    /* Sticky mobile header */
-
-    .header-area.header-sticky-active
-    .responsive-header
-    .header-logo-area::before {
-
-        opacity:
-            0.25;
-    }
-
-
-    .header-area.header-sticky-active
-    .responsive-header
-    .logo-main {
-
-        filter:
-            brightness(1.02)
-            contrast(1.04)
-            saturate(1.05);
-    }
-
-}
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

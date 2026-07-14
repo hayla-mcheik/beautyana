@@ -350,7 +350,7 @@ font-family:"Cormorant Garamond",serif;
 
     @if(count($items) > 0)
         <button
-            class="btn btn-danger btn-sm"
+            class="btn-primary"
             wire:click="clearCart"
         >
             <i class="fa fa-trash"></i> Clear Cart
