@@ -534,7 +534,7 @@
     left: 0;
     right: 0;
 
-    height: 70px;
+    height: 80px;
 
     z-index: 0;
 
