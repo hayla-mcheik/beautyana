@@ -802,7 +802,7 @@ section {
 
     padding: 20px;
 
-    object-fit: contain;
+    object-fit: cover;
 
     transition: transform 0.5s ease;
 }
