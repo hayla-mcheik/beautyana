@@ -31,7 +31,18 @@
 </div>
 <div class="mb-3">
     <label>Date</label>
-    <input type="date" name="date" value="{{ $blog->date }}" class="form-control">
+
+    <input
+        type="date"
+        name="date"
+        value="{{ old('date', optional($blog->date)->format('Y-m-d')) }}"
+        class="form-control">
+
+    @error('date')
+        <div class="text-danger">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 
 <div class="mb-3">

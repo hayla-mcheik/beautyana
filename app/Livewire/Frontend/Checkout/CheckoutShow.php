@@ -240,7 +240,7 @@ public function placeOrder()
 
             'user_id' => auth()->check() ? auth()->id() : null,
 
-            'tracking_no' => 'talys-' . Str::random(10),
+            'tracking_no' => 'demanto-' . Str::random(10),
 
             'fullname' => $this->fullname,
 

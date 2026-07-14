@@ -25,10 +25,6 @@ class Blogs extends Model
 
     public function images()
     {
-        return $this->hasMany(
-            BlogImage::class,
-            'blog_id',
-            'id'
-        );
+        return $this->hasMany(BlogImage::class, 'blog_id', 'id');
     }
 }

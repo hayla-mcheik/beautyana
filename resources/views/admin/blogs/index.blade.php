@@ -53,7 +53,9 @@
 
                                 <td>{{ $blog->by }}</td>
 
-                                <td>{{ $blog->date }}</td>
+                        <td>
+    {{ optional($blog->date)->format('M d, Y') }}
+</td>
 
                                 <td>
                                     {{ \Illuminate\Support\Str::limit($blog->description,100) }}
