@@ -2459,7 +2459,362 @@
     }
 
 }
+/* ============================================================
+   DESKTOP NAVBAR HOVER -> SAME DESIGN AS STICKY NAVBAR
+   ADD THIS AT THE VERY END OF YOUR CURRENT CSS
+============================================================ */
 
+@media (min-width: 992px) {
+
+    /* --------------------------------------------------------
+       1. SMOOTH TRANSITION FOR THE WHOLE NAVBAR
+    -------------------------------------------------------- */
+
+    .header-bottom {
+        transition:
+            background 0.35s ease,
+            background-color 0.35s ease,
+            box-shadow 0.35s ease,
+            backdrop-filter 0.35s ease,
+            -webkit-backdrop-filter 0.35s ease;
+    }
+
+
+    /* --------------------------------------------------------
+       2. GRADIENT PSEUDO ELEMENT TRANSITION
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on)::before {
+        opacity: 1;
+
+        transition:
+            opacity 0.35s ease;
+    }
+
+
+    /* --------------------------------------------------------
+       3. WHEN MOUSE ENTERS THE NAVBAR
+       MAKE IT LOOK EXACTLY LIKE STICKY NAVBAR
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover,
+    .header-bottom:not(.sticky-on):focus-within {
+
+        background:
+            rgba(253, 251, 247, 0.97) !important;
+
+        backdrop-filter:
+            blur(14px);
+
+        -webkit-backdrop-filter:
+            blur(14px);
+
+        box-shadow:
+            0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+
+    /* --------------------------------------------------------
+       4. REMOVE BLACK GRADIENT WHILE NAVBAR IS HOVERED
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover::before,
+    .header-bottom:not(.sticky-on):focus-within::before {
+
+        opacity: 0;
+    }
+
+
+    /* --------------------------------------------------------
+       5. MENU LINKS BECOME DARK
+       SAME AS STICKY NAVBAR
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-nav > li > a,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-nav > li > a {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       6. MENU LINK UNDERLINE BECOMES GOLD
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-nav > li > a::after,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-nav > li > a::after {
+
+        background:
+            var(--demanto-gold);
+    }
+
+
+    /* --------------------------------------------------------
+       7. INDIVIDUAL MENU LINK HOVER
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-nav > li > a:hover,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-nav > li > a:hover {
+
+        color:
+            var(--demanto-gold) !important;
+    }
+
+
+    /* --------------------------------------------------------
+       8. SOCIAL ICONS BECOME DARK
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .desktop-social-icon,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .desktop-social-icon {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       9. SOCIAL ICON HOVER BECOMES GOLD
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .desktop-social-icon:hover,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .desktop-social-icon:hover {
+
+        color:
+            var(--demanto-gold) !important;
+    }
+
+
+    /* --------------------------------------------------------
+       10. CURRENCY BECOMES DARK
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .theme-currency > a,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .theme-currency > a {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       11. CURRENCY HOVER BECOMES GOLD
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .theme-currency > a:hover,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .theme-currency > a:hover {
+
+        color:
+            var(--demanto-gold) !important;
+    }
+
+
+    /* --------------------------------------------------------
+       12. CART LINK BECOMES DARK
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .header-action-area a,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .header-action-area a {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       13. CART ICON BECOMES DARK
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .target-cart-icon,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .target-cart-icon {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       14. CART HOVER BECOMES GOLD
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .header-action-area a:hover,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .header-action-area a:hover,
+
+    .header-bottom:not(.sticky-on):hover
+    .header-action-area a:hover
+    .target-cart-icon,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .header-action-area a:hover
+    .target-cart-icon {
+
+        color:
+            var(--demanto-gold) !important;
+    }
+
+
+    /* --------------------------------------------------------
+       15. KEEP CART COUNT GOLD + WHITE TEXT
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .shop-count,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .shop-count {
+
+        background:
+            var(--demanto-gold) !important;
+
+        color:
+            #FFFFFF !important;
+
+        border-color:
+            rgba(197, 161, 90, 0.35);
+    }
+
+
+    /* --------------------------------------------------------
+       16. KEEP DROPDOWN WHITE
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-dropdown,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-dropdown {
+
+        background:
+            rgba(255, 255, 255, 0.99);
+    }
+
+
+    /* --------------------------------------------------------
+       17. DROPDOWN LINKS STAY DARK
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-dropdown > li > a,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-dropdown > li > a {
+
+        color:
+            var(--demanto-dark) !important;
+
+        text-shadow:
+            none !important;
+    }
+
+
+    /* --------------------------------------------------------
+       18. DROPDOWN LINK HOVER
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .boutique-dropdown > li > a:hover,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .boutique-dropdown > li > a:hover {
+
+        color:
+            var(--demanto-gold) !important;
+
+        background:
+            rgba(197, 161, 90, 0.06);
+    }
+
+
+    /* --------------------------------------------------------
+       19. LOGO SHADOW IS TOO STRONG ON WHITE BACKGROUND
+       REDUCE IT WHILE HOVERED
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .logo-main,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .logo-main {
+
+        filter:
+            brightness(1.05)
+            contrast(1.03)
+            saturate(1.05)
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+    }
+
+
+    /* --------------------------------------------------------
+       20. REMOVE LOGO BACKGROUND GLOW ON WHITE NAVBAR
+    -------------------------------------------------------- */
+
+    .header-bottom:not(.sticky-on):hover
+    .header-logo-area::before,
+
+    .header-bottom:not(.sticky-on):focus-within
+    .header-logo-area::before {
+
+        opacity: 0;
+    }
+
+
+    /* --------------------------------------------------------
+       21. SMOOTH LOGO GLOW TRANSITION
+    -------------------------------------------------------- */
+
+    .header-logo-area::before {
+
+        transition:
+            opacity 0.35s ease;
+    }
+
+}
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
