@@ -395,7 +395,7 @@ padding-top: 20px;
 
     position:relative;
 
-    height:160px;
+    height:190px;
 
     display:flex;
 
