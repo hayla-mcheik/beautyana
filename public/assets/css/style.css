@@ -5726,9 +5726,7 @@ height: 30vh;
   margin-top: 29px;
   text-transform: capitalize;
 }
-.shopping-cart-wrap .shopping-cart-content .btn-primary:hover {
-  background-color: var(--logo-pink-dark);
-}
+
 .shopping-cart-wrap .shopping-cart-summary {
   border: 1px solid #ebebeb;
 }
@@ -5775,9 +5773,7 @@ height: 30vh;
   margin-top: 0;
   text-transform: capitalize;
 }
-.shopping-cart-wrap .shopping-cart-summary .checkout-shopping .btn-checkout:hover {
-  background-color: var(--logo-pink-dark);
-}
+
 .shopping-cart-wrap .shopping-cart-summary .separator {
   border-top: 1px solid #ebebeb;
 }
