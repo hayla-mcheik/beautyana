@@ -97,7 +97,7 @@ return redirect()->back()->with('message','Empty Search');
         )
     );
 }
-  public function categoriescollections()
+public function categoriescollections()
 {
     $collections = Category::where('status','0')
         ->where('menu','Collections')

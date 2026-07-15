@@ -220,6 +220,47 @@ font-family:"Cormorant Garamond",serif;
             alertify.notify(event.detail.text, event.detail.type || 'success');
         }
     });
+    document.querySelectorAll(".collection-image img").forEach(function(img){
+
+    function imageLoaded(){
+
+        img.classList.add("loaded");
+
+        const wrapper = img.closest(".collection-image");
+
+        if(wrapper){
+
+            wrapper.classList.add("loaded");
+
+        }
+
+        if(window.signatureSliders){
+
+   const slider = img.closest(".signature-slider");
+
+if (slider && slider.swiper) {
+
+    slider.swiper.update();
+
+}
+
+        }
+
+    }
+
+    if(img.complete && img.naturalWidth){
+
+        imageLoaded();
+
+    }else{
+
+        img.addEventListener("load", imageLoaded);
+
+        img.addEventListener("error", imageLoaded);
+
+    }
+
+});
 </script>
 
 @yield('script')

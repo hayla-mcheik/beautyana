@@ -372,12 +372,14 @@ section {
    HERO CONTENT
 ============================================================ */
 
-.hero-banner-image > .container {
-    position: relative;
+.hero-banner-image .container{
 
-    z-index: 5;
+    position:relative;
+
+    z-index:3;
+
+    height:100%;
 }
-
 
 .slider-content {
     position: relative;
@@ -438,6 +440,33 @@ section {
 
     text-shadow:
         0 1px 5px rgba(0, 0, 0, 0.25);
+}
+.hero-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    z-index:1;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
 }
 
 
@@ -1982,32 +2011,35 @@ section {
 
             @forelse($sliders as $hero)
 
-                <div class="swiper-slide">
+            <div class="swiper-slide">
 
-                    <div
-                        class="hero-banner-image"
-                        style="background-image:url('{{ $hero->image
-                            ? asset($hero->image)
-                            : asset('assets/img/slider-placeholder.jpg') }}');"
-                    >
+                <div class="hero-banner-image">
 
-                        <div class="container h-100 p-4">
+                    <img
+                        class="hero-bg"
+                        src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}"
+                        alt="{{ $hero->title }}"
+                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                        fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
+                        decoding="async">
 
-                            <div class="row h-100 align-items-center">
+                    <div class="hero-overlay"></div>
 
-                                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+                    <div class="container h-100 p-4">
 
-                                    <div class="slider-content">
+                        <div class="row h-100 align-items-center">
 
-                                        <h1 class="slider-title">
-                                            {{ $hero->title }}
-                                        </h1>
+                            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
 
-                                        <p class="slider-desc">
-                                            {{ $hero->description }}
-                                        </p>
+                                <div class="slider-content">
 
-                                    </div>
+                                    <h1 class="slider-title">
+                                        {{ $hero->title }}
+                                    </h1>
+
+                                    <p class="slider-desc">
+                                        {{ $hero->description }}
+                                    </p>
 
                                 </div>
 
@@ -2018,33 +2050,39 @@ section {
                     </div>
 
                 </div>
+
+            </div>
 
             @empty
 
-                <div class="swiper-slide">
+            <div class="swiper-slide">
 
-                    <div
-                        class="hero-banner-image"
-                        style="background-image:url('{{ asset('assets/img/slider-placeholder.jpg') }}');"
-                    >
+                <div class="hero-banner-image">
 
-                        <div class="container h-100 p-4">
+                    <img
+                        class="hero-bg"
+                        src="{{ asset('assets/img/slider-placeholder.jpg') }}"
+                        alt="Demanto"
+                        loading="eager"
+                        fetchpriority="high">
 
-                            <div class="row h-100 align-items-center">
+                    <div class="hero-overlay"></div>
 
-                                <div class="col-lg-7">
+                    <div class="container h-100 p-4">
 
-                                    <div class="slider-content">
+                        <div class="row h-100 align-items-center">
 
-                                        <h1 class="slider-title">
-                                            Timeless Luxury
-                                        </h1>
+                            <div class="col-lg-7">
 
-                                        <p class="slider-desc">
-                                            Where diamonds become timeless masterpieces.
-                                        </p>
+                                <div class="slider-content">
 
-                                    </div>
+                                    <h1 class="slider-title">
+                                        Timeless Luxury
+                                    </h1>
+
+                                    <p class="slider-desc">
+                                        Where diamonds become timeless masterpieces.
+                                    </p>
 
                                 </div>
 
@@ -2055,6 +2093,8 @@ section {
                     </div>
 
                 </div>
+
+            </div>
 
             @endforelse
 
@@ -2063,11 +2103,6 @@ section {
         <div class="swiper-pagination"></div>
 
     </div>
-
-
-    <!-- WHATSAPP BUTTON -->
-
-
 
 </section>
     <a
@@ -2152,7 +2187,10 @@ section {
                             <div class="featured-image">
                                 <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
                                     @if($product->productImages->count())
-                                        <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}">
+                                        <img src="{{ asset($product->productImages[0]->image) }}"
+                                            loading="eager"
+    decoding="async"
+                                         wire:click alt="{{ $product->name }}">
                                     @else
                                         <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="">
                                     @endif
@@ -2560,7 +2598,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     }
+document.querySelectorAll('.hero-bg').forEach(function(img){
 
+    function updateHero(){
+
+        if(window.heroSwiper){
+            heroSwiper.update();
+            heroSwiper.updateAutoHeight();
+        }
+
+    }
+
+    if(img.complete){
+        updateHero();
+    }else{
+        img.onload = updateHero;
+    }
+
+});
 });
 </script>
 

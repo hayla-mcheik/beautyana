@@ -13,7 +13,6 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-
         /* =========================================================
            PRODUCT SINGLE AREA
         ========================================================= */
@@ -25,7 +24,6 @@
             padding: 30px 0 50px;
         }
 
-
         /* =========================================================
            PRODUCT CONTAINER
         ========================================================= */
@@ -34,7 +32,6 @@
             width: 100%;
             animation: productFade 0.5s ease;
         }
-
 
         /* =========================================================
            PRODUCT IMAGE CARD
@@ -47,16 +44,11 @@
                 #faf8f3 0%,
                 #ffffff 100%
             );
-
             border-radius: 20px;
-
             padding: 20px;
-
             border: 1px solid var(--luxury-border);
-
             overflow: hidden;
         }
-
 
         /* =========================================================
            MAIN SWIPER
@@ -64,42 +56,25 @@
 
         .single-product-thumb-content {
             width: 100%;
-
-            height: 500px;
-
+            height: 500px; /* Default height */
             margin-bottom: 15px;
-
             border-radius: 15px;
-
             overflow: hidden;
-
             background: var(--demanto-gold-light);
+            position: relative;
         }
-
 
         .single-product-thumb-content .swiper-wrapper {
             width: 100%;
             height: 100%;
         }
 
-
-        /*
-         * Important:
-         *
-         * Swiper can add inline width values to slides.
-         *
-         * width:100%!important overrides these values.
-         */
-
         .single-product-thumb-content .swiper-slide {
             width: 100% !important;
             height: 100%;
-
             position: relative;
-
             overflow: hidden;
         }
-
 
         /* =========================================================
            ZOOM CONTAINER
@@ -107,66 +82,41 @@
 
         .zoom-hover {
             position: relative;
-
             display: block;
-
             width: 100%;
             height: 100%;
-
             overflow: hidden;
-
             cursor: crosshair;
         }
 
-
-        /*
-         * Anchor must fill the complete container.
-         */
-
         .zoom-hover .lightbox-image {
             display: block;
-
             width: 100%;
             height: 100%;
-
             overflow: hidden;
         }
 
-
         /* =========================================================
-           MAIN IMAGE
+           MAIN IMAGE - FIXED FOR MOBILE
         ========================================================= */
 
         #main-image {
             display: block;
-
             width: 100% !important;
             height: 100% !important;
-
             max-width: none !important;
             max-height: none !important;
-
             margin: 0 !important;
             padding: 0 !important;
-
-            object-fit: cover !important;
+            object-fit: cover !important; /* Changed from cover to contain for better mobile view */
             object-position: center;
-
             transition: transform 0.5s ease;
         }
-
-
-        /*
-         * jQuery Zoom generates another image inside .zoom-hover.
-         *
-         * Do NOT give that generated image width:100%.
-         */
 
         .zoom-hover > img:not(#main-image) {
             max-width: none !important;
             max-height: none !important;
         }
-
 
         /* =========================================================
            THUMBNAIL SWIPER
@@ -174,22 +124,18 @@
 
         .single-product-nav-content {
             width: 100%;
-
             margin-top: 15px;
-
             overflow: hidden;
         }
-
 
         .single-product-nav-content .swiper-wrapper {
             align-items: stretch;
         }
 
-
         .single-product-nav-content .swiper-slide {
             height: auto;
+            width: auto !important; /* Allow thumbnails to size properly */
         }
-
 
         /* =========================================================
            THUMBNAIL CARD
@@ -198,32 +144,21 @@
         .thumb-img-wrapper {
             width: 100%;
             height: 95px;
-
             padding: 5px;
-
             background: #ffffff;
-
             border: 2px solid transparent;
-
             border-radius: 10px;
-
             overflow: hidden;
-
             cursor: pointer;
-
             transition: var(--transition-smooth);
         }
 
-
         .thumb-img-wrapper:hover,
-        .swiper-slide-thumb-active .thumb-img-wrapper {
+        .swiper-slide-thumb-active .thumb-img-wrapper,
+        .thumb-img-wrapper.active {
             border-color: var(--demanto-gold);
-
-            box-shadow:
-                0 5px 15px
-                rgba(179, 146, 86, 0.15);
+            box-shadow: 0 5px 15px rgba(179, 146, 86, 0.15);
         }
-
 
         /* =========================================================
            THUMBNAIL IMAGE
@@ -231,27 +166,19 @@
 
         .thumbnail-image {
             display: block;
-
             width: 100% !important;
             height: 100% !important;
-
             max-width: none !important;
-
             margin: 0 !important;
             padding: 0 !important;
-
             object-fit: cover;
-
             object-position: center;
-
             transition: transform 0.3s ease;
         }
-
 
         .thumb-img-wrapper:hover .thumbnail-image {
             transform: scale(1.05);
         }
-
 
         /* =========================================================
            PRODUCT INFORMATION
@@ -261,21 +188,14 @@
             padding-left: 25px;
         }
 
-
         .product-single-info .title {
             font-family: "Cormorant Garamond", serif;
-
             font-size: 32px;
-
             font-weight: 500;
-
             color: var(--demanto-dark);
-
             margin-bottom: 18px;
-
             letter-spacing: 0.5px;
         }
-
 
         /* =========================================================
            PRICES
@@ -283,42 +203,26 @@
 
         .prices {
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
             margin-bottom: 15px;
-
             padding-bottom: 15px;
-
-            border-bottom:
-                1px solid
-                var(--luxury-border);
+            border-bottom: 1px solid var(--luxury-border);
         }
-
 
         .price {
             font-family: "Cormorant Garamond", serif;
-
             font-size: 27px;
-
             font-weight: 600;
-
             color: var(--demanto-gold);
         }
 
-
         .old_price {
             font-family: "Cormorant Garamond", serif;
-
             font-size: 18px;
-
             color: #aaaaaa;
-
             text-decoration: line-through;
         }
-
 
         /* =========================================================
            STOCK
@@ -326,41 +230,29 @@
 
         .stock-status {
             display: block;
-
             margin-bottom: 20px;
         }
 
-
         .stock-badge {
             display: inline-block;
-
             padding: 6px 15px;
-
             border-radius: 20px;
-
             font-size: 10px;
-
             font-weight: 600;
-
             text-transform: uppercase;
-
             letter-spacing: 1px;
+            margin-top: 10px;
         }
-
 
         .stock-badge.in-stock {
             background: var(--demanto-gold);
-
             color: #ffffff;
         }
-
 
         .stock-badge.out-stock {
             background: #999999;
-
             color: #ffffff;
         }
-
 
         /* =========================================================
            DESCRIPTION
@@ -370,45 +262,29 @@
             margin: 20px 0;
         }
 
-
         .product-desc-list {
             list-style: none;
-
             padding: 0;
-
             margin: 0;
         }
 
-
         .product-desc-list li {
             color: var(--demanto-muted);
-
             font-size: 14px;
-
             line-height: 1.7;
-
             margin-bottom: 10px;
-
             position: relative;
-
             padding-left: 20px;
         }
 
-
         .product-desc-list li::before {
             content: '✧';
-
             position: absolute;
-
             left: 0;
-
             top: 2px;
-
             color: var(--demanto-gold);
-
             font-size: 10px;
         }
-
 
         /* =========================================================
            CART
@@ -416,160 +292,180 @@
 
         .product-quick-action {
             margin-top: 25px;
-
             padding-top: 20px;
-
-            border-top:
-                1px solid
-                var(--luxury-border);
+            border-top: 1px solid var(--luxury-border);
         }
-
 
         .white-bg {
             margin-bottom: 12px;
         }
-
 
         /* =========================================================
            TABLET
         ========================================================= */
 
         @media (max-width: 991px) {
-
             .product-single-info {
                 padding-left: 0;
-
                 margin-top: 30px;
             }
-
 
             .single-product-thumb-content {
                 height: 450px;
             }
 
-
             .product-single-info .title {
                 font-size: 27px;
             }
 
-
             .price {
                 font-size: 23px;
             }
-
 
             .thumb-img-wrapper {
                 height: 85px;
             }
         }
 
-
         /* =========================================================
-           MOBILE
+           MOBILE - FIXED
         ========================================================= */
 
         @media (max-width: 768px) {
-
             .product-single-area {
                 padding: 20px 0 35px;
             }
-
 
             .product-thumb {
                 padding: 15px;
             }
 
-
             .single-product-thumb-content {
-                height: 400px;
+                height: 350px !important; /* Adjusted for mobile */
+                min-height: 250px; /* Minimum height */
             }
-
 
             .product-single-info .title {
                 font-size: 24px;
             }
 
-
             .price {
                 font-size: 21px;
             }
-
 
             .old_price {
                 font-size: 15px;
             }
 
-
             .thumb-img-wrapper {
-                height: 75px;
+                height: 65px; /* Smaller thumbnails for mobile */
+                width: 65px; /* Fixed width for mobile */
+                min-width: 65px;
             }
-
 
             .product-desc-list li {
                 font-size: 13px;
             }
-        }
 
+            /* Fix for swiper slides on mobile */
+            .single-product-nav-content .swiper-slide {
+                width: 75px !important; /* Fixed width for mobile thumbnails */
+                flex-shrink: 0;
+            }
+
+            /* Ensure main image fills container properly */
+            #main-image {
+                object-fit: cover !important;
+            }
+        }
 
         /* =========================================================
            SMALL MOBILE
         ========================================================= */
 
         @media (max-width: 576px) {
-
             .product-single-area {
                 padding-top: 15px;
             }
-
 
             .product-thumb {
                 padding: 10px;
             }
 
-
             .single-product-thumb-content {
-                height: 350px;
+                height: 280px !important;
+                min-height: 200px;
             }
-
 
             .thumb-img-wrapper {
-                height: 65px;
+                height: 55px;
+                width: 55px;
+                min-width: 55px;
             }
-
 
             .product-single-info .title {
-                font-size: 22px;
+                font-size: 20px;
             }
 
-
             .price {
-                font-size: 19px;
+                font-size: 18px;
+            }
+
+            .single-product-nav-content .swiper-slide {
+                width: 65px !important;
+            }
+
+            /* Fix for row gap on mobile */
+            .row.g-3 {
+                --bs-gutter-y: 1rem;
+            }
+
+            /* Ensure images don't overflow */
+            .product-thumb {
+                padding: 8px;
             }
         }
 
+        /* =========================================================
+           EXTRA SMALL MOBILE
+        ========================================================= */
+
+        @media (max-width: 400px) {
+            .single-product-thumb-content {
+                height: 220px !important;
+                min-height: 180px;
+            }
+
+            .thumb-img-wrapper {
+                height: 45px;
+                width: 45px;
+                min-width: 45px;
+            }
+
+            .single-product-nav-content .swiper-slide {
+                width: 55px !important;
+            }
+
+            .product-thumb {
+                padding: 5px;
+                border-radius: 12px;
+            }
+        }
 
         /* =========================================================
            ANIMATION
         ========================================================= */
 
         @keyframes productFade {
-
             from {
                 opacity: 0;
-
-                transform:
-                    translateY(20px);
+                transform: translateY(20px);
             }
-
-
             to {
                 opacity: 1;
-
-                transform:
-                    translateY(0);
+                transform: translateY(0);
             }
         }
-
 
         /* =========================================================
            SCROLLBAR
@@ -579,21 +475,27 @@
             width: 6px;
         }
 
-
         ::-webkit-scrollbar-track {
             background: var(--demanto-bg);
         }
 
-
         ::-webkit-scrollbar-thumb {
             background: var(--demanto-gold);
-
             border-radius: 3px;
         }
 
+        /* =========================================================
+           FIX FOR FANCYBOX ON MOBILE
+        ========================================================= */
+
+        .fancybox-slide--image {
+            padding: 0 !important;
+        }
+
+        .fancybox-image {
+            object-fit: contain !important;
+        }
     </style>
-
-
 
     <!-- =========================================================
          BREADCRUMB
@@ -616,662 +518,252 @@
         ]
     ])
 
-
-
     <!-- =========================================================
          PRODUCT SINGLE AREA
     ========================================================= -->
 
     <section class="product-area product-single-area">
-
         <div class="container">
-
             <div class="row">
-
                 <div class="col-12">
-
-
                     <div class="product-single-item">
-
-
                         <div class="row g-3">
-
-
                             <!-- =================================================
                                  PRODUCT IMAGES
                             ================================================== -->
-
                             <div class="col-md-6">
-
-
                                 <div wire:ignore>
-
-
                                     @if($product->productImages && $product->productImages->count() > 0)
-
-
                                         <div class="product-thumb">
-
-
                                             <!-- MAIN IMAGE -->
-
                                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider2">
-
-
                                                 <div class="swiper-wrapper">
-
-
                                                     <div class="swiper-slide zoom zoom-hover">
-
-
                                                         <a
                                                             class="lightbox-image"
                                                             data-fancybox="gallery"
                                                             href="{{ asset($product->productImages->first()->image) }}"
                                                             id="main-image-link"
                                                         >
-
-
                                                             <img
                                                                 src="{{ asset($product->productImages->first()->image) }}"
                                                                 alt="{{ $product->name }}"
                                                                 id="main-image"
+                                                                loading="lazy"
                                                             >
-
-
                                                         </a>
-
-
                                                     </div>
-
-
                                                 </div>
-
-
                                             </div>
-
-
 
                                             <!-- =================================================
                                                  THUMBNAILS
                                             ================================================== -->
-
                                             <div class="swiper-container single-product-nav-content single-product-nav-slider2">
-
-
                                                 <div class="swiper-wrapper">
-
-
                                                     @foreach($product->productImages as $index => $itemImg)
-
-
                                                         <div class="swiper-slide">
-
-
-                                                            <div class="thumb-img-wrapper">
-
-
+                                                            <div class="thumb-img-wrapper {{ $index === 0 ? 'active' : '' }}">
                                                                 <img
                                                                     src="{{ asset($itemImg->image) }}"
                                                                     class="thumbnail-image"
                                                                     alt="{{ $product->name }}"
                                                                     data-index="{{ $index }}"
                                                                     data-image="{{ asset($itemImg->image) }}"
+                                                                    loading="lazy"
                                                                 >
-
-
                                                             </div>
-
-
                                                         </div>
-
-
                                                     @endforeach
-
-
                                                 </div>
-
-
                                             </div>
-
-
                                         </div>
-
-
                                     @else
-
-
                                         <div class="product-thumb">
-
-
                                             <div class="text-center py-5">
-
-
-                                                <p class="mb-0">
-
-                                                    No product images available.
-
-                                                </p>
-
-
+                                                <p class="mb-0">No product images available.</p>
                                             </div>
-
-
                                         </div>
-
-
                                     @endif
-
-
                                 </div>
-
-
                             </div>
-
-
 
                             <!-- =================================================
                                  PRODUCT INFORMATION
                             ================================================== -->
-
                             <div class="col-md-6">
-
-
                                 <div class="product-single-info">
-
-
-                                    <h1 class="title">
-
-                                        {{ $product->name }}
-
-                                    </h1>
-
-
+                                    <h1 class="title">{{ $product->name }}</h1>
 
                                     <!-- PRICES -->
-
                                     <div class="prices">
-
-
                                         @if($product->original_price > $product->selling_price)
-
-
-                                            <span class="old_price">
-
-                                                ${{ number_format($product->original_price, 2) }}
-
-                                            </span>
-
-
+                                            <span class="old_price">${{ number_format($product->original_price, 2) }}</span>
                                         @endif
-
-
-                                        <span class="price">
-
-                                            ${{ number_format($product->selling_price, 2) }}
-
-                                        </span>
-
-
+                                        <span class="price">${{ number_format($product->selling_price, 2) }}</span>
                                     </div>
-
-
 
                                     <!-- STOCK STATUS -->
-
                                     <div class="stock-status">
-
-
                                         @if($product->quantity > 0)
-
-
                                             <span class="stock-badge in-stock">
-
-
-                                                <i class="fa fa-check-circle"></i>
-
-
-                                                In Stock
-
-
+                                                <i class="fa fa-check-circle"></i> In Stock
                                             </span>
-
-
                                         @else
-
-
                                             <span class="stock-badge out-stock">
-
-
-                                                <i class="fa fa-times-circle"></i>
-
-
-                                                Out of Stock
-
-
+                                                <i class="fa fa-times-circle"></i> Out of Stock
                                             </span>
-
-
                                         @endif
-
-
                                     </div>
-
-
 
                                     <!-- DESCRIPTION -->
-
                                     <div class="product-description">
-
-
                                         <ul class="product-desc-list">
-
-
                                             @if($product->small_description)
-
-
-                                                <li>
-
-                                                    {{ $product->small_description }}
-
-                                                </li>
-
-
+                                                <li>{{ $product->small_description }}</li>
                                             @endif
-
-
-
                                             @if($product->description)
-
-
-                                                <li>
-
-                                                    {{ $product->description }}
-
-                                                </li>
-
-
+                                                <li>{{ $product->description }}</li>
                                             @endif
-
-
                                         </ul>
-
-
                                     </div>
-
-
 
                                     <!-- CART -->
-
                                     <div class="product-quick-action">
-
-
                                         <div class="white-bg">
-
-
-                                            <livewire:frontend.cart.add-to-cart
-                                                :product="$product"
-                                            />
-
-
+                                            <livewire:frontend.cart.add-to-cart :product="$product" />
                                         </div>
-
-
                                     </div>
-
-
                                 </div>
-
-
                             </div>
-
-
                         </div>
-
-
                     </div>
-
-
                 </div>
-
-
             </div>
-
-
         </div>
-
-
     </section>
 
-
-
     <!-- =========================================================
-         JAVASCRIPT
+         JAVASCRIPT - UPDATED FOR MOBILE
     ========================================================= -->
 
     @push('scripts')
-
         <script>
-
             document.addEventListener('DOMContentLoaded', function () {
+                const mainImage = document.getElementById('main-image');
+                const mainImageLink = document.getElementById('main-image-link');
+                const thumbnails = document.querySelectorAll('.thumbnail-image');
 
-
-                /*
-                |--------------------------------------------------------------------------
-                | ELEMENTS
-                |--------------------------------------------------------------------------
-                */
-
-
-                const mainImage =
-                    document.getElementById('main-image');
-
-
-                const mainImageLink =
-                    document.getElementById('main-image-link');
-
-
-                const thumbnails =
-                    document.querySelectorAll('.thumbnail-image');
-
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | INITIALIZE ZOOM
-                |--------------------------------------------------------------------------
-                */
-
-
+                // Function to initialize zoom with proper sizing
                 function initializeZoom() {
-
-
-                    if (
-                        !mainImage
-                        ||
-                        !mainImageLink
-                        ||
-                        typeof $.fn.zoom === 'undefined'
-                    ) {
-
+                    if (!mainImage || !mainImageLink || typeof $.fn.zoom === 'undefined') {
                         return;
-
                     }
 
+                    // Destroy existing zoom
+                    $('.zoom-hover').trigger('zoom.destroy');
 
-                    $('.zoom-hover')
-                        .trigger('zoom.destroy');
-
-
-                    $('.zoom-hover')
-                        .zoom({
-
-                            url:
-                                mainImageLink.getAttribute('href')
-
-                        });
-
+                    // Initialize zoom with proper options
+                    $('.zoom-hover').zoom({
+                        url: mainImageLink.getAttribute('href'),
+                        magnify: 1.5,
+                        touch: true // Enable touch support for mobile
+                    });
                 }
 
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | INITIALIZE FANCYBOX
-                |--------------------------------------------------------------------------
-                */
-
-
+                // Function to initialize fancybox
                 function initializeFancybox() {
-
-
-                    if (
-                        typeof $
-                        ===
-                        'undefined'
-                    ) {
-
+                    if (typeof $ === 'undefined' || typeof $.fancybox === 'undefined') {
                         return;
-
                     }
-
-
-                    if (
-                        typeof $.fancybox
-                        ===
-                        'undefined'
-                    ) {
-
-                        return;
-
-                    }
-
 
                     $.fancybox.destroy();
-
-
-                    $('[data-fancybox="gallery"]')
-                        .fancybox();
-
+                    $('[data-fancybox="gallery"]').fancybox({
+                        protect: true,
+                        touch: {
+                            vertical: true,
+                            momentum: true
+                        },
+                        thumbs: {
+                            autoStart: true
+                        }
+                    });
                 }
 
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | INITIAL LOAD
-                |--------------------------------------------------------------------------
-                */
-
-
+                // Initialize on load
                 if (mainImage) {
-
-
                     if (mainImage.complete) {
-
-
                         initializeZoom();
-
-
                     } else {
-
-
-                        mainImage.addEventListener(
-
-                            'load',
-
-                            function () {
-
-
-                                initializeZoom();
-
-
-                            },
-
-                            {
-                                once: true
-                            }
-
-                        );
-
-
+                        mainImage.addEventListener('load', function () {
+                            initializeZoom();
+                        }, { once: true });
                     }
-
-
                 }
-
-
 
                 initializeFancybox();
 
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | THUMBNAIL CLICK
-                |--------------------------------------------------------------------------
-                */
-
-
+                // Handle thumbnail clicks with mobile support
                 thumbnails.forEach(function (thumbnail) {
-
-
-                    thumbnail.addEventListener(
-
-
-                        'click',
-
-
-                        function () {
-
-
-                            if (
-                                !mainImage
-                                ||
-                                !mainImageLink
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            const newImageSrc =
-
-                                this.getAttribute(
-
-                                    'data-image'
-
-                                );
-
-
-                            if (!newImageSrc) {
-
-                                return;
-
-                            }
-
-
-
-                            /*
-                             * Destroy existing zoom.
-                             */
-
-
-                            if (
-                                typeof $
-                                !==
-                                'undefined'
-                                &&
-                                typeof $.fn.zoom
-                                !==
-                                'undefined'
-                            ) {
-
-
-                                $('.zoom-hover')
-                                    .trigger('zoom.destroy');
-
-
-                            }
-
-
-
-                            /*
-                             * Change image.
-                             */
-
-
-                            mainImageLink.href =
-                                newImageSrc;
-
-
-                            mainImage.src =
-                                newImageSrc;
-
-
-
-                            /*
-                             * Initialize zoom after the
-                             * new image finishes loading.
-                             */
-
-
-                            if (mainImage.complete) {
-
-
-                                initializeZoom();
-
-
-                            } else {
-
-
-                                mainImage.onload =
-                                    function () {
-
-
-                                        initializeZoom();
-
-
-                                    };
-
-
-                            }
-
-
-
-                            /*
-                             * Update active thumbnail.
-                             */
-
-
-                            document
-                                .querySelectorAll(
-                                    '.thumb-img-wrapper'
-                                )
-                                .forEach(
-                                    function (wrapper) {
-
-
-                                        wrapper.classList
-                                            .remove('active');
-
-
-                                    }
-                                );
-
-
-                            this
-                                .closest(
-                                    '.thumb-img-wrapper'
-                                )
-                                .classList
-                                .add('active');
-
-
-
-                            /*
-                             * Reinitialize Fancybox.
-                             */
-
-
-                            initializeFancybox();
-
-
+                    thumbnail.addEventListener('click', function (e) {
+                        if (!mainImage || !mainImageLink) return;
+
+                        const newImageSrc = this.getAttribute('data-image');
+                        if (!newImageSrc) return;
+
+                        // Destroy existing zoom
+                        if (typeof $ !== 'undefined' && typeof $.fn.zoom !== 'undefined') {
+                            $('.zoom-hover').trigger('zoom.destroy');
                         }
 
+                        // Update image
+                        mainImageLink.href = newImageSrc;
+                        mainImage.src = newImageSrc;
 
-                    );
+                        // Reinitialize zoom after image loads
+                        if (mainImage.complete) {
+                            setTimeout(initializeZoom, 100);
+                        } else {
+                            mainImage.onload = function () {
+                                setTimeout(initializeZoom, 100);
+                            };
+                        }
 
+                        // Update active thumbnail
+                        document.querySelectorAll('.thumb-img-wrapper').forEach(function (wrapper) {
+                            wrapper.classList.remove('active');
+                        });
+                        this.closest('.thumb-img-wrapper').classList.add('active');
 
+                        // Reinitialize fancybox
+                        setTimeout(initializeFancybox, 200);
+                    });
+
+                    // Add touch support for mobile
+                    thumbnail.addEventListener('touchstart', function (e) {
+                        // Allow touch events to pass through
+                    }, { passive: true });
                 });
 
-
+                // Fix for Swiper on mobile - ensure proper sizing
+                if (typeof Swiper !== 'undefined') {
+                    setTimeout(function () {
+                        const thumbSwiper = document.querySelector('.single-product-nav-content');
+                        if (thumbSwiper && thumbSwiper.swiper) {
+                            thumbSwiper.swiper.update();
+                        }
+                    }, 500);
+                }
             });
 
+            // Fix for window resize on mobile
+            window.addEventListener('resize', function () {
+                const mainImage = document.getElementById('main-image');
+                if (mainImage && window.innerWidth <= 768) {
+                    mainImage.style.objectFit = 'contain';
+                }
+            });
         </script>
-
     @endpush
-
 
 </div>

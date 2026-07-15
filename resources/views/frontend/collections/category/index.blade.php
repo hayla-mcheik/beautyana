@@ -42,12 +42,13 @@
 
                                         <div class="collection-image">
 
-                                            <img
-                                                src="{{ asset($categoryItem->image) }}"
-                                                alt="{{ $categoryItem->name }}"
-                                                loading="lazy"
-                                            >
-
+                                     <img
+    src="{{ asset($categoryItem->image) }}"
+    width="260"
+    height="160"
+    loading="eager"
+    decoding="async"
+    alt="{{ $categoryItem->name }}">
                                         </div>
 
                                     </div>
@@ -390,20 +391,23 @@ padding-top: 20px;
     IMAGE
 ==================================================*/
 
-.collection-image {
+.collection-image{
 
-    position: relative;
+    position:relative;
 
-    height: 160px;
+    height:160px;
 
-    display: flex;
+    display:flex;
 
-    justify-content: center;
+    justify-content:center;
 
-    align-items: center;
+    align-items:center;
 
-    padding: 0 30px;
+    overflow:hidden;
+
+    contain:layout paint;
 }
+
 
 
 /*==================================================
@@ -456,7 +460,13 @@ padding-top: 20px;
 
 .collection-image img {
 
-    display: block;
+    display:block;
+
+    opacity:0;
+
+    visibility:hidden;
+
+
 
     max-width: 100%;
 
@@ -486,7 +496,12 @@ padding-top: 20px;
 
         drop-shadow(0 22px 18px rgba(0, 0, 0, .06));
 }
+.collection-image.loaded img{
 
+    opacity:1;
+
+    visibility:visible;
+}
 
 .collection-card:hover .collection-image img {
 
