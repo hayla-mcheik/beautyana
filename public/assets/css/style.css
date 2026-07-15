@@ -2009,12 +2009,7 @@ section .container-fluid {
 .header-area.header-default .header-align .header-navigation-area .main-menu.nav > li {
   margin-right: 30px;
 }
-.header-area.header-default .header-align .header-navigation-area .main-menu.nav > li.active > a {
-  color: var(--logo-pink-dark) !important;
-}
-.header-area.header-default .header-align .header-navigation-area .main-menu.nav > li.active > a:before {
-  color: var(--logo-pink-dark) !important;
-}
+
 
 .header-area.header-default .header-align .header-navigation-area .main-menu.nav > li > a:last-child {
   padding-right: 0;
