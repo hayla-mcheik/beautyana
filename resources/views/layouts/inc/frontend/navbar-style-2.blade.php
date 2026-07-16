@@ -1164,13 +1164,6 @@
 }
 
 
-.desktop-social-icon:hover,
-.theme-currency > a:hover,
-.header-action-area a:hover {
-
-    color:
-        var(--demanto-gold-light) !important;
-}
 
 
 /* ============================================================
@@ -2680,23 +2673,6 @@
        14. CART HOVER BECOMES GOLD
     -------------------------------------------------------- */
 
-    .header-bottom:not(.sticky-on):hover
-    .header-action-area a:hover,
-
-    .header-bottom:not(.sticky-on):focus-within
-    .header-action-area a:hover,
-
-    .header-bottom:not(.sticky-on):hover
-    .header-action-area a:hover
-    .target-cart-icon,
-
-    .header-bottom:not(.sticky-on):focus-within
-    .header-action-area a:hover
-    .target-cart-icon {
-
-        color:
-            var(--demanto-gold) !important;
-    }
 
 
     /* --------------------------------------------------------
