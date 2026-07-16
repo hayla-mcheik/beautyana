@@ -657,7 +657,7 @@
 
                             <small class="text-muted">
 
-                                Upload at least two clear product images.
+                             Upload one or more product images.
 
                             </small>
 
@@ -691,11 +691,9 @@
 
                         <div class="mt-1">
 
-                            Upload at least 2 images.
-
-                            The first selected image will be used as the primary product image.
-
-                            Recommended images: front view, back view and additional product details.
+                    Upload at least one image.
+The first selected image will be used as the primary product image.
+You can upload additional images if you wish.
 
                         </div>
 
@@ -790,7 +788,7 @@
 
                             <small id="imageRequirementText">
 
-                                0 / 2
+                                0 / 1
 
                             </small>
 
@@ -1011,13 +1009,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         imageRequirementText.textContent =
-            Math.min(count, 2)
-            + ' / 2';
+      Math.min(count, 1) + ' / 1';
 
 
         const progress =
             Math.min(
-                (count / 2) * 100,
+               (count / 1) * 100,
                 100
             );
 
@@ -1027,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-        if (count < 2)
+        if (count < 1)
         {
             imageCountBadge.className =
                 'badge bg-danger';
@@ -1043,9 +1040,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             requirementMessage.textContent =
-                'Please select '
-                + (2 - count)
-                + ' more image'
+             'Please select at least one image.'
                 + ((2 - count) !== 1 ? 's' : '')
                 + '.';
 
@@ -1316,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (
                 allSelectedFiles.length
                 <
-                2
+                1
             )
             {
                 event.preventDefault();
@@ -1329,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Product Images Required',
 
                     text:
-                        'Please upload at least 2 product images before saving the product.',
+                        'Please upload at least one product image before saving the product.',
 
                     confirmButtonText:
                         'OK'

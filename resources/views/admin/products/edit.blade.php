@@ -726,9 +726,8 @@
 
                             <div class="mt-1">
 
-                                The first image is considered the primary product image.
-
-                                You can remove existing images or upload additional images below.
+                       The first image is used as the primary product image.
+You may keep a single image or upload additional images if needed.
 
                             </div>
 
@@ -852,18 +851,15 @@
 
                         <div>
 
-                            <h5 class="mb-1">
-
-                                <i class="mdi mdi-cloud-upload-outline"></i>
-
-                                Add New Images
-
-                            </h5>
+                 <h5 class="mb-1">
+    <i class="mdi mdi-cloud-upload-outline"></i>
+    Add Product Images
+</h5>
 
 
                             <small class="text-muted">
 
-                                Select additional images to add to this product.
+                            Upload one or more images for this product.
 
                             </small>
 
@@ -889,9 +885,8 @@
 
                     <div class="alert alert-light border">
 
-                        Existing images will not be replaced.
-
-                        New selected images will be added to the current product images.
+                   If you upload new images, they will be added to the existing ones.
+You can also keep only the current image if you don't want to upload more.
 
                     </div>
 
@@ -908,7 +903,7 @@
 
                         <h5>
 
-                            Select Additional Images
+                           Select Images
 
                         </h5>
 
@@ -1106,10 +1101,8 @@ document.addEventListener('DOMContentLoaded', function () {
             allNewFiles.length;
 
 
-        newImageCountBadge.textContent =
-            count
-            + ' new image'
-            + (count !== 1 ? 's' : '');
+     newImageCountBadge.textContent =
+    count + ' image' + (count !== 1 ? 's' : '') + ' selected';
 
 
         newImageCountBadge.className =
@@ -1173,7 +1166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         class="position-absolute top-0 start-0 m-2 badge bg-success"
                                     >
 
-                                        New Image ${index + 1}
+                                    Image ${index + 1}
 
                                     </span>
 

@@ -57,20 +57,15 @@ class ProductController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        if (
-            !$request->hasFile('image')
-            ||
-            count($request->file('image')) < 2
-        ) {
+      if (!$request->hasFile('image')) {
 
-            return redirect()
-                ->back()
-                ->withErrors([
-                    'image' =>
-                        'Please upload at least 2 images (front and back).'
-                ])
-                ->withInput();
-        }
+    return redirect()
+        ->back()
+        ->withErrors([
+            'image' => 'Please upload at least one image.'
+        ])
+        ->withInput();
+}  
 
 
         /*
