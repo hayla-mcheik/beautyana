@@ -318,9 +318,9 @@ section {
 .home-banner{
     position:relative;
     width:100%;
-    height:58vh;
-    min-height:500px;
-    max-height:58vh;
+    height:54vh;
+    min-height:460px;
+    max-height:54vh;
     overflow:hidden;
     z-index:1;
 }
