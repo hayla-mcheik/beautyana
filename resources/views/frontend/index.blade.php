@@ -1367,7 +1367,7 @@ section {
 
         min-height: 678px;
 
-        max-height:70vh;
+        max-height:65vh;
     }
 
 
@@ -1425,7 +1425,7 @@ section {
 
         min-height: 648px;
 
-        max-height: 70vh;
+        max-height: 65vh;
     }
 
 
