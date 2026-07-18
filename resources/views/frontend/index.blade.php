@@ -318,9 +318,9 @@ section {
 .home-banner{
     position:relative;
     width:100%;
-    height:52vh;
+    height:60vh;
     min-height:500px;
-    max-height:760px;
+    max-height:70vh;
     overflow:hidden;
     z-index:1;
 }
@@ -815,7 +815,7 @@ section {
 
     width: 100%;
 
-    height: 400px;
+    height: 380px;
 
     overflow: hidden;
 
@@ -1367,7 +1367,7 @@ section {
 
         min-height: 678px;
 
-        max-height: 900px;
+        max-height:70vh;
     }
 
 
@@ -1421,11 +1421,11 @@ section {
 @media (min-width: 1800px) {
 
     .home-banner {
-        height: 58vh;
+        height: 60vh;
 
         min-height: 648px;
 
-        max-height: 800px;
+        max-height: 70vh;
     }
 
 
