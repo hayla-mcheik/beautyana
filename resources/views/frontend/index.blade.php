@@ -1367,7 +1367,7 @@ section {
 
         min-height: 600px;
 
-        max-height:60vh;
+        max-height:64vh;
     }
 
 
@@ -1421,11 +1421,11 @@ section {
 @media (min-width: 1800px) {
 
     .home-banner {
-        height: 64vh;
+        height: 66vh;
 
-        min-height: 648px;
+        min-height: 700px;
 
-        max-height: 65vh;
+        max-height: 66vh;
     }
 
 
