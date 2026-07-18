@@ -1432,7 +1432,7 @@
 
 .responsive-header .logo-main {
     max-width:
-        78px !important;
+        100px !important;
 }
 
 
@@ -2246,7 +2246,7 @@
 
     :root {
         --mobile-header-height:
-            66px;
+            80px;
     }
 
 
@@ -2367,7 +2367,7 @@
     .logo-main {
 
         max-width:
-            62px !important;
+            100px !important;
     }
 
 

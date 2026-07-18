@@ -80,22 +80,7 @@
            ZOOM CONTAINER
         ========================================================= */
 
-        .zoom-hover {
-            position: relative;
-            display: block;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            cursor: crosshair;
-        }
-
-        .zoom-hover .lightbox-image {
-            display: block;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
+   
         /* =========================================================
            MAIN IMAGE - FIXED FOR MOBILE
         ========================================================= */
@@ -108,7 +93,7 @@
             max-height: none !important;
             margin: 0 !important;
             padding: 0 !important;
-            object-fit: cover !important; /* Changed from cover to contain for better mobile view */
+            object-fit: contain !important; /* Changed from cover to contain for better mobile view */
             object-position: center;
             transition: transform 0.5s ease;
         }
@@ -171,7 +156,7 @@
             max-width: none !important;
             margin: 0 !important;
             padding: 0 !important;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
             transition: transform 0.3s ease;
         }
@@ -375,7 +360,7 @@
 
             /* Ensure main image fills container properly */
             #main-image {
-                object-fit: cover !important;
+                object-fit: contain !important;
             }
         }
 
@@ -538,7 +523,7 @@
                                             <!-- MAIN IMAGE -->
                                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider2">
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide zoom zoom-hover">
+                                                 <div class="swiper-slide">
                                                         <a
                                                             class="lightbox-image"
                                                             data-fancybox="gallery"

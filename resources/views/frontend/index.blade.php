@@ -9,6 +9,9 @@
 /* ============================================================
    DEMANTO HOME PAGE
 ============================================================ */
+/* ============================================================
+   DEMANTO HOME PAGE
+============================================================ */
 
 :root {
     --demanto-gold: #C5A15A;
@@ -308,205 +311,210 @@ section {
    HERO
 ============================================================ */
 
-.home-banner {
-    position: relative;
+/*=========================================================
+                    HERO
+=========================================================*/
 
-    width: 100%;
-
-    height: 52vh;
-
-    min-height: 500px;
-    max-height: 760px;
-
-    overflow: hidden;
-
-    z-index: 1;
-}
-
-
-.home-banner .default-slider-container {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-}
-
-
-.default-slider-container .swiper-wrapper,
-.default-slider-container .swiper-slide {
-    width: 100%;
-    height: 100%;
-}
-
-
-.default-slider-container .swiper-slide {
-    position: relative;
-}
-
-
-.hero-banner-image {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    background-size: cover;
-
-    background-repeat: no-repeat;
-
-    background-position: 58% center;
-}
-
-
-/* ============================================================
-   HERO CONTENT
-============================================================ */
-
-.hero-banner-image .container{
-
+.home-banner{
     position:relative;
-
-    z-index:3;
-
-    height:100%;
-}
-
-.slider-content {
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    max-width: 540px;
-
-    padding-top: 70px;
-}
-
-
-.slider-title {
-    margin: 0 0 18px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(42px, 4vw, 68px);
-
-    font-weight: 500;
-
-    line-height: 0.98;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    color: #F4E5C3;
-
-    text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.28);
-}
-
-
-.slider-desc {
-    max-width: 400px;
-
-    margin: 0;
-
-    color:
-        rgba(255, 255, 255, 0.95);
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 14px;
-    font-weight: 400;
-
-    line-height: 1.8;
-
-    letter-spacing: 0.3px;
-
-    text-shadow:
-        0 1px 5px rgba(0, 0, 0, 0.25);
-}
-.hero-bg{
-
-    position:absolute;
-
-    inset:0;
-
     width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
+    height:52vh;
+    min-height:500px;
+    max-height:760px;
+    overflow:hidden;
     z-index:1;
+}
 
+.home-banner .default-slider-container,
+.home-banner .swiper,
+.home-banner .swiper-wrapper,
+.home-banner .swiper-slide{
+    width:100%;
+    height:100%;
+}
+
+.hero-banner-image{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    isolation:isolate;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:top center;
+    z-index:1;
+    transition:transform .8s ease;
+}
+
+.swiper-slide-active .hero-bg{
+    transform:scale(1.03);
 }
 
 .hero-overlay{
-
     position:absolute;
-
     inset:0;
-
     z-index:2;
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,.35),
+        rgba(0,0,0,.15),
+        rgba(0,0,0,.05)
+    );
+}
+
+.hero-banner-image>.container{
+    position:relative;
+    z-index:3;
+    height:100%;
+}
+
+.slider-content{
+    position:relative;
+    z-index:5;
+    max-width:540px;
+    padding-top:70px;
+}
+
+.slider-title{
+    margin-bottom:18px;
+    color:#F4E5C3;
+    font-size:clamp(42px,4vw,68px);
+    line-height:.95;
+}
+
+.slider-desc{
+    max-width:420px;
+    color:#fff;
+    font-size:14px;
+    line-height:1.8;
+}
+
+/* Pagination */
+
+.default-slider-container .swiper-pagination{
+    bottom:30px !important;
+    z-index:10;
+}
+
+/*==========================
+        LARGE
+==========================*/
+
+@media(min-width:1600px){
+
+.home-banner{
+    height:61vh;
+    min-height:680px;
+}
+
+.slider-content{
+    padding-top:100px;
+}
 
 }
 
+/*==========================
+        TABLET
+==========================*/
 
-/* ============================================================
-   HERO PAGINATION
-============================================================ */
+@media(max-width:991px){
 
-.default-slider-container .swiper-pagination {
-    bottom: 30px !important;
-
-    z-index: 10;
+.home-banner{
+    height:600px;
+    min-height:600px;
 }
 
-
-.default-slider-container
-.swiper-pagination-bullet {
-    width: 9px;
-    height: 9px;
-
-    margin: 0 5px !important;
-
-    border-radius: 50%;
-
-    background: #FFFFFF;
-
-    opacity: 0.55;
-
-    transition: all 0.3s ease;
+.hero-bg{
+    object-position:right;
 }
 
+.slider-content{
+    max-width:430px;
+    padding-top:70px;
+}
 
-.default-slider-container
-.swiper-pagination-bullet-active {
-    width: 30px;
+.slider-title{
+    font-size:48px;
+}
 
-    border-radius: 20px;
+}
 
-    background: var(--demanto-gold);
+/*==========================
+        MOBILE
+==========================*/
+@media (max-width:767px){
 
-    opacity: 1;
+.home-banner{
+    margin-top:80px;
+    height:500px !important;
+    min-height:500px !important;
+    overflow:hidden;
+}
+
+.default-slider-container,
+.default-slider-container .swiper-wrapper,
+.default-slider-container .swiper-slide{
+    height:500px !important;
+}
+
+.hero-banner-image{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:35% center;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+}
+
+.hero-banner-image>.container{
+    position:absolute;
+    inset:0;
+    z-index:5;
+}
+
+}
+
+/*==========================
+      SMALL MOBILE
+==========================*/
+
+@media(max-width:480px){
+
+.home-banner{
+    height:480px;
+    min-height:480px;
+}
+
+.hero-bg{
+    object-position:right;
+}
+
+.slider-title{
+    font-size:28px;
+}
+
+.slider-desc{
+    font-size:11px;
+    display: none;
+}
+
 }
 
 
@@ -1127,7 +1135,7 @@ section {
     overflow: hidden;
 
     background:
-        url('assets/img/appointment.jpg')
+        url('assets/img/appoint.jpeg')
         center center / cover
         no-repeat;
 }
@@ -1600,6 +1608,9 @@ section {
 
 /* ============================================================
    MOBILE
+   (Hero: image now shows FULLY, no cropping, no empty space.
+   The banner height follows the image's own aspect ratio
+   instead of a fixed pixel height.)
 ============================================================ */
 
 @media (max-width: 767px) {
@@ -1614,19 +1625,47 @@ section {
     }
 
 
-    /* HERO */
+    /* HERO — let height follow the image, no forced crop box */
 
     .home-banner {
-        height: 520px;
-
-        min-height: 520px;
-
-        max-height: none;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
     }
 
-
     .hero-banner-image {
-        background-position: 67% center;
+        position: relative;
+        height: auto;
+        display: block; /* text/overlay now overlaid via absolute positioning below */
+    }
+
+    .hero-bg {
+        position: static;
+        width: 100%;
+        height: 9rlh;
+        object-fit: cover; /* shows the whole image, nothing cropped */
+        display: block;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+    }
+
+    .hero-banner-image .container {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+    }
+
+    /* Swiper JS sets an inline pixel height on these elements at init.
+       Force them to shrink to the image's real height too, or a blank
+       gap (with the pagination dot floating in it) is left below the
+       image. !important is required to beat the inline JS style. */
+    .home-banner .default-slider-container,
+    .default-slider-container .swiper-wrapper,
+    .default-slider-container .swiper-slide {
+        height: auto !important;
     }
 
 
@@ -1795,17 +1834,13 @@ section {
 
 @media (max-width: 575px) {
 
+    /* HERO — keep height auto (do NOT reintroduce a fixed height here) */
+
     .home-banner {
-        height: 400px;
-
-        min-height: 400px;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
     }
-
-
-    .hero-banner-image {
-        background-position: 70% center;
-    }
-
 
     .hero-banner-image > .container {
         padding-left: 16px !important;
@@ -1906,15 +1941,12 @@ section {
 
 @media (max-width: 400px) {
 
+    /* HERO — keep height auto (do NOT reintroduce a fixed height here) */
+
     .home-banner {
-        height: 420px;
-
-        min-height: 420px;
-    }
-
-
-    .hero-banner-image {
-        background-position: 72% center;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
     }
 
 
@@ -2271,7 +2303,7 @@ section {
 
         <div class="row align-items-center">
 
-            <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="col-lg-8 mb-5 mb-lg-0">
 
                 {{-- <span class="appointment-label">
                     PRIVATE CONSULTATION
@@ -2285,7 +2317,7 @@ section {
 
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-lg-4">
 
             <div class="appointment-form">
 

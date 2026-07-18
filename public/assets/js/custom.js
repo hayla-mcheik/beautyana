@@ -153,6 +153,10 @@ const signatureSlider = new Swiper('.signature-slider', {
     spaceBetween: 12,
 
     breakpoints: {
+               200: {
+            slidesPerView: 2,
+            spaceBetween: 12,
+        },
            300: {
             slidesPerView: 2,
             spaceBetween: 12,
