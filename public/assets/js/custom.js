@@ -221,11 +221,11 @@ var featuredProducts = new Swiper('.featured-products-slider', {
             spaceBetween: 20
         },
         992: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 25
         },
         1200: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 30
         }
     }
