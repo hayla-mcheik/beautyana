@@ -49,7 +49,7 @@
             border: none;
             padding: 12px 0;
 font-family:"Cormorant Garamond",serif;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--demanto-dark);
             text-align: left;
@@ -66,13 +66,13 @@ font-family:"Cormorant Garamond",serif;
             border-radius: 50%;
             text-align: center;
             line-height: 26px;
-            font-size: 12px;
+            font-size: 18px;
             margin-right: 10px;
         }
 
         .heading-button .step-edit {
             float: right;
-            font-size: 10px;
+            font-size: 18px;
             color: var(--demanto-muted);
             opacity: 0;
             transition: var(--transition-smooth);
@@ -92,7 +92,7 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .form-group label {
-            font-size: 12px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--demanto-dark);
             margin-bottom: 5px;
@@ -102,7 +102,7 @@ font-family:"Cormorant Garamond",serif;
             border: 1px solid var(--luxury-border);
             border-radius: 10px;
             padding: 8px 12px;
-            font-size: 12px;
+            font-size: 14px;
             transition: var(--transition-smooth);
             background: #fff;
         }
@@ -116,7 +116,7 @@ font-family:"Cormorant Garamond",serif;
         .btn-promocode-apply {
             background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
             color: #fff;
-            font-size: 9px;
+            font-size: 16px;
             letter-spacing: 2px;
             text-transform: uppercase;
             padding: 0px 20px;
@@ -179,7 +179,7 @@ font-family:"Cormorant Garamond",serif;
         .promocode input {
             flex: 1;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 16px;
             padding: 6px 12px;
         }
 
@@ -200,12 +200,12 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .form-check-label {
-            font-size: 13px;
+            font-size: 16px;
             color: var(--demanto-dark);
         }
 
         .form-check-label p {
-            font-size: 11px;
+            font-size: 16px;
             margin-top: 3px;
         }
 
@@ -225,7 +225,7 @@ font-family:"Cormorant Garamond",serif;
 
         .personal-information li {
             padding: 3px 0;
-            font-size: 12px;
+            font-size: 18px;
         }
 
         .text-danger {
@@ -248,14 +248,14 @@ font-family:"Cormorant Garamond",serif;
                 padding: 15px;
             }
             .heading-button {
-                font-size: 14px;
+                font-size: 16px;
                 padding: 10px 0;
             }
             .heading-button .step-number {
                 width: 24px;
                 height: 24px;
                 line-height: 24px;
-                font-size: 11px;
+                font-size: 16px;
             }
         }
     </style>
@@ -279,7 +279,7 @@ font-family:"Cormorant Garamond",serif;
                                     <div id="collapseTwo" class="accordion-collapse collapse @if(!$isPersonalInfoValid) show @endif" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="checkout-accordion-body">
                                             <div class="personal-addresses">
-                                                <p class="mb-3" style="font-size: 11px; color: var(--demanto-muted);">Please provide your information for order delivery</p>
+                                                <p class="mb-3" style="font-size: 16px; color: var(--demanto-muted);">Please provide your information for order delivery</p>
                                                 <div class="delivery-address-form">
                                                     <form wire:submit.prevent="validatePersonalInformation">
                                                         <div class="form-group">
@@ -328,7 +328,7 @@ font-family:"Cormorant Garamond",serif;
                                                     <div class="personal-information">
                                                         <ul>
                                                             <li><strong>✓ Logged in as:</strong> {{ auth()->user()->name }}</li>
-                                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: var(--demanto-gold); font-size: 11px;">Log out</a></li>
+                                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: var(--demanto-gold); font-size: 16px;">Log out</a></li>
                                                         </ul>
                                                     </div>
                                                 @endauth
@@ -367,11 +367,11 @@ font-family:"Cormorant Garamond",serif;
                                 @foreach($carts as $item)
                                     <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
                                         <div>
-                                            <h6 class="mb-0" style="font-size: 12px; font-weight: 500;">{{ $item->product->name }}</h6>
-                                            <small class="text-muted" style="font-size: 10px;">Qty: {{ $item->quantity }}</small>
+                                            <h6 class="mb-0" style="font-size: 18px; font-weight: 500;">{{ $item->product->name }}</h6>
+                                            <small class="text-muted" style="font-size: 16px;">Qty: {{ $item->quantity }}</small>
                                         </div>
                                         <div class="text-end">
-                                            <span style="font-size: 12px; color: var(--demanto-gold);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
+                                            <span style="font-size: 18px; color: var(--demanto-gold);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -380,17 +380,17 @@ font-family:"Cormorant Garamond",serif;
                             @if($totalProductAmount != 0)
                                 <div class="cart-detailed-totals">
                                     <div class="d-flex justify-content-between mb-1">
-                                        <span class="label" style="font-size: 12px;">Subtotal</span>
-                                        <span class="value" style="font-size: 12px;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="label" style="font-size: 18px;">Subtotal</span>
+                                        <span class="value" style="font-size: 18px;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-1">
-                                        <span class="label" style="font-size: 12px;">Shipping</span>
-                                        <span class="value text-success" style="font-size: 12px;">Free</span>
+                                        <span class="label" style="font-size: 18px;">Shipping</span>
+                                        <span class="value text-success" style="font-size: 18px;">Free</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex justify-content-between fw-bold">
-                                        <span class="label" style="font-size: 13px;">Total</span>
-                                        <span class="value" style="color: var(--demanto-gold); font-size: 16px;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="label" style="font-size: 18px;">Total</span>
+                                        <span class="value" style="color: var(--demanto-gold); font-size: 18px;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                 </div>
                             @endif

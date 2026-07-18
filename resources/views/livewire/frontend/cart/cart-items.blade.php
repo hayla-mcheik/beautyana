@@ -70,7 +70,7 @@
 
         .product-title {
            font-family:"Cormorant Garamond",serif;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
             color: #232323;
             flex: 1;
@@ -78,13 +78,13 @@
         }
 
         .product-quantity {
-            font-size: 11px;
+            font-size: 16px;
             color: #999;
             font-weight: 500;
         }
 
         .product-price {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--demanto-gold);
             margin-left: auto;
@@ -94,7 +94,7 @@
             color: #999;
             transition: all 0.3s ease;
             margin-left: 8px;
-            font-size: 12px;
+            font-size: 16px;
             cursor: pointer;
         }
 
@@ -117,7 +117,7 @@
 
         .cart-total .label {
            font-family:"Cormorant Garamond",serif;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
             color: #232323;
             text-transform: capitalize;
@@ -145,7 +145,7 @@
             border-radius: 25px;
             text-decoration: none;
       font-family:"Cormorant Garamond",serif;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 600;
             text-transform: capitalize;
             letter-spacing: 1px;
@@ -174,7 +174,7 @@
         }
 
         .empty-cart-message span {
-            font-size: 12px;
+            font-size: 18px;
             color: #999;
       font-family:"Cormorant Garamond",serif;
         }

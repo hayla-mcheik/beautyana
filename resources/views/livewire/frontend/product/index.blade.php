@@ -80,7 +80,7 @@
 
     .mobile-categories-header h4 {
       font-family:"Cormorant Garamond",serif;
-        font-size: 14px;
+        font-size: 20px;
         font-weight: 600;
         color: var(--demanto-dark);
         margin: 0;
@@ -123,7 +123,7 @@
         padding: 8px 0;
         color: var(--demanto-muted);
         text-decoration: none;
-        font-size: 12px;
+        font-size: 16px;
         transition: var(--transition-smooth);
         border-bottom: 1px solid var(--luxury-border);
         position: relative;
@@ -137,7 +137,7 @@
         top: 50%;
         transform: translateY(-50%);
         color: var(--demanto-gold);
-        font-size: 9px;
+        font-size: 14px;
         opacity: 0;
         transition: var(--transition-smooth);
     }
@@ -154,7 +154,7 @@
 
     .sidebar-title {
         font-family:"Cormorant Garamond",serif;
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 600;
         margin-bottom: 12px;
         padding-bottom: 8px;
@@ -187,7 +187,7 @@
         padding: 8px 0;
         color: var(--demanto-muted);
         text-decoration: none;
-        font-size: 12px;
+        font-size: 16px;
         transition: var(--transition-smooth);
         border-bottom: 1px solid var(--luxury-border);
         position: relative;
@@ -255,7 +255,7 @@
 
     .total-products p {
         margin: 0;
-        font-size: 14px;
+        font-size: 18px;
         color: var(--demanto-muted);
     }
 
@@ -327,7 +327,7 @@
 
     .featured-content h4 {
         font-family:"Cormorant Garamond",serif;
-        font-size: 14px;
+        font-size: 18px;
         margin-bottom: 6px;
         color: var(--demanto-dark);
         font-weight: 500;
@@ -340,7 +340,7 @@
         color: var(--boutique-text);
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 9px;
+        font-size: 12px;
         letter-spacing: 1px;
         transition: var(--transition-smooth);
         display: inline-flex;
@@ -352,7 +352,9 @@
         color: var(--demanto-dark);
         gap: 8px;
     }
-
+.category-sub-menu h6{
+    font-size: 18px;
+}
     /* Empty State */
     .empty-state {
         text-align: center;
@@ -466,7 +468,7 @@
             object-fit: contain;
         }
         .featured-content { padding: 12px; }
-        .featured-content h4 { font-size: 12px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .featured-content h4 { font-size: 16px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .featured-content a { font-size: 8px; }
         
         .container-fluid {
@@ -489,11 +491,11 @@
         }
         
         .mobile-categories-header h4 {
-            font-size: 13px;
+            font-size: 20px;
         }
         
         .mobile-categories-list ul li a {
-            font-size: 11px;
+            font-size: 16px;
             padding: 6px 0;
             padding-left: 15px;
         }
@@ -509,14 +511,14 @@
             object-fit: contain;
         }
         .featured-content { padding: 10px; }
-        .featured-content h4 { font-size: 11px; }
-        .featured-content a { font-size: 7px; }
+        .featured-content h4 { font-size: 16px; }
+        .featured-content a { font-size: 12px; }
         
         .product-header-wrap { padding: 10px 12px; }
         .product-tab-nav li a { width: 30px; height: 30px; font-size: 12px; }
-        .total-products p { font-size: 10px; }
+        .total-products p { font-size: 18px; }
         
-        .sort-select { font-size: 10px; padding: 4px 10px; }
+        .sort-select { font-size: 12px; padding: 4px 10px; }
     }
 
     /* Animation */

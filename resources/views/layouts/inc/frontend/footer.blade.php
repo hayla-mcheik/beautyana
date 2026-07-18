@@ -87,7 +87,7 @@
                 </span>
 
                 <span class="quick-since">
-                    since 2005
+                    since 1991
                 </span>
 
             </div>
@@ -191,7 +191,7 @@
 
     color: #C9A96E;
 
-    font-size: 9px;
+    font-size: 12px;
 
     letter-spacing: 2.5px;
 
@@ -256,7 +256,7 @@
 
     color: #C9A96E;
 
-    font-size: 13px;
+    font-size: 14px;
 
     transition:
         background-color 0.3s ease,
@@ -290,7 +290,7 @@
 .footer-contact-label {
     color: #C9A96E;
 
-    font-size: 8px;
+    font-size: 12px;
 
     font-weight: 500;
 
@@ -347,7 +347,7 @@
 
     color: #8A857C;
 
-    font-size: 9px;
+    font-size: 12px;
 
     letter-spacing: 1px;
 }
@@ -370,7 +370,7 @@
 
     text-align: center;
 
-    font-size: 10px;
+    font-size: 12px;
 }
 
 

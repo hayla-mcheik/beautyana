@@ -120,7 +120,7 @@
 
     font-weight: 600;
 
-    font-size: 18px;
+    font-size: 20px;
 
     letter-spacing: 4px;
 
@@ -683,7 +683,7 @@ margin-top: 20px;
 
     .collections-title > span {
 
-        font-size: 14px;
+        font-size: 20px;
 
         letter-spacing: 3px;
     }

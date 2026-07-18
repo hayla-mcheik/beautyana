@@ -186,7 +186,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 500;
 
     line-height: 1.4;
@@ -265,7 +265,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 500;
 
     letter-spacing: 1.5px;
@@ -738,7 +738,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 500;
 
     line-height: 1.3;
@@ -881,7 +881,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 500;
 
     letter-spacing: 1px;
@@ -1171,7 +1171,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 11px;
+    font-size: 14px;
 
     letter-spacing: 4px;
 
@@ -1466,7 +1466,7 @@ section {
 
 
     .about-title {
-        font-size: 24px;
+        font-size: 26px;
     }
 
 
@@ -1552,7 +1552,7 @@ section {
     .about-description {
         max-width: 100%;
 
-        font-size: 14px;
+        font-size: 15px;
     }
 
 
@@ -1727,12 +1727,12 @@ section {
 
 
     .about-title {
-        font-size: 22px;
+        font-size: 26px;
     }
 
 
     .about-description {
-        font-size: 14px;
+        font-size: 15px;
 
         line-height: 1.65;
     }
@@ -1888,12 +1888,12 @@ section {
 
 
     .about-title {
-        font-size: 21px;
+        font-size: 26px;
     }
 
 
     .about-description {
-        font-size: 13px;
+        font-size: 15px;
     }
 
 
@@ -1905,7 +1905,7 @@ section {
 
 
     .featured-content h4 {
-        font-size: 15px;
+        font-size: 16px;
     }
 
 
@@ -1996,7 +1996,7 @@ section {
     /* ABOUT */
 
     .about-title {
-        font-size: 20px;
+        font-size: 26px;
     }
 
 

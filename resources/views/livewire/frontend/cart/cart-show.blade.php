@@ -92,7 +92,7 @@
 
         .product-content .title {
 font-family:"Cormorant Garamond",serif;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 500;
             margin-bottom: 4px;
             border: none;
@@ -111,7 +111,7 @@ font-family:"Cormorant Garamond",serif;
 
         .product-price {
             color: var(--demanto-gold);
-            font-size: 12px;
+            font-size: 18px;
             font-weight: 600;
         }
 
@@ -134,7 +134,7 @@ font-family:"Cormorant Garamond",serif;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition-smooth);
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--demanto-dark);
         }
@@ -150,7 +150,7 @@ font-family:"Cormorant Garamond",serif;
             border: none;
             background: transparent;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 18px;
             color: var(--demanto-dark);
         }
 
@@ -162,7 +162,7 @@ font-family:"Cormorant Garamond",serif;
         .product-close a {
             color: #999;
             transition: var(--transition-smooth);
-            font-size: 14px;
+            font-size: 18px;
         }
 
         .product-close a:hover {
@@ -173,7 +173,7 @@ font-family:"Cormorant Garamond",serif;
         .btn-primary {
             background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
             color: #fff;
-            font-size: 9px;
+            font-size: 18px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             padding: 7px 18px;
@@ -213,13 +213,13 @@ font-family:"Cormorant Garamond",serif;
 
         .card-block-item .label {
             color: var(--demanto-muted);
-            font-size: 11px;
+            font-size: 18px;
         }
 
         .card-block-item .value {
             color: var(--demanto-dark);
             font-weight: 600;
-            font-size: 13px;
+            font-size: 18px;
         }
 
         .separator {
@@ -231,7 +231,7 @@ font-family:"Cormorant Garamond",serif;
         .btn-checkout {
             background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
             color: #fff;
-            font-size: 9px;
+            font-size: 18px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             padding: 9px 18px;
@@ -264,7 +264,7 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .empty-cart p {
-            font-size: 12px;
+            font-size: 18px;
             color: var(--demanto-muted);
             margin-bottom: 12px;
         }
@@ -276,26 +276,26 @@ font-family:"Cormorant Garamond",serif;
                 padding: 15px;
             }
             .title {
-                font-size: 16px;
+                font-size: 18px;
             }
             .product-thumb img {
                 width: 155px;
                 height: 155px;
             }
             .product-content .title {
-                font-size: 12px;
+                font-size: 18px;
             }
             .product-price {
-                font-size: 11px;
+                font-size: 18px;
             }
             .quantity__value {
                 width: 24px;
                 height: 24px;
-                font-size: 12px;
+                font-size: 18px;
             }
             .quantity__number {
                 width: 35px;
-                font-size: 11px;
+                font-size: 18px;
             }
         }
 
@@ -305,18 +305,18 @@ font-family:"Cormorant Garamond",serif;
                 padding: 12px;
             }
             .title {
-                font-size: 15px;
+                font-size: 18px;
             }
             .product-thumb img {
                 width: 150px;
                 height: 150px;
             }
             .product-content .title {
-                font-size: 11px;
+                font-size: 18px;
             }
             .btn-primary {
                 padding: 6px 15px;
-                font-size: 8px;
+                font-size: 16px;
             }
         }
 

@@ -7,11 +7,22 @@
                     <div class="header-align align-default d-flex justify-content-between align-items-center">
                         
                         <div class="align-left d-flex align-items-center gap-4">
-                            <div class="header-logo-area">
-                                <a href="{{ url('/') }}">
-                                    <img class="logo-main boutique-logo" src="{{ asset('assets/img/logogold.png') }}" alt="Logo">
-                                </a>
-                            </div>
+                <div class="header-logo-area">
+
+    <a href="{{ url('/') }}" class="demanto-logo">
+
+        <img
+            class="logo-main boutique-logo"
+            src="{{ asset('assets/img/logogold.png') }}"
+            alt="DEMANTO">
+
+        <span class="logo-since">
+            SINCE 1991
+        </span>
+
+    </a>
+
+</div>
                             
                             <div class="header-navigation-area hidden-md-down">
                                 <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
@@ -208,11 +219,22 @@
                 </div>
                 <div class="col-4 text-center">
                     <div class="header-item justify-content-center">
-                        <div class="header-logo-area">
-                            <a href="{{ url('/') }}">
-                                <img class="logo-main boutique-logo" src="{{ asset('assets/img/logogold.png') }}" alt="Logo">
-                            </a>
-                        </div>
+             <div class="header-logo-area">
+
+    <a href="{{ url('/') }}" class="demanto-logo">
+
+        <img
+            class="logo-main boutique-logo"
+            src="{{ asset('assets/img/logogold.png') }}"
+            alt="DEMANTO">
+
+        <span class="logo-since">
+            SINCE 1991
+        </span>
+
+    </a>
+
+</div>
                     </div>
                 </div>
              <div class="col-4 text-end">
@@ -2789,6 +2811,73 @@
         transition:
             opacity 0.35s ease;
     }
+
+}
+/*==========================================
+    DEMANTO LOGO
+==========================================*/
+
+.demanto-logo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+}
+
+.logo-since{
+
+    margin-top:4px;
+
+    color:#D7B06A;
+
+    font-family:"Cormorant Garamond", serif;
+
+    font-size:10px;
+
+    font-weight:500;
+
+    letter-spacing:4px;
+
+    line-height:1;
+
+    text-transform:uppercase;
+
+    text-align:center;
+
+}
+
+.header-bottom.sticky-on .logo-since{
+
+    color:#9A7B45;
+
+}
+
+.header-bottom:not(.sticky-on):hover .logo-since{
+
+    color:#9A7B45;
+
+}
+
+/* Mobile */
+
+@media(max-width:991px){
+
+.logo-since{
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    margin-top:2px;
+
+}
 
 }
 </style>

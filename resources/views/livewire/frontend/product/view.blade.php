@@ -289,12 +289,7 @@
            CART
         ========================================================= */
 
-        .product-quick-action {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid var(--luxury-border);
-        }
-
+   
         .white-bg {
             margin-bottom: 12px;
         }
@@ -522,6 +517,13 @@
         .fancybox-image {
             object-fit: contain !important;
         }
+        .btn-appoint{
+            background-color: var(--demanto-gold) !important;
+            color: white !important;
+        }
+        .btn-appoint::before{
+            display: none !important;
+        }
     </style>
 
     <!-- =========================================================
@@ -657,10 +659,18 @@
 
                                     <!-- CART -->
                                     <div class="product-quick-action">
-                                        <div class="white-bg">
+                                        <div class="white-bg ">
                                             <livewire:frontend.cart.add-to-cart :product="$product" />
                                         </div>
                                     </div>
+                                    <!-- apppointment -->
+                                        <div class="product-quick-action">
+                                        <div class="white-bg">
+                                            <div>
+    <a class="btn-product-add btn-appoint" >Book Appointment</a>
+</div>
+                                        </div> 
+                                        </div> 
                                 </div>
                             </div>
                         </div>
