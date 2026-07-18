@@ -318,9 +318,9 @@ section {
 .home-banner{
     position:relative;
     width:100%;
-    height:60vh;
+    height:58vh;
     min-height:500px;
-    max-height:60vh;
+    max-height:58vh;
     overflow:hidden;
     z-index:1;
 }
@@ -409,8 +409,8 @@ section {
 @media(min-width:1600px){
 
 .home-banner{
-    height:61vh;
-    min-height:680px;
+    height:58vh;
+    min-height:600px;
 }
 
 .slider-content{
@@ -426,7 +426,7 @@ section {
 @media(max-width:991px){
 
 .home-banner{
-    height:600px;
+    height:500px;
     min-height:600px;
 }
 
@@ -451,7 +451,7 @@ section {
 @media (max-width:767px){
 
 .home-banner{
-    margin-top:80px;
+    margin-top:60px;
     height:500px !important;
     min-height:500px !important;
     overflow:hidden;
@@ -1363,11 +1363,11 @@ section {
 @media (min-width: 1600px) {
 
     .home-banner {
-        height: 61vh;
+        height: 58vh;
 
-        min-height: 678px;
+        min-height: 600px;
 
-        max-height:65vh;
+        max-height:60vh;
     }
 
 
