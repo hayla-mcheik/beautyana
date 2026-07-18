@@ -409,7 +409,7 @@ section {
 @media(min-width:1600px){
 
 .home-banner{
-    height:58vh;
+    height:64vh;
     min-height:600px;
 }
 
@@ -1363,7 +1363,7 @@ section {
 @media (min-width: 1600px) {
 
     .home-banner {
-        height: 58vh;
+        height: 64vh;
 
         min-height: 600px;
 
@@ -1421,7 +1421,7 @@ section {
 @media (min-width: 1800px) {
 
     .home-banner {
-        height: 60vh;
+        height: 64vh;
 
         min-height: 648px;
 
