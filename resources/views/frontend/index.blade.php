@@ -451,7 +451,7 @@ section {
 @media (max-width:767px){
 
 .home-banner{
-    margin-top:60px;
+    margin-top:80px;
     height:500px !important;
     min-height:500px !important;
     overflow:hidden;
