@@ -1,5 +1,4 @@
 <div>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -51,17 +50,20 @@
         }
 
         /* =========================================================
-           MAIN SWIPER
+           MAIN SWIPER - NO CROPPING (UPDATED)
         ========================================================= */
 
         .single-product-thumb-content {
             width: 100%;
-            height: 500px; /* Default height */
+            height: 500px;
             margin-bottom: 15px;
             border-radius: 15px;
             overflow: hidden;
             background: var(--demanto-gold-light);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .single-product-thumb-content .swiper-wrapper {
@@ -74,37 +76,42 @@
             height: 100%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* =========================================================
-           ZOOM CONTAINER
-        ========================================================= */
-
-   
-        /* =========================================================
-           MAIN IMAGE - FIXED FOR MOBILE
+           MAIN IMAGE - NO CROPPING (UPDATED)
         ========================================================= */
 
         #main-image {
             display: block;
             width: 100% !important;
             height: 100% !important;
-            max-width: none !important;
-            max-height: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            object-fit: contain !important; /* Changed from cover to contain for better mobile view */
+            max-width: 100% !important;
+            max-height: 100% !important;
+            margin: 0 auto !important;
+            padding: 20px !important;
+            object-fit: contain !important; /* NO CROPPING */
             object-position: center;
             transition: transform 0.5s ease;
         }
 
-        .zoom-hover > img:not(#main-image) {
-            max-width: none !important;
-            max-height: none !important;
+        /* =========================================================
+           LIGHTBOX LINK
+        ========================================================= */
+
+        .lightbox-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
 
         /* =========================================================
-           THUMBNAIL SWIPER
+           THUMBNAIL SWIPER - NO CROPPING (UPDATED)
         ========================================================= */
 
         .single-product-nav-content {
@@ -119,23 +126,29 @@
 
         .single-product-nav-content .swiper-slide {
             height: auto;
-            width: auto !important; /* Allow thumbnails to size properly */
+            width: auto !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* =========================================================
-           THUMBNAIL CARD
+           THUMBNAIL CARD - NO CROPPING (UPDATED)
         ========================================================= */
 
         .thumb-img-wrapper {
             width: 100%;
             height: 95px;
-            padding: 5px;
+            padding: 8px;
             background: #ffffff;
             border: 2px solid transparent;
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
             transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .thumb-img-wrapper:hover,
@@ -146,17 +159,18 @@
         }
 
         /* =========================================================
-           THUMBNAIL IMAGE
+           THUMBNAIL IMAGE - NO CROPPING (UPDATED)
         ========================================================= */
 
         .thumbnail-image {
             display: block;
             width: 100% !important;
             height: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            object-fit: contain;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            margin: 0 auto !important;
+            padding: 2px !important;
+            object-fit: contain !important; /* NO CROPPING */
             object-position: center;
             transition: transform 0.3s ease;
         }
@@ -286,7 +300,7 @@
         }
 
         /* =========================================================
-           TABLET
+           TABLET - NO CROPPING
         ========================================================= */
 
         @media (max-width: 991px) {
@@ -299,6 +313,11 @@
                 height: 450px;
             }
 
+            #main-image {
+                padding: 15px !important;
+                object-fit: contain !important;
+            }
+
             .product-single-info .title {
                 font-size: 27px;
             }
@@ -309,11 +328,12 @@
 
             .thumb-img-wrapper {
                 height: 85px;
+                padding: 6px;
             }
         }
 
         /* =========================================================
-           MOBILE - FIXED
+           MOBILE - NO CROPPING (UPDATED)
         ========================================================= */
 
         @media (max-width: 768px) {
@@ -326,8 +346,13 @@
             }
 
             .single-product-thumb-content {
-                height: 350px !important; /* Adjusted for mobile */
-                min-height: 250px; /* Minimum height */
+                height: 350px !important;
+                min-height: 250px;
+            }
+
+            #main-image {
+                padding: 15px !important;
+                object-fit: contain !important;
             }
 
             .product-single-info .title {
@@ -343,29 +368,29 @@
             }
 
             .thumb-img-wrapper {
-                height: 65px; /* Smaller thumbnails for mobile */
-                width: 65px; /* Fixed width for mobile */
+                height: 65px;
+                width: 65px;
                 min-width: 65px;
+                padding: 4px;
+            }
+
+            .thumbnail-image {
+                padding: 2px !important;
+                object-fit: contain !important;
             }
 
             .product-desc-list li {
                 font-size: 13px;
             }
 
-            /* Fix for swiper slides on mobile */
             .single-product-nav-content .swiper-slide {
-                width: 75px !important; /* Fixed width for mobile thumbnails */
+                width: 75px !important;
                 flex-shrink: 0;
-            }
-
-            /* Ensure main image fills container properly */
-            #main-image {
-                object-fit: contain !important;
             }
         }
 
         /* =========================================================
-           SMALL MOBILE
+           SMALL MOBILE - NO CROPPING (UPDATED)
         ========================================================= */
 
         @media (max-width: 576px) {
@@ -382,10 +407,20 @@
                 min-height: 200px;
             }
 
+            #main-image {
+                padding: 12px !important;
+                object-fit: contain !important;
+            }
+
             .thumb-img-wrapper {
                 height: 55px;
                 width: 55px;
                 min-width: 55px;
+                padding: 3px;
+            }
+
+            .thumbnail-image {
+                padding: 2px !important;
             }
 
             .product-single-info .title {
@@ -400,19 +435,17 @@
                 width: 65px !important;
             }
 
-            /* Fix for row gap on mobile */
             .row.g-3 {
                 --bs-gutter-y: 1rem;
             }
 
-            /* Ensure images don't overflow */
             .product-thumb {
                 padding: 8px;
             }
         }
 
         /* =========================================================
-           EXTRA SMALL MOBILE
+           EXTRA SMALL MOBILE - NO CROPPING (UPDATED)
         ========================================================= */
 
         @media (max-width: 400px) {
@@ -421,10 +454,19 @@
                 min-height: 180px;
             }
 
+            #main-image {
+                padding: 8px !important;
+            }
+
             .thumb-img-wrapper {
                 height: 45px;
                 width: 45px;
                 min-width: 45px;
+                padding: 2px;
+            }
+
+            .thumbnail-image {
+                padding: 1px !important;
             }
 
             .single-product-nav-content .swiper-slide {
@@ -514,7 +556,7 @@
                     <div class="product-single-item">
                         <div class="row g-3">
                             <!-- =================================================
-                                 PRODUCT IMAGES
+                                 PRODUCT IMAGES - NO CROPPING
                             ================================================== -->
                             <div class="col-md-6">
                                 <div wire:ignore>
@@ -523,7 +565,7 @@
                                             <!-- MAIN IMAGE -->
                                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider2">
                                                 <div class="swiper-wrapper">
-                                                 <div class="swiper-slide">
+                                                    <div class="swiper-slide">
                                                         <a
                                                             class="lightbox-image"
                                                             data-fancybox="gallery"
@@ -542,7 +584,7 @@
                                             </div>
 
                                             <!-- =================================================
-                                                 THUMBNAILS
+                                                 THUMBNAILS - NO CROPPING
                                             ================================================== -->
                                             <div class="swiper-container single-product-nav-content single-product-nav-slider2">
                                                 <div class="swiper-wrapper">
@@ -629,7 +671,7 @@
     </section>
 
     <!-- =========================================================
-         JAVASCRIPT - UPDATED FOR MOBILE
+         JAVASCRIPT - UPDATED FOR NO CROPPING
     ========================================================= -->
 
     @push('scripts')
@@ -750,5 +792,4 @@
             });
         </script>
     @endpush
-
 </div>

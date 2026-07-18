@@ -153,7 +153,7 @@
     }
 
     .sidebar-title {
-font-family:"Cormorant Garamond",serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 12px;
@@ -263,7 +263,10 @@ font-family:"Cormorant Garamond",serif;
         color: var(--demanto-gold);
     }
 
-    /* Product Cards */
+    /* ============================================================
+       PRODUCT CARDS - NO CROPPING (UPDATED)
+    ============================================================ */
+    
     .featured-product-card {
         background: #fff;
         border-radius: 20px;
@@ -288,6 +291,7 @@ font-family:"Cormorant Garamond",serif;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 10px; /* Added padding to ensure images fit */
     }
 
     .featured-image::after {
@@ -307,8 +311,8 @@ font-family:"Cormorant Garamond",serif;
     .featured-image img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        padding: 20px;
+        object-fit: contain; /* CHANGED: from cover to contain - NO CROPPING */
+        padding: 15px; /* Keep padding for breathing room */
         transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
@@ -322,7 +326,7 @@ font-family:"Cormorant Garamond",serif;
     }
 
     .featured-content h4 {
-     font-family:"Cormorant Garamond",serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 14px;
         margin-bottom: 6px;
         color: var(--demanto-dark);
@@ -366,7 +370,7 @@ font-family:"Cormorant Garamond",serif;
     }
 
     .empty-state h5 {
-      font-family:"Cormorant Garamond",serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 16px;
         color: var(--demanto-dark);
         margin-bottom: 8px;
@@ -394,9 +398,19 @@ font-family:"Cormorant Garamond",serif;
         cursor: pointer;
     }
 
-    /* Responsive Breakpoints */
+    /* ============================================================
+       RESPONSIVE - NO CROPPING
+    ============================================================ */
+
     @media (max-width: 1200px) {
-        .featured-image { height: 200px; }
+        .featured-image { 
+            height: 200px; 
+            padding: 8px;
+        }
+        .featured-image img { 
+            padding: 12px; 
+            object-fit: contain;
+        }
     }
 
     @media (max-width: 991px) {
@@ -414,8 +428,14 @@ font-family:"Cormorant Garamond",serif;
             display: none;
         }
         
-        .featured-image { height: 180px; }
-        .featured-image img { padding: 15px; }
+        .featured-image { 
+            height: 190px; 
+            padding: 8px;
+        }
+        .featured-image img { 
+            padding: 12px; 
+            object-fit: contain;
+        }
         
         /* Make products take full width */
         .col-lg-10 {
@@ -437,8 +457,14 @@ font-family:"Cormorant Garamond",serif;
         .product-tab-nav { justify-content: center; }
         .total-products { text-align: center; }
         
-        .featured-image { height: 160px; }
-        .featured-image img { padding: 15px; }
+        .featured-image { 
+            height: 180px; 
+            padding: 8px;
+        }
+        .featured-image img { 
+            padding: 10px; 
+            object-fit: contain;
+        }
         .featured-content { padding: 12px; }
         .featured-content h4 { font-size: 12px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .featured-content a { font-size: 8px; }
@@ -474,8 +500,14 @@ font-family:"Cormorant Garamond",serif;
     }
 
     @media (max-width: 576px) {
-        .featured-image { height: 140px; }
-        .featured-image img { padding: 12px; }
+        .featured-image { 
+            height: 150px; 
+            padding: 5px;
+        }
+        .featured-image img { 
+            padding: 8px; 
+            object-fit: contain;
+        }
         .featured-content { padding: 10px; }
         .featured-content h4 { font-size: 11px; }
         .featured-content a { font-size: 7px; }
@@ -532,53 +564,36 @@ font-family:"Cormorant Garamond",serif;
                 <i class="fa fa-chevron-down"></i>
             </div>
             <div class="mobile-categories-list" id="mobileCategoriesList">
-              <h5 class="sidebar-title">Collections</h5>
-
-<ul>
-
-@foreach($collections as $categoryItem)
-
-<li>
-    <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-        {{ $categoryItem->name }}
-    </a>
-</li>
-
-@endforeach
-
-</ul>
-
-<h5 class="sidebar-title mt-4">High Jewelry</h5>
-
-<ul>
-
-@foreach($highJewelry as $categoryItem)
-
-<li>
-    <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-        {{ $categoryItem->name }}
-    </a>
-</li>
-
-@endforeach
-
-</ul>
-
-<h5 class="sidebar-title mt-4">AD Signature</h5>
-
-<ul>
-
-@foreach($adSignature as $categoryItem)
-
-<li>
-    <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-        {{ $categoryItem->name }}
-    </a>
-</li>
-
-@endforeach
-
-</ul>
+                <h5 class="sidebar-title">Collections</h5>
+                <ul>
+                    @foreach($collections as $categoryItem)
+                    <li>
+                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                            {{ $categoryItem->name }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                <h5 class="sidebar-title mt-4">High Jewelry</h5>
+                <ul>
+                    @foreach($highJewelry as $categoryItem)
+                    <li>
+                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                            {{ $categoryItem->name }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                <h5 class="sidebar-title mt-4">AD Signature</h5>
+                <ul>
+                    @foreach($adSignature as $categoryItem)
+                    <li>
+                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                            {{ $categoryItem->name }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
 
@@ -601,53 +616,36 @@ font-family:"Cormorant Garamond",serif;
                         </h4>
                         <div class="sidebar-body">
                             <div class="category-sub-menu">
-                        <h6>Collections</h6>
-
-<ul>
-
-@foreach($collections as $categoryItem)
-
-<li>
-<a href="{{ url('/collections/'.$categoryItem->slug) }}">
-{{ $categoryItem->name }}
-</a>
-</li>
-
-@endforeach
-
-</ul>
-
-<h6 class="mt-3">High Jewelry</h6>
-
-<ul>
-
-@foreach($highJewelry as $categoryItem)
-
-<li>
-<a href="{{ url('/collections/'.$categoryItem->slug) }}">
-{{ $categoryItem->name }}
-</a>
-</li>
-
-@endforeach
-
-</ul>
-
-<h6 class="mt-3">AD Signature</h6>
-
-<ul>
-
-@foreach($adSignature as $categoryItem)
-
-<li>
-<a href="{{ url('/collections/'.$categoryItem->slug) }}">
-{{ $categoryItem->name }}
-</a>
-</li>
-
-@endforeach
-
-</ul>
+                                <h6>Collections</h6>
+                                <ul>
+                                    @foreach($collections as $categoryItem)
+                                    <li>
+                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                                            {{ $categoryItem->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <h6 class="mt-3">High Jewelry</h6>
+                                <ul>
+                                    @foreach($highJewelry as $categoryItem)
+                                    <li>
+                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                                            {{ $categoryItem->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <h6 class="mt-3">AD Signature</h6>
+                                <ul>
+                                    @foreach($adSignature as $categoryItem)
+                                    <li>
+                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
+                                            {{ $categoryItem->name }}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -734,10 +732,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileSortSelect.addEventListener('change', function() {
             const sortValue = this.value;
             if (sortValue) {
-                // Add Livewire sorting logic here if needed
                 console.log('Sort by:', sortValue);
-                // You can emit an event to Livewire component
-                // @this.set('sortBy', sortValue);
             }
         });
     }
