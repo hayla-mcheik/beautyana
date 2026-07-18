@@ -318,7 +318,7 @@ section {
 .home-banner{
     position:relative;
     width:100%;
-    height:65vh;
+    height:60vh;
     min-height:500px;
     max-height:70vh;
     overflow:hidden;
