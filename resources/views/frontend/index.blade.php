@@ -815,7 +815,7 @@ section {
 
     width: 100%;
 
-    height: 300px;
+    height: 400px;
 
     overflow: hidden;
 
@@ -1563,7 +1563,7 @@ section {
 
 
     .featured-image {
-        height: 300px;
+        height: 400px;
     }
 
 
@@ -1751,7 +1751,7 @@ section {
 
 
     .featured-image {
-        height: 280px;
+        height: 320px;
     }
 
 

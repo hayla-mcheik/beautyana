@@ -284,7 +284,7 @@
     }
 
     .featured-image {
-        height: 220px;
+        height: 300px;
         background: linear-gradient(135deg, #f8f5ef 0%, #fff 100%);
         overflow: hidden;
         position: relative;
@@ -404,7 +404,7 @@
 
     @media (max-width: 1200px) {
         .featured-image { 
-            height: 200px; 
+            height: 300px; 
             padding: 8px;
         }
         .featured-image img { 
