@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutDataController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail; // Import the Mail facade
@@ -75,6 +77,7 @@ Route::post('/book-appointment', 'bookAppointment');
 Route::post('/subscribe', 'subscribe');
 Route::get('/product/quick-view/{id}','quickView');
 });
+Route::get('/appointment', [FrontendController::class, 'appointment']);
 
 
 Route::middleware(['auth'])->group(function () {

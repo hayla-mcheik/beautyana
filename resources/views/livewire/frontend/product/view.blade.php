@@ -667,7 +667,13 @@
                                         <div class="product-quick-action">
                                         <div class="white-bg">
                                             <div>
-    <a class="btn-product-add btn-appoint" >Book Appointment</a>
+  <a
+    href="{{ url('/appointment') }}"
+    class="btn-product-add btn-appoint">
+
+    Book Appointment
+
+</a>
 </div>
                                         </div> 
                                         </div> 

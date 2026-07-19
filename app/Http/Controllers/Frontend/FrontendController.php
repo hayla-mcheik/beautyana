@@ -255,7 +255,10 @@ public function contactsubmit(Request $request)
     
     return back()->with('success', 'Your message has been submitted successfully.');
 }
-
+public function appointment()
+{
+    return view('frontend.appointment.index');
+}
 public function bookAppointment(Request $request)
 {
     $validator = Validator::make($request->all(), [
