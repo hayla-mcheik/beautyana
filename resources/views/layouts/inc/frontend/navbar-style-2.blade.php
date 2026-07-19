@@ -74,7 +74,7 @@
     </ul>
 </li>
 
-<li class="has-dropdown">
+{{-- <li class="has-dropdown">
     <a href="#">
     Menu 4 <i class="ion-ios-arrow-down ms-1"></i>
     </a>
@@ -101,7 +101,7 @@
             </li>
 
     </ul>
-</li>
+</li> --}}
 
                                     <li><a href="{{ url('blogs') }}">News</a></li>
                               
@@ -419,7 +419,7 @@
                         </li>
                     @endforeach
                 </ul>
-                             <ul class="mobile-sub-categories">
+                             {{-- <ul class="mobile-sub-categories">
                 
                         <li>
                             <a >
@@ -437,7 +437,7 @@
                             </a>
                         </li>
                
-                </ul>
+                </ul> --}}
 
             </li>
 
