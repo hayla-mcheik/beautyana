@@ -2095,6 +2095,7 @@
 
 
 .sidebar-social a {
+    visibility: hidden;
     width:
         38px;
 
