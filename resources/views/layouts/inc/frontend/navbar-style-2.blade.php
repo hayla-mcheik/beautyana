@@ -74,6 +74,35 @@
     </ul>
 </li>
 
+<li class="has-dropdown">
+    <a href="#">
+    Menu 4 <i class="ion-ios-arrow-down ms-1"></i>
+    </a>
+    <ul class="boutique-dropdown">
+
+            <li>
+                <a >
+               test
+                </a>
+            </li>
+
+    </ul>
+</li>
+<li class="has-dropdown">
+    <a href="#">
+    Menu 5 <i class="ion-ios-arrow-down ms-1"></i>
+    </a>
+    <ul class="boutique-dropdown">
+
+            <li>
+                <a >
+               test
+                </a>
+            </li>
+
+    </ul>
+</li>
+
                                     <li><a href="{{ url('blogs') }}">News</a></li>
                               
                                 </ul>
@@ -389,6 +418,25 @@
                             </a>
                         </li>
                     @endforeach
+                </ul>
+                             <ul class="mobile-sub-categories">
+                
+                        <li>
+                            <a >
+                         Menu 4
+                            </a>
+                        </li>
+               
+                </ul>
+
+                                      <ul class="mobile-sub-categories">
+                
+                        <li>
+                            <a >
+                         Menu 5
+                            </a>
+                        </li>
+               
                 </ul>
 
             </li>
@@ -809,7 +857,7 @@
     align-items: center;
 
     padding:
-        8px 11px !important;
+        6px 0px !important;
 
     font-family:
         "Cormorant Garamond",
