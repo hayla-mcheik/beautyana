@@ -482,8 +482,8 @@
     --demanto-cream: #FDFBF7;
     --demanto-white: #FFFFFF;
 
-    --desktop-header-height: 92px;
-    --mobile-header-height: 70px;
+    --desktop-header-height: 82px;
+    --mobile-header-height: 80px;
 
     --header-transition:
         all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -753,7 +753,7 @@
 @media (min-width: 992px) {
 
     .header-bottom .logo-main {
-        max-width: 100px !important;
+        max-width: 90px !important;
     }
 
 
