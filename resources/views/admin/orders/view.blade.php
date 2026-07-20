@@ -86,18 +86,53 @@
                                 <tr>
                                     <td width="10%">{{ $orderItem->id }}</td>
                                     <td width="10%">
-                                        @if($orderItem->product->productImages && count($orderItem->product->productImages) > 0)
-                                            <img src="{{ asset($orderItem->product->productImages[0]->image) }}" 
-                                                 style="width: 50px; height: 50px" alt="">
-                                        @else
-                                            <img src="" style="width: 50px; height: 50px" alt="">
-                                        @endif
+                          @if($orderItem->product)
+
+    @if($orderItem->product->productImages->count())
+
+        <img
+            src="{{ asset($orderItem->product->productImages->first()->image) }}"
+            style="width:50px;height:50px"
+            alt="Product">
+
+    @else
+
+        <img
+            src="{{ asset('assets/images/no-image.png') }}"
+            style="width:50px;height:50px"
+            alt="No Image">
+
+    @endif
+
+@else
+
+    <img
+        src="{{ asset('assets/images/no-image.png') }}"
+        style="width:50px;height:50px"
+        alt="Deleted Product">
+
+@endif
                                     </td>
                                     <td>
-                                        {{ $orderItem->product->name }}
-                                        @if($orderItem->productColor && $orderItem->productColor->color)
-                                            <span>- with color: {{ $orderItem->productColor->color->name }}</span>
-                                        @endif
+                               @if($orderItem->product)
+
+    {{ $orderItem->product->name }}
+
+@else
+
+    <span class="text-danger">
+        Product Deleted
+    </span>
+
+@endif
+                                @if($orderItem->product && $orderItem->productColor && $orderItem->productColor->color)
+
+    <span>
+        - with color:
+        {{ $orderItem->productColor->color->name }}
+    </span>
+
+@endif
                                     </td>
                                     <td width="10%">${{ number_format($orderItem->price, 2) }}</td>
                                     <td width="10%">{{ $orderItem->quantity }}</td>
