@@ -1515,7 +1515,7 @@ section .container-fluid {
   color: #302e2e;
 }
 .header-area .header-top {
-  background: var(--logo-pink-dark);
+  background: black;
   line-height: 1;
   margin: 0;
   padding: 17px 0 12px;
