@@ -6,8 +6,8 @@
           <div class="col-lg-4 hidden-md-down">
             <div class="contact-email">
               <span>Email us:
-                        <a href="mailto:{{ $appSetting->email1 ?? 'info@talyscollection.com' }}">
-                            {{ $appSetting->email1 ?? 'info@talyscollection.com' }}
+                        <a href="mailto:{{ $appSetting->email1 ?? 'info@beautyana.com' }}">
+                            {{ $appSetting->email1 ?? 'info@beautyana.com' }}
                         </a>
                         @if($appSetting->email2)
                             <br>

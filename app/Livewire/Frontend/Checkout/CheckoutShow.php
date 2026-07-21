@@ -138,7 +138,7 @@ public function placeOrder()
 
     $orderData = [
         'user_id' => $userId,
-        'tracking_no' => 'talys-' . Str::random(10),
+        'tracking_no' => 'Beautyana-' . Str::random(10),
         'fullname' => $this->fullname,
         'email' => !empty($this->email) ? $this->email : null, // Ensure empty string becomes null
         'phone' => $this->phone,
