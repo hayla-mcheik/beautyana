@@ -30,8 +30,8 @@
     background:#e9e9e9;
   }
     .btn-danger{
-        background-color: #4b0000 !important;
-        border-color: #4b0000 !important;
+        background-color: #e0a4a4 !important;
+        border-color: #e0a4a4 !important;
         color: white !important;
     }
   </style>

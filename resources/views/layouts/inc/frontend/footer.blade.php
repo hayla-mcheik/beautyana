@@ -125,7 +125,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#4b0000;
+    color:#e0a4a4;
     font-size:20px;
     text-decoration:none;
     transition:.35s;
@@ -139,7 +139,7 @@
 
 .social-icons a:hover{
     background:#fff;
-    color:#4b0000;
+    color:#e0a4a4;
     border-color:#fff;
     transform:translateY(-4px);
     box-shadow:0 8px 20px rgba(75,0,0,.18);

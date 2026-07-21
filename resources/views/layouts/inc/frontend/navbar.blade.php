@@ -115,7 +115,7 @@
             <div class="contact-link">
       <div class="contact-info">
     <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
-        Talk To Us: <a href="tel:00961 79353846" style="color: #4b0000;">00961 79353846</a>
+        Talk To Us: <a href="tel:00961 79353846" style="color: #e0a4a4;">00961 79353846</a>
     </span>
 <div class="time-contact" style="font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.4;">
  Redefine your wardrobe with premium fashion. Crafted to inspire confidence every day.
@@ -328,7 +328,7 @@
   }
 
   .boutique-dropdown li a:hover {
-    color: #4b0000 !important; /* Theme Pink */
+    color: #e0a4a4 !important; /* Theme Pink */
     background: #fafafa;
     padding-left: 30px !important;
   }
@@ -408,7 +408,7 @@
 }
 
 .mega-menu-items li a:hover {
-    color: #4b0000; /* Pink theme color */
+    color: #e0a4a4; /* Pink theme color */
 }
 
 /* Banner Styling */
@@ -462,7 +462,7 @@
     }
 
     .shop-count {
-      background: #4b0000 !important; /* Subtle gold/neutral tone for accessories */
+      background: #e0a4a4 !important; /* Subtle gold/neutral tone for accessories */
       font-size: 9px !important;
     }
 
@@ -495,7 +495,7 @@
         font-weight: 600;
         text-transform: lowercase;
 
-        color: #4b0000; /* Matches your logo pink */
+        color: #e0a4a4; /* Matches your logo pink */
         line-height: 20px;
         animation: tickerAnimation 9s infinite;
         position: absolute;

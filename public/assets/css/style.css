@@ -43,13 +43,13 @@ h1, h2, h3, h4, h5, h6,
   margin-top: 0;
 }
 :root {
-    --logo-pink-dark: #4b0000;
+    --logo-pink-dark: #e0a4a4;
     --logo-pink-light: #F5C8DA;
     --logo-pink-darklight: #f5c8dab7;
-    --logo-text-pink: #4b0000;
+    --logo-text-pink: #e0a4a4;
   }
 a {
-  color: #4b0000;
+  color: #e0a4a4;
   text-decoration: none;
   transition: 0.3s;
   -webkit-transition: 0.3s;
@@ -60,7 +60,7 @@ a {
 a:hover, a:active, a:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: #4b0000;
+  color: #e0a4a4;
   outline: none;
   text-decoration: none;
 }
@@ -88,25 +88,25 @@ p:last-child {
 }
 
 ::-moz-selection {
-  background: #4b0000;
+  background: #e0a4a4;
   color: #fff;
   text-shadow: none;
 }
 
 ::selection {
-  background: #4b0000;
+  background: #e0a4a4;
   color: #fff;
   text-shadow: none;
 }
 
 ::-moz-selection {
-  background: #4b0000; /* Firefox */
+  background: #e0a4a4; /* Firefox */
   color: #fff;
   text-shadow: none;
 }
 
 ::-webkit-selection {
-  background: #4b0000; /* Safari */
+  background: #e0a4a4; /* Safari */
   color: #fff;
   text-shadow: none;
 }
@@ -4817,8 +4817,8 @@ height: 30vh;
   }
 }
 .product-tabs-content-wrap .product-tab-nav li a.active {
-  border-bottom-color: #4b0000;
-  color: #4b0000;
+  border-bottom-color: #e0a4a4;
+  color: #e0a4a4;
 }
 .product-tabs-content-wrap .product-tab-nav li:last-child a {
   margin-right: 0;
@@ -4845,7 +4845,7 @@ height: 30vh;
   margin-right: 15px;
 }
 .product-inner-wrapper .product-header-wrap .product-tab-nav li a.active {
-  color: #4b0000;
+  color: #e0a4a4;
 }
 .product-inner-wrapper .product-header-wrap .total-products {
   font-size: 14px;

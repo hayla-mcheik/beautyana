@@ -268,7 +268,7 @@
   }
 
   .boutique-dropdown li a:hover {
-    color: #4b0000 !important; /* Theme Pink */
+    color: #e0a4a4 !important; /* Theme Pink */
     background: #fafafa;
     padding-left: 30px !important;
   }
@@ -324,7 +324,7 @@
     }
 
     .shop-count {
-      background: #4b0000 !important; /* Subtle gold/neutral tone for accessories */
+      background: #e0a4a4 !important; /* Subtle gold/neutral tone for accessories */
       font-size: 9px !important;
     }
 
@@ -357,7 +357,7 @@
         font-weight: 600;
         text-transform: lowercase;
 
-        color: #4b0000; /* Matches your logo pink */
+        color: #e0a4a4; /* Matches your logo pink */
         line-height: 20px;
         animation: tickerAnimation 9s infinite;
         position: absolute;

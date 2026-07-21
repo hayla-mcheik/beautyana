@@ -97,7 +97,7 @@ defineProps({ about: Object });
     font-family: 'Playfair Display', serif;
     font-size: 10vw;
     font-weight: 900;
-    color: #4b00000d !important; /* Extremely subtle grey-white */
+    color: #e0a4a40d !important; /* Extremely subtle grey-white */
     letter-spacing: -5px;
     line-height: 0.8;
     white-space: nowrap;
@@ -124,7 +124,7 @@ defineProps({ about: Object });
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: #4b0000 !important;
+    color: #e0a4a4 !important;
     font-weight: 700;
 }
 
@@ -138,7 +138,7 @@ defineProps({ about: Object });
 .accent-line {
     width: 40px;
     height: 1px;
-    background-color: #4b0000 !important;
+    background-color: #e0a4a4 !important;
 }
 
 .editorial-text {
@@ -168,7 +168,7 @@ defineProps({ about: Object });
 .dot-divider {
     width: 4px;
     height: 4px;
-    background-color: #4b0000 !important;
+    background-color: #e0a4a4 !important;
     border-radius: 50%;
 }
 
