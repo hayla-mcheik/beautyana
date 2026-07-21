@@ -13,11 +13,12 @@ class Category extends Model
     protected $fillable=[
         'name',
         'slug',
-        'description',
+        // 'description',
         'image',
-        'meta_title',
-        'meta_keyword',
-        'meta_description',
+        'menu',
+        // 'meta_title',
+        // 'meta_keyword',
+        // 'meta_description',
         'status'
     ];
 

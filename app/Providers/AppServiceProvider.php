@@ -32,15 +32,24 @@ public function boot(): void
     View::share('appSetting', $websiteSetting);
 
     // Share categories and tickers with the frontend layouts
-    View::composer(['layouts.app', 'layouts.inc.frontend.header'], function ($view) {
-        $categories = Category::where('status', '0')->get(); 
-        $tickers = Ticker::take(3)->get();
+    View::composer(['layouts.app', 'layouts.inc.frontend.header', 'layouts.inc.frontend.footer'], function ($view) {
+$allCategories = Category::where('status', '0')->get();
 
-        // Corrected syntax using an array
-        $view->with([
-            'allCategories' => $categories,
-            'tickers' => $tickers
-        ]);
+$collections = $allCategories->where('menu', 'Collections');
+
+$highJewelry = $allCategories->where('menu', 'High Jewelry');
+
+$adSignature = $allCategories->where('menu', 'AD Signature');
+
+$tickers = Ticker::take(3)->get();
+
+$view->with([
+    'allCategories' => $allCategories,
+    'collections' => $collections,
+    'highJewelry' => $highJewelry,
+    'adSignature' => $adSignature,
+    'tickers' => $tickers,
+]);
     });
 
     // Your existing Cart logic

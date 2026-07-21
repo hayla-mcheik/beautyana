@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutDataController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail; // Import the Mail facade
@@ -58,6 +61,7 @@ Route::get('/debug-cart-view', function() {
 Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->group(function () {
     Route::get('/','index');
     Route::get('/collections','categories');
+    Route::get('/categories','categoriescollections');
     Route::get('/collections/{category_slug}','products');
     Route::get('/collections/{category_slug}/{product_slug}','productView');
 Route::get('/new-arrivals', 'newArrival');
@@ -68,9 +72,13 @@ Route::get('/blog/details/{id}', 'blogdetails');
 Route::get('/contactus', 'contactus');
 Route::get('search','searchProducts');
 Route::post('/contact/submit', 'contactsubmit');
+Route::post('/book-appointment', 'bookAppointment');
+
 Route::post('/subscribe', 'subscribe');
 Route::get('/product/quick-view/{id}','quickView');
 });
+Route::get('/appointment', [FrontendController::class, 'appointment']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'index']);
@@ -134,6 +142,10 @@ Route::put('sliders/{slider}','update');
 Route::get('sliders/{slider}/delete','destroy');
     });
 
+Route::controller(AboutDataController::class)->group(function () {
+    Route::get('/about-data', 'edit')->name('admin.aboutdata.edit');
+    Route::put('/about-data', 'update')->name('admin.aboutdata.update');
+});
 
     Route::controller(App\Http\Controllers\Admin\BlogsController::class)->group(function () {
         Route::get('blogs','index');
@@ -142,6 +154,10 @@ Route::get('sliders/{slider}/delete','destroy');
         Route::get('blogs/{blog}/edit','edit');
         Route::put('blogs/{blog}','update');
         Route::get('blogs/{blog}/delete','destroy');
+        Route::get(
+    'blogs/gallery/delete/{id}',
+    'deleteGalleryImage'
+);
             });
 
     Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {

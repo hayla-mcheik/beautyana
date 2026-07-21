@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use App\Mail\PlaceOrderMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Helpers\CartHelper;
-
+use Illuminate\Support\Facades\DB;
 class CheckoutShow extends Component
 {
     public $carts;
@@ -99,73 +99,209 @@ class CheckoutShow extends Component
         $this->dispatch('message', text: 'Promo code applied successfully', type: 'success', status: 200);
     }
 
-    public function calculateTotal()
-    {
-        $this->totalProductAmount = 0;
+public function calculateTotal()
+{
+    $this->totalProductAmount = 0;
 
-        if (auth()->check()) {
-            $this->carts = Cart::where('user_id', auth()->id())->with('product')->get();
-        } else {
-            $guestCart = CartHelper::getGuestCart();
-            $productIds = array_keys($guestCart);
-            $products = Product::whereIn('id', $productIds)->get();
+    if (auth()->check()) {
 
-            $this->carts = $products->map(function($product) use ($guestCart) {
-                return (object) [
-                    'product_id' => $product->id,
-                    'product' => $product,
-                    'quantity' => $guestCart[$product->id]['quantity'],
-                    'product_color_id' => null
-                ];
-            });
-        }
+        $this->carts = Cart::where('user_id', auth()->id())
+            ->with('product')
+            ->get();
 
-        foreach ($this->carts as $cartItem) {
-            $this->totalProductAmount += ($cartItem->product->selling_price ?? 0) * $cartItem->quantity;
+    } else {
+
+        // Use the cleaned guest cart
+        $guestCart = CartHelper::getCartItems();
+
+        $productIds = array_keys($guestCart);
+
+        $products = Product::whereIn('id', $productIds)->get();
+
+        $this->carts = $products->map(function ($product) use ($guestCart) {
+
+            return (object)[
+                'product_id' => $product->id,
+                'product' => $product,
+                'quantity' => $guestCart[$product->id]['quantity'],
+                'product_color_id' => null,
+            ];
+
+        });
+    }
+
+    foreach ($this->carts as $cartItem) {
+
+        if ($cartItem->product) {
+
+            $this->totalProductAmount +=
+                $cartItem->product->selling_price * $cartItem->quantity;
         }
     }
+}
 
 public function placeOrder()
 {
-    // Make sure personal info is validated
     if (!$this->isPersonalInfoValid) {
-        $this->dispatch('message', text: 'Please complete your personal information first', type: 'warning', status: 200);
+
+        $this->dispatch(
+            'message',
+            text: 'Please complete your personal information first',
+            type: 'warning',
+            status: 200
+        );
+
         return null;
     }
 
-    // For guest users, user_id will be null
-    $userId = auth()->check() ? auth()->id() : null;
+    // Refresh cart before placing the order
+    $this->calculateTotal();
 
-    $orderData = [
-        'user_id' => $userId,
-        'tracking_no' => 'Beautyana-' . Str::random(10),
-        'fullname' => $this->fullname,
-        'email' => !empty($this->email) ? $this->email : null, // Ensure empty string becomes null
-        'phone' => $this->phone,
-        'address' => $this->address,
-        'status_message' => 'in progress',
-        'payment_mode' => $this->payment_mode,
-        'payment_id' => $this->payment_id,
-        'total_price' => $this->totalProductAmount,
-    ];
-
-    \Log::info('Creating order with data:', $orderData);
-
-    $order = Order::create($orderData);
+    /*
+    |--------------------------------------------------------------------------
+    | Validate all products before creating the order
+    |--------------------------------------------------------------------------
+    */
 
     foreach ($this->carts as $cartItem) {
-        OrderItem::create([
-            'order_id' => $order->id,
-            'product_id' => $cartItem->product_id,
-            'product_color_id' => $cartItem->product_color_id ?? null,
-            'quantity' => $cartItem->quantity,
-            'price' => $cartItem->product->selling_price,
-        ]);
 
-        Product::find($cartItem->product_id)->decrement('quantity', $cartItem->quantity);
+        $product = $cartItem->product;
+
+        if (
+            !$product ||
+            $product->status != '0'
+        ) {
+
+            if (auth()->check()) {
+                Cart::where('user_id', auth()->id())
+                    ->where('product_id', $cartItem->product_id)
+                    ->delete();
+            }
+
+            $this->dispatch(
+                'message',
+                text: 'A product in your cart is no longer available and has been removed.',
+                type: 'warning',
+                status: 200
+            );
+
+            return null;
+        }
+
+        if ($product->quantity <= 0) {
+
+            if (auth()->check()) {
+                Cart::where('user_id', auth()->id())
+                    ->where('product_id', $product->id)
+                    ->delete();
+            }
+
+            $this->dispatch(
+                'message',
+                text: "{$product->name} is out of stock and has been removed from your cart.",
+                type: 'warning',
+                status: 200
+            );
+
+            return null;
+        }
+
+        if ($cartItem->quantity > $product->quantity) {
+
+            if (auth()->check()) {
+
+                Cart::where('user_id', auth()->id())
+                    ->where('product_id', $product->id)
+                    ->update([
+                        'quantity' => $product->quantity
+                    ]);
+            }
+
+            $this->dispatch(
+                'message',
+                text: "Only {$product->quantity} item(s) of {$product->name} are available.",
+                type: 'warning',
+                status: 200
+            );
+
+            return null;
+        }
     }
 
-    return $order;
+    /*
+    |--------------------------------------------------------------------------
+    | Create order inside transaction
+    |--------------------------------------------------------------------------
+    */
+
+    return DB::transaction(function () {
+
+        $order = Order::create([
+
+            'user_id' => auth()->check() ? auth()->id() : null,
+
+            'tracking_no' => 'demanto-' . Str::random(10),
+
+            'fullname' => $this->fullname,
+
+            'email' => !empty($this->email) ? $this->email : null,
+
+            'phone' => $this->phone,
+
+            'address' => $this->address,
+
+            'status_message' => 'in progress',
+
+            'payment_mode' => $this->payment_mode,
+
+            'payment_id' => $this->payment_id,
+
+            'total_price' => $this->totalProductAmount,
+
+        ]);
+
+        foreach ($this->carts as $cartItem) {
+
+            $product = Product::lockForUpdate()->find($cartItem->product_id);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Stock changed while customer was checking out
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                !$product ||
+                $product->status != '0' ||
+                $product->quantity < $cartItem->quantity
+            ) {
+                throw new \Exception(
+                    "Stock changed while placing the order."
+                );
+            }
+
+            OrderItem::create([
+
+                'order_id' => $order->id,
+
+                'product_id' => $product->id,
+
+                'product_color_id' => $cartItem->product_color_id,
+
+                'quantity' => $cartItem->quantity,
+
+                'price' => $product->selling_price,
+
+            ]);
+
+            $product->decrement(
+                'quantity',
+                $cartItem->quantity
+            );
+        }
+
+        return $order;
+    });
 }
 
     public function codOrder()

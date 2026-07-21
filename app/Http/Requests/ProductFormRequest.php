@@ -27,7 +27,7 @@ class ProductFormRequest extends FormRequest
             $imageRules = [
                 'required',
                 'array',
-                'min:2'
+           
             ];
         } else {
             // For updating a product - images are optional
@@ -46,14 +46,14 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'string'
             ],  
-            'slug' => [
-                'required',
-                'string'
-            ],         
-            'small_description' => [
-                'required',
-                'string',
-            ],           
+            // 'slug' => [
+            //     'required',
+            //     'string'
+            // ],         
+            // 'small_description' => [
+            //     'required',
+            //     'string',
+            // ],           
             'description' => [
                 'required',
                 'string',
@@ -70,25 +70,25 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'integer',  
             ],
-            'trending' => [
-                'nullable', 
-            ], 
+            // 'trending' => [
+            //     'nullable', 
+            // ], 
             'status' => [
                 'nullable', 
             ],  
-            'meta_title' => [
-                'required',
-                'string',
-                'max:255'  
-            ],  
-            'meta_keyword' => [
-                'nullable',
-                'string',
-            ],
-            'meta_description' => [
-                'nullable',
-                'string',
-            ],
+            // 'meta_title' => [
+            //     'required',
+            //     'string',
+            //     'max:255'  
+            // ],  
+            // 'meta_keyword' => [
+            //     'nullable',
+            //     'string',
+            // ],
+            // 'meta_description' => [
+            //     'nullable',
+            //     'string',
+            // ],
             'image' => $imageRules,
             'image.*' => [
                 'image',
@@ -106,11 +106,11 @@ class ProductFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.required' => 'Please upload at least 2 images (front and back views are required)',
-            'image.min' => 'Please upload at least 2 images (front and back views are required)',
-            'image.*.image' => 'Each file must be a valid image',
-            'image.*.mimes' => 'Images must be in jpeg, png, jpg, gif, or webp format',
-            'image.*.max' => 'Each image must not exceed 2MB',
+    'image.required' => 'Please upload at least one image.',
+    'image.min' => 'Please upload at least one image.',
+    'image.*.image' => 'Each file must be a valid image.',
+    'image.*.mimes' => 'Images must be jpeg, png, jpg, gif or webp.',
+    'image.*.max' => 'Each image must not exceed 2MB.',
         ];
     }
 }

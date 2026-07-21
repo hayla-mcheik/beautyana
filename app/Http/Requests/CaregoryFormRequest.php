@@ -26,28 +26,29 @@ class CaregoryFormRequest extends FormRequest
             'required',
             'string'
         ],
-        'slug' => [
-            'required',
-            'string'
-        ],    
-        'description' => [
-            'required',
-        ],
+        'menu' => 'required|in:Collections,High Jewelry,AD Signature',
+        // 'slug' => [
+        //     'required',
+        //     'string'
+        // ],    
+        // 'description' => [
+        //     'required',
+        // ],
         'image' => [
             'nullable',
             'mimes:jpg,jpeg,png,webp'
         ],
-        'meta_title' => [
-            'required',
-            'string'
-        ],
-        'meta_keyword' => [
-            'required',
-            'string'
-        ],    
-        'meta_description' => [
-            'required',
-        ], 
+        // 'meta_title' => [
+        //     'required',
+        //     'string'
+        // ],
+        // 'meta_keyword' => [
+        //     'required',
+        //     'string'
+        // ],    
+        // 'meta_description' => [
+        //     'required',
+        // ], 
         ];
     }
 }

@@ -14,20 +14,138 @@
             </a>
         </li>
         
-        <li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
-            <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="{{ Request::is('admin/category*') ? 'true' : 'false' }}">
-                <i class="mdi mdi-view-list menu-icon"></i>
-                <span class="menu-title">Category</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse {{ Request::is('admin/category*') ? 'show' : '' }}" id="category" data-bs-parent="#sidebar">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> 
-                        <a class="nav-link {{ Request::is('admin/category') ? 'active' : '' }}" href="{{ url('admin/category') }}">View Category</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
+  <li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
+
+    <a
+        class="nav-link"
+        data-bs-toggle="collapse"
+        href="#category"
+        aria-expanded="{{ Request::is('admin/category*') ? 'true' : 'false' }}"
+        aria-controls="category"
+    >
+
+        <i class="mdi mdi-view-list menu-icon"></i>
+
+        <span class="menu-title">Category Management</span>
+
+        <i class="menu-arrow"></i>
+
+    </a>
+
+
+    <div
+        class="collapse {{ Request::is('admin/category*') ? 'show' : '' }}"
+        id="category"
+        data-bs-parent="#sidebar"
+    >
+
+        <ul class="nav flex-column sub-menu">
+
+
+            {{-- ALL CATEGORIES --}}
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link
+                    {{ Request::is('admin/category') && !request('menu')
+                        ? 'active'
+                        : '' }}"
+                    href="{{ url('admin/category') }}"
+                >
+
+                    All Categories
+
+                </a>
+
+            </li>
+
+
+
+            {{-- COLLECTIONS --}}
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link
+                    {{ request('menu') === 'Collections'
+                        ? 'active'
+                        : '' }}"
+                    href="{{ url('admin/category') }}?menu={{ urlencode('Collections') }}"
+                >
+
+                    Collections
+
+                </a>
+
+            </li>
+
+
+
+            {{-- HIGH JEWELRY --}}
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link
+                    {{ request('menu') === 'High Jewelry'
+                        ? 'active'
+                        : '' }}"
+                    href="{{ url('admin/category') }}?menu={{ urlencode('High Jewelry') }}"
+                >
+
+                    High Jewelry
+
+                </a>
+
+            </li>
+
+
+
+            {{-- AD SIGNATURE --}}
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link
+                    {{ request('menu') === 'AD Signature'
+                        ? 'active'
+                        : '' }}"
+                    href="{{ url('admin/category') }}?menu={{ urlencode('AD Signature') }}"
+                >
+
+                    AD Signature
+
+                </a>
+
+            </li>
+
+
+
+            {{-- ADD CATEGORY --}}
+
+            <li class="nav-item">
+
+                <a
+                    class="nav-link
+                    {{ Request::is('admin/category/create')
+                        ? 'active'
+                        : '' }}"
+                    href="{{ url('admin/category/create') }}"
+                >
+
+                    Add Category
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+    </div>
+
+</li>
         
         <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
             <a class="nav-link" data-bs-toggle="collapse" href="#products" aria-expanded="{{ Request::is('admin/products*') ? 'true' : 'false' }}">
@@ -53,9 +171,10 @@
             <div class="collapse {{ Request::is('admin/sliders*') || Request::is('admin/banners*') || Request::is('admin/tickers*') || Request::is('admin/about*') ? 'show' : '' }}" id="page-content" data-bs-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link {{ Request::is('admin/sliders') ? 'active' : '' }}" href="{{ url('admin/sliders') }}">Home Sliders</a></li>
-                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/banners') ? 'active' : '' }}" href="{{ url('admin/banners') }}">Banner Images</a></li>
-                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/tickers') ? 'active' : '' }}" href="{{ url('admin/tickers') }}">Top Tickers</a></li>
-                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about') ? 'active' : '' }}" href="{{ url('admin/about') }}">About Us</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/banners') ? 'active' : '' }}" href="{{ url('admin/banners') }}">Banner Images</a></li> --}}
+                    {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/tickers') ? 'active' : '' }}" href="{{ url('admin/tickers') }}">Top Tickers</a></li> --}}
+                    {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about') ? 'active' : '' }}" href="{{ url('admin/about') }}">About Us</a></li> --}}
+                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about-data') ? 'active' : '' }}" href="{{ route('admin.aboutdata.edit') }}">About Us Data</a></li>
                 </ul>
             </div>
         </li>
@@ -75,12 +194,12 @@
             </div>
         </li>
         
-        <li class="nav-item {{ Request::is('admin/reviews') ? 'active' : '' }}">
+        {{-- <li class="nav-item {{ Request::is('admin/reviews') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('admin/reviews') }}">
                 <i class="mdi mdi-star-outline menu-icon"></i>
                 <span class="menu-title">Reviews</span>
             </a>
-        </li>
+        </li> --}}
         
         <li class="nav-item {{ Request::is('admin/promocode') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('admin/promocode') }}">
@@ -96,12 +215,12 @@
             </a>
         </li>
         
-        <li class="nav-item {{ Request::is('admin/instagram*') ? 'active' : '' }}">
+        {{-- <li class="nav-item {{ Request::is('admin/instagram*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ url('admin/instagram') }}">
         <i class="mdi mdi-instagram menu-icon"></i>
         <span class="menu-title">Instagram Shop</span>
     </a>
-</li>
+</li> --}}
         <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('admin/settings') }}">
                 <i class="mdi mdi-settings menu-icon"></i>

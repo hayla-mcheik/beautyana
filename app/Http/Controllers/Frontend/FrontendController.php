@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\Mail\AppointmentMail;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Category;
@@ -21,16 +23,27 @@ class FrontendController extends Controller
     {
         $sliders = Slider::where('status','0')->get(); 
         $about = \App\Models\About::first();
+        $aboutData = \App\Models\AboutData::first();
         $trendingProducts = Product::where('trending','1')->latest()->take(15)->get();
         $newArrivalsProducts = Product::latest()->take(14)->get();
         $featuredProducts = Product::where('featured','1')->latest()->take(14)->get();
-        $categories = Category::where('status', '0')->with('products')->get();
+    $collections = Category::where('status','0')
+        ->where('menu','Collections')
+        ->get();
+
+    $highJewelry = Category::where('status','0')
+        ->where('menu','High Jewelry')
+        ->get();
+
+    $adSignature = Category::where('status','0')
+        ->where('menu','AD Signature')
+        ->get();
         $reviews= ReviewsModel::where('status','0')->get();
         $threecategories = Category::where('status','0')->take(3)->get();
         $blogs = Blogs::all();
 $banner = Banner::first();
 $instaFeeds = InstagramFeed::where('status','0')->latest()->take(8)->get();
-        return view('frontend.index',compact('sliders','about','trendingProducts','newArrivalsProducts','featuredProducts','categories','reviews','threecategories','blogs','banner','instaFeeds'));
+        return view('frontend.index',compact('sliders','about','aboutData','trendingProducts','newArrivalsProducts','featuredProducts','collections','highJewelry','adSignature','reviews','threecategories','blogs','banner','instaFeeds'));
     }
 
 
@@ -61,21 +74,81 @@ return redirect()->back()->with('message','Empty Search');
     }
 
 
-    public function categories()
-    {
-        $categories = Category::where('status','0')->get();
-        return view('frontend.collections.category.index',compact('categories'));
-    }
+  public function categories()
+{
+    $collections = Category::where('status','0')
+        ->where('menu','Collections')
+        ->get();
 
+    $highJewelry = Category::where('status','0')
+        ->where('menu','High Jewelry')
+        ->get();
+
+    $adSignature = Category::where('status','0')
+        ->where('menu','AD Signature')
+        ->get();
+
+    return view(
+        'frontend.collections.category.index',
+        compact(
+            'collections',
+            'highJewelry',
+            'adSignature'
+        )
+    );
+}
+public function categoriescollections()
+{
+    $collections = Category::where('status','0')
+        ->where('menu','Collections')
+        ->get();
+
+    $highJewelry = Category::where('status','0')
+        ->where('menu','High Jewelry')
+        ->get();
+
+    $adSignature = Category::where('status','0')
+        ->where('menu','AD Signature')
+        ->get();
+
+    return view(
+        'frontend.collections.category.collections',
+        compact(
+            'collections',
+            'highJewelry',
+            'adSignature'
+        )
+    );
+}
     public function products($category_slug)
     {
         $inStockCount = Product::where('quantity', '>', 0)->count();
         $outOfStockCount = Product::where('quantity', '=', 0)->count();
         $category = Category::where('slug',$category_slug)->withCount('products')->first();
-        $categories = Category::where('status','0')->get();
+$collections = Category::where('status','0')
+    ->where('menu','Collections')
+    ->get();
+
+$highJewelry = Category::where('status','0')
+    ->where('menu','High Jewelry')
+    ->get();
+
+$adSignature = Category::where('status','0')
+    ->where('menu','AD Signature')
+    ->get();
         if($category){
             // $products = $category->products()->get();
-            return view('frontend.collections.products.index',compact('category','categories','inStockCount','outOfStockCount'));
+return view(
+    'frontend.collections.products.index',
+    compact(
+        'category',
+        'collections',
+        'highJewelry',
+        'adSignature',
+        'inStockCount',
+        'outOfStockCount'
+    )
+);
          } else{
                 return redirect()->back();
             }
@@ -101,7 +174,8 @@ public function productView(string $category_slug , string $product_slug)
 public function aboutus()
 {
     $about = \App\Models\About::first();
-    return view('frontend.aboutus', compact('about'));
+    $aboutData = \App\Models\AboutData::first();
+    return view('frontend.aboutus', compact('about','aboutData'));
 }
 
 public function blogs()
@@ -112,13 +186,19 @@ public function blogs()
 
 public function blogdetails($id)
 {
-    // The specific blog being read
-    $blog = Blogs::findOrFail($id); 
+    // Load blog with gallery images
+    $blog = Blogs::with('images')->findOrFail($id);
 
-    // Fetch only the latest 4 posts for the sidebar
-    $latestBlogs = Blogs::latest()->take(4)->get(); 
+    // Latest posts for sidebar
+    $latestBlogs = Blogs::latest()
+        ->where('id', '!=', $id)
+        ->take(4)
+        ->get();
 
-    return view('frontend.blogs.blogdetails', compact('blog', 'latestBlogs')); 
+    return view(
+        'frontend.blogs.blogdetails',
+        compact('blog', 'latestBlogs')
+    );
 }
 public function contactus()
 {
@@ -171,11 +251,127 @@ public function contactsubmit(Request $request)
         'message' => $request->message,
     ];
 
-    Mail::to('info@beautyana.com')->send(new ContactFormMail($emailData));
+    Mail::to('mcheikhayla26@gmail.com')->send(new ContactFormMail($emailData));
     
     return back()->with('success', 'Your message has been submitted successfully.');
 }
+public function appointment()
+{
+    return view('frontend.appointment.index');
+}
+public function bookAppointment(Request $request)
+{
+    $validator = Validator::make($request->all(), [
 
+        'name' => 'required|string|max:255',
+
+        'email' => 'nullable|email|max:255',
+
+        'phone' => [
+            'required',
+
+            function ($attribute, $value, $fail) {
+
+                $digits = preg_replace('/\D/', '', $value);
+
+                if (strlen($digits) < 8 || strlen($digits) > 15) {
+
+                    $fail(
+                        'Phone number must be between 8 and 15 digits.'
+                    );
+                }
+            }
+        ],
+
+        'subject' => 'required|string|max:255',
+
+        'message' => 'required|string|max:1000',
+
+        'appointment_date' => 'required|date',
+
+        'appointment_time' => 'required|date_format:H:i',
+
+    ]);
+
+
+    if ($validator->fails()) {
+
+        return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validated Data
+    |--------------------------------------------------------------------------
+    */
+
+    $validatedData = $validator->validated();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Prepare Email Data
+    |--------------------------------------------------------------------------
+    */
+
+    $emailData = [
+
+        'name' => $validatedData['name'],
+
+        'email' => $validatedData['email'] ?? 'Not Provided',
+
+        'phone' => preg_replace(
+            '/\D/',
+            '',
+            $validatedData['phone']
+        ),
+
+        'subject' => $validatedData['subject'],
+
+        'message' => $validatedData['message'],
+
+        'appointment_date' => $validatedData['appointment_date'],
+
+        /*
+         * IMPORTANT:
+         *
+         * Send the actual submitted time.
+         */
+
+        'appointment_time' => $validatedData['appointment_time'],
+
+    ];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Send Email
+    |--------------------------------------------------------------------------
+    */
+
+    Mail::to('mcheikhayla26@gmail.com')
+        ->send(
+            new AppointmentMail($emailData)
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirect Back
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()
+        ->back()
+        ->with(
+            'success',
+            'Your appointment has been booked successfully. We will contact you shortly.'
+        );
+}
 public function subscribe(Request $request)
 {
     $request->validate([
