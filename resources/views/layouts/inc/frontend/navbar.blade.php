@@ -7,8 +7,8 @@
           <div class="col-lg-4 hidden-md-down">
             <div class="contact-email">
               <span>Email us:
-                        <a href="mailto:{{ $appSetting->email1 ?? 'info@beautyana.com' }}">
-                            {{ $appSetting->email1 ?? 'info@beautyana.com' }}
+                        <a href="mailto:{{ $appSetting->email1 ?? 'Beautyana31@gmail.com' }}">
+                            {{ $appSetting->email1 ?? 'Beautyana31@gmail.com' }}
                         </a>
                         @if($appSetting->email2)
                             <br>
@@ -115,7 +115,7 @@
             <div class="contact-link">
       <div class="contact-info">
     <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
-        Talk To Us: <a href="tel:00961 79353846" style="color: #e0a4a4;">00961 79353846</a>
+        Talk To Us: <a href="tel:81102121" style="color: #e0a4a4;">81102121</a>
     </span>
 <div class="time-contact" style="font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.4;">
  Redefine your wardrobe with premium fashion. Crafted to inspire confidence every day.
