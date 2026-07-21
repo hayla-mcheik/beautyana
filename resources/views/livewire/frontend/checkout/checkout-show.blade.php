@@ -152,7 +152,7 @@
                                     <hr>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span class="label">Total Amount</span>
-                                        <span class="value" style="color: #D97DA5;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="value" style="color: #4b0000;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                 </div>
                             @endif

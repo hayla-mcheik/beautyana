@@ -120,27 +120,22 @@
                 </a>
               </div>
               <div class="header-navigation-area hidden-md-down">
-                <ul class="main-menu nav position-relative boutique-nav ul-header-nav">
-                  <li><a href="{{ url('aboutus') }}">About Us</a></li>
-                  
-                  <li class="has-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-click-trigger">Products <i class="ion-ios-arrow-down"></i></a>
-                    <ul class="boutique-dropdown">
-                        @if(isset($allCategories))
-                            @foreach($allCategories as $categoryItem)
-                                <li>
-                                    <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                                        {{ $categoryItem->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                  </li>
+          <ul class="main-menu nav position-relative boutique-nav ul-header-nav">
+    <li><a href="{{ url('aboutus') }}">About Us</a></li>
 
-                  <li><a href="{{ url('blogs')}}">News</a></li>
-                  <li><a href="{{ url('contactus') }}">Contact us</a></li>
-                </ul>
+    @if(isset($allCategories))
+        @foreach($allCategories as $categoryItem)
+            <li>
+                <a href="{{ url('collections/'.$categoryItem->slug) }}">
+                    {{ $categoryItem->name }}
+                </a>
+            </li>
+        @endforeach
+    @endif
+
+    <li><a href="{{ url('blogs') }}">News</a></li>
+    <li><a href="{{ url('contactus') }}">Contact Us</a></li>
+</ul>
               </div>
             </div>
             <div class="align-right">
@@ -273,7 +268,7 @@
   }
 
   .boutique-dropdown li a:hover {
-    color: #D97DA5 !important; /* Theme Pink */
+    color: #4b0000 !important; /* Theme Pink */
     background: #fafafa;
     padding-left: 30px !important;
   }
@@ -329,7 +324,7 @@
     }
 
     .shop-count {
-      background: #D97DA5 !important; /* Subtle gold/neutral tone for accessories */
+      background: #4b0000 !important; /* Subtle gold/neutral tone for accessories */
       font-size: 9px !important;
     }
 
@@ -362,7 +357,7 @@
         font-weight: 600;
         text-transform: lowercase;
 
-        color: #D97DA5; /* Matches your logo pink */
+        color: #4b0000; /* Matches your logo pink */
         line-height: 20px;
         animation: tickerAnimation 9s infinite;
         position: absolute;

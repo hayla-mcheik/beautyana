@@ -115,7 +115,7 @@
             <div class="contact-link">
       <div class="contact-info">
     <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
-        Talk To Us: <a href="tel:00961 79353846" style="color: #D97DA5;">00961 79353846</a>
+        Talk To Us: <a href="tel:00961 79353846" style="color: #4b0000;">00961 79353846</a>
     </span>
 <div class="time-contact" style="font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.4;">
     We believe jewelry is the final touch that brings a look together - for both women and men.
@@ -193,25 +193,20 @@
             <div class="header-align align-default justify-content-center">
               <div class="header-navigation-area hidden-md-down">
                 <ul class="main-menu nav">
-              
-                      <li><a href="{{ url('aboutus') }}">About Us</a></li>
-     <li class="has-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-click-trigger">Products <i class="ion-ios-arrow-down"></i></a>
-                    <ul class="boutique-dropdown">
-                        @if(isset($allCategories))
-                            @foreach($allCategories as $categoryItem)
-                                <li>
-                                    <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                                        {{ $categoryItem->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                  </li>
-                      <li><a href="{{ url('blogs')}}">News</a>           
-                      </li>
-                      <li><a href="{{ url('contactus') }}">Contact us</a></li>
+    <li><a href="{{ url('aboutus') }}">About Us</a></li>
+
+@if(isset($allCategories))
+    @foreach($allCategories as $categoryItem)
+        <li>
+            <a href="{{ url('collections/'.$categoryItem->slug) }}">
+                {{ $categoryItem->name }}
+            </a>
+        </li>
+    @endforeach
+@endif
+
+<li><a href="{{ url('blogs') }}">News</a></li>
+<li><a href="{{ url('contactus') }}">Contact Us</a></li>
                     </ul>
               </div>
             </div>
@@ -334,7 +329,7 @@
   }
 
   .boutique-dropdown li a:hover {
-    color: #D97DA5 !important; /* Theme Pink */
+    color: #4b0000 !important; /* Theme Pink */
     background: #fafafa;
     padding-left: 30px !important;
   }
@@ -414,7 +409,7 @@
 }
 
 .mega-menu-items li a:hover {
-    color: #D97DA5; /* Pink theme color */
+    color: #4b0000; /* Pink theme color */
 }
 
 /* Banner Styling */
@@ -468,7 +463,7 @@
     }
 
     .shop-count {
-      background: #D97DA5 !important; /* Subtle gold/neutral tone for accessories */
+      background: #4b0000 !important; /* Subtle gold/neutral tone for accessories */
       font-size: 9px !important;
     }
 
@@ -501,7 +496,7 @@
         font-weight: 600;
         text-transform: lowercase;
 
-        color: #D97DA5; /* Matches your logo pink */
+        color: #4b0000; /* Matches your logo pink */
         line-height: 20px;
         animation: tickerAnimation 9s infinite;
         position: absolute;

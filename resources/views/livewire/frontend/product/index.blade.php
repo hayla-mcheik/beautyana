@@ -88,7 +88,7 @@
                                                             <a href="{{ url('/collections/'.$productItem->category->slug.'/'.$productItem->slug) }}" 
                                                                style="color:#51555a; font-size: 0.75rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; width: 100%; text-decoration: none;">
                                                                 <span>{{ $productItem->name }}</span>
-                                                                <i class="fa fa-arrow-right" style="font-size: 0.65rem; color: #D97DA5;"></i>
+                                                                <i class="fa fa-arrow-right" style="font-size: 0.65rem; color: #4b0000;"></i>
                                                             </a>
                                                         </h4>
                                                         <div class="prices text-start">

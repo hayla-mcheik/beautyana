@@ -184,6 +184,277 @@
         text-align: start;
         padding: 0px;
     }
+    
+
+/* ============================================================
+   EXHIBITIONS
+============================================================ */
+
+.exhibitions-area {
+    padding: 28px 0 32px;
+
+    overflow: hidden;
+
+    background: #fff4f4;
+}
+
+.signature-collections {
+
+    background: #f7f2eb;
+
+    padding: 0px 0;
+
+    overflow: hidden;
+}
+
+
+/*==================================================
+    CONTAINER
+==================================================*/
+
+.collections-container {
+
+    padding-left: 40px;
+
+    padding-right: 40px;
+}
+
+
+/*==================================================
+    TITLE
+==================================================*/
+
+.collections-title {
+
+    text-align: center;
+
+    margin-bottom: 0;
+}
+
+
+.collections-title > span {
+
+    display: block;
+
+    font-family: 'Roboto';
+
+    font-weight: 600;
+
+    font-size: 20px;
+
+    letter-spacing: 4px;
+
+    color: var(--boutique-dark);
+
+    text-transform: uppercase;
+}
+
+
+/*==================================================
+    DIVIDER
+==================================================*/
+
+.divider {
+
+    width: 120px;
+
+    height: 25px;
+
+    margin: 0 auto;
+
+    position: relative;
+}
+
+
+.divider::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 50%;
+
+    height: 1px;
+
+    background: #d7c4a2;
+}
+
+
+.divider span {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 12px;
+
+    height: 12px;
+
+    background: #b39256;
+
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
+/*==================================================
+    SWIPER WRAPPER
+==================================================*/
+
+.collections-slider-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+.section-title-demanto {
+    color: #B39256;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 28px;
+    font-weight: 500;
+
+    letter-spacing: 1.5px;
+}
+
+
+.demanto-exhibition-link {
+    display: block;
+
+    text-decoration: none;
+}
+
+
+.demanto-exhibition-item {
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background: #F4F0E8;
+}
+
+
+.demanto-exhibition-item img {
+    display: block;
+
+    width: 100%;
+    height: 400px;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
+}
+
+
+.demanto-exhibition-item:hover img {
+    transform: scale(1.05);
+}
+
+
+.swiper-slide-prev
+.demanto-exhibition-item img,
+
+.swiper-slide-next
+.demanto-exhibition-item img {
+    opacity: 0.60;
+}
+
+
+/* ============================================================
+   EXHIBITION NAVIGATION
+============================================================ */
+
+.demanto-prev,
+.demanto-next {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 10;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #D7C7A4;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    color: #B39256;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    transition: var(--transition-smooth);
+}
+
+
+.demanto-prev {
+    left: -10px;
+}
+
+
+.demanto-next {
+    right: -10px;
+}
+
+
+.demanto-prev:hover,
+.demanto-next:hover {
+    border-color: #B39256;
+
+    background: #B39256;
+
+    color: #FFFFFF;
+}
+
+
+.btn-demanto {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 24px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 25px;
+    background: linear-gradient(135deg, var(--logo-pink-dark), var(--logo-pink-dark));
+    color: #FFFFFF !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
 </style>
 
 <section>
@@ -259,7 +530,7 @@ defineProps({ about: Object });
     transform: translateY(-50%);
     font-size: 10vw;
     font-weight: 900;
-    color: #d97da50d !important; /* Extremely subtle grey-white */
+    color: #4b00000d !important; /* Extremely subtle grey-white */
     letter-spacing: 1px;
     line-height: 0.8;
     white-space: nowrap;
@@ -286,7 +557,7 @@ defineProps({ about: Object });
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: #D97DA5 !important;
+    color: #4b0000 !important;
     font-weight: 700;
 }
 
@@ -300,7 +571,7 @@ defineProps({ about: Object });
 .accent-line {
     width: 40px;
     height: 1px;
-    background-color: #D97DA5 !important;
+    background-color: #4b0000 !important;
 }
 
 .editorial-text {
@@ -330,7 +601,7 @@ defineProps({ about: Object });
 .dot-divider {
     width: 4px;
     height: 4px;
-    background-color: #D97DA5 !important;
+    background-color: #4b0000 !important;
     border-radius: 50%;
 }
 
@@ -416,7 +687,7 @@ defineProps({ about: Object });
             @if($product->original_price > $product->selling_price)
                 <span class="price-old" style="font-size: 10px; color: #51555a; text-decoration: line-through; margin-right: 5px;">€{{ $product->original_price }}</span>
             @endif
-            <span class="price" style="font-size: 12px; font-weight: 600; color: #D97DA5;">€{{ $product->selling_price }}</span>
+            <span class="price" style="font-size: 12px; font-weight: 600; color: #4b0000;">€{{ $product->selling_price }}</span>
         </div> --}}
     </div>
 </div>
@@ -483,7 +754,7 @@ defineProps({ about: Object });
     font-size: 9px !important; /* Extremely small for luxury feel */
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #D97DA5;
+    color: #4b0000;
     margin-bottom: 12px;
     font-weight: 700;
   }
@@ -626,7 +897,7 @@ defineProps({ about: Object });
                                                             €{{ $productItem->original_price }}
                                                         </span>
                                                     @endif
-                                                    <span class="price" style="font-size: 12px; font-weight: 600; color: #D97DA5;">
+                                                    <span class="price" style="font-size: 12px; font-weight: 600; color: #4b0000;">
                                                         €{{ $productItem->selling_price }}
                                                     </span>
                                                 </div>
@@ -642,44 +913,51 @@ defineProps({ about: Object });
         </div>
     </div>
 </section> --}}
-    <!--== Start Blog Area Wrapper ==-->
-    <section class="blog-area pb-60">
-        <div class="container pt-0 pb-0 ">
-          <div class="row">
-            <div class="col-sm-8 m-auto">
-              <div class="section-title text-center">
-                <h2 class="title">Latest News</h2>
-                {{-- <div class="desc">
-          <p style="font-size: 0.8rem; color: #51555a; font-weight: 400;">Present posts in a best way to highlight interesting moments of your blog.</p>
-                </div> --}}
-              </div>
+  <!-- Exhibitions Section - UNCHANGED -->
+<section class="exhibitions-area">
+    <div class="container">
+        <div class="collections-title mb-3">
+
+            <span>EXHIBITIONS & EVENTS</span>
+
+            <div class="divider">
+                <span></span>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="blog-slider owl-carousel owl-theme">
-                @foreach($blogs as $blog)
-                <div class="item">
-                  <!--== Start Blog Item ==-->
-                  <div class="post-item">
-                    <div class="inner-content">
-                      <div class="thumb">
-                                          <a href="{{ url('blog/details/'. $blog->id) }}"><img src="{{ asset($blog->image)}}" class="img" alt="Image-HasTech"></a>
-                      </div>
-                      <div class="content">
-                        <h4 class="title"><a href="{{ url('blog/details/'. $blog->id) }}">{{ words_limit($blog->description, 10) }}</a></h4>
-                      </div>
-                    </div>
-                  </div>
-                  <!--== End Blog Item ==-->
-                </div>
- @endforeach
-              </div>
-            </div>
-          </div>
+
         </div>
-      </section>
-      <!--== End Blog Area Wrapper ==-->
+        <div class="position-relative">
+            <div class="swiper exhibitions-slider">
+                <div class="swiper-wrapper">
+@foreach($blogs as $exhibition)
+<div class="swiper-slide">
+
+    <a href="{{ url('blog/details/'.$exhibition->id) }}"
+       class="demanto-exhibition-link">
+
+        <div class="demanto-exhibition-item">
+
+            <img src="{{ asset($exhibition->image) }}"
+                 alt="{{ $exhibition->title }}">
+
+ 
+
+        </div>
+
+    </a>
+
+</div>
+@endforeach
+                </div>
+            </div>
+            <div class="demanto-prev"><i class="fa fa-angle-left"></i></div>
+            <div class="demanto-next"><i class="fa fa-angle-right"></i></div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url('/blogs') }}" class="btn-demanto">VIEW ALL </a>
+        </div>
+    </div>
+</section>
 
 {{-- <section class="instagram-shop-area py-5">
     <div class="container-fluid text-center">

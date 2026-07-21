@@ -104,7 +104,7 @@
 }
 
 .has-mobile-dropdown.active > a {
-    color: #D97DA5; /* Your pink theme color */
+    color: #4b0000; /* Your pink theme color */
 }
         /* Enhanced Footer Styles */
         .footer-connect-section {
@@ -312,7 +312,7 @@
 }
 
 #shippingModal .modal-title-custom {
-    color: #D97DA5; /* Your logo pink */
+    color: #4b0000; /* Your logo pink */
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 28px;
@@ -320,7 +320,7 @@
 }
 
 #shippingModal .notice-text {
-    color: #D97DA5;
+    color: #4b0000;
     font-size: 15px;
     font-weight: 500;
     line-height: 1.6;
@@ -328,13 +328,13 @@
 }
 
 #shippingModal .secondary-text {
-    color: #D97DA5;
+    color: #4b0000;
     font-size: 14px;
     margin-bottom: 30px;
 }
 
 #shippingModal .btn-start-shopping {
-    background-color: #D97DA5;
+    background-color: #4b0000;
     color: white;
     border: none;
     width: 100%;
@@ -365,7 +365,7 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    color: #D97DA5;
+    color: #4b0000;
     font-size: 20px;
 }
     </style>

@@ -143,6 +143,40 @@ var carouselSlider = new Swiper('.default-slider-container', {
 });
 
   // Swiper Slider Js
+  
+var exhibitionsSlider = new Swiper('.exhibitions-slider', {
+
+    centeredSlides:true,
+
+    loop:true,
+
+    speed:1000,
+
+    slidesPerView:3,
+
+    spaceBetween:20,
+
+    autoplay:{
+        delay:3500,
+        disableOnInteraction:false
+    },
+
+    navigation:{
+        nextEl:'.demanto-next',
+        prevEl:'.demanto-prev'
+    },
+
+    breakpoints:{
+
+        0:{
+            slidesPerView:1
+        },
+
+        768:{
+            slidesPerView:3
+        }
+    }
+});
 
     // Product Single Thumb Slider Js
       var ProductNav = new Swiper('.single-product-nav-slider', {
