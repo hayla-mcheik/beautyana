@@ -8,43 +8,9 @@
     <div class="container-fluid p-0 pt-2 pb-2">
         <div class="row g-0 align-items-center">
             
-            <div class="col-lg-3 d-none d-lg-block">
-                <div class="featured-banner-left" style="position: relative; overflow: hidden; height: 70vh;">
-                    
-                    <div class="left-banner-overlay" style="
-                        position: absolute; 
-                        top: 0; 
-                        left: 0; 
-                        width: 100%; 
-                        height: 100%; 
-                        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%);
-                        z-index: 1;">
-                    </div>
+     
 
-                    @if(isset($banner) && $banner && $banner->image)
-                        <img src="{{ asset($banner->image) }}"
-                             alt="{{ $banner->title ?? 'Featured Collection' }}" 
-                             style="width: 100%; height: 100%; object-fit: cover;">
-                        
-                        <div class="banner-overlay-text" style="position: absolute; bottom: 30px; left: 20px; color: #fff; z-index: 2; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
-                            <h6 style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">
-                                {{ $banner->subtitle ?? 'New Arrivals' }}
-                            </h6>
-                            <h4 style="font-size: 18px; font-weight: 600; line-height: 1.4;">
-                                {!! isset($banner->title) ? nl2br(e($banner->title)) : 'The Pearl <br> Collection' !!}
-                            </h4>
-                        </div>
-                    @else
-                        <img src="{{ asset('assets/img/image-left.jpg') }}" alt="Default Banner" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div class="banner-overlay-text" style="position: absolute; bottom: 30px; left: 20px; color: #fff; z-index: 2;">
-                            <h6 style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase;">New Arrivals</h6>
-                            <h4 style="font-size: 18px; font-weight: 600;">The Pearl <br> Collection</h4>
-                        </div>
-                    @endif
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-9 p-1">
+            <div class="col-12 col-lg-12 p-1">
                 <div class="swiper-container swiper-pagination-style dots-bg-light home-slider-container default-slider-container" style="height: 70vh;">
                     <div class="swiper-wrapper home-slider-wrapper slider-default">
                         

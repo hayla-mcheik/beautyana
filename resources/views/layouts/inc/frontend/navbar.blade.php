@@ -118,8 +118,7 @@
         Talk To Us: <a href="tel:00961 79353846" style="color: #4b0000;">00961 79353846</a>
     </span>
 <div class="time-contact" style="font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.4;">
-    We believe jewelry is the final touch that brings a look together - for both women and men.
-    
+ Redefine your wardrobe with premium fashion. Crafted to inspire confidence every day.
     @if(optional($appSetting)->address)
         <br/> 
         <span style="color: #888;">Address:</span> 
