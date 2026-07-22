@@ -304,7 +304,9 @@ section .container-fluid {
 
 /*-------- Page Header Style Css --------*/
 .page-header-area {
-  padding: 30px 0 30px;
+    padding: 200px 0 150px;
+    position: relative;
+    overflow: hidden;
 }
 
 .breadcrumb-area {
@@ -319,13 +321,10 @@ section .container-fluid {
   margin-bottom: 0;
   padding: 0;
 }
-.breadcrumb-area .breadcrumb li a{
-  font-size: 12px;
-}
+
 .breadcrumb-area .breadcrumb li {
-  color: var(--logo-pink-dark);
+ color: white;
   display: inline-block;
-  font-size: 12px;
   font-weight: 700;
   line-height: 20px;
   position: relative;
@@ -335,17 +334,19 @@ section .container-fluid {
 }
 @media only screen and (max-width: 1199px) {
   .breadcrumb-area .breadcrumb li {
-    font-size: 12px;
+    font-size: 18px;
   }
   .about-page-wrap .about-content p{
     font-size: 0.75rem;
   }
 }
 .breadcrumb-area .breadcrumb li a {
-  color: #666;
+  color: #fff;
+  font-size: 20px !important;
 }
 .breadcrumb-area .breadcrumb li a:hover {
-  color: var(--logo-pink-dark);
+  color: white;
+    font-size: 20px !important;
 }
 .breadcrumb-area .breadcrumb .breadcrumb-sep {
   font-size: 14px;
@@ -1498,6 +1499,7 @@ section .container-fluid {
 }
 .product-header-wrap .product-tab-nav li a.active {
   color: var(--logo-pink-dark);
+  display: none !important;
 }
 .header-area.header-style4.header-default .header-top {
   background-color: #000;
