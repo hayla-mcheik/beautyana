@@ -161,14 +161,34 @@
                             @method('PUT')
                             <label>Update Your Order Status</label>
                             <div class="input-group">
-                                <select name="order_status" class="form-select">
-                                    <option value="">Select Order Status</option>
-                                    <option value="in progress" {{ Request::get('status') == 'in progress' ? 'selected':'' }}>In Progress</option>
-                                    <option value="completed" {{ Request::get('status') == 'completed'  ? 'selected':''}}>Completed</option>
-                                    <option value="pending" {{ Request::get('status') == 'pending'  ? 'selected':''}}>Pending</option>
-                                    <option value="cancelled" {{ Request::get('status') == 'cancelled'  ? 'selected':''}}>Cancelled</option>
-                                    <option value="out-for-delivery" {{ Request::get('status') == 'out-for-delivery'  ? 'selected':''}}>Out for delivery</option>
-                                </select>  
+                     <select name="order_status" class="form-select">
+
+    <option value="pending"
+        {{ $order->status_message == 'pending' ? 'selected' : '' }}>
+        Pending
+    </option>
+
+    <option value="in progress"
+        {{ $order->status_message == 'in progress' ? 'selected' : '' }}>
+        In Progress
+    </option>
+
+    <option value="out-for-delivery"
+        {{ $order->status_message == 'out-for-delivery' ? 'selected' : '' }}>
+        Out For Delivery
+    </option>
+
+    <option value="completed"
+        {{ $order->status_message == 'completed' ? 'selected' : '' }}>
+        Completed
+    </option>
+
+    <option value="cancelled"
+        {{ $order->status_message == 'cancelled' ? 'selected' : '' }}>
+        Cancelled
+    </option>
+
+</select>
                                 <button type="submit" class="btn btn-primary text-white">Update</button>
                             </div>
                         </form>

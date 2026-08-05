@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InvoiceOrderMailable;
+use App\Mail\OrderStatusMail;
 class OrderController extends Controller
 {
     public function index(Request $request)
@@ -38,21 +39,37 @@ class OrderController extends Controller
 
 
     
-    public function updateOrderStatus(int $orderId , Request $request)
-    {
-        $order = Order::where('id',$orderId)->first();
-        if($order)
-        {
-            $order->update([
-'status_message' => $request->order_status
-            ]);
-            return redirect('admin/orders/'.$orderId)->with('message','Order Status Updated');
+public function updateOrderStatus(int $orderId, Request $request)
+{
+    $order = Order::find($orderId);
+
+    if (!$order) {
+        return redirect('admin/orders')->with('message', 'Order Id not Found');
+    }
+
+    // Update status
+    $order->status_message = $request->order_status;
+    $order->save();
+
+    // Send status email
+    if (!empty($order->email)) {
+
+        try {
+
+            Mail::to($order->email)
+                ->send(new OrderStatusMail($order));
+
+        } catch (\Exception $e) {
+
+            \Log::error('Order Status Email Error: '.$e->getMessage());
+
         }
-    else
-    {
-        return redirect('admin/orders/'.$orderId)->with('message','Order Id not Found');
+
     }
-    }
+
+    return redirect('admin/orders/'.$orderId)
+        ->with('message', 'Order Status Updated Successfully');
+}
 
     public function viewInvoice(int $orderId)
     {

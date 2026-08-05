@@ -20,10 +20,7 @@
 
                 </a>
 
-                <div class="brand-tagline">
-                    TIMELESS LUXURY BY DEMANTO
-                </div>
-
+          
             </div>
 
 
@@ -42,7 +39,7 @@
                 <div class="footer-contact-content">
 
                     <span class="footer-contact-label">
-                        LOCATION
+                        Location
                     </span>
 
                     <span class="footer-contact-value">
@@ -67,7 +64,7 @@
                 <div class="footer-contact-content">
 
                     <span class="footer-contact-label">
-                        PHONE
+                        Phone
                     </span>
 
                     <span class="footer-contact-value">
@@ -182,7 +179,7 @@
 
     width: auto;
 
-    height: 38px;
+    height: 60px;
 }
 
 
@@ -290,7 +287,7 @@
 .footer-contact-label {
     color: #C9A96E;
 
-    font-size: 12px;
+    font-size: 18px;
 
     font-weight: 500;
 
@@ -303,7 +300,7 @@
 
     font-family: "Cormorant Garamond", serif;
 
-    font-size: 15px;
+    font-size: 20px;
 
     line-height: 1.3;
 }
@@ -332,7 +329,7 @@
 
     font-family: 'Cormorant Garamond', serif;
 
-    font-size: 16px;
+    font-size: 20px;
 
     font-style: italic;
 
@@ -398,12 +395,12 @@
 
 
     .footer-contact-value {
-        font-size: 13px;
+        font-size: 18px;
     }
 
 
     .quick-quote {
-        font-size: 14px;
+        font-size: 20px;
     }
 
 }
@@ -480,7 +477,7 @@
 
 
     .footer-logo {
-        height: 34px;
+        height: 50px;
     }
 
 
@@ -504,14 +501,14 @@
 
 
     .footer-contact-value {
-        font-size: 14px;
+        font-size: 18px;
 
         overflow-wrap: anywhere;
     }
 
 
     .quick-quote {
-        font-size: 15px;
+        font-size: 20px;
     }
 
 }

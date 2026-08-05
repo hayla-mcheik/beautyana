@@ -13,9 +13,9 @@
   
       <!--== Start Blog Area Wrapper ==-->
       <section class="blog-area blog-single-area">
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-4 order-1 order-lg-1">
+            {{-- <div class="col-lg-4 order-1 order-lg-1">
               <!--== Start Sidebar Area ==-->
               <div class="sidebar-area inner-left-padding">
    
@@ -48,8 +48,8 @@
 
               </div>
               <!--== End Sidebar Area ==-->
-            </div>
-            <div class="col-lg-8 order-0 order-lg-2">
+            </div> --}}
+            <div class="col-lg-12 order-0 order-lg-2">
               <div class="row">
                 <div class="col-12">
                   <!--== Start Blog Item ==-->

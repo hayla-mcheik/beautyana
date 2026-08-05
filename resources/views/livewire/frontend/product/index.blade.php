@@ -187,7 +187,7 @@
         padding: 8px 0;
         color: var(--demanto-muted);
         text-decoration: none;
-        font-size: 16px;
+        font-size: 22px;
         transition: var(--transition-smooth);
         border-bottom: 1px solid var(--luxury-border);
         position: relative;
@@ -327,7 +327,7 @@
 
     .featured-content h4 {
         font-family:"Cormorant Garamond",serif;
-        font-size: 18px;
+        font-size: 20px;
         margin-bottom: 6px;
         color: var(--demanto-dark);
         font-weight: 500;
@@ -340,7 +340,7 @@
         color: var(--boutique-text);
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 12px;
+        font-size: 14px;
         letter-spacing: 1px;
         transition: var(--transition-smooth);
         display: inline-flex;
@@ -353,7 +353,8 @@
         gap: 8px;
     }
 .category-sub-menu h6{
-    font-size: 18px;
+    font-size: 26px;
+    font-weight: 600;
 }
     /* Empty State */
     .empty-state {
@@ -468,8 +469,8 @@
             object-fit: contain;
         }
         .featured-content { padding: 12px; }
-        .featured-content h4 { font-size: 16px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .featured-content a { font-size: 8px; }
+        .featured-content h4 { font-size: 20px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .featured-content a { font-size: 14px; }
         
         .container-fluid {
             padding-left: 12px;
@@ -511,8 +512,8 @@
             object-fit: contain;
         }
         .featured-content { padding: 10px; }
-        .featured-content h4 { font-size: 16px; }
-        .featured-content a { font-size: 12px; }
+        .featured-content h4 { font-size: 20px; }
+        .featured-content a { font-size: 14px; }
         
         .product-header-wrap { padding: 10px 12px; }
         .product-tab-nav li a { width: 30px; height: 30px; font-size: 12px; }
@@ -558,7 +559,7 @@
 </style>
 
 <section class="product-area">
-    <div class="container">
+    <div class="container-fluid">
         <!-- Mobile Categories Section - ABOVE Products -->
         <div class="mobile-categories-section">
             <div class="mobile-categories-header" id="mobileCategoriesHeader">

@@ -230,6 +230,7 @@ var featuredProducts = new Swiper('.featured-products-slider', {
         }
     }
 });
+
 var exhibitionsSlider = new Swiper('.exhibitions-slider', {
 
     centeredSlides:true,

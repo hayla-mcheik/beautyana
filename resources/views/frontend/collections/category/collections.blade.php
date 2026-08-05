@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     font-weight: 600;
 
-    font-size: 20px;
+    font-size: 30px;
 
     letter-spacing: 4px;
 
@@ -520,7 +520,7 @@ padding-top: 20px;
 
     font-family: 'Roboto';
 
-    font-size: 12px;
+    font-size: 16px;
 
     font-weight: 800;
 
@@ -764,7 +764,7 @@ margin-top: 20px;
 
         padding: 0 10px;
 
-        font-size: 12px;
+        font-size: 16px;
 
         letter-spacing: 1.2px;
     }
@@ -816,7 +816,7 @@ margin-top: 20px;
 
     .collections-title > span {
 
-        font-size: 20px;
+        font-size: 24px;
 
         letter-spacing: 3px;
     }
@@ -846,7 +846,7 @@ margin-top: 20px;
 
     .collection-inner h3 {
 
-        font-size: 10px;
+        font-size: 14px;
     }
 
 

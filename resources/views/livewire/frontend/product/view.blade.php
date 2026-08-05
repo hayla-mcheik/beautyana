@@ -236,7 +236,7 @@
             display: inline-block;
             padding: 6px 15px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 14px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -282,7 +282,7 @@
             left: 0;
             top: 2px;
             color: var(--demanto-gold);
-            font-size: 10px;
+            font-size: 14px;
         }
 
         /* =========================================================
@@ -552,7 +552,7 @@
     ========================================================= -->
 
     <section class="product-area product-single-area">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="product-single-item">
@@ -560,63 +560,90 @@
                             <!-- =================================================
                                  PRODUCT IMAGES - NO CROPPING
                             ================================================== -->
-                            <div class="col-md-6">
-                                <div wire:ignore>
-                                    @if($product->productImages && $product->productImages->count() > 0)
-                                        <div class="product-thumb">
-                                            <!-- MAIN IMAGE -->
-                                            <div class="swiper-container single-product-thumb-content single-product-thumb-slider2">
-                                                <div class="swiper-wrapper">
-                                                    <div class="swiper-slide">
-                                                        <a
-                                                            class="lightbox-image"
-                                                            data-fancybox="gallery"
-                                                            href="{{ asset($product->productImages->first()->image) }}"
-                                                            id="main-image-link"
-                                                        >
-                                                            <img
-                                                                src="{{ asset($product->productImages->first()->image) }}"
-                                                                alt="{{ $product->name }}"
-                                                                id="main-image"
-                                                                loading="lazy"
-                                                            >
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                   <div class="col-md-6">
+    <div wire:ignore>
 
-                                            <!-- =================================================
-                                                 THUMBNAILS - NO CROPPING
-                                            ================================================== -->
-                                            <div class="swiper-container single-product-nav-content single-product-nav-slider2">
-                                                <div class="swiper-wrapper">
-                                                    @foreach($product->productImages as $index => $itemImg)
-                                                        <div class="swiper-slide">
-                                                            <div class="thumb-img-wrapper {{ $index === 0 ? 'active' : '' }}">
-                                                                <img
-                                                                    src="{{ asset($itemImg->image) }}"
-                                                                    class="thumbnail-image"
-                                                                    alt="{{ $product->name }}"
-                                                                    data-index="{{ $index }}"
-                                                                    data-image="{{ asset($itemImg->image) }}"
-                                                                    loading="lazy"
-                                                                >
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="product-thumb">
-                                            <div class="text-center py-5">
-                                                <p class="mb-0">No product images available.</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
+        @if($product->productImages && $product->productImages->count())
+
+        <div class="product-thumb">
+
+            <!-- Main Image -->
+            <div class="single-product-thumb-content">
+
+                <a
+                    id="main-image-link"
+                    href="{{ asset($product->productImages->first()->image) }}"
+                    data-fancybox="gallery"
+                    data-caption="{{ $product->name }}"
+                    class="lightbox-image">
+
+                    <img
+                        id="main-image"
+                        src="{{ asset($product->productImages->first()->image) }}"
+                        alt="{{ $product->name }}">
+                </a>
+
+            </div>
+
+            <!-- Thumbnails -->
+            <div class="single-product-nav-content mt-3">
+
+                <div class="row g-2">
+
+                    @foreach($product->productImages as $index => $image)
+
+                        <div class="col-3">
+
+                            <div
+                                class="thumb-img-wrapper {{ $index==0 ? 'active' : '' }}"
+                                data-image="{{ asset($image->image) }}">
+
+                                <img
+                                    src="{{ asset($image->image) }}"
+                                    class="thumbnail-image"
+                                    alt="{{ $product->name }}">
+
                             </div>
 
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+            {{-- Hidden images for Fancybox --}}
+            <div style="display:none">
+
+                @foreach($product->productImages as $image)
+
+                    <a
+                        href="{{ asset($image->image) }}"
+                        data-fancybox="gallery"
+                        data-caption="{{ $product->name }}">
+                    </a>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+        @else
+
+        <div class="product-thumb">
+
+            <div class="text-center py-5">
+                <p>No product images available.</p>
+            </div>
+
+        </div>
+
+        @endif
+
+    </div>
+</div>
                             <!-- =================================================
                                  PRODUCT INFORMATION
                             ================================================== -->
@@ -659,7 +686,7 @@
 
                                     <!-- CART -->
                                     <div class="product-quick-action">
-                                        <div class="white-bg ">
+                                        <div class="white-bg mt-4 ">
                                             <livewire:frontend.cart.add-to-cart :product="$product" />
                                         </div>
                                     </div>
@@ -692,120 +719,37 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const mainImage = document.getElementById('main-image');
-                const mainImageLink = document.getElementById('main-image-link');
-                const thumbnails = document.querySelectorAll('.thumbnail-image');
+document.addEventListener("DOMContentLoaded", function () {
 
-                // Function to initialize zoom with proper sizing
-                function initializeZoom() {
-                    if (!mainImage || !mainImageLink || typeof $.fn.zoom === 'undefined') {
-                        return;
-                    }
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        Thumbs: {
+            autoStart: true
+        }
+    });
 
-                    // Destroy existing zoom
-                    $('.zoom-hover').trigger('zoom.destroy');
+    const mainImage = document.getElementById("main-image");
+    const mainLink = document.getElementById("main-image-link");
 
-                    // Initialize zoom with proper options
-                    $('.zoom-hover').zoom({
-                        url: mainImageLink.getAttribute('href'),
-                        magnify: 1.5,
-                        touch: true // Enable touch support for mobile
-                    });
-                }
+    document.querySelectorAll(".thumb-img-wrapper").forEach(function(item){
 
-                // Function to initialize fancybox
-                function initializeFancybox() {
-                    if (typeof $ === 'undefined' || typeof $.fancybox === 'undefined') {
-                        return;
-                    }
+        item.addEventListener("click", function(){
 
-                    $.fancybox.destroy();
-                    $('[data-fancybox="gallery"]').fancybox({
-                        protect: true,
-                        touch: {
-                            vertical: true,
-                            momentum: true
-                        },
-                        thumbs: {
-                            autoStart: true
-                        }
-                    });
-                }
-
-                // Initialize on load
-                if (mainImage) {
-                    if (mainImage.complete) {
-                        initializeZoom();
-                    } else {
-                        mainImage.addEventListener('load', function () {
-                            initializeZoom();
-                        }, { once: true });
-                    }
-                }
-
-                initializeFancybox();
-
-                // Handle thumbnail clicks with mobile support
-                thumbnails.forEach(function (thumbnail) {
-                    thumbnail.addEventListener('click', function (e) {
-                        if (!mainImage || !mainImageLink) return;
-
-                        const newImageSrc = this.getAttribute('data-image');
-                        if (!newImageSrc) return;
-
-                        // Destroy existing zoom
-                        if (typeof $ !== 'undefined' && typeof $.fn.zoom !== 'undefined') {
-                            $('.zoom-hover').trigger('zoom.destroy');
-                        }
-
-                        // Update image
-                        mainImageLink.href = newImageSrc;
-                        mainImage.src = newImageSrc;
-
-                        // Reinitialize zoom after image loads
-                        if (mainImage.complete) {
-                            setTimeout(initializeZoom, 100);
-                        } else {
-                            mainImage.onload = function () {
-                                setTimeout(initializeZoom, 100);
-                            };
-                        }
-
-                        // Update active thumbnail
-                        document.querySelectorAll('.thumb-img-wrapper').forEach(function (wrapper) {
-                            wrapper.classList.remove('active');
-                        });
-                        this.closest('.thumb-img-wrapper').classList.add('active');
-
-                        // Reinitialize fancybox
-                        setTimeout(initializeFancybox, 200);
-                    });
-
-                    // Add touch support for mobile
-                    thumbnail.addEventListener('touchstart', function (e) {
-                        // Allow touch events to pass through
-                    }, { passive: true });
-                });
-
-                // Fix for Swiper on mobile - ensure proper sizing
-                if (typeof Swiper !== 'undefined') {
-                    setTimeout(function () {
-                        const thumbSwiper = document.querySelector('.single-product-nav-content');
-                        if (thumbSwiper && thumbSwiper.swiper) {
-                            thumbSwiper.swiper.update();
-                        }
-                    }, 500);
-                }
+            document.querySelectorAll(".thumb-img-wrapper").forEach(function(el){
+                el.classList.remove("active");
             });
 
-            // Fix for window resize on mobile
-            window.addEventListener('resize', function () {
-                const mainImage = document.getElementById('main-image');
-                if (mainImage && window.innerWidth <= 768) {
-                    mainImage.style.objectFit = 'contain';
-                }
-            });
+            this.classList.add("active");
+
+            const img = this.dataset.image;
+
+            mainImage.src = img;
+            mainLink.href = img;
+
+        });
+
+    });
+
+});
         </script>
     @endpush
 </div>

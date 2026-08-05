@@ -56,7 +56,7 @@
     
     .about-title {
         font-family:"Cormorant Garamond",serif;
-        font-size: 24px;
+        font-size: 32px;
         line-height: 1.2;
         color: var(--demanto-dark);
         text-transform: uppercase;
@@ -124,7 +124,7 @@
     .btn-demanto {
         background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
         color: #fff !important;
-        font-size: 9px;
+        font-size: 14px;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         padding: 8px 22px;
@@ -167,7 +167,7 @@
             padding: 20px 0;
         }
         .about-title {
-            font-size: 20px;
+            font-size: 26px;
         }
         .metric-number {
             font-size: 18px;
@@ -180,13 +180,13 @@
             letter-spacing: 0.5px;
         }
         .about-description {
-            font-size: 11px;
+            font-size: 14px;
         }
     }
 
     @media (max-width: 576px) {
         .about-title {
-            font-size: 18px;
+            font-size: 22px;
         }
         .metric-number {
             font-size: 16px;

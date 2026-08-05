@@ -149,7 +149,9 @@ section {
 
     background: var(--demanto-gold);
 }
-
+.swiper-pagination-bullet-active{
+    background: var(--demanto-gold);
+}
 
 /* ============================================================
    BUTTONS
@@ -186,7 +188,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 500;
 
     line-height: 1.4;
@@ -384,14 +386,14 @@ section {
 .slider-title{
     margin-bottom:18px;
     color:#F4E5C3;
-    font-size:clamp(42px,4vw,68px);
+    font-size:clamp(62px,4vw,68px);
     line-height:.95;
 }
 
 .slider-desc{
     max-width:420px;
     color:#fff;
-    font-size:14px;
+    font-size:20px;
     line-height:1.8;
 }
 
@@ -511,7 +513,7 @@ section {
 }
 
 .slider-desc{
-    font-size:11px;
+    font-size:18px;
     display: none;
 }
 
@@ -648,7 +650,7 @@ section {
         "Cormorant Garamond",
         serif;
 
-    font-size: 26px;
+    font-size: 36px;
     font-weight: 500;
 
     line-height: 1.2;
@@ -691,7 +693,7 @@ section {
         "Cormorant Garamond",
         serif;
 
-    font-size: 16px;
+    font-size: 18px;
 
     line-height: 1.7;
 }
@@ -867,7 +869,7 @@ section {
         "Cormorant Garamond",
         serif;
 
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 
     line-height: 1.3;
@@ -881,7 +883,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
 
     letter-spacing: 1px;
@@ -1188,7 +1190,7 @@ section {
         "Cormorant Garamond",
         serif;
 
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 500;
 
     line-height: 1.1;
@@ -1206,7 +1208,7 @@ section {
         "Montserrat",
         sans-serif;
 
-    font-size: 14px;
+    font-size: 20px;
 
     line-height: 1.9;
 }
@@ -1392,7 +1394,7 @@ section {
     .slider-desc {
         max-width: 520px;
 
-        font-size: 17px;
+        font-size: 20px;
     }
 
 
@@ -1444,7 +1446,7 @@ section {
     .slider-desc {
         max-width: 520px;
 
-        font-size: 17px;
+        font-size: 20px;
     }
 
 
@@ -1466,7 +1468,7 @@ section {
 
 
     .about-title {
-        font-size: 26px;
+        font-size: 32px;
     }
 
 
@@ -1552,7 +1554,7 @@ section {
     .about-description {
         max-width: 100%;
 
-        font-size: 15px;
+        font-size: 16px;
     }
 
 
@@ -1697,7 +1699,7 @@ section {
     .slider-desc {
         max-width: 265px;
 
-        font-size: 12px;
+        font-size: 18px;
 
         line-height: 1.65;
     }
@@ -1732,7 +1734,7 @@ section {
 
 
     .about-description {
-        font-size: 15px;
+        font-size: 16px;
 
         line-height: 1.65;
     }
@@ -1794,12 +1796,12 @@ section {
 
 
     .appointment-section h2 {
-        font-size: 29px;
+        font-size: 30px;
     }
 
 
     .appointment-section p {
-        font-size: 13px;
+        font-size: 16px;
 
         line-height: 1.75;
     }
@@ -1864,7 +1866,7 @@ section {
     .slider-desc {
         max-width: 235px;
 
-        font-size: 12px;
+        font-size: 18px;
 
         line-height: 1.55;
     }
@@ -1888,12 +1890,12 @@ section {
 
 
     .about-title {
-        font-size: 26px;
+        font-size: 28px;
     }
 
 
     .about-description {
-        font-size: 15px;
+        font-size: 16px;
     }
 
 
@@ -1905,7 +1907,7 @@ section {
 
 
     .featured-content h4 {
-        font-size: 16px;
+        font-size: 20px;
     }
 
 
@@ -1919,7 +1921,7 @@ section {
     /* APPOINTMENT */
 
     .appointment-section h2 {
-        font-size: 27px;
+        font-size: 32px;
     }
 
 
@@ -1965,7 +1967,7 @@ section {
     .slider-desc {
         max-width: 210px;
 
-        font-size: 11px;
+        font-size: 18px;
     }
 
 
@@ -1996,7 +1998,7 @@ section {
     /* ABOUT */
 
     .about-title {
-        font-size: 26px;
+        font-size: 28px;
     }
 
 
@@ -2022,7 +2024,7 @@ section {
 
 
     .appointment-section h2 {
-        font-size: 25px;
+        font-size: 30px;
     }
 
 

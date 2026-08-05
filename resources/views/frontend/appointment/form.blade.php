@@ -541,7 +541,7 @@ RESPONSIVE
         "Montserrat",
         sans-serif;
 
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 500;
 
     line-height: 1.4;
@@ -620,7 +620,7 @@ RESPONSIVE
         "Montserrat",
         sans-serif;
 
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 500;
 
     letter-spacing: 1.5px;

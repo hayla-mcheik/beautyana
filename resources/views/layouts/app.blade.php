@@ -15,7 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <!--== Bootstrap CSS ==-->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!--== Ionicon CSS ==-->
@@ -195,7 +197,7 @@ font-family:"Cormorant Garamond",serif;
 {{-- <script src="{{ asset('assets/js/countdown.js') }}"></script> --}}
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 <script>
     // Scroll to Top Button
     const scrollBtn = document.getElementById('scroll-to-top');

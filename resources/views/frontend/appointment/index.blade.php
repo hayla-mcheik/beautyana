@@ -30,9 +30,6 @@ Book Appointment
 </h1>
 
 <p class="appointment-subtitle">
-
-Reserve a private consultation with one of our jewelry specialists.
-
 </p>
 
 </div>

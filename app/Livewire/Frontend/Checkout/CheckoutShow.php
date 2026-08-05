@@ -240,7 +240,7 @@ public function placeOrder()
 
             'user_id' => auth()->check() ? auth()->id() : null,
 
-            'tracking_no' => 'demanto-' . Str::random(10),
+ 'tracking_no' => 'DEM-' . now()->format('Ymd') . '-' . strtoupper(Str::random(6)),
 
             'fullname' => $this->fullname,
 
@@ -250,13 +250,13 @@ public function placeOrder()
 
             'address' => $this->address,
 
-            'status_message' => 'in progress',
+           'status_message' => 'pending',
 
             'payment_mode' => $this->payment_mode,
 
             'payment_id' => $this->payment_id,
 
-            'total_price' => $this->totalProductAmount,
+        'total_price' => $this->totalProductAmount,
 
         ]);
 
@@ -304,36 +304,103 @@ public function placeOrder()
     });
 }
 
-    public function codOrder()
-    {
-        // Make sure personal info is validated
-        if (!$this->isPersonalInfoValid) {
-            $this->dispatch('message', text: 'Please complete your personal information first', type: 'warning', status: 200);
+public function codOrder()
+{
+    // Validate personal information
+    if (!$this->isPersonalInfoValid) {
+
+        $this->dispatch(
+            'message',
+            text: 'Please complete your personal information first.',
+            type: 'warning',
+            status: 200
+        );
+
+        return;
+    }
+
+    $this->payment_mode = 'Cash on Delivery';
+
+    try {
+
+        // Create Order
+        $order = $this->placeOrder();
+
+        if (!$order) {
             return;
         }
 
-        $this->payment_mode = 'Cash on Delivery';
-        $order = $this->placeOrder();
+        /*
+        |--------------------------------------------------------------------------
+        | Clear Cart
+        |--------------------------------------------------------------------------
+        */
 
-        if ($order) {
-            if (auth()->check()) {
-                Cart::where('user_id', auth()->id())->delete();
-            } else {
-                CartHelper::forgetGuestCart();
-            }
+        if (auth()->check()) {
 
-            if($order->email) {
-                try {
-                    Mail::to($order->email)->send(new PlaceOrderMailable($order));
-                } catch (\Exception $e) {
-                    \Log::error('Order email failed: ' . $e->getMessage());
-                }
-            }
+            Cart::where('user_id', auth()->id())->delete();
 
-            $this->dispatch('message', text: 'Order Placed Successfully', type: 'success', status: 200);
-            return redirect()->to('thank-you');
+        } else {
+
+            CartHelper::forgetGuestCart();
+
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Send Confirmation Email
+        |--------------------------------------------------------------------------
+        */
+
+        if (!empty($order->email)) {
+
+            try {
+
+                Mail::to($order->email)
+                    ->send(new PlaceOrderMailable($order));
+
+            } catch (\Exception $mailException) {
+
+                \Log::error(
+                    'Order Confirmation Email Error: '
+                    .$mailException->getMessage()
+                );
+
+            }
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Success Message
+        |--------------------------------------------------------------------------
+        */
+
+        $this->dispatch(
+            'message',
+            text: 'Thank you! Your order has been placed successfully.',
+            type: 'success',
+            status: 200
+        );
+
+        return redirect()->to('thank-you');
+
+    } catch (\Exception $e) {
+
+        \Log::error(
+            'Order Placement Error: '.$e->getMessage()
+        );
+
+        $this->dispatch(
+            'message',
+            text: 'Sorry, we could not place your order. Please try again.',
+            type: 'error',
+            status: 500
+        );
+
+        return;
     }
+}
 
     public function render()
     {

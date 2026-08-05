@@ -53,7 +53,7 @@
 
         .title {
            font-family:"Cormorant Garamond",serif;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 500;
             color: var(--demanto-dark);
             margin-bottom: 12px;
@@ -92,7 +92,7 @@
 
         .product-content .title {
 font-family:"Cormorant Garamond",serif;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 500;
             margin-bottom: 4px;
             border: none;
@@ -111,7 +111,7 @@ font-family:"Cormorant Garamond",serif;
 
         .product-price {
             color: var(--demanto-gold);
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 600;
         }
 
@@ -134,7 +134,7 @@ font-family:"Cormorant Garamond",serif;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition-smooth);
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--demanto-dark);
         }
@@ -150,7 +150,7 @@ font-family:"Cormorant Garamond",serif;
             border: none;
             background: transparent;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 22px;
             color: var(--demanto-dark);
         }
 
@@ -162,7 +162,7 @@ font-family:"Cormorant Garamond",serif;
         .product-close a {
             color: #999;
             transition: var(--transition-smooth);
-            font-size: 18px;
+            font-size: 22px;
         }
 
         .product-close a:hover {
@@ -173,7 +173,7 @@ font-family:"Cormorant Garamond",serif;
         .btn-primary {
             background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
             color: #fff;
-            font-size: 18px;
+            font-size: 22px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             padding: 7px 18px;
@@ -213,13 +213,13 @@ font-family:"Cormorant Garamond",serif;
 
         .card-block-item .label {
             color: var(--demanto-muted);
-            font-size: 18px;
+            font-size: 22px;
         }
 
         .card-block-item .value {
             color: var(--demanto-dark);
             font-weight: 600;
-            font-size: 18px;
+            font-size: 22px;
         }
 
         .separator {
@@ -231,7 +231,7 @@ font-family:"Cormorant Garamond",serif;
         .btn-checkout {
             background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
             color: #fff;
-            font-size: 18px;
+            font-size: 22px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             padding: 9px 18px;
@@ -264,7 +264,7 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .empty-cart p {
-            font-size: 18px;
+            font-size: 22px;
             color: var(--demanto-muted);
             margin-bottom: 12px;
         }
@@ -439,7 +439,7 @@ font-family:"Cormorant Garamond",serif;
                                 <div class="separator"></div>
                                 <div class="card-block-item fw-bold">
                                     <span class="label">Total</span>
-                                    <span class="value" style="color: var(--demanto-gold); font-size: 16px;">${{ number_format($total, 2) }}</span>
+                                    <span class="value" style="color: var(--demanto-gold); font-size: 20px;">${{ number_format($total, 2) }}</span>
                                 </div>
                             </div>
                             

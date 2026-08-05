@@ -118,7 +118,7 @@ font-family:"Cormorant Garamond",serif;
             color: #fff;
             font-size: 16px;
             letter-spacing: 2px;
-            text-transform: uppercase;
+            text-transform: capitalize;
             padding: 0px 20px;
             border: none;
             border-radius: 20px;
@@ -279,7 +279,7 @@ font-family:"Cormorant Garamond",serif;
                                     <div id="collapseTwo" class="accordion-collapse collapse @if(!$isPersonalInfoValid) show @endif" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="checkout-accordion-body">
                                             <div class="personal-addresses">
-                                                <p class="mb-3" style="font-size: 16px; color: var(--demanto-muted);">Please provide your information for order delivery</p>
+                                                <p class="mb-3" style="font-size: 26px; color: var(--demanto-muted);">Please provide your information for order delivery</p>
                                                 <div class="delivery-address-form">
                                                     <form wire:submit.prevent="validatePersonalInformation">
                                                         <div class="form-group">
@@ -367,11 +367,11 @@ font-family:"Cormorant Garamond",serif;
                                 @foreach($carts as $item)
                                     <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
                                         <div>
-                                            <h6 class="mb-0" style="font-size: 18px; font-weight: 500;">{{ $item->product->name }}</h6>
-                                            <small class="text-muted" style="font-size: 16px;">Qty: {{ $item->quantity }}</small>
+                                            <h6 class="mb-0" style="font-size: 26px; font-weight: 500;">{{ $item->product->name }}</h6>
+                                            <small class="text-muted" style="font-size: 26px;">Qty: {{ $item->quantity }}</small>
                                         </div>
                                         <div class="text-end">
-                                            <span style="font-size: 18px; color: var(--demanto-gold);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
+                                            <span style="font-size: 26px; color: var(--demanto-gold);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -380,17 +380,17 @@ font-family:"Cormorant Garamond",serif;
                             @if($totalProductAmount != 0)
                                 <div class="cart-detailed-totals">
                                     <div class="d-flex justify-content-between mb-1">
-                                        <span class="label" style="font-size: 18px;">Subtotal</span>
-                                        <span class="value" style="font-size: 18px;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="label" style="font-size: 26px;">Subtotal</span>
+                                        <span class="value" style="font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-1">
                                         <span class="label" style="font-size: 18px;">Shipping</span>
-                                        <span class="value text-success" style="font-size: 18px;">Free</span>
+                                        <span class="value text-success" style="font-size: 26px;">Free</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex justify-content-between fw-bold">
-                                        <span class="label" style="font-size: 18px;">Total</span>
-                                        <span class="value" style="color: var(--demanto-gold); font-size: 18px;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="label" style="font-size: 26px;">Total</span>
+                                        <span class="value" style="color: var(--demanto-gold); font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                 </div>
                             @endif

@@ -183,7 +183,7 @@
 
     .exhibition-content h3 {
         font-family: 'Roboto', sans-serif;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 500;
         color: var(--demanto-dark);
         margin-bottom: 6px;
@@ -195,7 +195,7 @@
     }
 
     .exhibition-date {
-        font-size: 10px;
+        font-size: 16px;
         color: var(--demanto-gold);
         letter-spacing: 1px;
         margin-bottom: 8px;
@@ -206,11 +206,11 @@
     }
 
     .exhibition-date i {
-        font-size: 10px;
+        font-size: 14px;
     }
 
     .exhibition-content p {
-        font-size: 12px;
+        font-size: 16px;
         color: var(--demanto-muted);
         line-height: 1.5;
         margin-bottom: 12px;
@@ -221,7 +221,7 @@
         text-align: center;
         padding: 40px 20px;
         background: #fff;
-        border-radius: 18px;
+        border-radius: 20px;
         border: 1px solid var(--luxury-border);
     }
 
@@ -234,13 +234,13 @@
 
     .empty-state h3 {
         font-family: 'Roboto', sans-serif;
-        font-size: 18px;
+        font-size: 20px;
         color: var(--demanto-dark);
         margin-bottom: 8px;
     }
 
     .empty-state p {
-        font-size: 12px;
+        font-size: 20px;
         color: var(--demanto-muted);
     }
 
@@ -288,10 +288,10 @@
             height: 300px;
         }
         .exhibition-content h3 {
-            font-size: 15px;
+            font-size: 18px;
         }
         .exhibition-content p {
-            font-size: 11px;
+            font-size: 14px;
         }
     }
 
@@ -306,10 +306,10 @@
             font-size: 14px;
         }
         .exhibition-content p {
-            font-size: 11px;
+            font-size: 14px;
         }
         .exhibition-date {
-            font-size: 9px;
+            font-size: 14px;
         }
         .exhibition-icon {
             font-size: 16px;
@@ -342,9 +342,9 @@
     display:block;
     font-family:'Roboto';
     font-weight: 600;
-    font-size:18px;
+    font-size:30px;
     letter-spacing:4px;
-    color:#6f5d48;
+    color:var(--demanto-dark);
     text-transform:uppercase;
 }
 
@@ -377,7 +377,7 @@
 @media(max-width:768px){
     .collections-title span{
 
-    font-size:16px;
+    font-size:24px;
 }
 }
 </style>

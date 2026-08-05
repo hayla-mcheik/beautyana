@@ -10,7 +10,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $table='orders';
-    protected $fillable=['user_id','tracking_no','fullname','email','phone','pincode','address','status_message','payment_mode','payment_id','total_amount'];
+    protected $fillable=['user_id','tracking_no','fullname','email','phone','pincode','address','status_message','payment_mode','payment_id','total_price'];
 
     public function orderItems(): HasMany
     {
