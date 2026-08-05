@@ -552,7 +552,7 @@
     ========================================================= -->
 
     <section class="product-area product-single-area">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="product-single-item">
