@@ -530,22 +530,7 @@
          BREADCRUMB
     ========================================================= -->
 
-    @include('layouts.inc.frontend.breadcrumb', [
-        'breadcrumbs' => [
-            [
-                'title' => 'Collections',
-                'url' => url('/categories')
-            ],
-            [
-                'title' => $category->name,
-                'url' => url('/collections/' . $category->slug)
-            ],
-            [
-                'title' => $product->name,
-                'url' => '#'
-            ]
-        ]
-    ])
+
 
     <!-- =========================================================
          PRODUCT SINGLE AREA

@@ -86,18 +86,53 @@
                                 <tr>
                                     <td width="10%">{{ $orderItem->id }}</td>
                                     <td width="10%">
-                                        @if($orderItem->product->productImages && count($orderItem->product->productImages) > 0)
-                                            <img src="{{ asset($orderItem->product->productImages[0]->image) }}" 
-                                                 style="width: 50px; height: 50px" alt="">
-                                        @else
-                                            <img src="" style="width: 50px; height: 50px" alt="">
-                                        @endif
+                          @if($orderItem->product)
+
+    @if($orderItem->product->productImages->count())
+
+        <img
+            src="{{ asset($orderItem->product->productImages->first()->image) }}"
+            style="width:50px;height:50px"
+            alt="Product">
+
+    @else
+
+        <img
+            src="{{ asset('assets/images/no-image.png') }}"
+            style="width:50px;height:50px"
+            alt="No Image">
+
+    @endif
+
+@else
+
+    <img
+        src="{{ asset('assets/images/no-image.png') }}"
+        style="width:50px;height:50px"
+        alt="Deleted Product">
+
+@endif
                                     </td>
                                     <td>
-                                        {{ $orderItem->product->name }}
-                                        @if($orderItem->productColor && $orderItem->productColor->color)
-                                            <span>- with color: {{ $orderItem->productColor->color->name }}</span>
-                                        @endif
+                               @if($orderItem->product)
+
+    {{ $orderItem->product->name }}
+
+@else
+
+    <span class="text-danger">
+        Product Deleted
+    </span>
+
+@endif
+                                @if($orderItem->product && $orderItem->productColor && $orderItem->productColor->color)
+
+    <span>
+        - with color:
+        {{ $orderItem->productColor->color->name }}
+    </span>
+
+@endif
                                     </td>
                                     <td width="10%">${{ number_format($orderItem->price, 2) }}</td>
                                     <td width="10%">{{ $orderItem->quantity }}</td>
@@ -126,14 +161,34 @@
                             @method('PUT')
                             <label>Update Your Order Status</label>
                             <div class="input-group">
-                                <select name="order_status" class="form-select">
-                                    <option value="">Select Order Status</option>
-                                    <option value="in progress" {{ Request::get('status') == 'in progress' ? 'selected':'' }}>In Progress</option>
-                                    <option value="completed" {{ Request::get('status') == 'completed'  ? 'selected':''}}>Completed</option>
-                                    <option value="pending" {{ Request::get('status') == 'pending'  ? 'selected':''}}>Pending</option>
-                                    <option value="cancelled" {{ Request::get('status') == 'cancelled'  ? 'selected':''}}>Cancelled</option>
-                                    <option value="out-for-delivery" {{ Request::get('status') == 'out-for-delivery'  ? 'selected':''}}>Out for delivery</option>
-                                </select>  
+                     <select name="order_status" class="form-select">
+
+    <option value="pending"
+        {{ $order->status_message == 'pending' ? 'selected' : '' }}>
+        Pending
+    </option>
+
+    <option value="in progress"
+        {{ $order->status_message == 'in progress' ? 'selected' : '' }}>
+        In Progress
+    </option>
+
+    <option value="out-for-delivery"
+        {{ $order->status_message == 'out-for-delivery' ? 'selected' : '' }}>
+        Out For Delivery
+    </option>
+
+    <option value="completed"
+        {{ $order->status_message == 'completed' ? 'selected' : '' }}>
+        Completed
+    </option>
+
+    <option value="cancelled"
+        {{ $order->status_message == 'cancelled' ? 'selected' : '' }}>
+        Cancelled
+    </option>
+
+</select>
                                 <button type="submit" class="btn btn-primary text-white">Update</button>
                             </div>
                         </form>

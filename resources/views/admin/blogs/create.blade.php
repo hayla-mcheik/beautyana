@@ -39,8 +39,31 @@
         <input type="text" name="description" class="form-control" rows="3">
 </div>
 <div class="form-group mb-3">
-    <label for="image">Image</label>
+    <label>Cover Image</label>
     <input type="file" name="image" class="form-control">
+
+    @error('image')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+</div>
+
+<div class="form-group mb-3">
+    <label>Gallery Images</label>
+
+    <input
+        type="file"
+        name="gallery[]"
+        class="form-control"
+        multiple
+        accept=".jpg,.jpeg,.png,.webp">
+
+    <small class="text-muted">
+        Hold CTRL to select multiple images.
+    </small>
+
+    @error('gallery.*')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
 </div>
 
 <div class="mb-3">

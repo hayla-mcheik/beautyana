@@ -123,20 +123,50 @@
                 <ul class="main-menu nav position-relative boutique-nav ul-header-nav">
                   <li><a href="{{ url('aboutus') }}">About Us</a></li>
                   
-                  <li class="has-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-click-trigger">Products <i class="ion-ios-arrow-down"></i></a>
-                    <ul class="boutique-dropdown">
-                        @if(isset($allCategories))
-                            @foreach($allCategories as $categoryItem)
-                                <li>
-                                    <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                                        {{ $categoryItem->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                  </li>
+@foreach($menus as $menu)
+
+    {{-- MENU WITHOUT CATEGORIES --}}
+    @if($menu->categories->count() == 0)
+        <li>
+            <a href="#">
+                {{ $menu->name }}
+            </a>
+        </li>
+
+    {{-- MENU WITH DROPDOWN --}}
+    @else
+        <li class="has-dropdown">
+            <a href="#">
+                {{ $menu->name }} <i class="ion-ios-arrow-down"></i>
+            </a>
+
+            <ul class="boutique-dropdown">
+
+                @foreach($menu->categories as $category)
+
+                    {{-- MAIN CATEGORY --}}
+                    <li>
+                        <a href="{{ url('collections/'.$category->slug) }}">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+
+                    {{-- SUBCATEGORIES --}}
+                    @foreach($category->children as $sub)
+                        <li style="padding-left:20px;">
+                            <a href="{{ url('collections/'.$sub->slug) }}">
+                                - {{ $sub->name }}
+                            </a>
+                        </li>
+                    @endforeach
+
+                @endforeach
+
+            </ul>
+        </li>
+    @endif
+
+@endforeach
 
                   <li><a href="{{ url('blogs')}}">News</a></li>
                   <li><a href="{{ url('contactus') }}">Contact us</a></li>
@@ -396,12 +426,60 @@
     }
     
 }
+.mega-menu {
+    position: relative;
+}
+
+.mega-menu-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 30px;
+    display: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+
+.mega-menu:hover .mega-menu-content {
+    display: block;
+}
+
+.mega-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mega-menu-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mega-menu-content ul li {
+    margin-bottom: 6px;
+}
+
+.mega-menu-content ul li a {
+    color: #555;
+    font-size: 13px;
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const trigger = document.querySelector('.dropdown-click-trigger');
-    const menu = document.querySelector('.boutique-dropdown');
+document.querySelectorAll('.has-dropdown').forEach(function(item) {
+    const trigger = item.querySelector('a');
+    const menu = item.querySelector('.mega-menu-content');
+
+    if (trigger && menu) {
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            menu.classList.toggle('is-open');
+            item.classList.toggle('active');
+        });
+    }
+});
 
     if (trigger && menu) {
         trigger.addEventListener('click', function(e) {

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>taly's collection | Laravel Ecommerce</title>
+    <title>Beautyana | Laravel Ecommerce</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -487,27 +487,53 @@
 
       <div class="off-canvas-item">
         <div class="custom-mobile-menu">
-          <ul class="mobile-main-nav">
-            <li><a href="{{ url('aboutus') }}">About Us</a></li>
-            
-            <li class="has-mobile-dropdown">
-              <a href="javascript:void(0)" class="mobile-dropdown-trigger">
-                Products <i class="ion-ios-arrow-down float-end"></i>
-              </a>
-              <ul class="mobile-sub-categories" style="display: none;">
-                @foreach($allCategories as $categoryItem)
-                  <li>
-                    <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                      {{ $categoryItem->name }}
-                    </a>
-                  </li>
-                @endforeach
-              </ul>
-            </li>
+     <ul class="mobile-main-nav">
 
-            <li><a href="{{ url('blogs') }}">News</a></li>
-            <li><a href="{{ url('contactus') }}">Contact us</a></li>
-          </ul>
+    <li><a href="{{ url('aboutus') }}">About</a></li>
+
+    @foreach($menus as $menu)
+        <li class="has-mobile-dropdown">
+
+            <a href="javascript:void(0)" class="mobile-dropdown-trigger">
+                {{ $menu->name }}
+                <i class="ion-ios-arrow-down float-end"></i>
+            </a>
+
+            @if($menu->categories->count())
+                <ul class="mobile-sub-categories" style="display:none;">
+
+                    @foreach($menu->categories as $category)
+                        <li>
+                            <a href="{{ url('collections/'.$category->slug) }}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+
+                        {{-- SUBCATEGORIES --}}
+                        @if($category->children->count())
+                            <ul class="mobile-sub-categories">
+                                @foreach($category->children as $child)
+                                    <li style="padding-left:15px;">
+                                        <a href="{{ url('collections/'.$child->slug) }}">
+                                            - {{ $child->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                    @endforeach
+
+                </ul>
+            @endif
+
+        </li>
+    @endforeach
+
+    <li><a href="{{ url('blogs') }}">News</a></li>
+    <li><a href="{{ url('contactus') }}">Contact</a></li>
+
+</ul>
         </div>
       </div>
     </div>
@@ -582,25 +608,22 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
     // Inside your existing DOMContentLoaded block:
-const mobileDropTrigger = document.querySelector('.mobile-dropdown-trigger');
-
-if (mobileDropTrigger) {
-    mobileDropTrigger.addEventListener('click', function(e) {
+document.querySelectorAll('.mobile-dropdown-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
         e.preventDefault();
-        const parentLi = this.parentElement;
-        const subMenu = this.nextElementSibling;
-        
-        // Toggle Active Class
-        parentLi.classList.toggle('active');
-        
-        // Slide Toggle logic
-        if (subMenu.style.display === "none" || subMenu.style.display === "") {
-            subMenu.style.display = "block";
+
+        const parent = this.parentElement;
+        const submenu = this.nextElementSibling;
+
+        parent.classList.toggle('active');
+
+        if (submenu.style.display === "block") {
+            submenu.style.display = "none";
         } else {
-            subMenu.style.display = "none";
+            submenu.style.display = "block";
         }
     });
-}
+});
     window.addEventListener('message', event => {
         alertify.set('notifier','position', 'top-right');
         alertify.notify(event.detail.text , event.detail.type);

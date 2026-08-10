@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')
+{{-- @section('title')
 {{ $category->meta_title }}
 @endsection
 
@@ -9,7 +9,7 @@
 
 @section('meta_description')
 {{ $category->meta_description }}
-@endsection
+@endsection --}}
 
 @section('content')
 <style>

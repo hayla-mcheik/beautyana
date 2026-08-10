@@ -48,7 +48,7 @@
       <div class="row align-items-center">
 <div class="col-lg-12 col-md-12 text-center text-lg-center mb-3 mb-lg-0">
     <p class="copyright mb-0">
-        Copyright © {{ date('Y') }} Taly's Collection. All Rights Reserved
+        Copyright © {{ date('Y') }} Beautyana. All Rights Reserved
     </p>
 </div>
 

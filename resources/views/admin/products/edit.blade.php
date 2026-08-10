@@ -1,239 +1,381 @@
+
 @extends('layouts.admin')
 
 @section('content')
 
 <div class="row">
     <div class="col-md-12">
-        
-        @if(session('message'))
-        <h5 class="alert alert-success mb-2">{{ session('message') }}</h5>
-        @endif
-        
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit Products
-                    <a href="{{ url('admin/products') }}" class="btn btn-danger btn-sm float-end">Back</a>
-                </h4>
+
+        {{-- PAGE HEADER --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="mb-1">
+                    <i class="mdi mdi-package-variant-closed"></i>
+                    Edit Product
+                </h3>
+                <p class="text-muted mb-0">
+                    Update product information, pricing, stock, visibility and product images.
+                </p>
             </div>
 
-            <div class="card-body">
-                @if($errors->any())
-                <div class="alert alert-warning">
+            <a href="{{ url('admin/products') }}" class="btn btn-outline-secondary">
+                <i class="mdi mdi-arrow-left"></i>
+                Back to Products
+            </a>
+        </div>
+
+        {{-- SUCCESS MESSAGE --}}
+        @if(session('message'))
+            <div class="alert alert-success">
+                <i class="mdi mdi-check-circle-outline"></i>
+                {{ session('message') }}
+            </div>
+        @endif
+
+        {{-- VALIDATION ERRORS --}}
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <h6 class="mb-2">
+                    <i class="mdi mdi-alert-circle-outline"></i>
+                    Please correct the following errors:
+                </h6>
+                <ul class="mb-0">
                     @foreach($errors->all() as $error)
-                    <div>{{ $error }}</div>
+                        <li>{{ $error }}</li>
                     @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ url('admin/products/'.$product->id) }}" method="POST" enctype="multipart/form-data" id="productForm">
+            @csrf
+            @method('PUT')
+
+            {{-- PRODUCT INFORMATION --}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-1">
+                        <i class="mdi mdi-information-outline"></i>
+                        Product Information
+                    </h5>
+                    <small class="text-muted">
+                        Update the category and general product information.
+                    </small>
                 </div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                {{-- CATEGORY --}}
+<div class="col-md-6 mb-3">
+    <label class="form-label fw-semibold">
+        Category <span class="text-danger">*</span>
+    </label>
+
+    <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" required>
+        <option value="">Select Product Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                {{ $category->menu->name ?? 'No Menu' }}
+                &rarr;
+                @if($category->parent)
+                    {{ $category->parent->name }} &rarr;
                 @endif
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
 
-                <form action="{{ url('admin/products/'.$product->id) }}" method="POST" enctype="multipart/form-data" id="productForm">
-                    @csrf
-                    @method('PUT')
-                    
-                    <!-- Hidden input to store active tab -->
-                    <input type="hidden" name="active_tab" id="activeTab" value="{{ old('active_tab', session('active_tab', 'home-tab')) }}">
+    <small class="text-muted">
+        Format: Menu &rarr; Parent Category (if exists) &rarr; Subcategory
+    </small>
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                                Home
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="seotag-tab" data-bs-toggle="tab" data-bs-target="#seotag-tab-pane" type="button" role="tab" aria-controls="seotag-tab-pane" aria-selected="false">
-                                SEO Tags
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details-tab-pane" type="button" role="tab" aria-controls="details-tab-pane" aria-selected="false">
-                                Details
-                            </button>
-                        </li> 
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
-                                Product Images
-                            </button>
-                        </li>
-                    </ul>
+    @error('category_id')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+                        {{-- PRODUCT NAME --}}
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">
+                                Product Name <span class="text-danger">*</span>
+                            </label>
 
-                    <div class="tab-content" id="myTabContent">
-                        <!-- Home Tab -->
-                        <div class="tab-pane fade border p-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                            <div class="mb-3">
-                                <label>Category</label>
-                                <select name="category_id" class="form-control">
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected':'' }} >
-                                        {{ $category->name }}
-                                    </option>
-                                    @endforeach
-                                </select>
+                            <input type="text" name="name" value="{{ old('name', $product->name) }}" class="form-control @error('name') is-invalid @enderror" placeholder="Example: Diamond Tennis Bracelet" required>
+
+                            <small class="text-muted">
+                                Changing the product name will automatically update the slug if your controller generates the slug from the name.
+                            </small>
+
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        {{-- DESCRIPTION --}}
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-semibold">
+                                Product Description <span class="text-danger">*</span>
+                            </label>
+
+                            <textarea name="description" rows="6" class="form-control @error('description') is-invalid @enderror" placeholder="Enter product material, design, size, collection information and other useful details...">{{ old('description', $product->description) }}</textarea>
+
+                            @error('description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- PRICING & INVENTORY --}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-1">
+                        <i class="mdi mdi-cash-multiple"></i>
+                        Pricing & Inventory
+                    </h5>
+                    <small class="text-muted">
+                        Update the prices and available stock quantity.
+                    </small>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                        {{-- ORIGINAL PRICE --}}
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">
+                                Original Price <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" step="0.01" min="0" name="original_price" value="{{ old('original_price', $product->original_price) }}" class="form-control @error('original_price') is-invalid @enderror" placeholder="0.00">
                             </div>
 
-                            <div class="mb-3">
-                                <label>Product Name</label>
-                                <input type="text" class="form-control" value="{{ $product->name }}" name="name" />
+                            <small class="text-muted">Price before discount.</small>
+
+                            @error('original_price')
+                                <div class="text-danger small mt-1">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        {{-- SELLING PRICE --}}
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">
+                                Selling Price <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" step="0.01" min="0" name="selling_price" value="{{ old('selling_price', $product->selling_price) }}" class="form-control @error('selling_price') is-invalid @enderror" placeholder="0.00">
                             </div>
 
-                            <div class="mb-3">
-                                <label>Slug</label>
-                                <input type="text" class="form-control" value="{{ $product->slug }}" name="slug" />
-                            </div>
+                            <small class="text-muted">Current price displayed to customers.</small>
 
-                            <div class="mb-3">
-                                <label>Small Description (500 words)</label>
-                                <textarea class="form-control" name="small_description" rows="4">{{ $product->small_description }}</textarea>
-                            </div>
+                            @error('selling_price')
+                                <div class="text-danger small mt-1">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
-                            <div class="mb-3">
-                                <label>Description</label>
-                                <textarea class="form-control" name="description" rows="4">{{ $product->description }}</textarea>
+                        {{-- QUANTITY --}}
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">
+                                Stock Quantity <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="number" min="0" name="quantity" value="{{ old('quantity', $product->quantity) }}" class="form-control @error('quantity') is-invalid @enderror">
+
+                            <small class="text-muted">Total available product quantity.</small>
+
+                            @error('quantity')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- PRODUCT VISIBILITY --}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-1">
+                        <i class="mdi mdi-eye-outline"></i>
+                        Product Visibility
+                    </h5>
+                    <small class="text-muted">
+                        Control where the product appears on the website.
+                    </small>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                        {{-- FEATURED --}}
+                        <div class="col-md-6 mb-3">
+                            <div class="setting-option d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Featured Product</h6>
+                                    <small class="text-muted">Highlight this product as a featured item.</small>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" name="featured" value="1" id="featured" {{ old('featured', $product->featured) ? 'checked' : '' }}>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- SEO Tags Tab -->
-                        <div class="tab-pane fade border p-3" id="seotag-tab-pane" role="tabpanel" aria-labelledby="seotag-tab" tabindex="0">
-                            <div class="mb-3">
-                                <label>Meta Title</label>
-                                <input type="text" class="form-control" name="meta_title" value="{{ $product->meta_title }}" />
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Meta Keyword</label>
-                                <textarea class="form-control" name="meta_keyword" rows="4">{{ $product->meta_keyword }}</textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label>Meta Description</label>
-                                <textarea class="form-control" name="meta_description" rows="4">{{ $product->meta_description }}</textarea>
-                            </div>
-                        </div>
-
-                        <!-- Details Tab -->
-                        <div class="tab-pane fade border p-3" id="details-tab-pane" role="tabpanel" aria-labelledby="details-tab" tabindex="0">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Original Price</label>
-                                        <input type="text" class="form-control" value="{{ $product->original_price }}" name="original_price" />
-                                    </div>
+                        {{-- STATUS --}}
+                        <div class="col-md-6 mb-3">
+                            <div class="setting-option d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">Product Visible</h6>
+                                    <small class="text-muted">Enable to display the product to customers.</small>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Selling Price</label>
-                                        <input type="text" class="form-control" value="{{ $product->selling_price }}" name="selling_price" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Quantity</label>
-                                        <input type="number" class="form-control" value="{{ $product->quantity }}" name="quantity" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Trending</label>
-                                        <input type="checkbox" name="trending" {{ $product->trending == '1' ? 'checked':'' }} style="width:30px; height:30px;" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Featured</label>
-                                        <input type="checkbox" name="featured" {{ $product->featured == '1' ? 'checked':'' }} style="width:30px; height:30px;" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label>Status</label>
-                                        <input type="checkbox" name="status" {{ $product->status == '1' ? 'checked':'' }} style="width:30px; height:30px;" />
-                                    </div>
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" name="status" value="1" id="status" {{ old('status', $product->status) ? 'checked' : '' }}>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Images Tab -->
-                        <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
-                            <div class="alert alert-info">
-                                <strong><i class="fas fa-info-circle"></i> Note:</strong> You can upload additional images. Existing images are shown below.
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label>Upload New Images</label>
-                                <div class="input-group">
-                                    <input type="file" name="image[]" multiple class="form-control" id="productImages" accept="image/*">
-                                    <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('productImages').click()">
-                                        <i class="fas fa-folder-open"></i> Browse
-                                    </button>
-                                </div>
-                                <small class="text-muted">You can select multiple images at once or add more later.</small>
-                                
-                                @error('image')
-                                <div class="text-danger mt-2">
-                                    <i class="fas fa-exclamation-triangle"></i> {{ $message }}
-                                </div>
-                                @enderror
-                                
-                                @error('image.*')
-                                <div class="text-danger mt-2">
-                                    <i class="fas fa-exclamation-triangle"></i> {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
+                    </div>
 
-                            <!-- New Images Counter -->
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label>New Images Selected:</label>
-                                    <span id="newImageCountBadge" class="badge bg-secondary">0 new images</span>
-                                </div>
-                            </div>
+                    <div class="alert alert-light border mb-0">
+                        <strong>Visibility explanation:</strong>
+                        Featured highlights the product in featured areas. Product Visible controls whether customers can see the product.
+                    </div>
+                </div>
+            </div>
 
-                            <!-- Preview of newly selected images -->
-                            <div id="newImagePreview" class="row mb-4">
-                                <!-- New image previews will appear here -->
-                            </div>
+            {{-- EXISTING PRODUCT IMAGES --}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1">
+                                <i class="mdi mdi-image-multiple-outline"></i>
+                                Current Product Images
+                            </h5>
+                            <small class="text-muted">Images currently saved for this product.</small>
+                        </div>
 
-                            <!-- Existing Images -->
-                            @if($product->productImages && count($product->productImages) > 0)
-                            <div class="mb-3">
-                                <h5>Existing Images ({{ count($product->productImages) }})</h5>
-                                <div class="row">
-                                    @foreach($product->productImages as $image)
-                                    <div class="col-md-3 mb-3" id="image-{{ $image->id }}">
-                                        <div class="card h-100">
-                                            <img src="{{ asset($image->image) }}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="Product Image">
-                                            <div class="card-body p-2">
-                                                <a href="{{ url('admin/product-image/'.$image->id.'/delete') }}" 
-                                                   class="btn btn-danger btn-sm w-100"
-                                                   onclick="return confirm('Are you sure you want to delete this image?')">
-                                                    <i class="fas fa-trash"></i> Remove
-                                                </a>
-                                            </div>
+                        <span class="badge bg-primary">
+                            {{ $product->productImages ? $product->productImages->count() : 0 }}
+                            {{ ($product->productImages && $product->productImages->count() == 1) ? 'Image' : 'Images' }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    @if($product->productImages && $product->productImages->count() > 0)
+                        <div class="alert alert-info">
+                            <strong>Image Management</strong>
+                            <div class="mt-1">
+                                The first image is used as the primary product image. You may keep existing images or upload additional ones below.
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            @foreach($product->productImages as $index => $image)
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+                                    <div class="card product-image-card h-100">
+                                        <div class="position-relative">
+                                            <img src="{{ asset($image->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                                            <span class="position-absolute top-0 start-0 m-2 badge {{ $index === 0 ? 'bg-primary' : 'bg-secondary' }}">
+                                                {{ $index === 0 ? 'Primary Image' : 'Image '.($index + 1) }}
+                                            </span>
+                                        </div>
+
+                                        <div class="card-body p-2">
+                                            <div class="small text-muted mb-2">Existing Product Image</div>
+                                            <a href="{{ url('admin/product-image/'.$image->id.'/delete') }}" class="btn btn-outline-danger btn-sm w-100 delete-existing-image">
+                                                <i class="mdi mdi-delete-outline"></i> Remove Image
+                                            </a>
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
-                            </div>
-                            @else
-                            <div class="alert alert-warning">
-                                <h5 class="mb-0">No Images Added Yet</h5>
-                            </div>
-                            @endif
+                            @endforeach
                         </div>
+                    @else
+                        <div class="alert alert-warning mb-0">
+                            <i class="mdi mdi-alert-outline"></i>
+                            This product does not have any images yet.
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            {{-- ADD NEW PRODUCT IMAGES --}}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1">
+                                <i class="mdi mdi-cloud-upload-outline"></i>
+                                Add Product Images
+                            </h5>
+                            <small class="text-muted">Upload one or more images for this product.</small>
+                        </div>
+
+                        <span id="newImageCountBadge" class="badge bg-secondary">
+                            0 new images
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="alert alert-light border">
+                        If you upload new images, they will be added to the existing ones. You can also keep only current images if you don't want to upload more.
                     </div>
 
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Update Product
+                    <div class="product-upload-area p-4 border rounded text-center" style="cursor: pointer;" onclick="document.getElementById('productImages').click()">
+                        <i class="mdi mdi-cloud-upload-outline upload-icon display-4"></i>
+                        <h5>Select Images</h5>
+                        <p class="text-muted mb-2">Click here to browse your device.</p>
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class="mdi mdi-folder-open-outline"></i> Browse Images
                         </button>
-                        <a href="{{ url('admin/products') }}" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
-                        </a>
+                        <input type="file" name="image[]" multiple id="productImages" accept="image/*" class="d-none">
                     </div>
-                </form>
+
+                    @error('image')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
+                    @error('image.*')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                    @enderror
+
+                    <div id="newImagePreview" class="row mt-4"></div>
+                </div>
             </div>
-        </div>
+
+            {{-- ACTION BUTTONS --}}
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url('admin/products') }}" class="btn btn-outline-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="mdi mdi-content-save-outline"></i> Update Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
     </div>
 </div>
 
@@ -241,314 +383,223 @@
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const productImages = document.getElementById('productImages');
     const newImagePreview = document.getElementById('newImagePreview');
     const newImageCountBadge = document.getElementById('newImageCountBadge');
-    const form = document.getElementById('productForm');
-    const activeTabInput = document.getElementById('activeTab');
-    
-    // Get all tab elements
-    const homeTab = document.getElementById('home-tab');
-    const seoTab = document.getElementById('seotag-tab');
-    const detailsTab = document.getElementById('details-tab');
-    const imagesTab = document.getElementById('image-tab');
-    const tabButtons = [homeTab, seoTab, detailsTab, imagesTab];
 
-    // Store all newly uploaded files cumulatively
     let allNewFiles = [];
 
-    // Function to save active tab
-    function saveActiveTab(tabId) {
-        activeTabInput.value = tabId;
-        sessionStorage.setItem('activeProductTab', tabId);
-    }
-
-    // Function to activate tab based on stored value
-    function activateStoredTab() {
-        const storedTab = sessionStorage.getItem('activeProductTab');
-        
-        if (storedTab) {
-            const tabToActivate = document.getElementById(storedTab);
-            if (tabToActivate) {
-                const tab = new bootstrap.Tab(tabToActivate);
-                tab.show();
-                activeTabInput.value = storedTab;
-            }
-        } else {
-            // Check if there are validation errors on specific tabs
-            @if($errors->any())
-                const errorFields = {!! json_encode(array_keys($errors->toArray())) !!};
-                if (errorFields.some(field => field.includes('image'))) {
-                    const tab = new bootstrap.Tab(imagesTab);
-                    tab.show();
-                    saveActiveTab('image-tab');
-                }
-            @endif
-        }
-    }
-
-    // Add click handlers to all tabs
-    tabButtons.forEach(tabButton => {
-        tabButton.addEventListener('click', function() {
-            saveActiveTab(this.id);
-        });
-    });
-
-    // Function to update the file input with all selected files
     function updateFileInput() {
         const dataTransfer = new DataTransfer();
-        
-        allNewFiles.forEach(file => {
-            dataTransfer.items.add(file);
-        });
-        
+        allNewFiles.forEach(file => dataTransfer.items.add(file));
         productImages.files = dataTransfer.files;
     }
 
-    // Function to update new images count
     function updateNewImageCount() {
         const count = allNewFiles.length;
-        newImageCountBadge.textContent = `${count} new image${count !== 1 ? 's' : ''}`;
+        newImageCountBadge.textContent = count + ' new image' + (count !== 1 ? 's' : '') + ' selected';
         newImageCountBadge.className = count > 0 ? 'badge bg-success' : 'badge bg-secondary';
     }
 
-    // Function to remove a specific new image
-    function removeNewImage(index) {
-        allNewFiles.splice(index, 1);
-        
-        // Refresh the preview
-        refreshNewImagePreview();
-        
-        // Update file input
-        updateFileInput();
-        
-        // Update count
-        updateNewImageCount();
-    }
-
-    // Function to refresh all new image previews
-    async function refreshNewImagePreview() {
+    function refreshNewImagePreview() {
         newImagePreview.innerHTML = '';
-        
-        for (let i = 0; i < allNewFiles.length; i++) {
-            const preview = await createNewImagePreview(allNewFiles[i], i);
-            if (preview) {
-                newImagePreview.appendChild(preview);
-            }
-        }
-    }
 
-    // Function to create image preview for new uploads with remove button
-    function createNewImagePreview(file, index) {
-        return new Promise((resolve) => {
-            if (file.type.match('image.*')) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const col = document.createElement('div');
-                    col.className = 'col-md-3 mb-3';
-                    col.dataset.index = index;
-                    
-                    const card = document.createElement('div');
-                    card.className = 'card h-100';
-                    
-                    const imgContainer = document.createElement('div');
-                    imgContainer.style.position = 'relative';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'card-img-top';
-                    img.style.height = '150px';
-                    img.style.objectFit = 'cover';
-                    
-                    const badge = document.createElement('span');
-                    badge.className = 'position-absolute top-0 start-0 badge bg-primary';
-                    badge.textContent = 'New';
-                    badge.style.zIndex = '1';
-                    
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className = 'btn btn-danger btn-sm position-absolute top-0 end-0 m-1';
-                    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    removeBtn.style.zIndex = '10';
-                    removeBtn.onclick = function(e) {
-                        e.preventDefault();
-                        removeNewImage(index);
-                    };
-                    
-                    imgContainer.appendChild(img);
-                    imgContainer.appendChild(badge);
-                    imgContainer.appendChild(removeBtn);
-                    
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body p-2';
-                    
-                    const fileName = document.createElement('p');
-                    fileName.className = 'card-text small text-truncate mb-0';
-                    fileName.textContent = file.name.length > 20 ? 
-                        file.name.substring(0, 20) + '...' : file.name;
-                    
-                    const fileSize = document.createElement('p');
-                    fileSize.className = 'card-text small text-muted';
-                    const sizeInKB = Math.round(file.size / 1024);
-                    fileSize.textContent = `${sizeInKB} KB`;
-                    
-                    cardBody.appendChild(fileName);
-                    cardBody.appendChild(fileSize);
-                    
-                    card.appendChild(imgContainer);
-                    card.appendChild(cardBody);
-                    col.appendChild(card);
-                    
-                    resolve(col);
-                };
-                
-                reader.readAsDataURL(file);
-            } else {
-                resolve(null);
-            }
+        allNewFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const column = document.createElement('div');
+                column.className = 'col-xl-3 col-lg-4 col-md-6 mb-3';
+                column.innerHTML = `
+                    <div class="card product-image-card h-100">
+                        <div class="position-relative">
+                            <img src="${event.target.result}" class="card-img-top" alt="New Product Image">
+                            <span class="position-absolute top-0 start-0 m-2 badge bg-success">
+                                New Image ${index + 1}
+                            </span>
+                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 remove-new-image" data-index="${index}">
+                                <i class="mdi mdi-close"></i>
+                            </button>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="small text-truncate">${file.name}</div>
+                            <small class="text-muted">${Math.round(file.size / 1024)} KB</small>
+                        </div>
+                    </div>
+                `;
+                newImagePreview.appendChild(column);
+            };
+            reader.readAsDataURL(file);
         });
     }
 
-    // Handle new image selection (APPEND instead of REPLACE)
-    if (productImages) {
-        productImages.addEventListener('change', async function() {
-            const newFiles = Array.from(this.files);
-            
-            if (newFiles.length > 0) {
-                // Add new files to the cumulative list
-                allNewFiles = [...allNewFiles, ...newFiles];
-                
-                // Clear the file input to allow re-selecting the same files
-                this.value = '';
-                
-                // Update file input with all files
-                updateFileInput();
-                
-                // Refresh all previews
-                await refreshNewImagePreview();
-                
-                // Update count
-                updateNewImageCount();
-                
-                // Make sure we stay on images tab
-                const tab = new bootstrap.Tab(imagesTab);
-                tab.show();
-                saveActiveTab('image-tab');
+    productImages.addEventListener('change', function () {
+        const newFiles = Array.from(this.files);
+
+        newFiles.forEach(newFile => {
+            const alreadyExists = allNewFiles.some(
+                existingFile => existingFile.name === newFile.name && existingFile.size === newFile.size
+            );
+            if (!alreadyExists) {
+                allNewFiles.push(newFile);
             }
         });
-    }
 
-    // Activate the last active tab on page load
-    activateStoredTab();
-
-    // Handle browser back/forward navigation
-    window.addEventListener('popstate', function() {
-        activateStoredTab();
+        updateFileInput();
+        updateNewImageCount();
+        refreshNewImagePreview();
     });
 
-    // Form submission - ensure all new files are included
-    form.addEventListener('submit', function(e) {
-        // Store active tab before submit
-        saveActiveTab(activeTabInput.value);
-    });
-});
+    newImagePreview.addEventListener('click', function (event) {
+        const button = event.target.closest('.remove-new-image');
+        if (!button) return;
 
-// Your existing jQuery code
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    
-    $(document).on('click','.updateProductColorBtn' , function () {
-        var product_id = "{{ $product->id }}";
-        var prod_color_id = $(this).val();
-        var qty = $(this).closest('.prod-color-tr').find('.productColorQuantity').val();
-        
-        if(qty <= 0){
-            alert('Quantity is required');
-            return false;
-        }
+        const index = parseInt(button.dataset.index);
+        allNewFiles.splice(index, 1);
 
-        var data = {
-            'product_id': product_id,
-            'prod_color_id' : prod_color_id,
-            'qty' : qty
-        };
-
-        $.ajax({
-            type : "POST",
-            url : "/admin/product-color/"+prod_color_id,
-            data : data,
-            success : function (response) {
-                alert(response.message);
-            }
-        });
-    });
-
-    $(document).on('click','.deleteProductColorBtn' , function () {
-        var prod_color_id = $(this).val();
-        var thisClick = $(this);
-
-        if(confirm('Are you sure you want to delete this color?')) {
-            $.ajax({
-                type : "GET",
-                url : "/admin/product-color/"+prod_color_id+"/delete",
-                success : function (response) {
-                    thisClick.closest('.prod-color-tr').remove();
-                    alert(response.message);
-                }
-            });
-        }
+        updateFileInput();
+        updateNewImageCount();
+        refreshNewImagePreview();
     });
 });
 </script>
 
+
+@if(!isset($swal))
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@endif
+
+
+
 <style>
-    .progress-bar {
-        transition: width 0.3s ease;
+
+.product-upload-area
+{
+    border: 2px dashed #ced4da;
+
+    border-radius: 10px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    background: #fafafa;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+
+.product-upload-area:hover
+{
+    border-color: #0d6efd;
+
+    background: #f8fbff;
+}
+
+
+.upload-icon
+{
+    font-size: 48px;
+
+    color: #6c757d;
+}
+
+
+.setting-option
+{
+    border: 1px solid #dee2e6;
+
+    border-radius: 8px;
+
+    padding: 18px;
+
+    min-height: 115px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.setting-option .form-check-input
+{
+    width: 42px;
+
+    height: 22px;
+
+    cursor: pointer;
+}
+
+
+.product-image-card
+{
+    overflow: hidden;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.product-image-card:hover
+{
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, .10);
+}
+
+
+.product-image-card img
+{
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+}
+
+
+.remove-new-image
+{
+    z-index: 5;
+}
+
+
+@media (max-width: 767px)
+{
+    .setting-option
+    {
+        min-height: auto;
     }
-    
-    .card {
-        transition: transform 0.2s;
+
+
+    .product-upload-area
+    {
+        padding: 25px 15px;
     }
-    
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+
+    .d-flex.justify-content-between.align-items-center
+    {
+        flex-wrap: wrap;
+
+        gap: 10px;
     }
-    
-    .nav-link.active {
-        font-weight: 600;
-        background-color: #f8f9fa !important;
-        border-bottom-color: transparent !important;
-    }
-    
-    .tab-pane {
-        transition: opacity 0.15s linear;
-    }
-    
-    .badge {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.5rem;
-    }
-    
-    .btn-outline-danger {
-        border-color: #dc3545;
-        color: #dc3545;
-    }
-    
-    .btn-outline-danger:hover {
-        background-color: #dc3545;
-        color: white;
-    }
-    
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
+}
+
 </style>
+
+
 @endsection

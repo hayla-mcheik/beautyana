@@ -195,20 +195,48 @@
                 <ul class="main-menu nav">
               
                       <li><a href="{{ url('aboutus') }}">About Us</a></li>
-     <li class="has-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-click-trigger">Products <i class="ion-ios-arrow-down"></i></a>
-                    <ul class="boutique-dropdown">
-                        @if(isset($allCategories))
-                            @foreach($allCategories as $categoryItem)
-                                <li>
-                                    <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                                        {{ $categoryItem->name }}
-                                    </a>
-                                </li>
-                            @endforeach
+@foreach($menus as $menu)
+    <li class="has-dropdown">
+        <a href="javascript:void(0)">
+            {{ $menu->name }}
+            @if($menu->categories->count())
+                <i class="ion-ios-arrow-down"></i>
+            @endif
+        </a>
+
+        @if($menu->categories->count())
+            <ul class="boutique-dropdown">
+
+                @foreach($menu->categories as $category)
+                    <li class="has-dropdown">
+
+                        <a href="{{ url('collections/'.$category->slug) }}">
+                            {{ $category->name }}
+                            @if($category->children->count())
+                                <i class="ion-ios-arrow-right float-end"></i>
+                            @endif
+                        </a>
+
+                        {{-- SUBCATEGORIES --}}
+                        @if($category->children->count())
+                            <ul class="boutique-dropdown" style="left: 100%; top: 0;">
+                                @foreach($category->children as $sub)
+                                    <li>
+                                        <a href="{{ url('collections/'.$sub->slug) }}">
+                                            {{ $sub->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endif
-                    </ul>
-                  </li>
+
+                    </li>
+                @endforeach
+
+            </ul>
+        @endif
+    </li>
+@endforeach
                       <li><a href="{{ url('blogs')}}">News</a>           
                       </li>
                       <li><a href="{{ url('contactus') }}">Contact us</a></li>

@@ -1,36 +1,35 @@
 @extends('layouts.app')
-@section('title')
-{{ $category->meta_title }}
-@endsection
 
-@section('meta_keyword')
-{{ $category->meta_keyword }}
-@endsection
+@php
+    $breadcrumbs = [];
 
-@section('meta_description')
-{{ $category->meta_description }}
-@endsection
+    // 1. Menu Level
+    if (isset($category->menu)) {
+        $breadcrumbs[] = [
+            'title' => $category->menu->name,
+            'url'   => url('/collections/' . $category->menu->slug)
+        ];
+    }
+
+    // 2. Parent Category Level (if applicable)
+    if (isset($category->parent)) {
+        $breadcrumbs[] = [
+            'title' => $category->parent->name,
+            'url'   => url('/collections/' . ($category->menu->slug ?? 'all') . '/' . $category->parent->slug)
+        ];
+    }
+
+    // 3. Current Category
+    $breadcrumbs[] = [
+        'title' => $category->name,
+        'url'   => '#'
+    ];
+@endphp
 
 @section('content')
-<style>
-   .product-item{
-  margin-bottom: 10px;
- }
- 
-</style>
 
-@include('layouts.inc.frontend.breadcrumb', [
-    'breadcrumbs' => [
-        [
-            'title' => $category->menu,
-            'url' => url('/categories')
-        ],
-        [
-            'title' => $category->name,
-            'url' => '#'
-        ]
-    ]
-])
+@include('layouts.inc.frontend.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+
 <livewire:frontend.product.index
     :category="$category"
     :collections="$collections"
@@ -39,8 +38,5 @@
     :inStockCount="$inStockCount"
     :outOfStockCount="$outOfStockCount"
 />
-
-      
-
 
 @endsection

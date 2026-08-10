@@ -28,16 +28,22 @@ class FrontendController extends Controller
         $newArrivalsProducts = Product::latest()->take(14)->get();
         $featuredProducts = Product::where('featured','1')->latest()->take(14)->get();
     $collections = Category::where('status','0')
-        ->where('menu','Collections')
+       ->whereHas('menu', function ($q) {
+    $q->where('name', 'Collections');
+})
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
-        ->get();
+$highJewelry = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'High Jewelry');
+    })
+    ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
-        ->get();
+$adSignature = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'AD Signature');
+    })
+    ->get();
         $reviews= ReviewsModel::where('status','0')->get();
         $threecategories = Category::where('status','0')->take(3)->get();
         $blogs = Blogs::all();
@@ -77,16 +83,22 @@ return redirect()->back()->with('message','Empty Search');
   public function categories()
 {
     $collections = Category::where('status','0')
-        ->where('menu','Collections')
+->whereHas('menu', function ($q) {
+    $q->where('name', 'Collections');
+})
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
-        ->get();
+$highJewelry = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'High Jewelry');
+    })
+    ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
-        ->get();
+$adSignature = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'AD Signature');
+    })
+    ->get();
 
     return view(
         'frontend.collections.category.index',
@@ -100,16 +112,22 @@ return redirect()->back()->with('message','Empty Search');
 public function categoriescollections()
 {
     $collections = Category::where('status','0')
-        ->where('menu','Collections')
+  ->whereHas('menu', function ($q) {
+    $q->where('name', 'Collections');
+})
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
-        ->get();
+$highJewelry = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'High Jewelry');
+    })
+    ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
-        ->get();
+$adSignature = Category::where('status','0')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'AD Signature');
+    })
+    ->get();
 
     return view(
         'frontend.collections.category.collections',
@@ -126,16 +144,23 @@ public function categoriescollections()
         $outOfStockCount = Product::where('quantity', '=', 0)->count();
         $category = Category::where('slug',$category_slug)->withCount('products')->first();
 $collections = Category::where('status','0')
-    ->where('menu','Collections')
+->whereHas('menu', function ($q) {
+    $q->where('name', 'Collections');
+})
     ->get();
 
 $highJewelry = Category::where('status','0')
-    ->where('menu','High Jewelry')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'High Jewelry');
+    })
     ->get();
 
 $adSignature = Category::where('status','0')
-    ->where('menu','AD Signature')
+    ->whereHas('menu', function ($q) {
+        $q->where('name', 'AD Signature');
+    })
     ->get();
+    
         if($category){
             // $products = $category->products()->get();
 return view(

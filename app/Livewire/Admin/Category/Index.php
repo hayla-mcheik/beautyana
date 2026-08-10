@@ -18,7 +18,6 @@ class Index extends Component
     public $menu = '';
 
 
-
     /*
     |--------------------------------------------------------------------------
     | Mount Component
@@ -29,7 +28,6 @@ class Index extends Component
     {
         $this->menu = request()->query('menu', '');
     }
-
 
 
     /*
@@ -44,7 +42,6 @@ class Index extends Component
     }
 
 
-
     /*
     |--------------------------------------------------------------------------
     | Delete Category
@@ -56,7 +53,6 @@ class Index extends Component
         $category = Category::find($this->category_id);
 
         if (!$category) {
-
             session()->flash(
                 'message',
                 'Category not found.'
@@ -67,47 +63,26 @@ class Index extends Component
             return;
         }
 
-
-        /*
-         * Your category->image already contains:
-         *
-         * uploads/category/image.jpg
-         *
-         * Therefore, do NOT add uploads/category/ again.
-         */
-
         if (
             $category->image &&
             File::exists(public_path($category->image))
         ) {
-
             File::delete(public_path($category->image));
         }
 
-
         $category->delete();
 
-
         $this->category_id = null;
-
 
         session()->flash(
             'message',
             'Category Deleted Successfully'
         );
 
-
         $this->dispatch('close-modal');
-
-
-        /*
-         * Important when deleting the last record
-         * from a pagination page.
-         */
 
         $this->resetPage();
     }
-
 
 
     /*
@@ -119,23 +94,15 @@ class Index extends Component
     public function render()
     {
         $categories = Category::query()
-
             ->when(
                 !empty($this->menu),
-
                 function ($query) {
-
-                    $query->where(
-                        'menu',
-                        $this->menu
-                    );
+                    // FIXED: Changed 'menu' to 'menu_id'
+                    $query->where('menu_id', $this->menu);
                 }
             )
-
             ->orderBy('name', 'ASC')
-
             ->paginate(10);
-
 
         return view(
             'livewire.admin.category.index',

@@ -31,7 +31,18 @@
 </div>
 <div class="mb-3">
     <label>Date</label>
-    <input type="date" name="date" value="{{ $blog->date }}" class="form-control">
+
+    <input
+        type="date"
+        name="date"
+        value="{{ old('date', optional($blog->date)->format('Y-m-d')) }}"
+        class="form-control">
+
+    @error('date')
+        <div class="text-danger">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 
 <div class="mb-3">
@@ -40,13 +51,82 @@
 </div>
 
 <div class="mb-3">
-    <label>Image</label>
-    <input type="file" name="image" class="form-control">
+
+    <label>Cover Image</label>
+
+    <input
+        type="file"
+        name="image"
+        class="form-control">
+
     @if($blog->image)
-        <img src="{{ asset($blog->image) }}" alt="Slider Image" width="100" height="100" class="mt-2">
+
+        <img
+            src="{{ asset($blog->image) }}"
+            width="180"
+            class="img-thumbnail mt-3">
+
     @endif
+
 </div>
 
+<div class="mb-3">
+
+    <label>Add Gallery Images</label>
+
+    <input
+        type="file"
+        name="gallery[]"
+        class="form-control"
+        multiple
+        accept=".jpg,.jpeg,.png,.webp">
+
+    <small class="text-muted">
+        Select one or multiple images.
+    </small>
+
+</div>
+@if($blog->images->count())
+
+<hr>
+
+<h5 class="mb-3">Gallery Images</h5>
+
+<div class="row">
+
+    @foreach($blog->images as $gallery)
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card">
+
+                <img
+                    src="{{ asset($gallery->image) }}"
+                    class="card-img-top"
+                    style="height:180px;object-fit:cover;">
+
+                <div class="card-body text-center">
+
+                    <a
+                        href="{{ url('admin/blogs/gallery/delete/'.$gallery->id) }}"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Delete this image?')">
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @endforeach
+
+</div>
+
+@endif
 
 <div class="mb-3">
     <button type="submit" class="btn btn-primary">Update</button>

@@ -15,7 +15,7 @@ class Category extends Model
         'slug',
         // 'description',
         'image',
-        'menu',
+           'menu_id',
         // 'meta_title',
         // 'meta_keyword',
         // 'meta_description',
@@ -35,4 +35,22 @@ class Category extends Model
     {
         return $this->hasMany(Brand::class,'category_id','id')->where('status','0');
     }
+    public function menu()
+{
+    return $this->belongsTo(Menu::class);
+}
+
+// Parent category
+public function parent()
+{
+    return $this->belongsTo(Category::class, 'parent_id');
+}
+
+// Subcategories
+public function children()
+{
+    return $this->hasMany(Category::class, 'parent_id')
+                ->where('status', '0')
+                ->with('children'); // 🔥 allows nesting
+}
 }
