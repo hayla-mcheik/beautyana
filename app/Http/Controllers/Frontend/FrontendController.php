@@ -15,42 +15,81 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
 use App\Models\Banner;
 use App\Models\InstagramFeed;
+use App\Models\Menu;
 use App\Models\Subscriber;
 
 class FrontendController extends Controller
 {
-    public function index()
-    {
-        $sliders = Slider::where('status','0')->get(); 
-        $about = \App\Models\About::first();
-        $aboutData = \App\Models\AboutData::first();
-        $trendingProducts = Product::where('trending','1')->latest()->take(15)->get();
-        $newArrivalsProducts = Product::latest()->take(14)->get();
-        $featuredProducts = Product::where('featured','1')->latest()->take(14)->get();
-    $collections = Category::where('status','0')
-       ->whereHas('menu', function ($q) {
-    $q->where('name', 'Collections');
-})
+    private function getMenus()
+{
+    return Menu::where('status', 1)
+        ->with([
+            'categories' => function ($query) {
+                $query->whereNull('parent_id')
+                    ->where('status', '0')
+                    ->with('children');
+            }
+        ])
+        ->orderBy('sort_order')
+        ->get();
+}
+public function index()
+{
+    $sliders = Slider::where('status', '0')->get();
+
+    $about = \App\Models\About::first();
+
+    $aboutData = \App\Models\AboutData::first();
+
+    $trendingProducts = Product::where('trending', '1')
+        ->latest()
+        ->take(15)
         ->get();
 
-$highJewelry = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'High Jewelry');
-    })
-    ->get();
+    $newArrivalsProducts = Product::latest()
+        ->take(14)
+        ->get();
 
-$adSignature = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'AD Signature');
-    })
-    ->get();
-        $reviews= ReviewsModel::where('status','0')->get();
-        $threecategories = Category::where('status','0')->take(3)->get();
-        $blogs = Blogs::all();
-$banner = Banner::first();
-$instaFeeds = InstagramFeed::where('status','0')->latest()->take(8)->get();
-        return view('frontend.index',compact('sliders','about','aboutData','trendingProducts','newArrivalsProducts','featuredProducts','collections','highJewelry','adSignature','reviews','threecategories','blogs','banner','instaFeeds'));
-    }
+    $featuredProducts = Product::where('featured', '1')
+        ->latest()
+        ->take(14)
+        ->get();
+
+    $menus = $this->getMenus();
+
+    $reviews = ReviewsModel::where('status', '0')->get();
+
+    $threecategories = Category::where('status', '0')
+        ->take(3)
+        ->get();
+
+    $blogs = Blogs::all();
+
+    $banner = Banner::first();
+
+    $instaFeeds = InstagramFeed::where('status', '0')
+        ->latest()
+        ->take(8)
+        ->get();
+
+    return view(
+        'frontend.index',
+        compact(
+            'sliders',
+            'about',
+            'aboutData',
+            'trendingProducts',
+            'newArrivalsProducts',
+            'featuredProducts',
+            'menus',
+            'reviews',
+            'threecategories',
+            'blogs',
+            'banner',
+            'instaFeeds'
+        )
+    );
+}
 
 
     public function searchProducts(Request $request)
@@ -80,120 +119,91 @@ return redirect()->back()->with('message','Empty Search');
     }
 
 
-  public function categories()
+public function categories()
 {
-    $collections = Category::where('status','0')
-->whereHas('menu', function ($q) {
-    $q->where('name', 'Collections');
-})
-        ->get();
-
-$highJewelry = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'High Jewelry');
-    })
-    ->get();
-
-$adSignature = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'AD Signature');
-    })
-    ->get();
+    $menus = $this->getMenus();
 
     return view(
         'frontend.collections.category.index',
-        compact(
-            'collections',
-            'highJewelry',
-            'adSignature'
-        )
+        compact('menus')
     );
 }
 public function categoriescollections()
 {
-    $collections = Category::where('status','0')
-  ->whereHas('menu', function ($q) {
-    $q->where('name', 'Collections');
-})
-        ->get();
-
-$highJewelry = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'High Jewelry');
-    })
-    ->get();
-
-$adSignature = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'AD Signature');
-    })
-    ->get();
+    $menus = $this->getMenus();
 
     return view(
-        'frontend.collections.category.collections',
+        'frontend.collections.category.index',
+        compact('menus')
+    );
+}
+public function products($category_slug)
+{
+    $inStockCount = Product::where('quantity', '>', 0)->count();
+
+    $outOfStockCount = Product::where('quantity', '=', 0)->count();
+
+    $category = Category::where('slug', $category_slug)
+        ->with([
+            'menu',
+            'parent',
+            'children'
+        ])
+        ->withCount('products')
+        ->first();
+
+    if (!$category) {
+        return redirect()->back();
+    }
+
+    $menus = $this->getMenus();
+
+    return view(
+        'frontend.collections.products.index',
         compact(
-            'collections',
-            'highJewelry',
-            'adSignature'
+            'category',
+            'menus',
+            'inStockCount',
+            'outOfStockCount'
         )
     );
 }
-    public function products($category_slug)
-    {
-        $inStockCount = Product::where('quantity', '>', 0)->count();
-        $outOfStockCount = Product::where('quantity', '=', 0)->count();
-        $category = Category::where('slug',$category_slug)->withCount('products')->first();
-$collections = Category::where('status','0')
-->whereHas('menu', function ($q) {
-    $q->where('name', 'Collections');
-})
-    ->get();
-
-$highJewelry = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'High Jewelry');
-    })
-    ->get();
-
-$adSignature = Category::where('status','0')
-    ->whereHas('menu', function ($q) {
-        $q->where('name', 'AD Signature');
-    })
-    ->get();
     
-        if($category){
-            // $products = $category->products()->get();
-return view(
-    'frontend.collections.products.index',
-    compact(
-        'category',
-        'collections',
-        'highJewelry',
-        'adSignature',
-        'inStockCount',
-        'outOfStockCount'
-    )
-);
-         } else{
-                return redirect()->back();
-            }
-        }
-    
-public function productView(string $category_slug , string $product_slug)
-{
-    $category = Category::where('slug',$category_slug)->first();
-    if($category){
-         $product = $category->products()->where('slug',$product_slug)->where('status','0')->first();
-         if($product)
-         {
-            return view('frontend.collections.products.view',compact('product','category')); 
-         }
-         else{
-            return redirect()->back();
-        }
-     } else{
-            return redirect()->back();
-        }
+public function productView(
+    string $category_slug,
+    string $product_slug
+) {
+    $category = Category::where('slug', $category_slug)
+        ->with([
+            'menu',
+            'parent',
+            'children'
+        ])
+        ->first();
+
+    if (!$category) {
+        return redirect()->back();
+    }
+
+    $product = $category->products()
+        ->where('slug', $product_slug)
+        ->where('status', '0')
+        ->first();
+
+    if (!$product) {
+        return redirect()->back();
+    }
+
+    $menus = $this->getMenus();
+
+    return view(
+        'frontend.collections.products.view',
+        compact(
+            'product',
+            'category',
+            'menus'
+        )
+    );
 }
 
 public function aboutus()
@@ -206,23 +216,36 @@ public function aboutus()
 public function blogs()
 {
     $blogs = Blogs::all();
-    return view('frontend.blogs.bloglist' , compact('blogs'));
-}
 
+    $menus = $this->getMenus();
+
+    return view(
+        'frontend.blogs.bloglist',
+        compact(
+            'blogs',
+            'menus'
+        )
+    );
+}
 public function blogdetails($id)
 {
-    // Load blog with gallery images
-    $blog = Blogs::with('images')->findOrFail($id);
+    $blog = Blogs::with('images')
+        ->findOrFail($id);
 
-    // Latest posts for sidebar
     $latestBlogs = Blogs::latest()
         ->where('id', '!=', $id)
         ->take(4)
         ->get();
 
+    $menus = $this->getMenus();
+
     return view(
         'frontend.blogs.blogdetails',
-        compact('blog', 'latestBlogs')
+        compact(
+            'blog',
+            'latestBlogs',
+            'menus'
+        )
     );
 }
 public function contactus()

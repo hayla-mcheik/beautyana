@@ -118,7 +118,7 @@ td:first-child{
 
 <div class="header">
 
-<h1>DEMANTO</h1>
+<h1>Beautyna</h1>
 
 <p>New Appointment Request</p>
 
@@ -169,7 +169,7 @@ td:first-child{
 
 <div class="footer">
 
-This appointment request was submitted through the DEMANTO website.
+This appointment request was submitted through the beautyana website.
 
 </div>
 

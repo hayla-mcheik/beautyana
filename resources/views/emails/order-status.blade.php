@@ -17,7 +17,7 @@ switch($order->status_message){
         break;
 
     case 'completed':
-        $message = 'Your order has been delivered successfully. We sincerely thank you for shopping with Demanto and hope you enjoy your purchase.';
+        $message = 'Your order has been delivered successfully. We sincerely thank you for shopping with Beautyana and hope you enjoy your purchase.';
         break;
 
     case 'cancelled':
@@ -44,7 +44,7 @@ switch($order->status_message){
     <tr>
         <td style="background:#111;padding:30px;text-align:center;color:#fff;">
             <h1 style="margin:0;font-size:30px;letter-spacing:2px;">
-                DEMANTO
+                Beautyana
             </h1>
 
             <p style="margin:10px 0 0;color:#d8c08b;">
@@ -169,7 +169,7 @@ switch($order->status_message){
             </table>
 
             <p style="margin-top:35px;font-size:15px;color:#666;line-height:26px;">
-                Thank you for shopping with <strong>Demanto</strong>.
+                Thank you for shopping with <strong>Beautyna</strong>.
                 We truly appreciate your trust and look forward to serving you again.
             </p>
 
@@ -182,7 +182,7 @@ switch($order->status_message){
 
         <td style="background:#111;color:#999;padding:20px;text-align:center;font-size:13px;">
 
-            © {{ date('Y') }} Demanto. All Rights Reserved.
+            © {{ date('Y') }} Beautyana. All Rights Reserved.
 
         </td>
 

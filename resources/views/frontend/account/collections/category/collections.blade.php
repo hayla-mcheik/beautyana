@@ -6,7 +6,7 @@
 @include('layouts.inc.frontend.breadcrumb', [
     'breadcrumbs' => [
         [
-            'title' => 'THE HOUSE OF DEMANTO',
+            'title' => 'THE HOUSE OF BEAUTYANA',
             'url' => '#'
         ]
     ]

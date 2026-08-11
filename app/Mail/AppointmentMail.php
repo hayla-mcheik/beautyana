@@ -16,7 +16,7 @@ class AppointmentMail extends Mailable
 public function build()
 {
     return $this
-        ->subject('New Appointment Request - DEMANTO')
+        ->subject('New Appointment Request - beautyana')
         ->view('emails.appointment');
 }
 }

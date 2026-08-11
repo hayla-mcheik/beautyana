@@ -29,7 +29,7 @@ public function build()
         default => 'Your Order Status Has Been Updated',
     };
 
-    return $this->subject('Demanto - '.$subject)
+    return $this->subject('Beautyana - '.$subject)
                 ->view('emails.order-status');
 }
 }
