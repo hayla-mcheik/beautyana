@@ -1,47 +1,147 @@
 @extends('layouts.app')
 
 @php
-    $breadcrumbs = [];
 
-    if (isset($category)) {
-        // 1. Menu Level
-        if (isset($category->menu)) {
-            $breadcrumbs[] = [
-                'title' => $category->menu->name,
-                'url'   => url('/collections/' . $category->menu->slug)
-            ];
-        }
+$breadcrumbs = [];
 
-        // 2. Parent Category Level (if applicable)
-        if (isset($category->parent)) {
-            $breadcrumbs[] = [
-                'title' => $category->parent->name,
-                'url'   => url('/collections/' . ($category->menu->slug ?? 'all') . '/' . $category->parent->slug)
-            ];
-        }
 
-        // 3. Category Level
+/*
+|--------------------------------------------------------------------------
+| CATEGORY BREADCRUMBS
+|--------------------------------------------------------------------------
+*/
+
+if (isset($category)) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Get Menu
+    |--------------------------------------------------------------------------
+    */
+
+    $menu = null;
+
+    if (!empty($category->menu_id)) {
+        $menu = \App\Models\Menu::find($category->menu_id);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Add Menu
+    |--------------------------------------------------------------------------
+    */
+
+    if ($menu) {
+
         $breadcrumbs[] = [
-            'title' => $category->name,
-            'url'   => url('/collections/' . ($category->menu->slug ?? 'all') . '/' . $category->slug)
+            'title' => $menu->name,
+            'url'   => url('/collections/' . $menu->slug),
         ];
     }
 
-    // 4. Product Name
-    if (isset($product)) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Build Category Hierarchy
+    |--------------------------------------------------------------------------
+    */
+
+    $categoryHierarchy = [];
+
+    $currentCategory = $category;
+
+    while ($currentCategory) {
+
+        $categoryHierarchy[] = $currentCategory;
+
+        if (!empty($currentCategory->parent_id)) {
+
+            $currentCategory =
+                \App\Models\Category::find(
+                    $currentCategory->parent_id
+                );
+
+        } else {
+
+            $currentCategory = null;
+        }
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reverse hierarchy
+    |--------------------------------------------------------------------------
+    |
+    | Example:
+    |
+    | Rings
+    |   ↓
+    | Jewelry
+    |
+    | becomes:
+    |
+    | Jewelry → Rings
+    |
+    */
+
+    $categoryHierarchy = array_reverse(
+        $categoryHierarchy
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Add Categories
+    |--------------------------------------------------------------------------
+    */
+
+    foreach ($categoryHierarchy as $categoryItem) {
+
+        $categoryUrl = $menu
+            ? url(
+                '/collections/' .
+                $menu->slug .
+                '/' .
+                $categoryItem->slug
+            )
+            : url(
+                '/collections/' .
+                $categoryItem->slug
+            );
+
+
         $breadcrumbs[] = [
-            'title' => $product->name,
-            'url'   => '#'
+            'title' => $categoryItem->name,
+            'url'   => $categoryUrl,
         ];
     }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCT
+|--------------------------------------------------------------------------
+*/
+
+if (isset($product)) {
+
+    $breadcrumbs[] = [
+        'title' => $product->name,
+        'url'   => '#',
+    ];
+}
+
 @endphp
+
 
 @section('content')
 
-@include('layouts.inc.frontend.breadcrumb', ['breadcrumbs' => $breadcrumbs])
-
-<div>
-    <livewire:frontend.product.view :category="$category" :product="$product" />
-</div>
+    @include(
+        'layouts.inc.frontend.breadcrumb',
+        ['breadcrumbs' => $breadcrumbs]
+    )
 
 @endsection
