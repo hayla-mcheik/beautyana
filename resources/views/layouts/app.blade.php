@@ -406,71 +406,7 @@
             
 
 
-    <!--== Start Footer Connect Section ==-->
-    <section class="footer-connect-section">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6 mb-4 mb-lg-0">
-            <div class="social-connect-box text-center">
-              <h3 class="section-title">Let's Connect On Social</h3>
-         <div class="social-icons-enhanced">
-    {{-- Safe check for Facebook --}}
-    @if(optional($appSetting)->facebook)
-        <a href="{{ $appSetting->facebook }}" target="_blank" class="facebook">
-            <i class="la la-facebook"></i>
-        </a>
-    @endif
-
-    {{-- Safe check for TikTok (mapped to youtube field) --}}
-    @if(optional($appSetting)->youtube)
-        <a href="{{ $appSetting->youtube }}" target="_blank" class="tiktok">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-top: 0px;">
-                <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
-            </svg>
-        </a>
-    @endif
-
-    {{-- Safe check for Instagram --}}
-    @if(optional($appSetting)->instagram)
-        <a href="{{ $appSetting->instagram }}" target="_blank" class="instagram">
-            <i class="la la-instagram"></i>
-        </a>
-    @endif
-</div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="newsletter-box text-center">
-              <h3 class="section-title">Sign Up For Newsletter</h3>
-              <div class="newsletter-form-enhanced">
-                @if ($errors->any())
-                  <div class="alert alert-danger">
-                    <ul class="mb-0">
-                      @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                      @endforeach
-                    </ul>
-                  </div>
-                @endif
-                @if (session('success'))
-                  <div class="alert alert-success">
-                    {{ session('success') }}
-                  </div>
-                @endif
-                <form action="{{ url('subscribe') }}" method="POST">
-                  @csrf
-                  <div class="mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Your email address" requi#d40707>
-                  </div>
-                  <button class="btn btn-submit-enhanced" type="submit">Subscribe Now</button>
-                </form>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--== End Footer Connect Section ==-->
+   
         </main>
             @include('layouts.inc.frontend.footer')
               <!--== Scroll Top Button ==-->

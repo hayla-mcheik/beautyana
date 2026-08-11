@@ -153,197 +153,341 @@
     
 
 /* ============================================================
-   EXHIBITIONS
+   EXHIBITIONS & EVENTS
 ============================================================ */
 
 .exhibitions-area {
-    padding: 28px 0 32px;
+    position: relative;
+
+    padding: 65px 0 55px;
 
     overflow: hidden;
 
-    background: #fff4f4;
-}
-
-.signature-collections {
-
-    background: #f7f2eb;
-
-    padding: 0px 0;
-
-    overflow: hidden;
+    /*
+     * Elegant warm ivory background
+     */
+    background: #faf8f5;
 }
 
 
-/*==================================================
-    CONTAINER
-==================================================*/
+/* ============================================================
+   SUBTLE BACKGROUND DECORATION
+============================================================ */
+
+.exhibitions-area::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    top: -220px;
+    left: -180px;
+
+    border-radius: 50%;
+
+    background: rgba(222, 154, 168, 0.06);
+
+    pointer-events: none;
+}
+
+
+.exhibitions-area::after {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    bottom: -200px;
+    right: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(179, 146, 86, 0.05);
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   CONTAINER
+============================================================ */
 
 .collections-container {
+    position: relative;
 
-    padding-left: 40px;
+    z-index: 2;
 
-    padding-right: 40px;
+    padding-left: 55px;
+    padding-right: 55px;
 }
 
 
-/*==================================================
-    TITLE
-==================================================*/
+/* ============================================================
+   TITLE
+============================================================ */
 
 .collections-title {
+    position: relative;
 
     text-align: center;
 
-    margin-bottom: 0;
+    margin-bottom: 35px;
 }
 
 
 .collections-title > span {
-
     display: block;
 
-    font-family: 'Roboto';
+    color: #4b4542;
 
-    font-weight: 600;
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
 
-    font-size: 20px;
+    font-size: 27px;
+
+    font-weight: 500;
 
     letter-spacing: 4px;
-
-    color: var(--boutique-dark);
 
     text-transform: uppercase;
 }
 
 
-/*==================================================
-    DIVIDER
-==================================================*/
+/* ============================================================
+   SMALL SUBTITLE
+============================================================ */
+
+.collections-title::after {
+    content: "Discover our latest stories and moments";
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #a49b95;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 400;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   DIVIDER
+============================================================ */
 
 .divider {
-
-    width: 120px;
-
-    height: 25px;
-
-    margin: 0 auto;
-
     position: relative;
+
+    width: 100px;
+
+    height: 22px;
+
+    margin: 5px auto 0;
 }
 
 
 .divider::before {
-
     content: "";
 
     position: absolute;
 
     left: 0;
-
     right: 0;
 
     top: 50%;
 
     height: 1px;
 
-    background: #d7c4a2;
+    background: #d9c8aa;
 }
 
 
 .divider span {
-
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
-    width: 12px;
-
-    height: 12px;
+    width: 9px;
+    height: 9px;
 
     background: #b39256;
 
-    transform: translate(-50%, -50%) rotate(45deg);
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
 }
 
 
-/*==================================================
-    SWIPER WRAPPER
-==================================================*/
+/* ============================================================
+   SLIDER WRAPPER
+============================================================ */
 
 .collections-slider-wrapper {
-
     position: relative;
 
     width: 100%;
 
-    overflow: hidden;
+    overflow: visible;
 }
 
 
-.section-title-demanto {
-    color: #B39256;
+/* ============================================================
+   SWIPER
+============================================================ */
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+.exhibitions-slider {
+    position: relative;
 
-    font-size: 28px;
-    font-weight: 500;
-
-    letter-spacing: 1.5px;
+    padding: 5px 0 10px;
 }
 
+
+.exhibitions-slider .swiper-wrapper {
+    align-items: stretch;
+}
+
+
+.exhibitions-slider .swiper-slide {
+    height: auto;
+}
+
+
+/* ============================================================
+   EXHIBITION LINK
+============================================================ */
 
 .demanto-exhibition-link {
     display: block;
+
+    height: 100%;
+
+    color: inherit;
 
     text-decoration: none;
 }
 
 
+/* ============================================================
+   EXHIBITION CARD
+============================================================ */
+
 .demanto-exhibition-item {
+    position: relative;
+
     width: 100%;
 
     overflow: hidden;
 
-    border-radius: 15px;
+    border-radius: 10px;
 
-    background: #F4F0E8;
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 30px rgba(50, 40, 35, 0.07);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
+
+.demanto-exhibition-link:hover
+.demanto-exhibition-item {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 40px rgba(50, 40, 35, 0.12);
+}
+
+
+/* ============================================================
+   IMAGE
+============================================================ */
 
 .demanto-exhibition-item img {
     display: block;
 
     width: 100%;
-    height: 400px;
+
+    height: 390px;
 
     object-fit: cover;
 
     transition:
-        transform 0.5s ease,
-        opacity 0.5s ease;
+        transform 0.6s ease,
+        filter 0.4s ease;
 }
 
 
-.demanto-exhibition-item:hover img {
-    transform: scale(1.05);
-}
-
-
-.swiper-slide-prev
-.demanto-exhibition-item img,
-
-.swiper-slide-next
+.demanto-exhibition-link:hover
 .demanto-exhibition-item img {
-    opacity: 0.60;
+    transform: scale(1.04);
+
+    filter: brightness(0.96);
 }
 
 
 /* ============================================================
-   EXHIBITION NAVIGATION
+   IMAGE OVERLAY
+============================================================ */
+
+.demanto-exhibition-item::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(30, 25, 22, 0.12),
+            transparent 35%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.35s ease;
+
+    pointer-events: none;
+}
+
+
+.demanto-exhibition-link:hover
+.demanto-exhibition-item::after {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   PREVIOUS / NEXT SLIDES
+============================================================ */
+
+.swiper-slide-prev
+.demanto-exhibition-item,
+
+.swiper-slide-next
+.demanto-exhibition-item {
+    opacity: 0.88;
+}
+
+
+/* ============================================================
+   NAVIGATION BUTTONS
 ============================================================ */
 
 .demanto-prev,
@@ -352,76 +496,255 @@
 
     top: 50%;
 
-    z-index: 10;
+    z-index: 20;
 
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border: 1px solid #D7C7A4;
+    border: 1px solid #dfcfb3;
 
     border-radius: 50%;
 
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.96);
 
-    color: #B39256;
+    color: #a78650;
 
     cursor: pointer;
 
     transform: translateY(-50%);
 
-    transition: var(--transition-smooth);
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 
 .demanto-prev {
-    left: -10px;
+    left: -20px;
 }
 
 
 .demanto-next {
-    right: -10px;
+    right: -20px;
 }
 
 
 .demanto-prev:hover,
 .demanto-next:hover {
-    border-color: #B39256;
+    background: #b39256;
 
-    background: #B39256;
+    border-color: #b39256;
 
-    color: #FFFFFF;
+    color: #ffffff;
+
+    transform:
+        translateY(-50%)
+        scale(1.05);
 }
 
+
+/* ============================================================
+   VIEW ALL BUTTON AREA
+============================================================ */
+
+.exhibitions-area .text-center {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 30px !important;
+}
+
+
+/* ============================================================
+   VIEW ALL BUTTON
+============================================================ */
 
 .btn-demanto {
     position: relative;
-    z-index: 1;
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
-    padding: 9px 24px;
-    overflow: hidden;
-    border: 0;
-    border-radius: 25px;
-    background: linear-gradient(135deg, var(--logo-pink-dark), var(--logo-pink-dark));
-    color: #FFFFFF !important;
-    font-family: "Montserrat", sans-serif;
+
+    min-width: 125px;
+
+    padding: 11px 25px;
+
+    border: 1px solid #dfa0aa;
+
+    border-radius: 30px;
+
+    background: #dfa0aa;
+
+    color: #ffffff !important;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
     font-size: 10px;
+
     font-weight: 500;
+
     line-height: 1.4;
+
     letter-spacing: 1.5px;
+
     text-align: center;
+
     text-decoration: none;
+
     text-transform: uppercase;
-    cursor: pointer;
-    transition: var(--transition-smooth);
+
+    transition:
+        all 0.3s ease;
 }
-</style>
+
+
+.btn-demanto:hover {
+    background: transparent;
+
+    color: #c98794 !important;
+
+    border-color: #c98794;
+
+    transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   REMOVE OLD PINK COLLECTION BACKGROUND
+============================================================ */
+
+.signature-collections {
+    background: #ffffff;
+
+    padding: 0;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   RESPONSIVE - TABLET
+============================================================ */
+
+@media (max-width: 991px) {
+
+    .exhibitions-area {
+        padding: 55px 0 45px;
+    }
+
+
+    .collections-container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+    .collections-title > span {
+        font-size: 24px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .demanto-exhibition-item img {
+        height: 340px;
+    }
+
+
+    .demanto-prev {
+        left: -10px;
+    }
+
+
+    .demanto-next {
+        right: -10px;
+    }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - MOBILE
+============================================================ */
+
+@media (max-width: 767px) {
+
+    .exhibitions-area {
+        padding: 45px 0 40px;
+    }
+
+
+    .collections-container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .collections-title {
+        margin-bottom: 25px;
+    }
+
+
+    .collections-title > span {
+        font-size: 21px;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    .collections-title::after {
+        font-size: 9px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .demanto-exhibition-item {
+        border-radius: 8px;
+    }
+
+
+    .demanto-exhibition-item img {
+        height: 330px;
+    }
+
+
+    .demanto-prev,
+    .demanto-next {
+        width: 34px;
+
+        height: 34px;
+    }
+
+
+    .demanto-prev {
+        left: 5px;
+    }
+
+
+    .demanto-next {
+        right: 5px;
+    }
+
+
+    .btn-demanto {
+        padding: 10px 22px;
+    }
+
+}
 
 <section>
     <div class="about-editorial-root py-2 position-relative overflow-hidden">

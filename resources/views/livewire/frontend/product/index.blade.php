@@ -559,45 +559,7 @@
 
 <section class="product-area">
     <div class="container">
-        <!-- Mobile Categories Section - ABOVE Products -->
-        <div class="mobile-categories-section">
-            <div class="mobile-categories-header" id="mobileCategoriesHeader">
-                <h4><i class="fa fa-sliders-h"></i> All Categories</h4>
-                <i class="fa fa-chevron-down"></i>
-            </div>
-            <div class="mobile-categories-list" id="mobileCategoriesList">
-                <h5 class="sidebar-title">Collections</h5>
-                <ul>
-                    @foreach($collections as $categoryItem)
-                    <li>
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                            {{ $categoryItem->name }}
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
-                <h5 class="sidebar-title mt-4">High Jewelry</h5>
-                <ul>
-                    @foreach($highJewelry as $categoryItem)
-                    <li>
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                            {{ $categoryItem->name }}
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
-                <h5 class="sidebar-title mt-4">AD Signature</h5>
-                <ul>
-                    @foreach($adSignature as $categoryItem)
-                    <li>
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                            {{ $categoryItem->name }}
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+  
 
         <!-- Sort Bar for Mobile -->
         <div class="sort-bar">
@@ -609,53 +571,10 @@
         </div>
 
         <div class="row g-3">
-            <!-- Desktop Sidebar (hidden on mobile) -->
-            <div class="col-lg-2">
-                <div class="shop-sidebar-wrapper">
-                    <div class="sidebar-item">
-                        <h4 class="sidebar-title">
-                            <a href="{{ url('/categories') }}">All Categories</a>
-                        </h4>
-                        <div class="sidebar-body">
-                            <div class="category-sub-menu">
-                                <h6>Collections</h6>
-                                <ul>
-                                    @foreach($collections as $categoryItem)
-                                    <li>
-                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                                            {{ $categoryItem->name }}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <h6 class="mt-3">High Jewelry</h6>
-                                <ul>
-                                    @foreach($highJewelry as $categoryItem)
-                                    <li>
-                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                                            {{ $categoryItem->name }}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <h6 class="mt-3">AD Signature</h6>
-                                <ul>
-                                    @foreach($adSignature as $categoryItem)
-                                    <li>
-                                        <a href="{{ url('/collections/'.$categoryItem->slug) }}">
-                                            {{ $categoryItem->name }}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Products Grid -->
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="product-header-wrap">
                     <div class="row align-items-center">
                         <div class="col-12">

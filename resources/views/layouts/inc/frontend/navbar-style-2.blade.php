@@ -119,59 +119,175 @@
                   <img class="logo-main boutique-logo" src="{{ asset('assets/img/logo.png')}}" alt="Logo">
                 </a>
               </div>
-              <div class="header-navigation-area hidden-md-down">
-                <ul class="main-menu nav position-relative boutique-nav ul-header-nav">
-                  <li><a href="{{ url('aboutus') }}">About Us</a></li>
-                  
-@foreach($menus as $menu)
+          <div class="header-navigation-area hidden-md-down">
 
-    {{-- MENU WITHOUT CATEGORIES --}}
-    @if($menu->categories->count() == 0)
+    <ul class="main-menu nav position-relative boutique-nav ul-header-nav">
+
+        {{-- ABOUT US --}}
         <li>
-            <a href="#">
-                {{ $menu->name }}
+            <a href="{{ url('aboutus') }}">
+                About Us
             </a>
         </li>
 
-    {{-- MENU WITH DROPDOWN --}}
-    @else
-        <li class="has-dropdown">
-            <a href="#">
-                {{ $menu->name }} <i class="ion-ios-arrow-down"></i>
+
+        {{-- =========================================
+             DYNAMIC MENUS
+        ========================================== --}}
+
+        @foreach($menus as $menu)
+
+            @if($menu->categories->count() > 0)
+
+                {{-- MENU WITH MEGA MENU --}}
+                <li class="mega-menu-parent">
+
+                    <a
+                        href="{{ url('/collections/' . $menu->slug) }}"
+                        class="mega-menu-trigger"
+                    >
+                        {{ $menu->name }}
+
+                        <i class="ion-ios-arrow-down"></i>
+                    </a>
+
+
+                    {{-- ================================
+                         MEGA MENU
+                    ================================= --}}
+
+                    <div class="mega-menu-wrapper">
+
+                        <div class="mega-menu-container">
+
+                            <div class="mega-menu-layout">
+
+
+                                {{-- =========================
+                                     LEFT SIDE - CATEGORIES
+                                ========================== --}}
+
+                                <div class="mega-categories-area">
+
+                                    <div class="mega-menu-grid">
+
+                                        @foreach($menu->categories as $category)
+
+                                            <div class="mega-menu-column">
+
+                                                {{-- CATEGORY --}}
+                                                <a
+                                                    href="{{ url('/collections/' . $category->slug) }}"
+                                                    class="mega-category-title"
+                                                >
+                                                    {{ $category->name }}
+                                                </a>
+
+
+                                                {{-- =================
+                                                     SUBCATEGORIES
+                                                ================== --}}
+
+                                                @if($category->children->count() > 0)
+
+                                                    <ul class="mega-subcategories">
+
+                                                        @foreach($category->children as $sub)
+
+                                                            <li>
+
+                                                                <a
+                                                                    href="{{ url('/collections/' . $sub->slug) }}"
+                                                                >
+                                                                    {{ $sub->name }}
+                                                                </a>
+
+                                                            </li>
+
+                                                        @endforeach
+
+                                                    </ul>
+
+                                                @endif
+
+                                            </div>
+
+                                        @endforeach
+
+                                    </div>
+
+                                </div>
+
+
+                                {{-- =========================
+                                     RIGHT SIDE - IMAGE
+                                ========================== --}}
+
+                                <div class="mega-image-column">
+
+                                    <a href="{{ url('/collections/' . $menu->slug) }}">
+
+                                        <img
+                                            src="{{ asset('assets/img/megaimg.webp') }}"
+                                            alt="{{ $menu->name }}"
+                                            class="mega-menu-image"
+                                        >
+
+                                        <div class="mega-image-overlay">
+
+                                            <span>
+                                                Shop {{ $menu->name }}
+                                            </span>
+
+                                        </div>
+
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+            @else
+
+                {{-- MENU WITHOUT CATEGORIES --}}
+                <li>
+
+                    <a href="{{ url('/collections/' . $menu->slug) }}">
+                        {{ $menu->name }}
+                    </a>
+
+                </li>
+
+            @endif
+
+        @endforeach
+
+
+        {{-- NEWS --}}
+        <li>
+            <a href="{{ url('blogs') }}">
+                News
             </a>
-
-            <ul class="boutique-dropdown">
-
-                @foreach($menu->categories as $category)
-
-                    {{-- MAIN CATEGORY --}}
-                    <li>
-                        <a href="{{ url('collections/'.$category->slug) }}">
-                            {{ $category->name }}
-                        </a>
-                    </li>
-
-                    {{-- SUBCATEGORIES --}}
-                    @foreach($category->children as $sub)
-                        <li style="padding-left:20px;">
-                            <a href="{{ url('collections/'.$sub->slug) }}">
-                                - {{ $sub->name }}
-                            </a>
-                        </li>
-                    @endforeach
-
-                @endforeach
-
-            </ul>
         </li>
-    @endif
 
-@endforeach
 
-                  <li><a href="{{ url('blogs')}}">News</a></li>
-                  <li><a href="{{ url('contactus') }}">Contact us</a></li>
-                </ul>
-              </div>
+        {{-- CONTACT --}}
+        <li>
+            <a href="{{ url('contactus') }}">
+                Contact Us
+            </a>
+        </li>
+
+    </ul>
+
+</div>
             </div>
             <div class="align-right">
               <div class="contact-link float-start boutique-text-small">
@@ -237,233 +353,643 @@
 </header>
 
 <style>
-  /* 1. Create an invisible bridge so the hover doesn't break */
-.has-dropdown {
+
+/* =========================================================
+   BEAUTYANA HEADER
+========================================================= */
+
+.boutique-nav {
     position: relative;
-    padding-bottom: 20px; /* Provides space for the bridge */
-    margin-bottom: -20px;
 }
 
-.boutique-dropdown::before {
-    content: "";
-    position: absolute;
-    top: -25px; /* Adjust this based on your header height */
-    left: 0;
-    width: 100%;
-    height: 25px;
-    background: transparent;
+
+/* =========================================================
+   NORMAL NAVIGATION ITEMS
+========================================================= */
+
+.boutique-nav > li {
+    position: static;
 }
 
-/* 2. Ensure the dropdown stays open while hovering the menu itself */
-.has-dropdown:hover .boutique-dropdown {
-    display: block !important;
+.boutique-nav > li > a {
+    display: flex !important;
+    align-items: center;
+
+    gap: 5px;
 }
-    /* 1. New Classic Dropdown Styling */
-  .boutique-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff;
-    min-width: 200px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    padding: 15px 0;
-    display: none;
-    z-index: 999;
-    border: 1px solid #f2f2f2;
-    border-radius: 4px;
-    text-align: left;
-  }
-  /* Show on Hover */
-  @media (min-width: 992px) {
-    .has-dropdown:hover .boutique-dropdown {
-        display: block;
-    }
-  }
 
-  /* Show on Click (via JS) */
-  .boutique-dropdown.is-open {
-    display: block !important;
-  }
 
-  .boutique-dropdown li {
-    display: block;
-    width: 100%;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+/* =========================================================
+   MEGA MENU PARENT
+========================================================= */
 
-  .boutique-dropdown li a {
-    padding: 10px 25px !important;
-    color: #444 !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    text-transform: capitalize !important;
-    display: block;
-    border: none !important;
-  }
-
-  .boutique-dropdown li a:hover {
-    color: #D97DA5 !important; /* Theme Pink */
-    background: #fafafa;
-    padding-left: 30px !important;
-  }
-
-  /* 2. Aesthetics & Logic */
-  .boutique-logo {
-    max-width: 80px !important;
-    height: auto !important;
-  }
-
-  .header-top, .boutique-nav li a, .boutique-text-small a {
-    font-size: 11px !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-  }
-
-  .has-dropdown i {
-    transition: 0.3s;
-  }
-
-  .has-dropdown:hover i {
-    transform: rotate(180deg);
-  }
-
-  /* Sidebar/Mobile specific display */
-  .ul-sidebar .boutique-dropdown {
+.mega-menu-parent {
     position: static !important;
-    width: 100% !important;
-    box-shadow: none !important;
-    display: none; /* Controlled by mobile script toggle */
-    padding-left: 20px !important;
-    background: transparent;
-    border: none;
-  }
-  
-  .ul-sidebar .has-dropdown.active .boutique-dropdown {
-    display: block !important;
-  }
-      /* Small text aesthetic for luxury feel */
-    .header-top, 
-    .main-menu li a, 
-    .contact-info span, 
-    .dropdown-btn {
-      font-size: 12px !important; 
-      text-transform: capitalize;
-      font-weight: 700;
-    }
-
-    .header-top {
-      border-bottom: 1px solid #f2f2f2;
-      padding: 6px 0;
-    }
-
-    .shop-count {
-      background: #D97DA5 !important; /* Subtle gold/neutral tone for accessories */
-      font-size: 9px !important;
-    }
-
-    .icon-user {
-      display: none;
-    }
-
-    /* Sticky Blur Effect */
-    .sticky-header.sticky-on {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .header-area .header-top .contact-email span{
-      font-size: 13px !important;
-        text-transform: capitalize;
-        font-weight: 700;
-    }
-      .header-area .header-top .contact-email span a { 
-          text-transform: lowercase;
-      }
-  /* ANIMATED TICKER CSS */
-    .luxury-ticker {
-        height: 20px;
-        overflow: hidden;
-        position: relative;
-    }
-    .ticker-item {
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: lowercase;
-
-        color: #D97DA5; /* Matches your logo pink */
-        line-height: 20px;
-        animation: tickerAnimation 9s infinite;
-        position: absolute;
-        width: 100%;
-        opacity: 0;
-    }
-    .ticker-item:nth-child(1) { animation-delay: 0s; }
-    .ticker-item:nth-child(2) { animation-delay: 3s; }
-    .ticker-item:nth-child(3) { animation-delay: 6s; }
-
-    @keyframes tickerAnimation {
-        0% { opacity: 0; transform: translateY(10px); }
-        5% { opacity: 1; transform: translateY(0); }
-        30% { opacity: 1; transform: translateY(0); }
-        35% { opacity: 0; transform: translateY(-10px); }
-        100% { opacity: 0; }
-    }
-    @media (max-width: 991px) {
-     .logo-main {
-      max-width: 90px !important; /* Forces logo to be small and elegant */
-      height: auto;
-      transition: transform 0.3s ease;
-    }
-    
-}
-    @media (min-width: 991px) {
-     .logo-main {
-      max-width: 100px !important; /* Forces logo to be small and elegant */
-      height: auto;
-      transition: transform 0.3s ease;
-    }
-    
-}
-.mega-menu {
-    position: relative;
 }
 
-.mega-menu-content {
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.mega-menu-trigger i {
+    margin-left: 5px;
+
+    font-size: 9px;
+
+    transition: transform 0.3s ease;
+}
+
+
+.mega-menu-parent:hover .mega-menu-trigger i {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   FULL WIDTH MEGA MENU
+========================================================= */
+
+.mega-menu-wrapper {
+
     position: absolute;
+
     top: 100%;
     left: 0;
+
     width: 100%;
-    background: #fff;
-    padding: 30px;
-    display: none;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    z-index: 999;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.10);
+
+    z-index: 9999;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
 }
 
-.mega-menu:hover .mega-menu-content {
+
+/* =========================================================
+   SHOW MEGA MENU
+========================================================= */
+
+.mega-menu-parent:hover .mega-menu-wrapper {
+
+    visibility: visible;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   HOVER BRIDGE
+========================================================= */
+
+.mega-menu-parent {
+
+    padding-bottom: 20px !important;
+
+    margin-bottom: -20px !important;
+}
+
+
+/* =========================================================
+   INNER CONTAINER
+========================================================= */
+
+.mega-menu-container {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 35px 40px 40px;
+}
+
+
+/* =========================================================
+   MAIN MEGA MENU LAYOUT
+
+   LEFT  = CATEGORIES
+   RIGHT = IMAGE
+========================================================= */
+
+.mega-menu-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+    gap: 40px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   CATEGORY AREA
+========================================================= */
+
+.mega-categories-area {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
+
+.mega-menu-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 30px 50px;
+}
+
+
+/* =========================================================
+   CATEGORY COLUMN
+========================================================= */
+
+.mega-menu-column {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   MAIN CATEGORY
+========================================================= */
+
+.mega-category-title {
+
     display: block;
+
+    margin-bottom: 12px;
+
+    padding-bottom: 8px !important;
+
+    color: #222 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 600 !important;
+
+    text-transform: uppercase !important;
+
+    letter-spacing: 1px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+
+    background: transparent !important;
 }
 
-.mega-title {
-    font-weight: bold;
-    margin-bottom: 10px;
+
+.mega-category-title:hover {
+
+    color: #D97DA5 !important;
+
+    padding-left: 4px !important;
+
+    background: transparent !important;
 }
 
-.mega-menu-content ul {
+
+/* =========================================================
+   SUBCATEGORIES
+========================================================= */
+
+.mega-subcategories {
+
     list-style: none;
+
+    margin: 0;
+
     padding: 0;
 }
 
-.mega-menu-content ul li {
-    margin-bottom: 6px;
+
+.mega-subcategories li {
+
+    margin: 0 !important;
+
+    padding: 0 !important;
 }
 
-.mega-menu-content ul li a {
-    color: #555;
-    font-size: 13px;
+
+.mega-subcategories li a {
+
+    display: block;
+
+    padding: 5px 0 !important;
+
+    color: #777 !important;
+
+    font-size: 12px !important;
+
+    font-weight: 400 !important;
+
+    text-transform: capitalize !important;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
 }
+
+
+.mega-subcategories li a:hover {
+
+    color: #D97DA5 !important;
+
+    padding-left: 6px !important;
+
+    background: transparent !important;
+}
+
+
+/* =========================================================
+   IMAGE COLUMN
+========================================================= */
+
+.mega-image-column {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 280px;
+
+    overflow: hidden;
+
+    background: #f7f7f7;
+}
+
+
+.mega-image-column a {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+}
+
+
+/* =========================================================
+   MEGA IMAGE
+========================================================= */
+
+.mega-menu-image {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+.mega-image-column:hover .mega-menu-image {
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   IMAGE DARK GRADIENT
+========================================================= */
+
+.mega-image-column::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.35),
+            transparent 55%
+        );
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   IMAGE BUTTON
+========================================================= */
+
+.mega-image-overlay {
+
+    position: absolute;
+
+    left: 20px;
+
+    bottom: 20px;
+
+    z-index: 2;
+}
+
+
+.mega-image-overlay span {
+
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    background: rgba(0,0,0,0.15);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.mega-image-column:hover
+.mega-image-overlay span {
+
+    background: #ffffff;
+
+    color: #222222;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESKTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .mega-menu-container {
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+
+    .mega-menu-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            250px;
+
+        gap: 25px;
+    }
+
+
+    .mega-menu-grid {
+
+        gap: 25px 30px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .mega-menu-wrapper {
+
+        display: none !important;
+    }
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.boutique-logo {
+
+    max-width: 100px !important;
+
+    height: auto !important;
+}
+
+
+/* =========================================================
+   HEADER TEXT
+========================================================= */
+
+.header-top,
+.boutique-nav li a,
+.boutique-text-small a {
+
+    font-size: 11px !important;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
+
+.shop-count {
+
+    background: #D97DA5 !important;
+
+    font-size: 9px !important;
+}
+
+
+/* =========================================================
+   STICKY HEADER
+========================================================= */
+
+.sticky-header.sticky-on {
+
+    background: rgba(255,255,255,0.95);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.05);
+}
+
+
+/* =========================================================
+   TICKER
+========================================================= */
+
+.luxury-ticker {
+
+    height: 20px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+
+.ticker-item {
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-transform: lowercase;
+
+    color: #D97DA5;
+
+    line-height: 20px;
+
+    animation: tickerAnimation 9s infinite;
+
+    position: absolute;
+
+    width: 100%;
+
+    opacity: 0;
+}
+
+
+.ticker-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.ticker-item:nth-child(2) {
+    animation-delay: 3s;
+}
+
+.ticker-item:nth-child(3) {
+    animation-delay: 6s;
+}
+
+
+@keyframes tickerAnimation {
+
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    5% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    35% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   MOBILE LOGO
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .logo-main {
+
+        max-width: 90px !important;
+
+        height: auto;
+
+        transition: transform 0.3s ease;
+    }
+
+}
+
+
+/* =========================================================
+   HEADER EMAIL
+========================================================= */
+
+.header-area
+.header-top
+.contact-email span {
+
+    font-size: 13px !important;
+
+    text-transform: capitalize;
+
+    font-weight: 700;
+}
+
+
+.header-area
+.header-top
+.contact-email span a {
+
+    text-transform: lowercase;
+}
+
 </style>
 
 <script>

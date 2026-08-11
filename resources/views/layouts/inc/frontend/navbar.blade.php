@@ -192,55 +192,153 @@
           <div class="col col-12 position-relative">
             <div class="header-align align-default justify-content-center">
               <div class="header-navigation-area hidden-md-down">
-                <ul class="main-menu nav">
-              
-                      <li><a href="{{ url('aboutus') }}">About Us</a></li>
-@foreach($menus as $menu)
-    <li class="has-dropdown">
-        <a href="javascript:void(0)">
-            {{ $menu->name }}
-            @if($menu->categories->count())
-                <i class="ion-ios-arrow-down"></i>
-            @endif
+        <ul class="main-menu nav boutique-main-menu">
+
+    {{-- ABOUT --}}
+    <li>
+        <a href="{{ url('aboutus') }}">
+            About Us
         </a>
+    </li>
+
+
+    {{-- DYNAMIC MENUS --}}
+    @foreach($menus as $menu)
 
         @if($menu->categories->count())
-            <ul class="boutique-dropdown">
 
-                @foreach($menu->categories as $category)
-                    <li class="has-dropdown">
+            {{-- MENU WITH CATEGORIES --}}
+            <li class="mega-menu-parent">
 
-                        <a href="{{ url('collections/'.$category->slug) }}">
-                            {{ $category->name }}
+                <a href="javascript:void(0);" class="mega-menu-trigger">
+                    {{ $menu->name }}
+
+                    <i class="ion-ios-arrow-down"></i>
+                </a>
+
+
+<div class="mega-menu-wrapper">
+
+    <div class="mega-menu-container">
+
+        <div class="mega-menu-layout">
+
+            {{-- ============================= --}}
+            {{-- CATEGORIES --}}
+            {{-- ============================= --}}
+
+            <div class="mega-categories-area">
+
+                <div class="mega-menu-grid">
+
+                    @foreach($menu->categories as $category)
+
+                        <div class="mega-menu-column">
+
+                            {{-- MAIN CATEGORY --}}
+                            <a
+                                href="{{ url('collections/'.$category->slug) }}"
+                                class="mega-category-title"
+                            >
+                                {{ $category->name }}
+                            </a>
+
+
+                            {{-- SUBCATEGORIES --}}
                             @if($category->children->count())
-                                <i class="ion-ios-arrow-right float-end"></i>
+
+                                <ul class="mega-subcategories">
+
+                                    @foreach($category->children as $sub)
+
+                                        <li>
+                                            <a href="{{ url('collections/'.$sub->slug) }}">
+                                                {{ $sub->name }}
+                                            </a>
+                                        </li>
+
+                                    @endforeach
+
+                                </ul>
+
                             @endif
-                        </a>
 
-                        {{-- SUBCATEGORIES --}}
-                        @if($category->children->count())
-                            <ul class="boutique-dropdown" style="left: 100%; top: 0;">
-                                @foreach($category->children as $sub)
-                                    <li>
-                                        <a href="{{ url('collections/'.$sub->slug) }}">
-                                            {{ $sub->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
+                        </div>
 
-                    </li>
-                @endforeach
+                    @endforeach
 
-            </ul>
+                </div>
+
+            </div>
+
+
+            {{-- ============================= --}}
+            {{-- MEGA MENU IMAGE --}}
+            {{-- ============================= --}}
+
+            <div class="mega-image-column">
+
+                <a href="{{ url('/collections/'.$menu->slug) }}">
+
+                    <img
+                        src="{{ asset('assets/img/megaimg.webp') }}"
+                        alt="{{ $menu->name }}"
+                        class="mega-menu-image"
+                    >
+
+                    <div class="mega-image-overlay">
+
+                        <span>
+                            Shop {{ $menu->name }}
+                        </span>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+            </li>
+
+        @else
+
+            {{-- MENU WITHOUT CATEGORIES --}}
+            <li>
+
+                @if($menu->slug === 'news')
+
+                    <a href="{{ url('blogs') }}">
+                        {{ $menu->name }}
+                    </a>
+
+                @else
+
+                    <a href="{{ url('/collections/'.$menu->slug) }}">
+                        {{ $menu->name }}
+                    </a>
+
+                @endif
+
+            </li>
+
         @endif
+
+    @endforeach
+
+
+    {{-- CONTACT --}}
+    <li>
+        <a href="{{ url('contactus') }}">
+            Contact Us
+        </a>
     </li>
-@endforeach
-                      <li><a href="{{ url('blogs')}}">News</a>           
-                      </li>
-                      <li><a href="{{ url('contactus') }}">Contact us</a></li>
-                    </ul>
+
+</ul>
               </div>
             </div>
           </div>
@@ -295,7 +393,451 @@
   </header>
   <!--== End Header Wrapper ==-->
 <style>
-  /* 1. Create an invisible bridge so the hover doesn't break */
+  /* =========================================================
+   BEAUTYANA MEGA MENU
+   ========================================================= */
+
+.boutique-main-menu {
+    position: relative;
+}
+
+
+/* ---------------------------------------------------------
+   Main menu item
+   --------------------------------------------------------- */
+
+.boutique-main-menu > li {
+    position: static !important;
+}
+
+
+.boutique-main-menu > li > a {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+}
+
+
+/* ---------------------------------------------------------
+   Arrow
+   --------------------------------------------------------- */
+
+.mega-menu-trigger i {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+
+.mega-menu-parent:hover .mega-menu-trigger i {
+    transform: rotate(180deg);
+}
+
+
+/* ---------------------------------------------------------
+   FULL WIDTH MEGA MENU
+   --------------------------------------------------------- */
+
+/* =========================================================
+   BEAUTYANA MEGA MENU
+   ========================================================= */
+
+.mega-menu-parent {
+    position: static !important;
+}
+
+
+/* ---------------------------------------------------------
+   MEGA MENU WRAPPER
+   --------------------------------------------------------- */
+
+.mega-menu-wrapper {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    background: #fff;
+
+    border-top: 1px solid #eeeeee;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 9999;
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   SHOW ON HOVER
+   --------------------------------------------------------- */
+
+.mega-menu-parent:hover .mega-menu-wrapper {
+    visibility: visible;
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CONTAINER
+   --------------------------------------------------------- */
+
+.mega-menu-container {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 30px 35px;
+}
+
+
+/* ---------------------------------------------------------
+   TWO PART LAYOUT
+
+   LEFT  = categories
+   RIGHT = image
+   --------------------------------------------------------- */
+
+.mega-menu-layout {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 300px;
+
+    gap: 35px;
+
+    align-items: stretch;
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORY AREA
+   --------------------------------------------------------- */
+
+.mega-categories-area {
+    min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORY GRID
+
+   Two columns for categories
+   --------------------------------------------------------- */
+
+.mega-menu-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 50px;
+
+    row-gap: 25px;
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORY COLUMN
+   --------------------------------------------------------- */
+
+.mega-menu-column {
+    min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORY TITLE
+   --------------------------------------------------------- */
+
+.mega-category-title {
+    display: block;
+
+    margin-bottom: 10px;
+
+    padding-bottom: 8px !important;
+
+    color: #222 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+
+    text-transform: uppercase !important;
+
+    letter-spacing: 0.8px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    transition:
+        color 0.25s ease,
+        padding-left 0.25s ease;
+}
+
+
+.mega-category-title:hover {
+    color: #D97DA5 !important;
+
+    padding-left: 4px !important;
+
+    background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   SUBCATEGORIES
+   --------------------------------------------------------- */
+
+.mega-subcategories {
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+.mega-subcategories li {
+    margin: 0 !important;
+
+    padding: 0 !important;
+}
+
+
+.mega-subcategories li a {
+    display: block;
+
+    padding: 4px 0 !important;
+
+    color: #777 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 400 !important;
+
+    text-transform: capitalize !important;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+
+    background: transparent !important;
+
+    border: none !important;
+}
+
+
+.mega-subcategories li a:hover {
+    color: #D97DA5 !important;
+
+    padding-left: 6px !important;
+
+    background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE COLUMN
+   --------------------------------------------------------- */
+
+.mega-image-column {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 260px;
+
+    overflow: hidden;
+
+    background: #f7f7f7;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE
+   --------------------------------------------------------- */
+
+.mega-menu-image {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 260px;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE HOVER
+   --------------------------------------------------------- */
+
+.mega-image-column:hover .mega-menu-image {
+    transform: scale(1.04);
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE OVERLAY
+   --------------------------------------------------------- */
+
+.mega-image-overlay {
+    position: absolute;
+
+    left: 20px;
+
+    bottom: 20px;
+
+    z-index: 2;
+}
+
+
+.mega-image-overlay span {
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    color: #fff;
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    background: rgba(0,0,0,0.15);
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(2px);
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.mega-image-column:hover .mega-image-overlay span {
+    background: #fff;
+
+    color: #222;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE DARK OVERLAY
+   --------------------------------------------------------- */
+
+.mega-image-column::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.25),
+        transparent 45%
+    );
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   ARROW
+   --------------------------------------------------------- */
+
+.mega-menu-trigger i {
+    margin-left: 5px;
+
+    font-size: 9px;
+
+    transition: transform 0.3s ease;
+}
+
+
+.mega-menu-parent:hover .mega-menu-trigger i {
+    transform: rotate(180deg);
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP
+   --------------------------------------------------------- */
+
+@media (min-width: 992px) {
+
+    .mega-menu-parent {
+        padding-bottom: 20px !important;
+
+        margin-bottom: -20px !important;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+    .mega-menu-container {
+        padding: 25px;
+    }
+
+    .mega-menu-layout {
+        grid-template-columns:
+            minmax(0, 1fr) 250px;
+
+        gap: 25px;
+    }
+
+    .mega-menu-grid {
+        column-gap: 30px;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 991px) {
+
+    .mega-menu-wrapper {
+        display: none !important;
+    }
+
+}
+ 1. Create an invisible bridge so the hover doesn't break */
 .has-dropdown {
     position: relative;
     padding-bottom: 20px; /* Provides space for the bridge */
