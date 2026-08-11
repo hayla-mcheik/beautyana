@@ -137,11 +137,14 @@ if (isset($product)) {
 @endphp
 
 
+
+
 @section('content')
 
-    @include(
-        'layouts.inc.frontend.breadcrumb',
-        ['breadcrumbs' => $breadcrumbs]
-    )
+@include('layouts.inc.frontend.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+
+<div>
+    <livewire:frontend.product.view :category="$category" :product="$product" />
+</div>
 
 @endsection
