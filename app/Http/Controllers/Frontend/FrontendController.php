@@ -137,30 +137,37 @@ public function categoriescollections()
         compact('menus')
     );
 }
-public function products($category_slug)
+public function products(string $category_slug)
 {
-    $inStockCount = Product::where('quantity', '>', 0)->count();
-
-    $outOfStockCount = Product::where('quantity', '=', 0)->count();
-
     $category = Category::where('slug', $category_slug)
-        ->with([
-            'menu',
-            'parent',
-            'children'
-        ])
+        ->where('status', '0')
+        ->with(['menu', 'parent', 'children'])
         ->withCount('products')
-        ->first();
+        ->firstOrFail();
 
-    if (!$category) {
-        return redirect()->back();
-    }
+    $menu = $category->menu;
+
+    // Include current category + all its children
+    $categoryIds = $category->children
+        ->pluck('id')
+        ->push($category->id);
+
+    $inStockCount = Product::whereIn('category_id', $categoryIds)
+        ->where('status', '0')
+        ->where('quantity', '>', 0)
+        ->count();
+
+    $outOfStockCount = Product::whereIn('category_id', $categoryIds)
+        ->where('status', '0')
+        ->where('quantity', '=', 0)
+        ->count();
 
     $menus = $this->getMenus();
 
     return view(
         'frontend.collections.products.index',
         compact(
+            'menu',
             'category',
             'menus',
             'inStockCount',
@@ -174,38 +181,29 @@ public function productView(
     string $product_slug
 ) {
     $category = Category::where('slug', $category_slug)
-        ->with([
-            'menu',
-            'parent',
-            'children'
-        ])
-        ->first();
+        ->where('status', '0')
+        ->with(['menu', 'parent', 'children'])
+        ->firstOrFail();
 
-    if (!$category) {
-        return redirect()->back();
-    }
+    $menu = $category->menu;
 
-    $product = $category->products()
+    $product = Product::where('category_id', $category->id)
         ->where('slug', $product_slug)
         ->where('status', '0')
-        ->first();
-
-    if (!$product) {
-        return redirect()->back();
-    }
+        ->firstOrFail();
 
     $menus = $this->getMenus();
 
     return view(
         'frontend.collections.products.view',
         compact(
-            'product',
+            'menu',
             'category',
+            'product',
             'menus'
         )
     );
 }
-
 public function aboutus()
 {
     $about = \App\Models\About::first();
