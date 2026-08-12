@@ -79,7 +79,7 @@
     }
 
     .mobile-categories-header h4 {
-      font-family:"Cormorant Garamond",serif;
+        font-family:"Cormorant Garamond",serif;
         font-size: 20px;
         font-weight: 600;
         color: var(--demanto-dark);
@@ -264,9 +264,8 @@
     }
 
     /* ============================================================
-       PRODUCT CARDS - NO CROPPING (UPDATED)
+       PRODUCT CARDS - NO CROPPING
     ============================================================ */
-    
     .featured-product-card {
         background: #fff;
         border-radius: 20px;
@@ -291,7 +290,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px; /* Added padding to ensure images fit */
+        padding: 10px;
     }
 
     .featured-image::after {
@@ -311,8 +310,8 @@
     .featured-image img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* CHANGED: from cover to contain - NO CROPPING */
-        padding: 15px; /* Keep padding for breathing room */
+        object-fit: contain;
+        padding: 15px;
         transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
@@ -352,9 +351,11 @@
         color: var(--demanto-dark);
         gap: 8px;
     }
-.category-sub-menu h6{
-    font-size: 18px;
-}
+
+    .category-sub-menu h6 {
+        font-size: 18px;
+    }
+
     /* Empty State */
     .empty-state {
         text-align: center;
@@ -401,7 +402,7 @@
     }
 
     /* ============================================================
-       RESPONSIVE - NO CROPPING
+       RESPONSIVE
     ============================================================ */
 
     @media (max-width: 1200px) {
@@ -416,12 +417,10 @@
     }
 
     @media (max-width: 991px) {
-        /* Hide desktop sidebar on mobile */
         .col-lg-2 {
             display: none;
         }
         
-        /* Show mobile categories section */
         .mobile-categories-section {
             display: block;
         }
@@ -439,7 +438,6 @@
             object-fit: contain;
         }
         
-        /* Make products take full width */
         .col-lg-10 {
             width: 100%;
             flex: 0 0 100%;
@@ -559,7 +557,6 @@
 
 <section class="product-area">
     <div class="container">
-  
 
         <!-- Sort Bar for Mobile -->
         <div class="sort-bar">
@@ -571,7 +568,6 @@
         </div>
 
         <div class="row g-3">
-
 
             <!-- Products Grid -->
             <div class="col-lg-12">
@@ -597,39 +593,47 @@
                         <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                             <div class="row g-3">
                                 @forelse ($products as $index => $product)
-                                <div class="col-6 col-md-4 col-lg-3" style="animation-delay: {{ $index * 0.05 }}s">
-                                    <div class="featured-product-card">
-                                        <div class="featured-image">
-                                            <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
-                                                @if($product->productImages->count())
-                                                    <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy">
-                                                @else
-                                                    <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="">
-                                                @endif
-                                            </a>
-                                        </div>
-                                        <div class="featured-content">
-                                            <h4>{{ $product->name }}</h4>
-                                            <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
-                                                Discover Details <i class="fa fa-arrow-right"></i>
-                                            </a>
+                                    @php
+                                        // Dynamically determine menu slug for URL generation
+                                        $menuSlug = $category->menu->slug ?? ($product->category->menu->slug ?? 'collection');
+                                        $catSlug  = $product->category->slug ?? $category->slug;
+                                        $productUrl = url( $menuSlug . '/' . $catSlug . '/' . $product->slug);
+                                    @endphp
+
+                                    <div class="col-6 col-md-4 col-lg-3" style="animation-delay: {{ $index * 0.05 }}s">
+                                        <div class="featured-product-card">
+                                            <div class="featured-image">
+                                                <a href="{{ $productUrl }}">
+                                                    @if($product->productImages->count())
+                                                        <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy">
+                                                    @else
+                                                        <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $product->name }}">
+                                                    @endif
+                                                </a>
+                                            </div>
+                                            <div class="featured-content">
+                                                <h4>{{ $product->name }}</h4>
+                                                <a href="{{ $productUrl }}">
+                                                    Discover Details <i class="fa fa-arrow-right"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @empty
-                                <div class="col-12">
-                                    <div class="empty-state">
-                                        <i class="fa-regular fa-gem"></i>
-                                        <h5>No Products Available</h5>
-                                        <p>New products are being curated just for you. Please check back soon.</p>
+                                    <div class="col-12">
+                                        <div class="empty-state">
+                                            <i class="fa-regular fa-gem"></i>
+                                            <h5>No Products Available</h5>
+                                            <p>New products are being curated just for you. Please check back soon.</p>
+                                        </div>
                                     </div>
-                                </div>
                                 @endforelse
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

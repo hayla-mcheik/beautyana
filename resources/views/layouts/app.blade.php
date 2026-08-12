@@ -6,32 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Beautyana | Laravel Ecommerce</title>
+    <title>DEMANTO - Timeless Luxury</title>
 
     <!--== Favicon ==-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
-    <!--== Google Fonts ==-->
+    <!--== Google Fonts - Luxury Serif + Sans ==-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="../../css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <!--== Bootstrap CSS ==-->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!--== Ionicon CSS ==-->
-    <link href="{{ asset('assets/css/ionicons.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/ionicons.min.css') }}" rel="stylesheet"> 
     <!--== Simple Line Icon CSS ==-->
-    <link href="{{ asset('assets/css/simple-line-icons.css') }}" rel="stylesheet">
+     <link href="{{ asset('assets/css/simple-line-icons.css') }}" rel="stylesheet"> 
     <!--== Line Icons CSS ==-->
-    <link href="{{ asset('assets/css/lineIcons.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/lineIcons.css') }}" rel="stylesheet"> --}}
     <!--== Font Awesome Icon CSS ==-->
-    <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet">
-    <!--== Animate CSS ==-->
-    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
+
+    {{-- <!--== Animate CSS ==-->
+    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet"> --}}
     <!--== Swiper CSS ==-->
     <link href="{{ asset('assets/css/swiper.min.css') }}" rel="stylesheet">
     <!--== Range Slider CSS ==-->
-    <link href="{{ asset('assets/css/range-slider.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/range-slider.css') }}" rel="stylesheet">
     <!--== Fancybox Min CSS ==-->
     <link href="{{ asset('assets/css/fancybox.min.css') }}" rel="stylesheet">
     <!--== Slicknav Min CSS ==-->
@@ -39,359 +41,94 @@
     <!--== Owl Carousel Min CSS ==-->
     <link href="{{ asset('assets/css/owlcarousel.min.css') }}" rel="stylesheet">
     <!--== Owl Theme Min CSS ==-->
-    <link href="{{ asset('assets/css/owltheme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/owltheme.min.css') }}" rel="stylesheet"> --}}
     <!--== Spacing CSS ==-->
-    <link href="{{ asset('assets/css/spacing.css') }}" rel="stylesheet">
-
+{{-- 
+ <link href="{{ asset('assets/css/slicknav.css') }}" rel="stylesheet"> --}}
     <!--== Main Style CSS ==-->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+         <link href="{{ asset('assets/css/simple-line-icons.css') }}" rel="stylesheet"> 
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-    <!-- Custom CSS for Enhanced Footer Design -->
- 
-
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<!-- Default theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @livewireStyles
-       <style>
-        /* Sidebar Cleanup */
-.mobile-main-nav {
-    list-style: none;
-    padding: 20px 0;
-    margin: 0;
+
+    <style>
+   
+/* Floating WhatsApp Button */
+.whatsapp-btn{
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    background: green;
+    color: #fff;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:16px;
+    z-index:9999;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:.3s;
 }
 
-.mobile-main-nav > li {
-    border-bottom: 1px solid #f2f2f2;
+.whatsapp-btn:hover{
+    background:#C9A96E;
+    color:#fff;
+    transform:scale(1.1);
 }
 
-.mobile-main-nav > li > a {
-    display: block;
-    padding: 15px 25px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #51555A;
-    text-transform: uppercase;
+.whatsapp-btn i{
+    line-height:1;
 }
-
-/* Sub-categories Styling */
-.mobile-sub-categories {
-    list-style: none;
-    padding: 0 0 15px 40px;
-    background: #fafafa;
-}
-
-.mobile-sub-categories li a {
-    display: block;
-    padding: 10px 0;
-    font-size: 11px;
-    color: #51555A;
-    font-weight: 700;
-    text-transform: capitalize;
-}
-
-/* Arrow Rotation */
-.has-mobile-dropdown.active .ion-ios-arrow-down {
-    transform: rotate(180deg);
-    transition: 0.3s;
-}
-
-.has-mobile-dropdown.active > a {
-    color: #D97DA5; /* Your pink theme color */
-}
-        /* Enhanced Footer Styles */
-        .footer-connect-section {
-            background: var(--logo-pink-dark) ;
-            padding: 0px 0;
-            color: #fff;
-        }
-        
-        .footer-connect-section .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #fff;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .footer-connect-section .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 60px;
-            height: 3px;
-            background: #d40707;
-        }
-        
-        .social-connect-box {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 30px;
-            height: 100%;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-        
-        .social-connect-box:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .newsletter-box {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 30px;
-            height: 100%;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-        
-        .newsletter-box:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-icons-enhanced {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .social-icons-enhanced a {
+        /* Scroll Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 30px;
+            height: 30px;
+            background: #C9A96E;
+            color: #000000;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: #fff;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-decoration: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1040;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-        
-        .social-icons-enhanced a:hover {
-            background: #d40707;
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(236, 107, 129, 0.3);
-        }
-        
-        .social-icons-enhanced .facebook:hover { background: #3b5998; }
-        .social-icons-enhanced .twitter:hover { background: #1da1f2; }
-        .social-icons-enhanced .youtube:hover { background: #ff0000; }
-        .social-icons-enhanced .instagram:hover { 
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-        }
-        
-        .newsletter-form-enhanced .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            height: 50px;
-            border-radius: 25px;
-            padding: 0 20px;
-            margin-bottom: 15px;
-            font-size: 12px
-        }
-        
-        .newsletter-form-enhanced .form-control:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #d40707;
-            box-shadow: 0 0 0 0.2rem rgba(236, 107, 129, 0.25);
-            color: #fff;
-        }
-        
-        .newsletter-form-enhanced .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .newsletter-form-enhanced .btn-submit-enhanced {
-            background: #d40707;
-            border: none;
-            color: white;
-            height: 50px;
-            border-radius: 25px;
-            padding: 0 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .newsletter-form-enhanced .btn-submit-enhanced:hover {
-            background: #d40707;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(236, 107, 129, 0.3);
-        }
-        
-        .connect-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-        
-        .newsletter-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
-            line-height: 1.5;
-            margin-top: 15px;
-            margin-bottom: 0;
-        }
-                .newsletter-form-enhanced .btn-submit-enhanced {
-                    font-size: 12px;
-                }
-        .alert {
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .footer-connect-section {
-                padding: 0px 0;
-            }
-            
-            .social-connect-box,
-            .newsletter-box {
-                padding: 20px;
-                margin-bottom: 30px;
-            }
-            
-            .footer-connect-section .section-title {
-                font-size: 1.1rem;
-            }
-
-            
-            .social-icons-enhanced {
-                gap: 10px;
-            }
-            
-            .social-icons-enhanced a {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-        .connect-description{
-            font-size: 12px;
-        }
-    }
-        @media (max-width: 576px) {
-            .social-icons-enhanced {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            
-            .newsletter-form-enhanced .btn-submit-enhanced {
-                padding: 0 20px;
-            }
-        }
-
- 
-#shippingModal .modal-content {
-    border: none;
-    border-radius: 4px; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-}
-
-#shippingModal .modal-body {
-    padding: 50px 40px;
-}
-
-#shippingModal .shipping-emoji {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 15px;
-}
-
-#shippingModal .modal-title-custom {
-    color: #D97DA5; /* Your logo pink */
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 28px;
-    margin-bottom: 25px;
-}
-
-#shippingModal .notice-text {
-    color: #D97DA5;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-#shippingModal .secondary-text {
-    color: #D97DA5;
-    font-size: 14px;
-    margin-bottom: 30px;
-}
-
-#shippingModal .btn-start-shopping {
-    background-color: #D97DA5;
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 2px;
-    transition: opacity 0.3s;
-}
-
-#shippingModal .btn-start-shopping:hover {
-    opacity: 0.8;
+.scroll-to-top i{
+    font-size: 14px !important;
     color: white;
 }
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-#shippingModal .no-thanks {
-    display: block;
-    margin-top: 20px;
-    color: #999;
-    font-size: 13px;
-    text-decoration: underline;
-    cursor: pointer;
-}
+        .scroll-to-top:hover {
+            background: #ad8b4c;
+            transform: translateY(-4px);
+            color: #ffffff;
+        }
+   </style>
 
-#shippingModal .social-links-popup {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    color: #D97DA5;
-    font-size: 20px;
-}
-    </style>
 
-    @if($appSetting->facebook_pixel_id)
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      
-      fbq('init', '{{ $appSetting->facebook_pixel_id }}');
-      fbq('track', 'PageView');
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none" 
-           src="https://www.facebook.com/tr?id={{ $appSetting->facebook_pixel_id }}&ev=PageView&noscript=1"/>
-    </noscript>
-    @endif
 </head>
 <body>
-<!--wrapper start-->
+
 <div class="wrapper home-default-wrapper">
 
 
@@ -478,138 +215,94 @@
      
     </div>
 
-    {{-- <div class="modal fade" id="shippingModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="text-end p-3">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <span class="shipping-emoji">🚨</span>
-                <h2 class="modal-title-custom">Shipping Update</h2>
-                
-                <p class="notice-text">
-                    loreum ipsum loreum ipsum loreum ipsum loreum ipsum loreum ipsum loreum ipsum loreum ipsum.
-                </p>
-                
-                <p class="secondary-text">
-                    You can also shop our Direct Delivery items for faster shipping.
-                </p>
-                
-                <a href="{{ url('/collections') }}" class="btn btn-start-shopping">Start Shopping</a>
-                
-                <span class="no-thanks" data-bs-dismiss="modal">No thanks</span>
-                
-                <div class="social-links-popup">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-tiktok"></i></a>
-                    <a href="#"><i class="fa fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
-<!--=== Modernizr Min Js ===-->
-<script src="{{ asset('assets/js/modernizr.js')}}"></script>
-<!--=== jQuery Min Js ===-->
-<script src="{{ asset('assets/js/jquery-main.js')}}"></script>
-<!--=== jQuery Migration Min Js ===-->
-<script src="{{ asset('assets/js/jquery-migrate.js')}}"></script>
-<!--=== Bootstrap Min Js ===-->
-<script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
-<!--=== jQuery Appear Js ===-->
-<script src="{{ asset('assets/js/jquery.appear.js')}}"></script>
-<!--=== jQuery Swiper Min Js ===-->
-<script src="{{ asset('assets/js/swiper.min.js')}}"></script>
-<!--=== jQuery Fancy Box Min Js ===-->
-<script src="{{ asset('assets/js/fancybox.min.js')}}"></script>
-<!--=== jQuery Slick Nav Js ===-->
-<script src="{{ asset('assets/js/slicknav.js')}}"></script>
-<!--=== jQuery Waypoints Js ===-->
-<script src="{{ asset('assets/js/waypoints.js')}}"></script>
-<!--=== jQuery Owl Carousel Min Js ===-->
-<script src="{{ asset('assets/js/owlcarousel.min.js')}}"></script>
-<!--=== jQuery Match Height Min Js ===-->
-<script src="{{ asset('assets/js/jquery-match-height.min.js')}}"></script>
-<!--=== jQuery Zoom Min Js ===-->
-<script src="{{ asset('assets/js/jquery-zoom.min.js')}}"></script>
-<!--=== Countdown Js ===-->
-<script src="{{ asset('assets/js/countdown.js')}}"></script>
-
-<!--=== Custom Js ===-->
-<script src="{{ asset('assets/js/custom.js')}}"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- Scripts -->
+{{-- <script src="{{ asset('assets/js/modernizr.js') }}"></script> --}}
+<script src="{{ asset('assets/js/jquery-main.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/jquery-migrate.js') }}"></script> --}}
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/jquery.appear.js') }}"></script> --}}
+<script src="{{ asset('assets/js/swiper.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/fancybox.min.js') }}"></script> --}}
+<script src="{{ asset('assets/js/slicknav.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/waypoints.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/js/owlcarousel.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/js/jquery-match-height.min.js') }}"></script> --}}
+<script src="{{ asset('assets/js/jquery-zoom.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/countdown.js') }}"></script> --}}
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 <script>
-    // Inside your existing DOMContentLoaded block:
-document.querySelectorAll('.mobile-dropdown-trigger').forEach(trigger => {
-    trigger.addEventListener('click', function(e) {
-        e.preventDefault();
+    // Scroll to Top Button
+    const scrollBtn = document.getElementById('scroll-to-top');
+    if (scrollBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+        
+        scrollBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-        const parent = this.parentElement;
-        const submenu = this.nextElementSibling;
-
-        parent.classList.toggle('active');
-
-        if (submenu.style.display === "block") {
-            submenu.style.display = "none";
-        } else {
-            submenu.style.display = "block";
+    // Livewire Alertify Events
+    window.addEventListener('message', event => {
+        if (event.detail && event.detail.text) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.notify(event.detail.text, event.detail.type || 'success');
         }
     });
+    document.querySelectorAll(".collection-image img").forEach(function(img){
+
+    function imageLoaded(){
+
+        img.classList.add("loaded");
+
+        const wrapper = img.closest(".collection-image");
+
+        if(wrapper){
+
+            wrapper.classList.add("loaded");
+
+        }
+
+        if(window.signatureSliders){
+
+   const slider = img.closest(".signature-slider");
+
+if (slider && slider.swiper) {
+
+    slider.swiper.update();
+
+}
+
+        }
+
+    }
+
+    if(img.complete && img.naturalWidth){
+
+        imageLoaded();
+
+    }else{
+
+        img.addEventListener("load", imageLoaded);
+
+        img.addEventListener("error", imageLoaded);
+
+    }
+
 });
-    window.addEventListener('message', event => {
-        alertify.set('notifier','position', 'top-right');
-        alertify.notify(event.detail.text , event.detail.type);
-    });
-
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     console.log("Checking for Shipping Popup..."); // Check F12 Console for this
-
-    //     // 1. Check if we are on the Home Page
-    //     var isHomePage = window.location.pathname === '/' || 
-    //                      window.location.pathname === '/index.php' ||
-    //                      window.location.pathname.endsWith('/');
-
-    //     if (isHomePage) {
-            
-    //         // 2. Check Session Storage (Clear your cache/incognito to test)
-    //         if (!sessionStorage.getItem('shownShippingPopup')) {
-                
-    //             var modalElement = document.getElementById('shippingModal');
-                
-    //             if (modalElement) {
-    //                 // Force a delay to ensure Bootstrap is fully loaded
-    //                 setTimeout(function() {
-    //                     try {
-    //                         // Using the modern Bootstrap 5 way
-    //                         var myModal = new bootstrap.Modal(modalElement);
-    //                         myModal.show();
-    //                         sessionStorage.setItem('shownShippingPopup', 'true');
-    //                         console.log("Popup launched successfully.");
-    //                     } catch (err) {
-    //                         console.error("Bootstrap Modal Error: ", err);
-    //                         // Fallback for Bootstrap 4 if the above fails
-    //                         if (window.$) {
-    //                             $(modalElement).modal('show');
-    //                         }
-    //                     }
-    //                 }, 1000); 
-    //             } else {
-    //                 console.error("Error: Element #shippingModal not found in HTML.");
-    //             }
-    //         } else {
-    //             console.log("Popup already shown this session.");
-    //         }
-    //     }
-    // });
 </script>
-    @yield('script')
-    @livewireScripts
-    @stack('scripts')
-    
+
+@yield('script')
+@livewireScripts
+@stack('scripts')
 
 </body>
 </html>

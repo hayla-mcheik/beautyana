@@ -1,22 +1,17 @@
 @extends('layouts.app')
 
+@section('title', $category->name)
+
 @php
-
-    $breadcrumbs = [];
-
     /*
     |--------------------------------------------------------------------------
-    | MENU
+    | BREADCRUMBS SETUP
     |--------------------------------------------------------------------------
     */
+    $breadcrumbs = [];
 
-    $menu = null;
-
-    // Get the Menu through menu_id instead of relying directly
-    // on $category->menu
-    if (!empty($category->menu_id)) {
-        $menu = \App\Models\Menu::find($category->menu_id);
-    }
+    // 1. MENU LEVEL
+    $menu = $category->menu ?? null;
 
     if ($menu) {
         $breadcrumbs[] = [
@@ -25,70 +20,42 @@
         ];
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | PARENT CATEGORY
-    |--------------------------------------------------------------------------
-    */
-
-    $parentCategory = null;
-
-    if (!empty($category->parent_id)) {
-        $parentCategory = \App\Models\Category::find(
-            $category->parent_id
-        );
-    }
+    // 2. PARENT CATEGORY LEVEL (If present)
+    $parentCategory = $category->parent ?? null;
 
     if ($parentCategory) {
-
         $breadcrumbs[] = [
             'title' => $parentCategory->name,
-
-            'url' => $menu
-                ? url(
-                    '/collections/' .
-                    $menu->slug .
-                    '/' .
-                    $parentCategory->slug
-                )
-                : url(
-                    '/collections/' .
-                    $parentCategory->slug
-                ),
+            'url'   => $menu
+                ? url('/collections/' . $menu->slug . '/' . $parentCategory->slug)
+                : url('/collections/' . $parentCategory->slug),
         ];
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | CURRENT CATEGORY
-    |--------------------------------------------------------------------------
-    */
-
+    // 3. CURRENT ACTIVE CATEGORY
     $breadcrumbs[] = [
         'title' => $category->name,
         'url'   => '#',
     ];
-
 @endphp
-
 
 @section('content')
 
-    @include(
-        'layouts.inc.frontend.breadcrumb',
-        ['breadcrumbs' => $breadcrumbs]
-    )
+{{-- ============================================================
+     BREADCRUMB
+============================================================ --}}
+@include('layouts.inc.frontend.breadcrumb', [
+    'breadcrumbs' => $breadcrumbs
+])
 
-
-    <livewire:frontend.product.index
-        :category="$category"
-        :collections="$collections"
-        :highJewelry="$highJewelry"
-        :adSignature="$adSignature"
-        :inStockCount="$inStockCount"
-        :outOfStockCount="$outOfStockCount"
-    />
+{{-- ============================================================
+     PRODUCTS LISTING
+============================================================ --}}
+<livewire:frontend.product.index
+    :category="$category"
+    :menus="$menus"
+    :inStockCount="$inStockCount"
+    :outOfStockCount="$outOfStockCount"
+/>
 
 @endsection

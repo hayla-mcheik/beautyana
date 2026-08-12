@@ -12,31 +12,20 @@ use App\Models\Cart;
 class Index extends Component
 {
     use WithPagination;
-    
-public $category;
-public $collections;
-public $highJewelry;
-public $adSignature;
+
+    public $category;
     public $brandInputs = [], $priceInput;
     public $perPage = 12;
-    
-    
+
     protected $queryString = [
         'brandInputs' => ['except' => '', 'as' => 'brand'],
         'priceInput' => ['except' => '', 'as' => 'price'],
     ];
 
-public function mount(
-    $category,
-    $collections,
-    $highJewelry,
-    $adSignature
-){
-    $this->category = $category;
-    $this->collections = $collections;
-    $this->highJewelry = $highJewelry;
-    $this->adSignature = $adSignature;
-}
+    public function mount($category)
+    {
+        $this->category = $category;
+    }
 
     /* ---------------- Wishlist ---------------- */
 
@@ -159,7 +148,11 @@ public function mount(
 
     public function render()
     {
-        $products = Product::where('category_id', $this->category->id)
+        // Get current category ID + subcategories IDs (if parent category)
+        $categoryIds = $this->category->children->pluck('id')->push($this->category->id);
+
+        $products = Product::whereIn('category_id', $categoryIds)
+            ->where('status', '0')
             ->when($this->brandInputs, fn ($q) =>
                 $q->whereIn('brand', $this->brandInputs)
             )
@@ -172,7 +165,6 @@ public function mount(
                     fn ($q2) => $q2->orderBy('selling_price', 'ASC')
                 );
             })
-            ->where('status', '0')
             ->paginate($this->perPage);
 
         return view('livewire.frontend.product.index', [
