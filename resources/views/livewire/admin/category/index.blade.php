@@ -174,7 +174,7 @@
                                 </td>
 
 <td>
-    {{ $category->menu_id }}
+    {{ optional($category->menu)->name ?? '-' }}
 </td>
                                 <td>
 

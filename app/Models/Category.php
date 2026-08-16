@@ -35,9 +35,9 @@ class Category extends Model
     {
         return $this->hasMany(Brand::class,'category_id','id')->where('status','0');
     }
-    public function menu()
+public function menu()
 {
-    return $this->belongsTo(Menu::class);
+    return $this->belongsTo(Menu::class, 'menu_id', 'id');
 }
 
 
