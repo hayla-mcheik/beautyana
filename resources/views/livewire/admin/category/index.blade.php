@@ -173,11 +173,9 @@
 
                                 </td>
 
-                                <td>
-
-                                    {{ $category->menu->name ?? '-' }}
-
-                                </td>
+                    <td>
+    {{ optional($category->menu)->name }}
+</td>
 
                                 <td>
 
