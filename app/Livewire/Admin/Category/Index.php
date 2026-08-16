@@ -84,13 +84,22 @@ class Index extends Component
 
     public function render()
     {
-$categories = Category::with('menu')
+        $menus = Menu::orderBy('name')
+            ->get();
+
+   $categories = Category::with('menu')
     ->when($this->menu, function ($query) {
         $query->where('menu_id', $this->menu);
     })
     ->orderBy('id', 'DESC')
     ->paginate(10);
 
-dd($categories->first()->toArray());
+        return view(
+            'livewire.admin.category.index',
+            [
+                'menus' => $menus,
+                'categories' => $categories
+            ]
+        );
     }
 }
