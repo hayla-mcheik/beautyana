@@ -37,7 +37,7 @@ class Category extends Model
     }
 public function menu()
 {
-    return $this->belongsTo(Menu::class, 'menu_id', 'id');
+    return $this->belongsTo(Menu::class);
 }
 
 
