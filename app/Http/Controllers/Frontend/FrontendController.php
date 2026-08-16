@@ -181,7 +181,7 @@ public function productView(
 
     $product = Product::where('category_id', $category->id)
         ->where('slug', $product_slug)
-        ->where('status', '0')
+        ->where('status', '1')
         ->firstOrFail();
 
     $menus = $this->getMenus();
