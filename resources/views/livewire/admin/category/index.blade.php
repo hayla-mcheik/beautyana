@@ -174,7 +174,7 @@
                                 </td>
 
 <td>
-    {{ $category->menu->name }}
+    {{ gettype($category->menu) }}
 </td>
                                 <td>
 
