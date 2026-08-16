@@ -190,12 +190,19 @@
                                     @else
                                         {{-- MENU WITHOUT CATEGORIES --}}
                                         <li>
-                                            @if($menu->slug === 'news')
-                                                <a href="{{ url('blogs') }}">{{ $menu->name }}</a>
-                                            @else
-                                  <a href="{{ url('/collections/' . $category->slug) }}">
-                                                  {{ $menu->name }}</a>
-                                            @endif
+                         @if($menu->slug == 'news')
+
+    <a href="{{ url('blogs') }}">
+        {{ $menu->name }}
+    </a>
+
+@else
+
+    <a href="{{ url('/collections/' . $menu->slug) }}">
+        {{ $menu->name }}
+    </a>
+
+@endif
                                         </li>
                                     @endif
                                 @endforeach
