@@ -53,21 +53,19 @@
                                 <div class="category-card">
 
                                     {{-- Category Image --}}
-                                <a href="{{ url('/collections/' . $category->slug) }}">
-                                       class="category-card-image">
+                     <a href="{{ url('/collections/' . $category->slug) }}"
+   class="category-card-image">
 
-                                        @if($category->image)
-                                            <img
-                                                src="{{ asset($category->image) }}"
-                                                alt="{{ $category->name }}"
-                                            >
-                                        @else
-                                            <div class="category-placeholder">
-                                                <span>{{ $category->name }}</span>
-                                            </div>
-                                        @endif
+    @if($category->image)
+        <img src="{{ asset($category->image) }}"
+             alt="{{ $category->name }}">
+    @else
+        <div class="category-placeholder">
+            <span>{{ $category->name }}</span>
+        </div>
+    @endif
 
-                                    </a>
+</a>
 
                                     {{-- Category Content --}}
                                     <div class="category-card-content">
