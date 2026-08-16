@@ -33,9 +33,7 @@ public function create()
     $menus = Menu::where('status', 1)
         ->orderBy('sort_order')
         ->get();
-$categories = Category::whereNull('parent_id')->get();
-
-    return view('admin.category.create', compact('menus','categories'));
+    return view('admin.category.create', compact('menus'));
 }
 
 
@@ -54,7 +52,6 @@ $categories = Category::whereNull('parent_id')->get();
 
 
     $category->menu_id = $validatedData['menu_id'];
-    $category->parent_id = $validatedData['parent_id'] ?? null;
         $category->name = $validatedData['name'];
 
 
@@ -161,14 +158,10 @@ public function edit(Category $category)
         ->orderBy('sort_order')
         ->get();
 
-    // 🔥 ADD THIS
-    $categories = Category::whereNull('parent_id')
-        ->where('id', '!=', $category->id) // avoid selecting itself
-        ->get();
 
     return view(
         'admin.category.edit',
-        compact('category', 'menus', 'categories')
+        compact('category', 'menus')
     );
 }
 
@@ -192,7 +185,6 @@ public function edit(Category $category)
 
      $category->menu_id =
     $validatedData['menu_id'];
-$category->parent_id = $validatedData['parent_id'] ?? null;
         /*
         |--------------------------------------------------------------------------
         | Update Slug Only When Name Changes

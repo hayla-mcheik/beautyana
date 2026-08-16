@@ -40,17 +40,5 @@ class Category extends Model
     return $this->belongsTo(Menu::class);
 }
 
-// Parent category
-public function parent()
-{
-    return $this->belongsTo(Category::class, 'parent_id');
-}
 
-// Subcategories
-public function children()
-{
-    return $this->hasMany(Category::class, 'parent_id')
-                ->where('status', '0')
-                ->with('children'); // 🔥 allows nesting
-}
 }

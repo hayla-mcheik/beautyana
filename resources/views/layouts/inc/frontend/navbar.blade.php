@@ -153,7 +153,7 @@
 
                                 {{-- DYNAMIC MENUS --}}
                                 @foreach($menus as $menu)
-                                    @if($menu->categories->count())
+                            @if($menu->categories && $menu->categories->count() > 0)
                                         {{-- MENU WITH CATEGORIES --}}
                                         <li class="mega-menu-parent">
                                             <a href="javascript:void(0);" class="mega-menu-trigger">
@@ -166,30 +166,19 @@
                                                     <div class="mega-menu-layout">
                                                         <div class="mega-categories-area">
                                                             <div class="mega-menu-grid">
-                                                                @foreach($menu->categories as $category)
+                                                              @foreach($menu->categories ?? [] as $category)
                                                                     <div class="mega-menu-column">
                                                                         <a href="{{ url('collections/'.$category->slug) }}" class="mega-category-title">
                                                                             {{ $category->name }}
                                                                         </a>
 
-                                                                        @if($category->children->count())
-                                                                            <ul class="mega-subcategories">
-                                                                                @foreach($category->children as $sub)
-                                                                                    <li>
-                                                                                        <a href="{{ url('collections/'.$sub->slug) }}">
-                                                                                            {{ $sub->name }}
-                                                                                        </a>
-                                                                                    </li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                        @endif
                                                                     </div>
                                                                 @endforeach
                                                             </div>
                                                         </div>
 
                                                         <div class="mega-image-column">
-                                                         <a href="{{ url('/collections/' . $menu->slug . '/' . $category->slug) }}">
+                                                     <a href="{{ url('/collections/' . $category->slug) }}">
                                                                 <img src="{{ asset('assets/img/megaimg.webp') }}" alt="{{ $menu->name }}" class="mega-menu-image">
                                                         
                                                             </a>
@@ -204,7 +193,7 @@
                                             @if($menu->slug === 'news')
                                                 <a href="{{ url('blogs') }}">{{ $menu->name }}</a>
                                             @else
-                                      <a href="{{ url('/collections/' . $menu->slug . '/' . $category->slug) }}">
+                                  <a href="{{ url('/collections/' . $category->slug) }}">
                                                   {{ $menu->name }}</a>
                                             @endif
                                         </li>

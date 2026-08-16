@@ -146,30 +146,29 @@ class Index extends Component
         );
     }
 
-    public function render()
-    {
-        // Get current category ID + subcategories IDs (if parent category)
-        $categoryIds = $this->category->children->pluck('id')->push($this->category->id);
+  public function render()
+{
+    $products = Product::where('category_id', $this->category->id)
+        ->where('status', '0')
+        ->when($this->brandInputs, function ($q) {
+            $q->whereIn('brand', $this->brandInputs);
+        })
+        ->when($this->priceInput, function ($q) {
 
-        $products = Product::whereIn('category_id', $categoryIds)
-            ->where('status', '0')
-            ->when($this->brandInputs, fn ($q) =>
-                $q->whereIn('brand', $this->brandInputs)
-            )
-            ->when($this->priceInput, function ($q) {
-                $q->when(
-                    $this->priceInput === 'high-to-low',
-                    fn ($q2) => $q2->orderBy('selling_price', 'DESC')
-                )->when(
-                    $this->priceInput === 'low-to-high',
-                    fn ($q2) => $q2->orderBy('selling_price', 'ASC')
-                );
-            })
-            ->paginate($this->perPage);
+            $q->when(
+                $this->priceInput === 'high-to-low',
+                fn($q2) => $q2->orderBy('selling_price', 'DESC')
+            )->when(
+                $this->priceInput === 'low-to-high',
+                fn($q2) => $q2->orderBy('selling_price', 'ASC')
+            );
 
-        return view('livewire.frontend.product.index', [
-            'products' => $products,
-            'category' => $this->category,
-        ]);
-    }
+        })
+        ->paginate($this->perPage);
+
+    return view('livewire.frontend.product.index', [
+        'products' => $products,
+        'category' => $this->category,
+    ]);
+}
 }

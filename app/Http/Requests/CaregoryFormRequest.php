@@ -27,7 +27,6 @@ class CaregoryFormRequest extends FormRequest
             'string'
         ],
     'menu_id' => 'required|exists:menus,id',
-    'parent_id' => 'nullable|exists:categories,id',
         // 'slug' => [
         //     'required',
         //     'string'

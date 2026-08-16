@@ -15,7 +15,7 @@ class Menu extends Model
 
 public function categories()
 {
-    return $this->hasMany(\App\Models\Category::class)
+    return $this->hasMany(Category::class)
         ->where('status', '0')
         ->orderBy('name');
 }

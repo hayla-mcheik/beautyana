@@ -81,25 +81,6 @@
                             @enderror
                         </div>
 
-                        {{-- PARENT CATEGORY SELECT --}}
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Parent Category</label>
-                            <select name="parent_id" class="form-select @error('parent_id') is-invalid @enderror">
-                                <option value="">-- Main Category (Root) --</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}" {{ old('parent_id') == $cat->id ? 'selected' : '' }}>
-                                        {{ $cat->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <small class="text-muted">Leave empty to set as a primary category.</small>
-                            @error('parent_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
                         {{-- CATEGORY NAME --}}
                         <div class="col-lg-6">
                             <label for="categoryName" class="form-label fw-semibold">

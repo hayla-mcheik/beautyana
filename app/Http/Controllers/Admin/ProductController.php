@@ -30,7 +30,7 @@ class ProductController extends Controller
 public function create()
 {
     // Eager load menu and parent relationships
-    $categories = Category::with(['menu', 'parent'])->get();
+    $categories = Category::with(['menu'])->get();
     $colors = Color::where('status', '0')->get();
 
     return view('admin.products.create', compact('categories', 'colors'));
@@ -116,7 +116,7 @@ public function create()
  public function edit(int $product_id)
 {
     // Eager load menu and parent relationships
-    $categories = Category::with(['menu', 'parent'])->get();
+    $categories = Category::with(['menu'])->get();
     $product = Product::findOrFail($product_id);
 
     $productColorIds = $product->productColors->pluck('color_id')->toArray();

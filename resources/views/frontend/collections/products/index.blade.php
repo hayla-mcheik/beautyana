@@ -3,42 +3,22 @@
 @section('title', $category->name)
 
 @php
-    /*
-    |--------------------------------------------------------------------------
-    | BREADCRUMBS SETUP
-    |--------------------------------------------------------------------------
-    */
-    $breadcrumbs = [];
 
-    // 1. MENU LEVEL
-    $menu = $category->menu ?? null;
+$breadcrumbs = [
 
-    if ($menu) {
-        $breadcrumbs[] = [
-            'title' => $menu->name,
-            'url'   => url('/collections/' . $menu->slug),
-        ];
-    }
+    [
+        'title' => 'Collections',
+        'url' => url('/collections')
+    ]
+];
 
-    // 2. PARENT CATEGORY LEVEL (If present)
-    $parentCategory = $category->parent ?? null;
+$breadcrumbs[] = [
 
-    if ($parentCategory) {
-        $breadcrumbs[] = [
-            'title' => $parentCategory->name,
-            'url'   => $menu
-                ? url('/collections/' . $menu->slug . '/' . $parentCategory->slug)
-                : url('/collections/' . $parentCategory->slug),
-        ];
-    }
+    'title' => $category->name,
+    'url' => '#'
+];
 
-    // 3. CURRENT ACTIVE CATEGORY
-    $breadcrumbs[] = [
-        'title' => $category->name,
-        'url'   => '#',
-    ];
 @endphp
-
 @section('content')
 
 {{-- ============================================================

@@ -53,7 +53,7 @@
                                 <div class="category-card">
 
                                     {{-- Category Image --}}
-                                    <a href="{{ url('/collections/' . $menu->slug . '/' . $category->slug) }}"
+                                <a href="{{ url('/collections/' . $category->slug) }}">
                                        class="category-card-image">
 
                                         @if($category->image)
@@ -73,29 +73,12 @@
                                     <div class="category-card-content">
 
                                         <h3>
-                                            <a href="{{ url('/collections/' . $menu->slug . '/' . $category->slug) }}">
+                                  <a href="{{ url('/collections/' . $category->slug) }}">
                                                 {{ $category->name }}
                                             </a>
                                         </h3>
 
-                                        {{-- Subcategories --}}
-                                        @if($category->children->count())
-
-                                            <ul class="subcategory-list">
-
-                                                @foreach($category->children as $child)
-
-                                                    <li>
-                                                        <a href="{{ url('/collections/' . $menu->slug . '/' . $child->slug) }}">
-                                                            {{ $child->name }}
-                                                        </a>
-                                                    </li>
-
-                                                @endforeach
-
-                                            </ul>
-
-                                        @endif
+                                  
 
                                     </div>
 

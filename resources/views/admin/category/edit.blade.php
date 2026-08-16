@@ -71,25 +71,7 @@
                             @enderror
                         </div>
 
-                        {{-- PARENT CATEGORY SELECT --}}
-                        <div class="col-md-6">
-                            <label class="form-label fw-semibold">Parent Category</label>
-                            <select name="parent_id" class="form-select @error('parent_id') is-invalid @enderror">
-                                <option value="">-- Main Category (Root) --</option>
-                                @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}"
-                                        {{ old('parent_id', $category->parent_id) == $cat->id ? 'selected' : '' }}>
-                                        {{ $cat->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <small class="text-muted">Leave empty to set as a primary category.</small>
-                            @error('parent_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                    
 
                         {{-- CATEGORY NAME --}}
                         <div class="col-lg-6">
@@ -278,29 +260,6 @@ document.addEventListener('DOMContentLoaded', function () {
         reader.readAsDataURL(file);
     });
 
-    // DYNAMIC PARENT CATEGORY FETCHING ON MENU CHANGE
-    const menuSelect = document.querySelector('[name="menu_id"]');
-    const parentSelect = document.querySelector('[name="parent_id"]');
-
-    if (menuSelect && parentSelect) {
-        menuSelect.addEventListener('change', function () {
-            let menuId = this.value;
-            if (!menuId) return;
-
-            fetch(`/admin/get-categories-by-menu/${menuId}`)
-                .then(res => res.json())
-                .then(data => {
-                    parentSelect.innerHTML = '<option value="">-- Main Category (Root) --</option>';
-                    data.forEach(cat => {
-                        // Prevent category from choosing itself as parent
-                        if (cat.id != {{ $category->id }}) {
-                            parentSelect.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
-                        }
-                    });
-                })
-                .catch(err => console.error('Error fetching parent categories:', err));
-        });
-    }
 });
 </script>
 

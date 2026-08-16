@@ -48,13 +48,11 @@ View::composer(
     function ($view) {
 
         $menus = Menu::where('status', 1)
-            ->with([
-                'categories' => function ($q) {
-                    $q->whereNull('parent_id')
-                      ->with('children')
-                      ->where('status', '0');
-                }
-            ])
+   ->with([
+    'categories' => function ($q) {
+        $q->where('status', '0');
+    }
+])
             ->orderBy('sort_order')
             ->get();
 

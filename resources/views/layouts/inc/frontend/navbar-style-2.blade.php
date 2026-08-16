@@ -124,17 +124,6 @@
                                                                                 {{ $category->name }}
                                                                             </a>
 
-                                                                            @if($category->children->count() > 0)
-                                                                                <ul class="mega-subcategories">
-                                                                                    @foreach($category->children as $sub)
-                                                                                        <li>
-                                                                                            <a href="{{ url('/collections/' . $sub->slug) }}">
-                                                                                                {{ $sub->name }}
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                            @endif
                                                                         </div>
                                                                     @endforeach
                                                                 </div>

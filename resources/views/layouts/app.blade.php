@@ -182,18 +182,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                             </a>
                         </li>
 
-                        {{-- SUBCATEGORIES --}}
-                        @if($category->children->count())
-                            <ul class="mobile-sub-categories">
-                                @foreach($category->children as $child)
-                                    <li style="padding-left:15px;">
-                                        <a href="{{ url('collections/'.$child->slug) }}">
-                                            - {{ $child->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
 
                     @endforeach
 

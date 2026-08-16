@@ -22,13 +22,10 @@ class FrontendController extends Controller
 {
     private function getMenus()
 {
-    return Menu::where('status', 1)
-        ->with([
-            'categories' => function ($query) {
-                $query->whereNull('parent_id')
-                    ->where('status', '0')
-                    ->with('children');
-            }
+    return Menu::where('status', 1)->with([
+        'categories' => function ($q) {
+            $q->where('status', '0');
+        }
         ])
         ->orderBy('sort_order')
         ->get();
@@ -141,25 +138,20 @@ public function products(string $category_slug)
 {
     $category = Category::where('slug', $category_slug)
         ->where('status', '0')
-        ->with(['menu', 'parent', 'children'])
+        ->with('menu')
         ->withCount('products')
         ->firstOrFail();
 
     $menu = $category->menu;
 
-    // Include current category + all its children
-    $categoryIds = $category->children
-        ->pluck('id')
-        ->push($category->id);
-
-    $inStockCount = Product::whereIn('category_id', $categoryIds)
+    $inStockCount = Product::where('category_id', $category->id)
         ->where('status', '0')
         ->where('quantity', '>', 0)
         ->count();
 
-    $outOfStockCount = Product::whereIn('category_id', $categoryIds)
+    $outOfStockCount = Product::where('category_id', $category->id)
         ->where('status', '0')
-        ->where('quantity', '=', 0)
+        ->where('quantity', 0)
         ->count();
 
     $menus = $this->getMenus();
@@ -182,7 +174,7 @@ public function productView(
 ) {
     $category = Category::where('slug', $category_slug)
         ->where('status', '0')
-        ->with(['menu', 'parent', 'children'])
+        ->with('menu')
         ->firstOrFail();
 
     $menu = $category->menu;

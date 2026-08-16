@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Category;
 
 use App\Models\Category;
+use App\Models\Menu;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\File;
@@ -14,45 +15,29 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $category_id;
-
     public $menu = '';
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Mount Component
-    |--------------------------------------------------------------------------
-    */
 
     public function mount()
     {
         $this->menu = request()->query('menu', '');
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Select Category For Delete
-    |--------------------------------------------------------------------------
-    */
+    public function updatedMenu()
+    {
+        $this->resetPage();
+    }
 
     public function deleteCategory($category_id)
     {
         $this->category_id = $category_id;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Delete Category
-    |--------------------------------------------------------------------------
-    */
-
     public function destroyCategory()
     {
         $category = Category::find($this->category_id);
 
         if (!$category) {
+
             session()->flash(
                 'message',
                 'Category not found.'
@@ -64,19 +49,32 @@ class Index extends Component
         }
 
         if (
+            $category->children()->count() > 0
+        ) {
+            session()->flash(
+                'message',
+                'You cannot delete a category that contains subcategories.'
+            );
+
+            $this->dispatch('close-modal');
+
+            return;
+        }
+
+        if (
             $category->image &&
             File::exists(public_path($category->image))
         ) {
-            File::delete(public_path($category->image));
+            File::delete(
+                public_path($category->image)
+            );
         }
 
         $category->delete();
 
-        $this->category_id = null;
-
         session()->flash(
             'message',
-            'Category Deleted Successfully'
+            'Category deleted successfully.'
         );
 
         $this->dispatch('close-modal');
@@ -84,29 +82,31 @@ class Index extends Component
         $this->resetPage();
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Render
-    |--------------------------------------------------------------------------
-    */
-
     public function render()
     {
-        $categories = Category::query()
+        $menus = Menu::orderBy('name')
+            ->get();
+
+        $categories = Category::with([
+                'menu'
+            ])
             ->when(
-                !empty($this->menu),
+                $this->menu,
                 function ($query) {
-                    // FIXED: Changed 'menu' to 'menu_id'
-                    $query->where('menu_id', $this->menu);
+                    $query->where(
+                        'menu_id',
+                        $this->menu
+                    );
                 }
             )
-            ->orderBy('name', 'ASC')
+            ->orderBy('menu_id')
+            ->orderBy('name')
             ->paginate(10);
 
         return view(
             'livewire.admin.category.index',
             [
+                'menus' => $menus,
                 'categories' => $categories
             ]
         );
