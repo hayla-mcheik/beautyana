@@ -173,10 +173,9 @@
 
                                 </td>
 
-                    <td>
-    {{ optional($category->menu)->name }}
+<td>
+    {{ $category->menu_id }}
 </td>
-
                                 <td>
 
                                     {{ $category->name }}
