@@ -165,7 +165,12 @@
                             <div class="contact-link float-start boutique-text-small">
                                 <div class="phone">
                                     <span>Call us:</span>
-                                    <a href="tel:0096179353846">00961 79353846</a>
+                              <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
+    Talk To Us:
+    <a href="tel:{{ $appSetting->phone1 ?? '+96179353846' }}" style="color: #D97DA5;">
+        {{ $appSetting->phone1 ?? '+96179353846' }}
+    </a>
+</span>
                                 </div>
                             </div>
                             <div class="header-action-area float-start">

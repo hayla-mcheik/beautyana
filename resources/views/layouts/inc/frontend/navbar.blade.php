@@ -93,9 +93,12 @@
                 <div class="col col-md-4 col-sm-12">
                     <div class="contact-link">
                         <div class="contact-info">
-                            <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
-                                Talk To Us: <a href="tel:0096179353846" style="color: #D97DA5;">00961 79353846</a>
-                            </span>
+                      <span class="phone" style="display: block; font-weight: 600; margin-bottom: 3px;">
+    Talk To Us:
+    <a href="tel:{{ $appSetting->phone1 ?? '+96179353846' }}" style="color: #D97DA5;">
+        {{ $appSetting->phone1 ?? '+96179353846' }}
+    </a>
+</span>
                             <div class="time-contact" style="font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.4;">
                                 We believe jewelry is the final touch that brings a look together - for both women and men.
                                 @if(optional($appSetting)->address)
