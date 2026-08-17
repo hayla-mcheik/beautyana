@@ -108,7 +108,7 @@
                                     @foreach($menus as $menu)
                                         @if($menu->categories->count() > 0)
                                             <li class="mega-menu-parent">
-                                                <a href="{{ url('/collections/' . $menu->slug) }}" class="mega-menu-trigger">
+                                                <a  href="javascript:void(0);" class="mega-menu-trigger">
                                                     {{ $menu->name }}
                                                     <i class="ion-ios-arrow-down"></i>
                                                 </a>
@@ -141,7 +141,7 @@
                                             </li>
                                         @else
                                             <li>
-                                                <a href="{{ url('/collections/' . $menu->slug) }}">
+                                                <a href="javascript:void(0);">
                                                     {{ $menu->name }}
                                                 </a>
                                             </li>

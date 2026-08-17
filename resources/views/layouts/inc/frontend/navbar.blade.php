@@ -198,7 +198,7 @@
 
 @else
 
-    <a href="{{ url('/collections/' . $menu->slug) }}">
+    <a  href="javascript:void(0);">
         {{ $menu->name }}
     </a>
 
