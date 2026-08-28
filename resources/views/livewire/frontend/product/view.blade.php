@@ -1,6 +1,13 @@
 <div>
+
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
+
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
 
         :root {
             --demanto-gold: #B39256;
@@ -12,25 +19,36 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+
         /* =========================================================
            PRODUCT SINGLE AREA
         ========================================================= */
 
         .product-single-area {
-            background: linear-gradient(135deg, #FDFBF7 0%, #ffffff 100%);
+            background: linear-gradient(
+                135deg,
+                #FDFBF7 0%,
+                #ffffff 100%
+            );
+
             position: relative;
+
             overflow: hidden;
+
             padding: 30px 0 50px;
         }
 
+
         /* =========================================================
-           PRODUCT CONTAINER
+           PRODUCT ITEM
         ========================================================= */
 
         .product-single-item {
             width: 100%;
+
             animation: productFade 0.5s ease;
         }
+
 
         /* =========================================================
            PRODUCT IMAGE CARD
@@ -38,146 +56,335 @@
 
         .product-thumb {
             width: 100%;
+
             background: linear-gradient(
                 135deg,
                 #faf8f3 0%,
                 #ffffff 100%
             );
+
             border-radius: 20px;
+
             padding: 20px;
+
             border: 1px solid var(--luxury-border);
-            overflow: hidden;
+
+            /*
+             * Keep thumbnails visible.
+             */
+            overflow: visible;
         }
 
+
         /* =========================================================
-           MAIN SWIPER - NO CROPPING (UPDATED)
+           MAIN IMAGE CONTAINER
+           
+           CLIENT IMAGES ARE ALWAYS:
+           1200px x 1200px
+
+           Therefore:
+           1 / 1 aspect ratio
         ========================================================= */
 
         .single-product-thumb-content {
-            width: 100%;
-            height: 500px;
-            margin-bottom: 15px;
+            width: 100% !important;
+
+            aspect-ratio: 1 / 1 !important;
+
+            height: auto !important;
+
+            min-height: 0 !important;
+
+            margin: 0 0 15px 0 !important;
+
+            padding: 0 !important;
+
             border-radius: 15px;
+
             overflow: hidden;
-            background: var(--demanto-gold-light);
+
+            background: transparent;
+
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+            display: block !important;
+
+            box-sizing: border-box;
         }
 
-        .single-product-thumb-content .swiper-wrapper {
-            width: 100%;
-            height: 100%;
-        }
-
-        .single-product-thumb-content .swiper-slide {
-            width: 100% !important;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
         /* =========================================================
-           MAIN IMAGE - NO CROPPING (UPDATED)
-        ========================================================= */
-
-        #main-image {
-            display: block;
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 100% !important;
-            max-height: 100% !important;
-            margin: 0 auto !important;
-            padding: 20px !important;
-            object-fit: contain !important; /* NO CROPPING */
-            object-position: center;
-            transition: transform 0.5s ease;
-        }
-
-        /* =========================================================
-           LIGHTBOX LINK
+           MAIN IMAGE LINK
         ========================================================= */
 
         .lightbox-image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
+            display: block !important;
+
+            width: 100% !important;
+
+            height: 100% !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            line-height: 0;
+
+            text-decoration: none;
         }
 
+
         /* =========================================================
-           THUMBNAIL SWIPER - NO CROPPING (UPDATED)
+           MAIN IMAGE
+           
+           1200 x 1200
+           
+           FULL WIDTH
+           FULL HEIGHT
+           NO CROPPING
+           NO DISTORTION
+        ========================================================= */
+
+        #main-image {
+            display: block !important;
+
+            width: 100% !important;
+
+            height: 100% !important;
+
+            max-width: 100% !important;
+
+            max-height: 100% !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            border: none !important;
+
+            /*
+             * Since images are always 1200x1200,
+             * contain will display the complete image.
+             */
+            object-fit: cover !important;
+
+            object-position: center center !important;
+
+            transition: transform 0.5s ease;
+        }
+
+
+        /* =========================================================
+           THUMBNAILS CONTAINER
         ========================================================= */
 
         .single-product-nav-content {
-            width: 100%;
-            margin-top: 15px;
-            overflow: hidden;
+            display: block !important;
+
+            width: 100% !important;
+
+            height: auto !important;
+
+            margin-top: 15px !important;
+
+            margin-bottom: 0 !important;
+
+            padding: 0 !important;
+
+            overflow: visible !important;
+
+            position: relative;
+
+            clear: both;
         }
 
-        .single-product-nav-content .swiper-wrapper {
-            align-items: stretch;
-        }
-
-        .single-product-nav-content .swiper-slide {
-            height: auto;
-            width: auto !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
         /* =========================================================
-           THUMBNAIL CARD - NO CROPPING (UPDATED)
+           THUMBNAIL LIST
+           
+           Custom flex layout instead of Bootstrap row/col.
+        ========================================================= */
+
+        .thumbnail-list {
+            display: flex !important;
+
+            flex-wrap: wrap !important;
+
+            align-items: center;
+
+            justify-content: flex-start;
+
+            gap: 10px;
+
+            width: 100% !important;
+
+            height: auto !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+           THUMBNAIL ITEM
+        ========================================================= */
+
+        .thumbnail-item {
+            display: block !important;
+
+            width: 80px !important;
+
+            height: 80px !important;
+
+            min-width: 80px !important;
+
+            max-width: 80px !important;
+
+            flex: 0 0 80px !important;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+           THUMBNAIL WRAPPER
         ========================================================= */
 
         .thumb-img-wrapper {
-            width: 100%;
-            height: 95px;
-            padding: 8px;
-            background: #ffffff;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            overflow: hidden;
+            position: relative !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            width: 80px !important;
+
+            height: 80px !important;
+
+            min-width: 80px !important;
+
+            min-height: 80px !important;
+
+            max-width: 80px !important;
+
+            max-height: 80px !important;
+
+            margin: 0 !important;
+
+            padding: 3px !important;
+
+            background: #ffffff !important;
+
+            border: 2px solid transparent !important;
+
+            border-radius: 10px !important;
+
+            overflow: hidden !important;
+
+            box-sizing: border-box !important;
+
             cursor: pointer;
+
             transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
         }
 
-        .thumb-img-wrapper:hover,
-        .swiper-slide-thumb-active .thumb-img-wrapper,
-        .thumb-img-wrapper.active {
-            border-color: var(--demanto-gold);
-            box-shadow: 0 5px 15px rgba(179, 146, 86, 0.15);
-        }
 
         /* =========================================================
-           THUMBNAIL IMAGE - NO CROPPING (UPDATED)
+           ACTIVE THUMBNAIL
+        ========================================================= */
+
+        .thumb-img-wrapper.active {
+            border-color: var(--demanto-gold) !important;
+
+            box-shadow:
+                0 5px 15px rgba(
+                    179,
+                    146,
+                    86,
+                    0.15
+                );
+        }
+
+
+        /* =========================================================
+           THUMBNAIL HOVER
+        ========================================================= */
+
+        .thumb-img-wrapper:hover {
+            border-color: var(--demanto-gold) !important;
+
+            box-shadow:
+                0 5px 15px rgba(
+                    179,
+                    146,
+                    86,
+                    0.15
+                );
+        }
+
+
+        /* =========================================================
+           THUMBNAIL IMAGE
         ========================================================= */
 
         .thumbnail-image {
-            display: block;
+            display: block !important;
+
             width: 100% !important;
+
             height: 100% !important;
+
             max-width: 100% !important;
+
             max-height: 100% !important;
-            margin: 0 auto !important;
-            padding: 2px !important;
-            object-fit: contain !important; /* NO CROPPING */
-            object-position: center;
+
+            margin: 0 !important;
+
+            padding: 0 !important;
+
+            border: none !important;
+
+            object-fit: contain !important;
+
+            object-position: center center !important;
+
+            position: relative !important;
+
+            z-index: 2 !important;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
+
             transition: transform 0.3s ease;
         }
+
+
+        /* =========================================================
+           THUMBNAIL HOVER IMAGE
+        ========================================================= */
 
         .thumb-img-wrapper:hover .thumbnail-image {
             transform: scale(1.05);
         }
+
 
         /* =========================================================
            PRODUCT INFORMATION
@@ -187,14 +394,21 @@
             padding-left: 25px;
         }
 
+
         .product-single-info .title {
             font-family: "Cormorant Garamond", serif;
+
             font-size: 32px;
+
             font-weight: 500;
+
             color: var(--demanto-dark);
+
             margin-bottom: 18px;
+
             letter-spacing: 0.5px;
         }
+
 
         /* =========================================================
            PRICES
@@ -202,56 +416,84 @@
 
         .prices {
             display: flex;
+
             align-items: center;
+
             gap: 15px;
+
             margin-bottom: 15px;
+
             padding-bottom: 15px;
+
             border-bottom: 1px solid var(--luxury-border);
         }
 
+
         .price {
             font-family: "Cormorant Garamond", serif;
+
             font-size: 27px;
+
             font-weight: 600;
+
             color: var(--demanto-gold);
         }
 
+
         .old_price {
             font-family: "Cormorant Garamond", serif;
+
             font-size: 18px;
+
             color: #aaaaaa;
+
             text-decoration: line-through;
         }
 
+
         /* =========================================================
-           STOCK
+           STOCK STATUS
         ========================================================= */
 
         .stock-status {
             display: block;
+
             margin-bottom: 20px;
         }
 
+
         .stock-badge {
             display: inline-block;
+
             padding: 6px 15px;
+
             border-radius: 20px;
+
             font-size: 14px;
+
             font-weight: 600;
+
             text-transform: uppercase;
+
             letter-spacing: 1px;
+
             margin-top: 10px;
         }
 
+
         .stock-badge.in-stock {
             background: var(--demanto-gold);
+
             color: #ffffff;
         }
 
+
         .stock-badge.out-stock {
             background: #999999;
+
             color: #ffffff;
         }
+
 
         /* =========================================================
            DESCRIPTION
@@ -261,233 +503,341 @@
             margin: 20px 0;
         }
 
+
         .product-desc-list {
             list-style: none;
+
             padding: 0;
+
             margin: 0;
         }
 
+
         .product-desc-list li {
             color: var(--demanto-muted);
+
             font-size: 14px;
+
             line-height: 1.7;
+
             margin-bottom: 10px;
+
             position: relative;
+
             padding-left: 20px;
         }
 
+
         .product-desc-list li::before {
             content: '✧';
+
             position: absolute;
+
             left: 0;
+
             top: 2px;
+
             color: var(--demanto-gold);
+
             font-size: 14px;
         }
+
 
         /* =========================================================
            CART
         ========================================================= */
 
-   
         .white-bg {
             margin-bottom: 12px;
         }
 
+
         /* =========================================================
-           TABLET - NO CROPPING
+           APPOINTMENT
+        ========================================================= */
+
+        .btn-appoint {
+            background-color: var(--demanto-gold) !important;
+
+            color: white !important;
+        }
+
+
+        .btn-appoint::before {
+            display: none !important;
+        }
+
+
+        /* =========================================================
+           TABLET
         ========================================================= */
 
         @media (max-width: 991px) {
+
             .product-single-info {
                 padding-left: 0;
+
                 margin-top: 30px;
             }
 
-            .single-product-thumb-content {
-                height: 450px;
-            }
-
-            #main-image {
-                padding: 15px !important;
-                object-fit: contain !important;
-            }
 
             .product-single-info .title {
                 font-size: 27px;
             }
 
+
             .price {
                 font-size: 23px;
             }
 
-            .thumb-img-wrapper {
-                height: 85px;
-                padding: 6px;
+
+            .single-product-thumb-content {
+                aspect-ratio: 1 / 1 !important;
+            }
+
+
+            #main-image {
+                width: 100% !important;
+
+                height: 100% !important;
             }
         }
 
+
         /* =========================================================
-           MOBILE - NO CROPPING (UPDATED)
+           MOBILE
         ========================================================= */
 
         @media (max-width: 768px) {
+
             .product-single-area {
                 padding: 20px 0 35px;
             }
+
 
             .product-thumb {
                 padding: 15px;
             }
 
-            .single-product-thumb-content {
-                height: 350px !important;
-                min-height: 250px;
-            }
-
-            #main-image {
-                padding: 15px !important;
-                object-fit: contain !important;
-            }
 
             .product-single-info .title {
                 font-size: 24px;
             }
 
+
             .price {
                 font-size: 21px;
             }
+
 
             .old_price {
                 font-size: 15px;
             }
 
-            .thumb-img-wrapper {
-                height: 65px;
-                width: 65px;
-                min-width: 65px;
-                padding: 4px;
-            }
-
-            .thumbnail-image {
-                padding: 2px !important;
-                object-fit: contain !important;
-            }
 
             .product-desc-list li {
                 font-size: 13px;
             }
 
-            .single-product-nav-content .swiper-slide {
-                width: 75px !important;
-                flex-shrink: 0;
+
+            .single-product-thumb-content {
+                aspect-ratio: 1 / 1 !important;
+            }
+
+
+            #main-image {
+                width: 100% !important;
+
+                height: 100% !important;
+            }
+
+
+            /* Thumbnails */
+
+            .thumbnail-list {
+                gap: 8px;
+            }
+
+
+            .thumbnail-item {
+                width: 65px !important;
+
+                height: 65px !important;
+
+                min-width: 65px !important;
+
+                max-width: 65px !important;
+
+                flex: 0 0 65px !important;
+            }
+
+
+            .thumb-img-wrapper {
+                width: 65px !important;
+
+                height: 65px !important;
+
+                min-width: 65px !important;
+
+                min-height: 65px !important;
+
+                max-width: 65px !important;
+
+                max-height: 65px !important;
             }
         }
 
+
         /* =========================================================
-           SMALL MOBILE - NO CROPPING (UPDATED)
+           SMALL MOBILE
         ========================================================= */
 
         @media (max-width: 576px) {
+
             .product-single-area {
                 padding-top: 15px;
             }
+
 
             .product-thumb {
                 padding: 10px;
             }
 
-            .single-product-thumb-content {
-                height: 280px !important;
-                min-height: 200px;
-            }
-
-            #main-image {
-                padding: 12px !important;
-                object-fit: contain !important;
-            }
-
-            .thumb-img-wrapper {
-                height: 55px;
-                width: 55px;
-                min-width: 55px;
-                padding: 3px;
-            }
-
-            .thumbnail-image {
-                padding: 2px !important;
-            }
 
             .product-single-info .title {
                 font-size: 20px;
             }
 
+
             .price {
                 font-size: 18px;
             }
 
-            .single-product-nav-content .swiper-slide {
-                width: 65px !important;
+
+            .single-product-thumb-content {
+                aspect-ratio: 1 / 1 !important;
             }
 
-            .row.g-3 {
-                --bs-gutter-y: 1rem;
+
+            #main-image {
+                width: 100% !important;
+
+                height: 100% !important;
             }
 
-            .product-thumb {
-                padding: 8px;
+
+            .thumbnail-list {
+                gap: 7px;
+            }
+
+
+            .thumbnail-item {
+                width: 58px !important;
+
+                height: 58px !important;
+
+                min-width: 58px !important;
+
+                max-width: 58px !important;
+
+                flex: 0 0 58px !important;
+            }
+
+
+            .thumb-img-wrapper {
+                width: 58px !important;
+
+                height: 58px !important;
+
+                min-width: 58px !important;
+
+                min-height: 58px !important;
+
+                max-width: 58px !important;
+
+                max-height: 58px !important;
             }
         }
 
+
         /* =========================================================
-           EXTRA SMALL MOBILE - NO CROPPING (UPDATED)
+           EXTRA SMALL MOBILE
         ========================================================= */
 
         @media (max-width: 400px) {
-            .single-product-thumb-content {
-                height: 220px !important;
-                min-height: 180px;
-            }
-
-            #main-image {
-                padding: 8px !important;
-            }
-
-            .thumb-img-wrapper {
-                height: 45px;
-                width: 45px;
-                min-width: 45px;
-                padding: 2px;
-            }
-
-            .thumbnail-image {
-                padding: 1px !important;
-            }
-
-            .single-product-nav-content .swiper-slide {
-                width: 55px !important;
-            }
 
             .product-thumb {
-                padding: 5px;
+                padding: 7px;
+
                 border-radius: 12px;
             }
+
+
+            .single-product-thumb-content {
+                aspect-ratio: 1 / 1 !important;
+            }
+
+
+            #main-image {
+                width: 100% !important;
+
+                height: 100% !important;
+            }
+
+
+            .thumbnail-list {
+                gap: 5px;
+            }
+
+
+            .thumbnail-item {
+                width: 52px !important;
+
+                height: 52px !important;
+
+                min-width: 52px !important;
+
+                max-width: 52px !important;
+
+                flex: 0 0 52px !important;
+            }
+
+
+            .thumb-img-wrapper {
+                width: 52px !important;
+
+                height: 52px !important;
+
+                min-width: 52px !important;
+
+                min-height: 52px !important;
+
+                max-width: 52px !important;
+
+                max-height: 52px !important;
+            }
         }
+
 
         /* =========================================================
            ANIMATION
         ========================================================= */
 
         @keyframes productFade {
+
             from {
                 opacity: 0;
+
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
+
                 transform: translateY(0);
             }
         }
+
 
         /* =========================================================
            SCROLLBAR
@@ -497,259 +847,486 @@
             width: 6px;
         }
 
+
         ::-webkit-scrollbar-track {
             background: var(--demanto-bg);
         }
 
+
         ::-webkit-scrollbar-thumb {
             background: var(--demanto-gold);
+
             border-radius: 3px;
         }
 
+
         /* =========================================================
-           FIX FOR FANCYBOX ON MOBILE
+           FANCYBOX
         ========================================================= */
 
         .fancybox-slide--image {
             padding: 0 !important;
         }
 
+
         .fancybox-image {
             object-fit: contain !important;
         }
-        .btn-appoint{
-            background-color: var(--demanto-gold) !important;
-            color: white !important;
-        }
-        .btn-appoint::before{
-            display: none !important;
-        }
+
     </style>
+
 
     <!-- =========================================================
          BREADCRUMB
     ========================================================= -->
 
     @include('layouts.inc.frontend.breadcrumb', [
+
         'breadcrumbs' => [
+
             [
                 'title' => 'Collections',
                 'url' => url('/categories')
             ],
+
             [
                 'title' => $category->name,
                 'url' => url('/collections/' . $category->slug)
             ],
+
             [
                 'title' => $product->name,
                 'url' => '#'
             ]
+
         ]
+
     ])
+
 
     <!-- =========================================================
          PRODUCT SINGLE AREA
     ========================================================= -->
 
     <section class="product-area product-single-area">
+
         <div class="container">
+
             <div class="row">
+
                 <div class="col-12">
+
                     <div class="product-single-item">
+
                         <div class="row g-3">
+
+
                             <!-- =================================================
-                                 PRODUCT IMAGES - NO CROPPING
-                            ================================================== -->
-                   <div class="col-md-6">
-    <div wire:ignore>
+                                 PRODUCT IMAGES
+                            ================================================= -->
 
-        @if($product->productImages && $product->productImages->count())
+                            <div class="col-md-6">
 
-        <div class="product-thumb">
+                                <div wire:ignore>
 
-            <!-- Main Image -->
-            <div class="single-product-thumb-content">
+                                    @if($product->productImages && $product->productImages->count())
 
-                <a
-                    id="main-image-link"
-                    href="{{ asset($product->productImages->first()->image) }}"
-                    data-fancybox="gallery"
-                    data-caption="{{ $product->name }}"
-                    class="lightbox-image">
+                                        <div class="product-thumb">
 
-                    <img
-                        id="main-image"
-                        src="{{ asset($product->productImages->first()->image) }}"
-                        alt="{{ $product->name }}">
-                </a>
 
-            </div>
+                                            <!-- =================================================
+                                                 MAIN IMAGE
+                                            ================================================= -->
 
-            <!-- Thumbnails -->
-            <div class="single-product-nav-content mt-3">
+                                            <div class="single-product-thumb-content">
 
-                <div class="row g-2">
+                                                <a
+                                                    id="main-image-link"
+                                                    href="{{ asset($product->productImages->first()->image) }}"
+                                                    data-fancybox="gallery"
+                                                    data-caption="{{ $product->name }}"
+                                                    class="lightbox-image"
+                                                >
 
-                    @foreach($product->productImages as $index => $image)
+                                                    <img
+                                                        id="main-image"
+                                                        src="{{ asset($product->productImages->first()->image) }}"
+                                                        alt="{{ $product->name }}"
+                                                    >
 
-                        <div class="col-3">
+                                                </a>
 
-                            <div
-                                class="thumb-img-wrapper {{ $index==0 ? 'active' : '' }}"
-                                data-image="{{ asset($image->image) }}">
+                                            </div>
 
-                                <img
-                                    src="{{ asset($image->image) }}"
-                                    class="thumbnail-image"
-                                    alt="{{ $product->name }}">
+
+                                            <!-- =================================================
+                                                 THUMBNAILS
+                                            ================================================= -->
+
+                                            <div class="single-product-nav-content">
+
+                                                <div class="thumbnail-list">
+
+                                                    @foreach($product->productImages as $index => $image)
+
+                                                        <div class="thumbnail-item">
+
+                                                            <div
+                                                                class="thumb-img-wrapper {{ $index == 0 ? 'active' : '' }}"
+                                                                data-image="{{ asset($image->image) }}"
+                                                            >
+
+                                                                <img
+                                                                    src="{{ asset($image->image) }}"
+                                                                    class="thumbnail-image"
+                                                                    alt="{{ $product->name }}"
+                                                                >
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    @endforeach
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- =================================================
+                                                 HIDDEN IMAGES FOR FANCYBOX
+                                            ================================================= -->
+
+                                            <div style="display:none">
+
+                                                @foreach($product->productImages as $image)
+
+                                                    <a
+                                                        href="{{ asset($image->image) }}"
+                                                        data-fancybox="gallery"
+                                                        data-caption="{{ $product->name }}"
+                                                    ></a>
+
+                                                @endforeach
+
+                                            </div>
+
+
+                                        </div>
+
+                                    @else
+
+                                        <div class="product-thumb">
+
+                                            <div class="text-center py-5">
+
+                                                <p>
+                                                    No product images available.
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    @endif
+
+                                </div>
 
                             </div>
 
-                        </div>
 
-                    @endforeach
-
-                </div>
-
-            </div>
-
-            {{-- Hidden images for Fancybox --}}
-            <div style="display:none">
-
-                @foreach($product->productImages as $image)
-
-                    <a
-                        href="{{ asset($image->image) }}"
-                        data-fancybox="gallery"
-                        data-caption="{{ $product->name }}">
-                    </a>
-
-                @endforeach
-
-            </div>
-
-        </div>
-
-        @else
-
-        <div class="product-thumb">
-
-            <div class="text-center py-5">
-                <p>No product images available.</p>
-            </div>
-
-        </div>
-
-        @endif
-
-    </div>
-</div>
                             <!-- =================================================
                                  PRODUCT INFORMATION
-                            ================================================== -->
+                            ================================================= -->
+
                             <div class="col-md-6">
+
                                 <div class="product-single-info">
-                                    <h1 class="title">{{ $product->name }}</h1>
+
+
+                                    <!-- PRODUCT NAME -->
+
+                                    <h1 class="title">
+                                        {{ $product->name }}
+                                    </h1>
+
 
                                     <!-- PRICES -->
+
                                     <div class="prices">
+
                                         @if($product->original_price > $product->selling_price)
-                                            <span class="old_price">${{ number_format($product->original_price, 2) }}</span>
+
+                                            <span class="old_price">
+                                                ${{ number_format($product->original_price, 2) }}
+                                            </span>
+
                                         @endif
-                                        <span class="price">${{ number_format($product->selling_price, 2) }}</span>
+
+
+                                        <span class="price">
+                                            ${{ number_format($product->selling_price, 2) }}
+                                        </span>
+
                                     </div>
+
 
                                     <!-- STOCK STATUS -->
+
                                     <div class="stock-status">
+
                                         @if($product->quantity > 0)
+
                                             <span class="stock-badge in-stock">
-                                                <i class="fa fa-check-circle"></i> In Stock
+
+                                                <i class="fa fa-check-circle"></i>
+
+                                                In Stock
+
                                             </span>
+
                                         @else
+
                                             <span class="stock-badge out-stock">
-                                                <i class="fa fa-times-circle"></i> Out of Stock
+
+                                                <i class="fa fa-times-circle"></i>
+
+                                                Out of Stock
+
                                             </span>
+
                                         @endif
+
                                     </div>
+
 
                                     <!-- DESCRIPTION -->
+
                                     <div class="product-description">
+
                                         <ul class="product-desc-list">
+
                                             @if($product->small_description)
-                                                <li>{{ $product->small_description }}</li>
+
+                                                <li>
+                                                    {{ $product->small_description }}
+                                                </li>
+
                                             @endif
+
+
                                             @if($product->description)
-                                                <li>{{ $product->description }}</li>
+
+                                                <li>
+                                                    {{ $product->description }}
+                                                </li>
+
                                             @endif
+
                                         </ul>
+
                                     </div>
 
-                                    <!-- CART -->
+
+                                    <!-- ADD TO CART -->
+
                                     <div class="product-quick-action">
-                                        <div class="white-bg mt-4 ">
-                                            <livewire:frontend.cart.add-to-cart :product="$product" />
+
+                                        <div class="white-bg mt-4">
+
+                                            <livewire:frontend.cart.add-to-cart
+                                                :product="$product"
+                                            />
+
                                         </div>
+
                                     </div>
-                                    <!-- apppointment -->
-                                        <div class="product-quick-action">
+
+
+                                    <!-- BOOK APPOINTMENT -->
+
+                                    <div class="product-quick-action">
+
                                         <div class="white-bg">
-                                            <div>
-  <a
-    href="{{ url('/appointment') }}"
-    class="btn-product-add btn-appoint">
 
-    Book Appointment
+                                            <a
+                                                href="{{ url('/appointment') }}"
+                                                class="btn-product-add btn-appoint"
+                                            >
+                                                Book Appointment
+                                            </a>
 
-</a>
-</div>
-                                        </div> 
-                                        </div> 
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
+
                             </div>
+
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
 
+
     <!-- =========================================================
-         JAVASCRIPT - UPDATED FOR NO CROPPING
+         JAVASCRIPT
+         
+         ONLY:
+         1. Fancybox
+         2. Thumbnail switching
+         
+         NO ASPECT RATIO CALCULATION
     ========================================================= -->
 
     @push('scripts')
+
         <script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    Fancybox.bind('[data-fancybox="gallery"]', {
-        Thumbs: {
-            autoStart: true
-        }
-    });
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
 
-    const mainImage = document.getElementById("main-image");
-    const mainLink = document.getElementById("main-image-link");
 
-    document.querySelectorAll(".thumb-img-wrapper").forEach(function(item){
+                    /* =====================================================
+                       FANCYBOX
+                    ===================================================== */
 
-        item.addEventListener("click", function(){
+                    if (typeof Fancybox !== 'undefined') {
 
-            document.querySelectorAll(".thumb-img-wrapper").forEach(function(el){
-                el.classList.remove("active");
-            });
+                        Fancybox.bind(
+                            '[data-fancybox="gallery"]',
+                            {
+                                Thumbs: {
+                                    autoStart: true
+                                }
+                            }
+                        );
 
-            this.classList.add("active");
+                    }
 
-            const img = this.dataset.image;
 
-            mainImage.src = img;
-            mainLink.href = img;
+                    /* =====================================================
+                       MAIN IMAGE
+                    ===================================================== */
 
-        });
+                    const mainImage =
+                        document.getElementById(
+                            "main-image"
+                        );
 
-    });
 
-});
+                    const mainLink =
+                        document.getElementById(
+                            "main-image-link"
+                        );
+
+
+                    /* =====================================================
+                       THUMBNAIL CLICK
+                    ===================================================== */
+
+                    document
+                        .querySelectorAll(
+                            ".thumb-img-wrapper"
+                        )
+                        .forEach(
+                            function (item) {
+
+
+                                item.addEventListener(
+                                    "click",
+                                    function () {
+
+
+                                        /* ---------------------------------
+                                           REMOVE ACTIVE CLASS
+                                        --------------------------------- */
+
+                                        document
+                                            .querySelectorAll(
+                                                ".thumb-img-wrapper"
+                                            )
+                                            .forEach(
+                                                function (el) {
+
+                                                    el.classList.remove(
+                                                        "active"
+                                                    );
+
+                                                }
+                                            );
+
+
+                                        /* ---------------------------------
+                                           ADD ACTIVE CLASS
+                                        --------------------------------- */
+
+                                        this.classList.add(
+                                            "active"
+                                        );
+
+
+                                        /* ---------------------------------
+                                           GET IMAGE URL
+                                        --------------------------------- */
+
+                                        const img =
+                                            this.getAttribute(
+                                                "data-image"
+                                            );
+
+
+                                        /* ---------------------------------
+                                           CHANGE MAIN IMAGE
+                                        --------------------------------- */
+
+                                        if (
+                                            mainImage &&
+                                            img
+                                        ) {
+
+                                            mainImage.src =
+                                                img;
+
+                                        }
+
+
+                                        /* ---------------------------------
+                                           CHANGE FANCYBOX LINK
+                                        --------------------------------- */
+
+                                        if (
+                                            mainLink &&
+                                            img
+                                        ) {
+
+                                            mainLink.href =
+                                                img;
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+                        );
+
+                }
+            );
+
         </script>
+
     @endpush
+
 </div>

@@ -551,7 +551,7 @@ section {
 
     border-radius: 50%;
 
-    background: var(--demanto-gold);
+    background: green;
 
     color: #FFFFFF !important;
 
@@ -2139,15 +2139,7 @@ section {
     </div>
 
 </section>
-    <a
-        href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
-        class="whatsapp-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contact DEMANTO on WhatsApp"
-    >
-        <i class="fab fa-whatsapp"></i>
-    </a>
+
 <!-- Signature Collections Section -->
 @include('frontend.collections.category.index')
 
