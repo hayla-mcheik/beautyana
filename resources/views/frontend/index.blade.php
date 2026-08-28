@@ -523,50 +523,38 @@ section {
 /* ============================================================
    FIXED WHATSAPP BUTTON
 ============================================================ */
+/* =========================================================
+   WHATSAPP BUTTON
+========================================================= */
 
 .whatsapp-btn {
     position: fixed !important;
 
-    /*
-    JavaScript controls the vertical position.
-
-    This fallback is used before JavaScript executes.
-    */
-
-    top: 500px;
-
     right: 22px;
 
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     padding: 0;
 
-
-
     border-radius: 50%;
 
     background: green;
 
-    color: #FFFFFF !important;
+    color: #fff !important;
 
     font-size: 25px;
-
     line-height: 1;
 
     text-decoration: none;
 
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
 
     z-index: 99999;
-
-    transform: translateY(-50%);
 
     transition:
         background 0.3s ease,
@@ -574,6 +562,21 @@ section {
         transform 0.3s ease;
 }
 
+
+/* =========================================================
+   GLOBAL BUTTON - NON HOME PAGES
+========================================================= */
+
+.whatsapp-global-btn {
+    top: 50% !important;
+
+    transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
 
 .whatsapp-btn i {
     display: flex;
@@ -583,26 +586,93 @@ section {
 
     margin: 0;
 
-    color: #FFFFFF;
+    color: #fff;
 
     line-height: 1;
 }
 
 
+/* =========================================================
+   HOVER
+========================================================= */
+
 .whatsapp-btn:hover {
-    background: var(--demanto-gold-dark);
+    color: #fff !important;
 
-    color: #FFFFFF !important;
-
-    transform:
-        translateY(-50%)
-        scale(1.08);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.28);
+    transform: translateY(-50%) scale(1.08);
 }
 
 
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .whatsapp-btn {
+        right: 18px;
+
+        width: 50px;
+        height: 50px;
+
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .whatsapp-btn {
+        right: 14px;
+
+        width: 47px;
+        height: 47px;
+
+        font-size: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+    .whatsapp-btn {
+        right: 12px;
+
+        width: 45px;
+        height: 45px;
+
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .whatsapp-btn {
+        right: 10px;
+
+        width: 56px;
+        height: 56px;
+
+        font-size: 20px;
+    }
+
+}
 /* ============================================================
    ABOUT SECTION
 ============================================================ */
@@ -1407,8 +1477,8 @@ section {
     .whatsapp-btn {
         right: 30px;
 
-        width: 58px;
-        height: 58px;
+        width: 56px;
+        height: 56px;
 
         font-size: 28px;
     }
@@ -1544,8 +1614,8 @@ section {
     .whatsapp-btn {
         right: 18px;
 
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
 
         font-size: 24px;
     }
@@ -1714,8 +1784,8 @@ section {
     .whatsapp-btn {
         right: 14px;
 
-        width: 47px;
-        height: 47px;
+        width: 56px;
+        height: 56px;
 
         font-size: 23px;
     }
@@ -1875,8 +1945,8 @@ section {
     .whatsapp-btn {
         right: 12px;
 
-        width: 45px;
-        height: 45px;
+        width: 56px;
+        height: 56px;
 
         font-size: 22px;
     }
@@ -1988,8 +2058,8 @@ section {
     .whatsapp-btn {
         right: 10px;
 
-        width: 42px;
-        height: 42px;
+        width: 56px;
+        height: 56px;
 
         font-size: 20px;
     }
@@ -2474,8 +2544,10 @@ document.addEventListener('DOMContentLoaded', function () {
     ============================================================
     */
 
-    const whatsappButton =
-        document.querySelector('.whatsapp-btn');
+const whatsappButton =
+    document.querySelector(
+        '.home-default-wrapper > .whatsapp-btn'
+    );
 
     const homeBanner =
         document.querySelector('.home-banner');

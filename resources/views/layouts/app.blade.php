@@ -98,80 +98,17 @@ font-family:"Cormorant Garamond",serif;
             display: none;
         }
 /* Floating WhatsApp Button */
-.whatsapp-btn{
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    background: green;
-    color: #fff;
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    font-size:16px;
-    z-index:9999;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
-    transition:.3s;
-}
-
-.whatsapp-btn:hover{
-    background:#C9A96E;
-    color:#fff;
-    transform:scale(1.1);
-}
-
-.whatsapp-btn i{
-    line-height:1;
-}
-        /* Scroll Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 30px;
-            height: 30px;
-            background: #C9A96E;
-            color: #000000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 1040;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-.scroll-to-top i{
-    font-size: 14px !important;
-    color: white;
-}
-        .scroll-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-to-top:hover {
-            background: #ad8b4c;
-            transform: translateY(-4px);
-            color: #ffffff;
-        }
-        /* =========================================================
-   GLOBAL WHATSAPP BUTTON
+/* =========================================================
+   WHATSAPP BUTTON
 ========================================================= */
 
 .whatsapp-btn {
-    position: fixed;
+    position: fixed !important;
 
-    top: 500px;
     right: 22px;
 
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
 
     display: flex;
     align-items: center;
@@ -194,8 +131,6 @@ font-family:"Cormorant Garamond",serif;
 
     z-index: 99999;
 
-    transform: translateY(-50%);
-
     transition:
         background 0.3s ease,
         box-shadow 0.3s ease,
@@ -203,8 +138,24 @@ font-family:"Cormorant Garamond",serif;
 }
 
 
+/* =========================================================
+   GLOBAL BUTTON - NON HOME PAGES
+========================================================= */
+
+.whatsapp-global-btn {
+    top: 50% !important;
+
+    transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
 .whatsapp-btn i {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -216,15 +167,15 @@ font-family:"Cormorant Garamond",serif;
 }
 
 
+/* =========================================================
+   HOVER
+========================================================= */
+
 .whatsapp-btn:hover {
-    background: #C9A96E;
 
     color: #fff !important;
 
     transform: translateY(-50%) scale(1.08);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.28);
 }
 
 
@@ -235,12 +186,10 @@ font-family:"Cormorant Garamond",serif;
 @media (max-width: 991px) {
 
     .whatsapp-btn {
-        top: 45vh;
-
         right: 18px;
 
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
 
         font-size: 24px;
     }
@@ -255,20 +204,10 @@ font-family:"Cormorant Garamond",serif;
 @media (max-width: 767px) {
 
     .whatsapp-btn {
-        /*
-         * Same vertical area as the Home button.
-         *
-         * Home's JS currently places it around
-         * 290px on a 651px viewport.
-         *
-         * 45vh ≈ 293px.
-         */
-        top: 45vh;
-
         right: 14px;
 
-        width: 47px;
-        height: 47px;
+        width: 56px;
+        height: 56px;
 
         font-size: 23px;
     }
@@ -283,12 +222,10 @@ font-family:"Cormorant Garamond",serif;
 @media (max-width: 575px) {
 
     .whatsapp-btn {
-        top: 45vh;
-
         right: 12px;
 
-        width: 45px;
-        height: 45px;
+        width: 56px;
+        height: 56px;
 
         font-size: 22px;
     }
@@ -303,12 +240,10 @@ font-family:"Cormorant Garamond",serif;
 @media (max-width: 400px) {
 
     .whatsapp-btn {
-        top: 45vh;
-
         right: 10px;
 
-        width: 42px;
-        height: 42px;
+        width: 56px;
+        height: 56px;
 
         font-size: 20px;
     }
@@ -330,13 +265,15 @@ font-family:"Cormorant Garamond",serif;
 
     <a
         href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
-        class="whatsapp-btn"
+        class="whatsapp-btn whatsapp-global-btn"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact DEMANTO on WhatsApp"
     >
         <i class="fab fa-whatsapp"></i>
     </a>
+
+
 
 @endif
  @include('layouts.inc.frontend.footer')
