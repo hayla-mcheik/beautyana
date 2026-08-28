@@ -160,6 +160,160 @@ font-family:"Cormorant Garamond",serif;
             transform: translateY(-4px);
             color: #ffffff;
         }
+        /* =========================================================
+   GLOBAL WHATSAPP BUTTON
+========================================================= */
+
+.whatsapp-btn {
+    position: fixed;
+
+    top: 500px;
+    right: 22px;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: green;
+
+    color: #fff !important;
+
+    font-size: 25px;
+    line-height: 1;
+
+    text-decoration: none;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+
+    z-index: 99999;
+
+    transform: translateY(-50%);
+
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.whatsapp-btn i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+
+    color: #fff;
+
+    line-height: 1;
+}
+
+
+.whatsapp-btn:hover {
+    background: #C9A96E;
+
+    color: #fff !important;
+
+    transform: translateY(-50%) scale(1.08);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .whatsapp-btn {
+        top: 45vh;
+
+        right: 18px;
+
+        width: 50px;
+        height: 50px;
+
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .whatsapp-btn {
+        /*
+         * Same vertical area as the Home button.
+         *
+         * Home's JS currently places it around
+         * 290px on a 651px viewport.
+         *
+         * 45vh ≈ 293px.
+         */
+        top: 45vh;
+
+        right: 14px;
+
+        width: 47px;
+        height: 47px;
+
+        font-size: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+    .whatsapp-btn {
+        top: 45vh;
+
+        right: 12px;
+
+        width: 45px;
+        height: 45px;
+
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .whatsapp-btn {
+        top: 45vh;
+
+        right: 10px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+}
    </style>
 
 
@@ -171,7 +325,20 @@ font-family:"Cormorant Garamond",serif;
     <main class="main-content">
         @yield('content')
     </main>
+{{-- WhatsApp button on all pages except Home --}}
+@if (!request()->is('/'))
 
+    <a
+        href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
+        class="whatsapp-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact DEMANTO on WhatsApp"
+    >
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+@endif
  @include('layouts.inc.frontend.footer')
 
 
