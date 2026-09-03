@@ -11,101 +11,269 @@
 
     <a href="{{ url('/') }}" class="demanto-logo">
 
-        <img
-            class="logo-main boutique-logo"
-            src="{{ asset('assets/img/logogold.png') }}"
-            alt="DEMANTO">
+@if(!empty($appSetting?->logo))
 
-        <span class="logo-since">
-            SINCE 1991
-        </span>
+    <img
+        class="logo-main boutique-logo"
+        src="{{ asset($appSetting->logo) }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}">
 
+@else
+
+    <img
+        class="logo-main boutique-logo"
+        src="{{ asset('assets/img/logogold.png') }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}">
+
+@endif
     </a>
 
 </div>
                             
                             <div class="header-navigation-area hidden-md-down">
-                                <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
-                                    <li><a href="{{ url('/') }}">Home</a></li>
-                             
-                                    
-                              <li class="has-dropdown">
-    <a href="#">
-        Collections <i class="ion-ios-arrow-down ms-1"></i>
-    </a>
-    <ul class="boutique-dropdown">
-        @foreach($collections as $category)
-            <li>
-                <a href="{{ url('collections/'.$category->slug) }}">
-                    {{ $category->name }}
-                </a>
-            </li>
-        @endforeach
-    </ul>
-</li>
+                      <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
 
-<li class="has-dropdown">
-    <a href="#">
-        High Jewelry <i class="ion-ios-arrow-down ms-1"></i>
-    </a>
-    <ul class="boutique-dropdown">
-        @foreach($highJewelry as $category)
-            <li>
-                <a href="{{ url('collections/'.$category->slug) }}">
-                    {{ $category->name }}
-                </a>
-            </li>
-        @endforeach
-    </ul>
-</li>
+    <li>
+        <a href="{{ url('/') }}">Home</a>
+    </li>
 
-<li class="has-dropdown">
-    <a href="#">
-        AD Signature <i class="ion-ios-arrow-down ms-1"></i>
-    </a>
-    <ul class="boutique-dropdown">
-        @foreach($adSignature as $category)
-            <li>
-                <a href="{{ url('collections/'.$category->slug) }}">
-                    {{ $category->name }}
-                </a>
-            </li>
-        @endforeach
-    </ul>
-</li>
 
-{{-- <li class="has-dropdown">
-    <a href="#">
-    Menu 4 <i class="ion-ios-arrow-down ms-1"></i>
-    </a>
-    <ul class="boutique-dropdown">
+    {{-- =========================================================
+         COLLECTIONS MEGA MENU
+    ========================================================== --}}
+    <li class="has-dropdown mega-menu-parent">
 
-            <li>
-                <a >
-               test
-                </a>
-            </li>
+        <a href="javascript:void(0)" class="mega-menu-trigger">
+            Collections
+            <i class="ion-ios-arrow-down ms-1"></i>
+        </a>
 
-    </ul>
-</li>
-<li class="has-dropdown">
-    <a href="#">
-    Menu 5 <i class="ion-ios-arrow-down ms-1"></i>
-    </a>
-    <ul class="boutique-dropdown">
+        <div class="mega-menu">
 
-            <li>
-                <a >
-               test
-                </a>
-            </li>
+            <div class="container">
 
-    </ul>
-</li> --}}
+                <div class="row align-items-start">
 
-                                    <li><a href="{{ url('blogs') }}">News</a></li>
-                              
-                                </ul>
+                    {{-- TITLE --}}
+                    <div class="col-lg-4">
+
+                        <div class="mega-menu-intro">
+
+                            <span class="mega-menu-eyebrow">
+                                DEMANTO
+                            </span>
+
+                            <h4>
+                                Collections
+                            </h4>
+
+                            <p>
+                                Discover our exclusive jewelry collections.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- CATEGORIES --}}
+                    <div class="col-lg-8">
+
+                        <div class="row">
+
+                            @foreach($collections as $category)
+
+                                <div class="col-lg-4 col-md-6">
+
+                                    <a
+                                        href="{{ url('collections/'.$category->slug) }}"
+                                        class="mega-category-link"
+                                    >
+
+                                        <span>
+                                            {{ $category->name }}
+                                        </span>
+
+                                        <i class="ion-ios-arrow-forward"></i>
+
+                                    </a>
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </li>
+
+
+    {{-- =========================================================
+         HIGH JEWELRY MEGA MENU
+    ========================================================== --}}
+    <li class="has-dropdown mega-menu-parent">
+
+        <a href="javascript:void(0)" class="mega-menu-trigger">
+            High Jewelry
+            <i class="ion-ios-arrow-down ms-1"></i>
+        </a>
+
+        <div class="mega-menu">
+
+            <div class="container">
+
+                <div class="row align-items-start">
+
+                    {{-- TITLE --}}
+                    <div class="col-lg-3">
+
+                        <div class="mega-menu-intro">
+
+                            <span class="mega-menu-eyebrow">
+                                DEMANTO
+                            </span>
+
+                            <h4>
+                                High Jewelry
+                            </h4>
+
+                            <p>
+                                Explore our finest high jewelry pieces.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- CATEGORIES --}}
+                    <div class="col-lg-9">
+
+                        <div class="row">
+
+                            @foreach($highJewelry as $category)
+
+                                <div class="col-lg-4 col-md-6">
+
+                                    <a
+                                        href="{{ url('collections/'.$category->slug) }}"
+                                        class="mega-category-link"
+                                    >
+
+                                        <span>
+                                            {{ $category->name }}
+                                        </span>
+
+                                        <i class="ion-ios-arrow-forward"></i>
+
+                                    </a>
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </li>
+
+
+    {{-- =========================================================
+         AD SIGNATURE MEGA MENU
+    ========================================================== --}}
+    <li class="has-dropdown mega-menu-parent">
+
+        <a href="javascript:void(0)" class="mega-menu-trigger">
+            AD Signature
+            <i class="ion-ios-arrow-down ms-1"></i>
+        </a>
+
+        <div class="mega-menu">
+
+            <div class="container">
+
+                <div class="row align-items-start">
+
+                    {{-- TITLE --}}
+                    <div class="col-lg-3">
+
+                        <div class="mega-menu-intro">
+
+                            <span class="mega-menu-eyebrow">
+                                DEMANTO
+                            </span>
+
+                            <h4>
+                                AD Signature
+                            </h4>
+
+                            <p>
+                                Discover the signature collection.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- CATEGORIES --}}
+                    <div class="col-lg-9">
+
+                        <div class="row">
+
+                            @foreach($adSignature as $category)
+
+                                <div class="col-lg-4 col-md-6">
+
+                                    <a
+                                        href="{{ url('collections/'.$category->slug) }}"
+                                        class="mega-category-link"
+                                    >
+
+                                        <span>
+                                            {{ $category->name }}
+                                        </span>
+
+                                        <i class="ion-ios-arrow-forward"></i>
+
+                                    </a>
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </li>
+
+
+    <li>
+        <a href="{{ url('blogs') }}">News</a>
+    </li>
+
+</ul>
                             </div>
                         </div>
 
@@ -252,14 +420,21 @@
 
     <a href="{{ url('/') }}" class="demanto-logo">
 
-        <img
-            class="logo-main boutique-logo"
-            src="{{ asset('assets/img/logogold.png') }}"
-            alt="DEMANTO">
+   @if(!empty($appSetting?->logo))
 
-        <span class="logo-since">
-            SINCE 1991
-        </span>
+    <img
+        class="logo-main boutique-logo"
+        src="{{ asset($appSetting->logo) }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}">
+
+@else
+
+    <img
+        class="logo-main boutique-logo"
+        src="{{ asset('assets/img/logogold.png') }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}">
+
+@endif
 
     </a>
 
@@ -341,10 +516,23 @@
         <div class="off-canvas-header">
             <div class="logo text-start">
                 <a href="{{ url('/') }}">
-                    <img class="logo-main"
-                         src="{{ asset('assets/img/logogold.png') }}"
-                         alt="Logo"
-                         style="max-width:70px;">
+         @if(!empty($appSetting?->logo))
+
+    <img
+        class="logo-main"
+        src="{{ asset($appSetting->logo) }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}"
+        style="max-width:70px;">
+
+@else
+
+    <img
+        class="logo-main"
+        src="{{ asset('assets/img/logogold.png') }}"
+        alt="{{ $appSetting->website_name ?? 'DEMANTO' }}"
+        style="max-width:70px;">
+
+@endif
                 </a>
             </div>
 
@@ -521,21 +709,7 @@
    DEMANTO HEADER — BLACK LUXURY GRADIENT DESIGN
 ============================================================ */
 
-:root {
-    --demanto-gold: #C5A15A;
-    --demanto-gold-light: #E4C98F;
-    --demanto-dark: #4F4033;
-    --demanto-text: #76522E;
-    --demanto-muted: #8B7765;
-    --demanto-cream: #FDFBF7;
-    --demanto-white: #FFFFFF;
 
-    --desktop-header-height: 82px;
-    --mobile-header-height: 80px;
-
-    --header-transition:
-        all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
 
 
 /* ============================================================
@@ -552,7 +726,7 @@
 
     z-index: 1050;
 
-    background: transparent;
+    background: white;
 }
 
 
@@ -571,14 +745,16 @@
 
     align-items: center;
 
-    background: transparent;
+    background: white;
 
     transition:
         background 0.35s ease,
         box-shadow 0.35s ease,
         backdrop-filter 0.35s ease;
 }
-
+.header-bottom:not(.sticky-on)::before {
+    display: none !important;
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -590,42 +766,6 @@
 |
 */
 
-.header-bottom:not(.sticky-on)::before {
-    content: "";
-
-    position: absolute;
-
-    /*
-     * Extend below navbar so the gradient
-     * fades naturally into the hero.
-     */
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 80px;
-
-    z-index: 0;
-
-    pointer-events: none;
-
-    background:
-
-        linear-gradient(
-            180deg,
-
-            rgba(0, 0, 0, 0.96) 0%,
-
-            rgba(0, 0, 0, 0.88) 30%,
-
-            rgba(0, 0, 0, 0.65) 60%,
-
-            rgba(0, 0, 0, 0.28) 82%,
-
-            rgba(0, 0, 0, 0) 100%
-        );
-}
 
 
 .header-bottom > .container {
@@ -668,30 +808,18 @@
 
 .header-bottom.sticky-on {
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
-
-    background:
-        rgba(253, 251, 247, 0.97) !important;
-
-    backdrop-filter:
-        blur(14px);
-
-    -webkit-backdrop-filter:
-        blur(14px);
-
-    box-shadow:
-        0 5px 25px rgba(0, 0, 0, 0.08);
-
-    animation:
-        demantoHeaderSlideDown 0.4s ease forwards;
-
+    animation: demantoHeaderSlideDown 0.4s ease forwards;
     z-index: 1060;
-}
 
+    /* White sticky navbar */
+    background: #FFFFFF !important;
+
+    /* Optional subtle shadow */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
 
 .header-bottom.sticky-on::before {
     display: none;
@@ -746,12 +874,6 @@
 
     transition:
         transform 0.35s ease;
-
-    filter:
-        brightness(1.15)
-        contrast(1.08)
-        saturate(1.12)
-        drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
 }
 
 
@@ -775,23 +897,6 @@
     transform:
         translate(-50%, -50%);
 
-    background:
-
-        radial-gradient(
-            ellipse at center,
-
-            rgba(255, 230, 170, 0.16) 0%,
-
-            rgba(197, 161, 90, 0.08) 42%,
-
-            rgba(197, 161, 90, 0.02) 65%,
-
-            transparent 76%
-        );
-
-    filter:
-        blur(5px);
-
     pointer-events: none;
 
     z-index: -1;
@@ -801,7 +906,7 @@
 @media (min-width: 992px) {
 
     .header-bottom .logo-main {
-        max-width: 90px !important;
+        max-width: 60px !important;
     }
 
 
@@ -867,7 +972,7 @@
         15px !important;
 
     font-weight:
-        800 !important;
+        600 !important;
 
     line-height:
         1;
@@ -890,10 +995,7 @@
      */
 
     color:
-        #FAF7F1 !important;
-
-    text-shadow:
-        0 2px 9px rgba(0, 0, 0, 0.80);
+        #000 !important;
 
     transition:
         color 0.3s ease;
@@ -917,7 +1019,7 @@
         translateX(-50%);
 
     background:
-        var(--demanto-gold-light);
+        var(--demanto-red-light);
 
     transition:
         width 0.3s ease;
@@ -926,7 +1028,7 @@
 
 .boutique-nav > li > a:hover {
     color:
-        var(--demanto-gold-light) !important;
+        var(--demanto-red-light) !important;
 }
 
 
@@ -1170,7 +1272,7 @@
         0;
 
     color:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     transition:
         opacity 0.25s ease,
@@ -1183,7 +1285,7 @@
         35px !important;
 
     color:
-        var(--demanto-gold) !important;
+        var(--demanto-red) !important;
 
     background:
         rgba(197, 161, 90, 0.06);
@@ -1218,17 +1320,13 @@
 .target-cart-icon {
 
     color:
-        #FAF7F1 !important;
+        #000 !important;
 
     text-decoration:
         none;
 
     font-size:
         15px;
-
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.80);
-
     transition:
         color 0.3s ease;
 }
@@ -1255,15 +1353,326 @@
 .boutique-nav > li > a::after {
 
     background:
-        var(--demanto-gold);
+        var(--demanto-red);
+}
+
+/* ============================================================
+   DEMANTO MEGA MENU
+============================================================ */
+
+.mega-menu-parent {
+    position: static !important;
 }
 
 
+/* ------------------------------------------------------------
+   MEGA MENU
+------------------------------------------------------------ */
+
+.mega-menu {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    padding: 38px 0 42px;
+
+    margin: 0;
+
+    background: rgba(255, 255, 255, 0.98);
+
+    border-top: 1px solid rgba(197, 161, 90, 0.20);
+
+    border-bottom: 1px solid rgba(197, 161, 90, 0.18);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(12px);
+
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease,
+        transform 0.28s ease;
+
+    z-index: 1080;
+
+    text-align: left;
+}
+
+
+/* ------------------------------------------------------------
+   OPEN ON HOVER
+------------------------------------------------------------ */
+
+@media (min-width: 992px) {
+
+    .mega-menu-parent:hover > .mega-menu {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   HOVER BRIDGE
+   Prevents menu from closing while moving mouse down
+------------------------------------------------------------ */
+
+.mega-menu-parent::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 100%;
+
+    height: 18px;
+
+    background: transparent;
+
+    z-index: 1079;
+
+}
+
+
+/* ------------------------------------------------------------
+   INTRO / LEFT SIDE
+------------------------------------------------------------ */
+
+.mega-menu-intro {
+
+    padding: 4px 35px 8px 0;
+
+    min-height: 145px;
+
+    border-right:
+        1px solid rgba(197, 161, 90, 0.20);
+}
+
+
+.mega-menu-eyebrow {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color:
+        var(--demanto-red);
+
+}
+
+
+.mega-menu-intro h4 {
+
+    margin: 0 0 10px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+
+    color:
+        var(--demanto-dark);
+
+}
+
+
+.mega-menu-intro p {
+
+    max-width: 230px;
+
+    margin: 0;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.4px;
+
+    color:
+        var(--demanto-muted);
+
+}
+
+
+/* ------------------------------------------------------------
+   CATEGORY LINKS
+------------------------------------------------------------ */
+
+.mega-category-link {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    min-height: 55px;
+
+    padding: 10px 15px;
+
+    margin-bottom: 8px;
+
+    border-bottom:
+        1px solid rgba(197, 161, 90, 0.14);
+
+    font-family:
+        "Cormorant Garamond",
+        serif !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+
+    text-decoration: none;
+
+    color:
+        var(--demanto-dark) !important;
+
+    text-shadow: none !important;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        padding-left 0.25s ease;
+
+}
+
+
+/* Arrow */
+
+.mega-category-link i {
+
+    font-size: 13px;
+
+    color:
+        var(--demanto-muted);
+
+    opacity: 0.65;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+
+}
+
+
+/* Hover */
+
+.mega-category-link:hover {
+
+    color:
+        var(--demanto-red) !important;
+
+    background:
+        rgba(197, 161, 90, 0.06);
+
+    padding-left: 21px;
+
+}
+
+
+.mega-category-link:hover i {
+
+    color:
+        var(--demanto-red);
+
+    opacity: 1;
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* ------------------------------------------------------------
+   STICKY HEADER
+------------------------------------------------------------ */
+
+.header-bottom.sticky-on
+.mega-menu {
+
+    background:
+        rgba(253, 251, 247, 0.99);
+
+    border-top:
+        1px solid rgba(197, 161, 90, 0.20);
+
+}
+
+
+/* ------------------------------------------------------------
+   DESKTOP ONLY
+------------------------------------------------------------ */
+
+@media (max-width: 991px) {
+
+    .mega-menu {
+
+        display: none !important;
+
+    }
+
+    .mega-menu-parent::after {
+
+        display: none;
+
+    }
+
+}
 .header-bottom.sticky-on
 .boutique-nav > li > a:hover {
 
     color:
-        var(--demanto-gold) !important;
+        var(--demanto-red) !important;
 }
 
 
@@ -1335,7 +1744,7 @@
         50%;
 
     background:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     color:
         #FFFFFF !important;
@@ -1459,18 +1868,7 @@
      * Same black luxury gradient on mobile.
      */
 
-    background:
-
-        linear-gradient(
-            180deg,
-
-            rgba(0, 0, 0, 0.96) 0%,
-
-            rgba(0, 0, 0, 0.84) 55%,
-
-            rgba(0, 0, 0, 0.58) 100%
-        );
-
+    background:white;
     border-bottom:
         1px solid rgba(197, 161, 90, 0.20) !important;
 
@@ -1502,7 +1900,7 @@
 
 .responsive-header .logo-main {
     max-width:
-        100px !important;
+        60px !important;
 }
 
 
@@ -1515,13 +1913,11 @@
 .mobile-social-icon {
 
     color:
-        #FFFFFF !important;
+        #000 !important;
 
     text-decoration:
         none;
 
-    text-shadow:
-        0 2px 7px rgba(0, 0, 0, 0.65);
 
     transition:
         color 0.3s ease;
@@ -1565,7 +1961,7 @@
 
 .mobile-social-icon:hover {
     color:
-        var(--demanto-gold-light) !important;
+        var(--demanto-red-light) !important;
 }
 
 
@@ -1872,10 +2268,10 @@
 
 .btn-menu-close:hover {
     border-color:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     background:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     color:
         #FFFFFF;
@@ -1956,7 +2352,7 @@
 
 .mobile-main-nav > li > a:hover {
     color:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     background:
         rgba(197, 161, 90, 0.04);
@@ -2027,7 +2423,7 @@
 
 .mobile-sub-categories > li > a:hover {
     color:
-        var(--demanto-gold);
+        var(--demanto-red);
 }
 
 
@@ -2116,7 +2512,7 @@
         center;
 
     color:
-        var(--demanto-gold);
+        var(--demanto-red);
 }
 
 
@@ -2187,10 +2583,10 @@
 
 .sidebar-social a:hover {
     border-color:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     background:
-        var(--demanto-gold);
+        var(--demanto-red);
 
     color:
         #FFFFFF;
@@ -2286,7 +2682,7 @@
     .logo-main {
 
         max-width:
-            72px !important;
+            60px !important;
     }
 
 
@@ -2336,7 +2732,7 @@
     .logo-main {
 
         max-width:
-            90px !important;
+            60px !important;
     }
 
 
@@ -2438,7 +2834,7 @@
     .logo-main {
 
         max-width:
-            100px !important;
+            60px !important;
     }
 
 
@@ -2492,7 +2888,7 @@
 .sidebar-social a:focus-visible {
 
     outline:
-        2px solid var(--demanto-gold);
+        2px solid var(--demanto-red);
 
     outline-offset:
         3px;
@@ -2600,8 +2996,7 @@
     .header-bottom:not(.sticky-on):focus-within
     .boutique-nav > li > a {
 
-        color:
-            var(--demanto-dark) !important;
+        color:#000;
 
         text-shadow:
             none !important;
@@ -2619,7 +3014,7 @@
     .boutique-nav > li > a::after {
 
         background:
-            var(--demanto-gold);
+            var(--demanto-red);
     }
 
 
@@ -2634,7 +3029,7 @@
     .boutique-nav > li > a:hover {
 
         color:
-            var(--demanto-gold) !important;
+            var(--demanto-red) !important;
     }
 
 
@@ -2667,7 +3062,7 @@
     .desktop-social-icon:hover {
 
         color:
-            var(--demanto-gold) !important;
+            var(--demanto-red) !important;
     }
 
 
@@ -2700,7 +3095,7 @@
     .theme-currency > a:hover {
 
         color:
-            var(--demanto-gold) !important;
+            var(--demanto-red) !important;
     }
 
 
@@ -2757,7 +3152,7 @@
     .shop-count {
 
         background:
-            var(--demanto-gold) !important;
+            var(--demanto-red) !important;
 
         color:
             #FFFFFF !important;
@@ -2811,7 +3206,7 @@
     .boutique-dropdown > li > a:hover {
 
         color:
-            var(--demanto-gold) !important;
+            var(--demanto-red) !important;
 
         background:
             rgba(197, 161, 90, 0.06);

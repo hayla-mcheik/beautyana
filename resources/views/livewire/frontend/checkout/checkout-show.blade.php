@@ -2,15 +2,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
-        :root {
-            --demanto-gold: #B39256;
-            --demanto-dark: #232323;
-            --demanto-bg: #FDFBF7;
-            --demanto-muted: #6E6E6E;
-            --luxury-border: rgba(179, 146, 86, 0.25);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
+    
         .product-area {
             background: linear-gradient(135deg, #FDFBF7 0%, #fff 100%);
             position: relative;
@@ -23,7 +15,7 @@
             top: 30px;
             right: 30px;
             font-size: 80px;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             opacity: 0.03;
             font-family: serif;
             pointer-events: none;
@@ -61,7 +53,7 @@ font-family:"Cormorant Garamond",serif;
             display: inline-block;
             width: 26px;
             height: 26px;
-            background: var(--demanto-gold);
+            background: var(--demanto-red);
             color: #fff;
             border-radius: 50%;
             text-align: center;
@@ -109,12 +101,12 @@ font-family:"Cormorant Garamond",serif;
 
         .form-control:focus {
             outline: none;
-            border-color: var(--demanto-gold);
+            border-color: var(--demanto-red);
             box-shadow: 0 0 0 2px rgba(179, 146, 86, 0.1);
         }
 
         .btn-promocode-apply {
-            background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+            background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
             color: #fff;
             font-size: 16px;
             letter-spacing: 2px;
@@ -195,8 +187,8 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .form-check-input:checked {
-            background-color: var(--demanto-gold);
-            border-color: var(--demanto-gold);
+            background-color: var(--demanto-red);
+            border-color: var(--demanto-red);
         }
 
         .form-check-label {
@@ -328,7 +320,7 @@ font-family:"Cormorant Garamond",serif;
                                                     <div class="personal-information">
                                                         <ul>
                                                             <li><strong>✓ Logged in as:</strong> {{ auth()->user()->name }}</li>
-                                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: var(--demanto-gold); font-size: 16px;">Log out</a></li>
+                                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="color: var(--demanto-red); font-size: 16px;">Log out</a></li>
                                                         </ul>
                                                     </div>
                                                 @endauth
@@ -371,7 +363,7 @@ font-family:"Cormorant Garamond",serif;
                                             <small class="text-muted" style="font-size: 26px;">Qty: {{ $item->quantity }}</small>
                                         </div>
                                         <div class="text-end">
-                                            <span style="font-size: 26px; color: var(--demanto-gold);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
+                                            <span style="font-size: 26px; color: var(--demanto-red);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
                                         </div>
                                     </div>
                                 @endforeach
@@ -390,7 +382,7 @@ font-family:"Cormorant Garamond",serif;
                                     <hr>
                                     <div class="d-flex justify-content-between fw-bold">
                                         <span class="label" style="font-size: 26px;">Total</span>
-                                        <span class="value" style="color: var(--demanto-gold); font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
+                                        <span class="value" style="color: var(--demanto-red); font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
                                     </div>
                                 </div>
                             @endif

@@ -532,7 +532,7 @@ RESPONSIVE
         linear-gradient(
             135deg,
             var(--demanto-dark),
-            var(--demanto-gold-dark)
+            var(--demanto-red-dark)
         );
 
     color: #FFFFFF !important;
@@ -608,13 +608,13 @@ RESPONSIVE
     padding: 8px 20px;
 
     border:
-        1.5px solid var(--demanto-gold);
+        1.5px solid var(--demanto-red);
 
     border-radius: 25px;
 
     background: transparent;
 
-    color: var(--demanto-gold);
+    color: var(--demanto-red);
 
     font-family:
         "Montserrat",
@@ -633,7 +633,7 @@ RESPONSIVE
 
 
 .btn-demanto-outline:hover {
-    background: var(--demanto-gold);
+    background: var(--demanto-red);
 
     color: #FFFFFF !important;
 

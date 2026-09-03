@@ -9,15 +9,7 @@
            VARIABLES
         ========================================================= */
 
-        :root {
-            --demanto-gold: #B39256;
-            --demanto-gold-light: #F7F4EB;
-            --demanto-dark: #232323;
-            --demanto-bg: #FDFBF7;
-            --demanto-muted: #6E6E6E;
-            --luxury-border: rgba(179, 146, 86, 0.25);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+  
 
 
         /* =========================================================

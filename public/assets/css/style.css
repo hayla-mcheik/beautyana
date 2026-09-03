@@ -53,25 +53,20 @@ h1, h2, h3, h4, h5, h6,
     }
 
 :root {
-    --demanto-gold: #C5A15A;
-    --demanto-gold-dark: #9B7738;
+    /* === REPLACING GOLD WITH HERITAGE RUBY RED === */
+    --demanto-red: #B31B1B;          /* Main accent – vibrant, rich crimson */
+    --demanto-red-dark: #7A1212;     /* Darker shade – for hover states, footers, and depth */
+    --demanto-red-light: #F8F0F0;    /* Very soft rose-tinted white – for backgrounds, borders, or light overlays */
 
-    --demanto-cream: #F8F3EA;
-    --demanto-bg: #FDFBF7;
-
-    --demanto-dark: #342A22;
-
-    --demanto-text: #5D5147;
+    /* Keep your neutrals exactly as they are */
+    --demanto-dark: #2C241E;
+    --demanto-text: #4A3F38;
     --demanto-muted: #85786D;
-
+    --demanto-bg: #FDFBF7;
     --demanto-white: #FFFFFF;
-
-    --luxury-border: rgba(197, 161, 90, 0.25);
-
-    --transition-smooth:
-        all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --luxury-border: rgba(179, 27, 27, 0.25); /* Updated border to match red */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 
 body {
     margin: 0;

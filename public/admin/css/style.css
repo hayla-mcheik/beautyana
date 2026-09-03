@@ -22682,7 +22682,7 @@ dl li {
 
 .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand img {
   width: calc(257px - 150px);
-  max-width: 60%;
+  max-width: 40%;
   height: auto;
   margin: auto;
   vertical-align: middle;

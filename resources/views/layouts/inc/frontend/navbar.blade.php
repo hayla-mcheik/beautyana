@@ -195,20 +195,66 @@
                 <ul class="main-menu nav">
               
                       <li><a href="{{ url('aboutus') }}">About Us</a></li>
-     <li class="has-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-click-trigger">Products <i class="ion-ios-arrow-down"></i></a>
-                    <ul class="boutique-dropdown">
+<li class="has-dropdown mega-menu-parent">
+
+    <a href="javascript:void(0)" class="dropdown-click-trigger">
+        Products <i class="ion-ios-arrow-down"></i>
+    </a>
+
+    <div class="mega-menu">
+
+        <div class="container">
+
+            <div class="row">
+
+                {{-- LEFT SIDE --}}
+                <div class="col-lg-3">
+
+                    <div class="mega-menu-title">
+                        <h4>Shop Collections</h4>
+                        <span>Discover our collections</span>
+                    </div>
+
+                </div>
+
+                {{-- CATEGORIES --}}
+                <div class="col-lg-9">
+
+                    <div class="row">
+
                         @if(isset($allCategories))
+
                             @foreach($allCategories as $categoryItem)
-                                <li>
+
+                                <div class="col-lg-4 col-md-6 mega-category">
+
                                     <a href="{{ url('collections/'.$categoryItem->slug) }}">
-                                        {{ $categoryItem->name }}
+
+                                        <span class="mega-category-name">
+                                            {{ $categoryItem->name }}
+                                        </span>
+
+                                        <i class="ion-ios-arrow-forward"></i>
+
                                     </a>
-                                </li>
+
+                                </div>
+
                             @endforeach
+
                         @endif
-                    </ul>
-                  </li>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</li>
                       <li><a href="{{ url('blogs')}}">News</a>           
                       </li>
                       <li><a href="{{ url('contactus') }}">Contact us</a></li>
@@ -346,7 +392,206 @@
     left: 20% !important;       /* Center it because of the 80% width */
     max-height: 350px;          /* Limit height */
 }
+/* =========================================
+   PRODUCTS MEGA MENU
+========================================= */
 
+.mega-menu-parent {
+    position: static !important;
+}
+
+/* Mega menu container */
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+
+    padding: 35px 0;
+
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #eeeeee;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+
+    display: none;
+    z-index: 9999;
+
+    text-align: left;
+}
+
+/* Desktop hover */
+@media (min-width: 992px) {
+
+    .mega-menu-parent:hover .mega-menu {
+        display: block;
+    }
+
+}
+
+/* Open from JavaScript */
+.mega-menu.is-open {
+    display: block !important;
+}
+
+
+/* =========================================
+   LEFT TITLE
+========================================= */
+
+.mega-menu-title {
+    padding: 5px 30px 10px 0;
+    border-right: 1px solid #eeeeee;
+    min-height: 120px;
+}
+
+.mega-menu-title h4 {
+    margin: 0 0 8px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #333;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mega-menu-title span {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: #999;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   CATEGORY AREA
+========================================= */
+
+.mega-category {
+    margin-bottom: 12px;
+}
+
+.mega-category a {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 15px;
+
+    color: #444 !important;
+
+    background: #fff;
+
+    border-bottom: 1px solid #f2f2f2;
+
+    transition: all 0.25s ease;
+}
+
+.mega-category-name {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-transform: capitalize;
+
+    letter-spacing: 0.4px;
+}
+
+.mega-category a i {
+    font-size: 14px;
+
+    color: #aaa;
+
+    transition: transform 0.25s ease,
+                color 0.25s ease;
+}
+
+
+/* Hover */
+
+.mega-category a:hover {
+    color: #D97DA5 !important;
+
+    padding-left: 20px;
+
+    background: #fafafa;
+}
+
+.mega-category a:hover i {
+    color: #D97DA5;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   INVISIBLE HOVER BRIDGE
+========================================= */
+
+.mega-menu-parent::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 100%;
+
+    height: 15px;
+
+    background: transparent;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 991px) {
+
+    .mega-menu {
+        position: static;
+
+        width: 100%;
+
+        padding: 20px 15px;
+
+        box-shadow: none;
+
+        border-top: 1px solid #eee;
+    }
+
+    .mega-menu-title {
+        border-right: none;
+
+        border-bottom: 1px solid #eee;
+
+        padding: 0 0 15px;
+
+        margin-bottom: 15px;
+
+        min-height: auto;
+    }
+
+    .mega-category {
+        margin-bottom: 5px;
+    }
+
+    .mega-category a {
+        padding: 10px 5px;
+    }
+
+}
 /* Compact Categories */
 .mega-menu-items.compact li a {
     font-size: 12px !important; /* Smaller text */
@@ -536,22 +781,52 @@
     
 }
   </style>
-  <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const trigger = document.querySelector('.dropdown-click-trigger');
-    const menu = document.querySelector('.mega-menu');
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
-    trigger.addEventListener('click', function(e) {
+    const parent = document.querySelector('.mega-menu-parent');
+
+    if (!parent) return;
+
+    const trigger = parent.querySelector('.dropdown-click-trigger');
+    const menu = parent.querySelector('.mega-menu');
+
+    if (!trigger || !menu) return;
+
+
+    /* CLICK */
+    trigger.addEventListener('click', function (e) {
+
         e.preventDefault();
         e.stopPropagation();
+
         menu.classList.toggle('is-open');
+
     });
 
-    // Close menu when clicking anywhere else on the page
-    document.addEventListener('click', function(e) {
-        if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+
+    /* CLICK OUTSIDE */
+    document.addEventListener('click', function (e) {
+
+        if (!parent.contains(e.target)) {
+
             menu.classList.remove('is-open');
+
         }
+
     });
+
+
+    /* ESCAPE */
+    document.addEventListener('keydown', function (e) {
+
+        if (e.key === 'Escape') {
+
+            menu.classList.remove('is-open');
+
+        }
+
+    });
+
 });
 </script>

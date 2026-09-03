@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DEMANTO - Timeless Luxury</title>
+    <title>Beautyana Shop</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
@@ -65,6 +65,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             padding: 0;
             box-sizing: border-box;
         }
+        :root {
+    --demanto-red: #B31B1B;
+    --demanto-red-dark: #7A1212;
+    --demanto-red-light: #F8F0F0;
+    --demanto-dark: #2C241E;
+    --demanto-text: #4A3F38;
+    --demanto-muted: #85786D;
+    --demanto-bg: #FDFBF7;
+    --demanto-white: #FFFFFF;
+    --luxury-border: rgba(179, 27, 27, 0.25);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
         body {
      font-family:"Cormorant Garamond",serif;
@@ -268,7 +280,7 @@ font-family:"Cormorant Garamond",serif;
         class="whatsapp-btn whatsapp-global-btn"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Contact DEMANTO on WhatsApp"
+        aria-label="Contact Beautyana on WhatsApp"
     >
         <i class="fab fa-whatsapp"></i>
     </a>

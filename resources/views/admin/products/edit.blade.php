@@ -308,107 +308,126 @@
                     <div class="row">
 
 
-                        {{-- ORIGINAL PRICE --}}
+               {{-- ================================================= --}}
+{{-- ORIGINAL PRICE --}}
+{{-- ================================================= --}}
 
-                        <div class="col-md-4 mb-3">
+<div class="col-md-4 mb-3">
 
-                            <label class="form-label fw-semibold">
+    <label class="form-label fw-semibold">
+        Original Price
+        <span class="text-danger">*</span>
+    </label>
 
-                                Original Price
+    <div class="input-group">
 
-                                <span class="text-danger">*</span>
+        <span class="input-group-text">
+            $
+        </span>
 
-                            </label>
+        <input
+            type="number"
+            step="0.01"
+            min="0"
+            name="original_price"
+            id="originalPrice"
+            value="{{ old('original_price', $product->original_price) }}"
+            class="form-control @error('original_price') is-invalid @enderror"
+            placeholder="0.00"
+            required
+        >
 
+    </div>
 
-                            <div class="input-group">
+    <small class="text-muted">
+        Regular price before discount.
+    </small>
 
-                                <span class="input-group-text">$</span>
+    @error('original_price')
+        <div class="text-danger small mt-1">
+            {{ $message }}
+        </div>
+    @enderror
 
-
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    name="original_price"
-                                    value="{{ old('original_price', $product->original_price) }}"
-                                    class="form-control @error('original_price') is-invalid @enderror"
-                                    placeholder="0.00"
-                                >
-
-                            </div>
-
-
-                            <small class="text-muted">
-
-                                Price before discount.
-
-                            </small>
-
-
-                            @error('original_price')
-
-                                <div class="text-danger small mt-1">
-
-                                    {{ $message }}
-
-                                </div>
-
-                            @enderror
-
-                        </div>
+</div>
 
 
+{{-- ================================================= --}}
+{{-- DISCOUNT --}}
+{{-- ================================================= --}}
 
-                        {{-- SELLING PRICE --}}
+<div class="col-md-4 mb-3">
 
-                        <div class="col-md-4 mb-3">
+    <label class="form-label fw-semibold">
+        Sale Percentage
+    </label>
 
-                            <label class="form-label fw-semibold">
+    <div class="input-group">
 
-                                Selling Price
+        <input
+            type="number"
+            step="0.01"
+            min="0"
+            max="100"
+            name="discount_percentage"
+            id="discountPercentage"
+            value="{{ old('discount_percentage', $product->discount_percentage ?? 0) }}"
+            class="form-control @error('discount_percentage') is-invalid @enderror"
+            placeholder="0"
+        >
 
-                                <span class="text-danger">*</span>
+        <span class="input-group-text">
+            %
+        </span>
 
-                            </label>
+    </div>
 
+    <small class="text-muted">
+        Leave 0 if the product is not on sale.
+    </small>
 
-                            <div class="input-group">
+    @error('discount_percentage')
+        <div class="text-danger small mt-1">
+            {{ $message }}
+        </div>
+    @enderror
 
-                                <span class="input-group-text">$</span>
-
-
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    name="selling_price"
-                                    value="{{ old('selling_price', $product->selling_price) }}"
-                                    class="form-control @error('selling_price') is-invalid @enderror"
-                                    placeholder="0.00"
-                                >
-
-                            </div>
+</div>
 
 
-                            <small class="text-muted">
+{{-- ================================================= --}}
+{{-- FINAL SELLING PRICE --}}
+{{-- ================================================= --}}
 
-                                Current price displayed to customers.
+<div class="col-md-4 mb-3">
 
-                            </small>
+    <label class="form-label fw-semibold">
+        Final Selling Price
+    </label>
 
+    <div class="input-group">
 
-                            @error('selling_price')
+        <span class="input-group-text">
+            $
+        </span>
 
-                                <div class="text-danger small mt-1">
+        <input
+            type="number"
+            step="0.01"
+            id="sellingPrice"
+            value="{{ old('selling_price', $product->selling_price) }}"
+            class="form-control"
+            placeholder="0.00"
+            readonly
+        >
 
-                                    {{ $message }}
+    </div>
 
-                                </div>
+    <small class="text-muted">
+        Automatically calculated.
+    </small>
 
-                            @enderror
-
-                        </div>
+</div>
 
 
 
@@ -425,18 +444,20 @@
                             </label>
 
 
-                            <input
-                                type="number"
-                                min="0"
-                                name="quantity"
-                                value="{{ old('quantity', $product->quantity) }}"
-                                class="form-control @error('quantity') is-invalid @enderror"
-                            >
+                 <input
+    type="number"
+    min="0"
+    name="quantity"
+    id="totalQuantity"
+    value="{{ old('quantity', $product->quantity) }}"
+    class="form-control @error('quantity') is-invalid @enderror"
+    readonly
+>
 
 
                             <small class="text-muted">
 
-                                Total available product quantity.
+                               Automatically calculated from the color/size quantities.
 
                             </small>
 
@@ -459,7 +480,337 @@
                 </div>
 
             </div>
+{{-- ======================================================== --}}
+{{-- PRODUCT VARIANTS --}}
+{{-- ======================================================== --}}
 
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-white">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="mb-1">
+                    <i class="mdi mdi-tshirt-crew-outline me-1"></i>
+                    Colors & Sizes
+                </h5>
+
+                <small class="text-muted">
+                    Manage available color and size combinations
+                    and set the stock quantity for each combination.
+                </small>
+
+            </div>
+
+            <button
+                type="button"
+                id="addVariant"
+                class="btn btn-primary btn-sm"
+            >
+                <i class="mdi mdi-plus"></i>
+                Add Variant
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div id="variants-container">
+
+            @php
+
+                /*
+                |--------------------------------------------------------------------------
+                | Existing Variants
+                |--------------------------------------------------------------------------
+                */
+
+                $oldVariants = old('variants');
+
+                if ($oldVariants !== null) {
+
+                    $variantsToDisplay = $oldVariants;
+
+                } else {
+
+                    $variantsToDisplay =
+                        $product->productVariants->map(function ($variant) {
+
+                            return [
+                                'color_id' => $variant->color_id,
+                                'size_id' => $variant->size_id,
+                                'quantity' => $variant->quantity,
+                            ];
+
+                        })->toArray();
+
+                }
+
+            @endphp
+
+
+            @if(count($variantsToDisplay) > 0)
+
+                @foreach($variantsToDisplay as $index => $variant)
+
+                    <div
+                        class="variant-row row align-items-end mb-3"
+                        data-index="{{ $index }}"
+                    >
+
+                        {{-- COLOR --}}
+
+                        <div class="col-md-4 mb-2">
+
+                            <label class="form-label fw-semibold">
+                                Color
+                            </label>
+
+                            <select
+                                name="variants[{{ $index }}][color_id]"
+                                class="form-control variant-color"
+                            >
+
+                                <option value="">
+                                    Select Color
+                                </option>
+
+                                @foreach($colors as $color)
+
+                                    <option
+                                        value="{{ $color->id }}"
+                                        {{ (string)($variant['color_id'] ?? '') === (string)$color->id ? 'selected' : '' }}
+                                    >
+                                        {{ $color->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+                        {{-- SIZE --}}
+
+                        <div class="col-md-4 mb-2">
+
+                            <label class="form-label fw-semibold">
+                                Size
+                            </label>
+
+                            <select
+                                name="variants[{{ $index }}][size_id]"
+                                class="form-control variant-size"
+                            >
+
+                                <option value="">
+                                    Select Size
+                                </option>
+
+                                @foreach($sizes as $size)
+
+                                    <option
+                                        value="{{ $size->id }}"
+                                        {{ (string)($variant['size_id'] ?? '') === (string)$size->id ? 'selected' : '' }}
+                                    >
+                                        {{ $size->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+                        {{-- QUANTITY --}}
+
+                        <div class="col-md-3 mb-2">
+
+                            <label class="form-label fw-semibold">
+                                Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                min="0"
+                                name="variants[{{ $index }}][quantity]"
+                                value="{{ $variant['quantity'] ?? 0 }}"
+                                class="form-control variant-quantity"
+                            >
+
+                        </div>
+
+
+                        {{-- REMOVE --}}
+
+                        <div class="col-md-1 mb-2">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-danger remove-variant"
+                                title="Remove Variant"
+                            >
+                                <i class="mdi mdi-delete-outline"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                @endforeach
+
+            @else
+
+                {{-- EMPTY VARIANT ROW --}}
+
+                <div
+                    class="variant-row row align-items-end mb-3"
+                    data-index="0"
+                >
+
+                    {{-- COLOR --}}
+
+                    <div class="col-md-4 mb-2">
+
+                        <label class="form-label fw-semibold">
+                            Color
+                        </label>
+
+                        <select
+                            name="variants[0][color_id]"
+                            class="form-control variant-color"
+                        >
+
+                            <option value="">
+                                Select Color
+                            </option>
+
+                            @foreach($colors as $color)
+
+                                <option value="{{ $color->id }}">
+                                    {{ $color->name }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+
+                    {{-- SIZE --}}
+
+                    <div class="col-md-4 mb-2">
+
+                        <label class="form-label fw-semibold">
+                            Size
+                        </label>
+
+                        <select
+                            name="variants[0][size_id]"
+                            class="form-control variant-size"
+                        >
+
+                            <option value="">
+                                Select Size
+                            </option>
+
+                            @foreach($sizes as $size)
+
+                                <option value="{{ $size->id }}">
+                                    {{ $size->name }}
+                                </option>
+
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+
+                    {{-- QUANTITY --}}
+
+                    <div class="col-md-3 mb-2">
+
+                        <label class="form-label fw-semibold">
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            min="0"
+                            name="variants[0][quantity]"
+                            value="0"
+                            class="form-control variant-quantity"
+                        >
+
+                    </div>
+
+
+                    {{-- REMOVE --}}
+
+                    <div class="col-md-1 mb-2">
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-danger remove-variant"
+                            title="Remove Variant"
+                        >
+                            <i class="mdi mdi-delete-outline"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            @endif
+
+        </div>
+
+
+        {{-- HELP --}}
+
+        <div class="alert alert-light border mt-3 mb-0">
+
+            <div class="d-flex">
+
+                <i class="mdi mdi-information-outline fs-5 me-2"></i>
+
+                <div>
+
+                    <strong>
+                        Example:
+                    </strong>
+
+                    <span class="ms-1">
+                        Black / S / 5,
+                        Black / M / 8,
+                        White / S / 4
+                    </span>
+
+                    <br>
+
+                    <small class="text-muted">
+                        The total stock is automatically calculated
+                        from all variant quantities.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
             {{-- ======================================================== --}}
@@ -1058,7 +1409,66 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('submitBtn');
 
 
+/*
+|--------------------------------------------------------------------------
+| Product Price Calculation
+|--------------------------------------------------------------------------
+*/
 
+const originalPriceInput =
+    document.getElementById('originalPrice');
+
+const discountPercentageInput =
+    document.getElementById('discountPercentage');
+
+const sellingPriceInput =
+    document.getElementById('sellingPrice');
+
+
+function calculateSellingPrice() {
+
+    const originalPrice =
+        parseFloat(originalPriceInput.value) || 0;
+
+    const discountPercentage =
+        parseFloat(discountPercentageInput.value) || 0;
+
+
+    if (originalPrice <= 0) {
+
+        sellingPriceInput.value = '';
+
+        return;
+    }
+
+
+    const sellingPrice =
+        originalPrice -
+        (
+            originalPrice *
+            discountPercentage /
+            100
+        );
+
+
+    sellingPriceInput.value =
+        sellingPrice.toFixed(2);
+}
+
+
+originalPriceInput.addEventListener(
+    'input',
+    calculateSellingPrice
+);
+
+
+discountPercentageInput.addEventListener(
+    'input',
+    calculateSellingPrice
+);
+
+
+calculateSellingPrice();
     let allNewFiles = [];
 
 
@@ -1449,7 +1859,281 @@ document.addEventListener('DOMContentLoaded', function () {
 
     );
 
+/*
+|--------------------------------------------------------------------------
+| PRODUCT VARIANTS
+|--------------------------------------------------------------------------
+*/
 
+const variantsContainer =
+    document.getElementById('variants-container');
+
+const addVariantButton =
+    document.getElementById('addVariant');
+
+const totalQuantityInput =
+    document.getElementById('totalQuantity');
+
+let variantIndex =
+    document.querySelectorAll('.variant-row').length;
+
+
+/*
+|--------------------------------------------------------------------------
+| CALCULATE TOTAL QUANTITY
+|--------------------------------------------------------------------------
+*/
+
+function calculateTotalQuantity()
+{
+    let total = 0;
+
+    document
+        .querySelectorAll('.variant-quantity')
+        .forEach(function (input) {
+
+            const quantity =
+                parseInt(input.value) || 0;
+
+            total += quantity;
+        });
+
+    if (totalQuantityInput) {
+
+        totalQuantityInput.value = total;
+
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CREATE VARIANT ROW
+|--------------------------------------------------------------------------
+*/
+
+function createVariantRow(index)
+{
+    const row =
+        document.createElement('div');
+
+    row.className =
+        'variant-row row align-items-end mb-3';
+
+    row.dataset.index =
+        index;
+
+
+    row.innerHTML = `
+
+        <div class="col-md-4 mb-2">
+
+            <label class="form-label fw-semibold">
+                Color
+            </label>
+
+            <select
+                name="variants[${index}][color_id]"
+                class="form-control variant-color"
+            >
+
+                <option value="">
+                    Select Color
+                </option>
+
+                @foreach($colors as $color)
+
+                    <option value="{{ $color->id }}">
+                        {{ $color->name }}
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-4 mb-2">
+
+            <label class="form-label fw-semibold">
+                Size
+            </label>
+
+            <select
+                name="variants[${index}][size_id]"
+                class="form-control variant-size"
+            >
+
+                <option value="">
+                    Select Size
+                </option>
+
+                @foreach($sizes as $size)
+
+                    <option value="{{ $size->id }}">
+                        {{ $size->name }}
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-3 mb-2">
+
+            <label class="form-label fw-semibold">
+                Quantity
+            </label>
+
+            <input
+                type="number"
+                min="0"
+                name="variants[${index}][quantity]"
+                value="0"
+                class="form-control variant-quantity"
+            >
+
+        </div>
+
+
+        <div class="col-md-1 mb-2">
+
+            <button
+                type="button"
+                class="btn btn-outline-danger remove-variant"
+                title="Remove Variant"
+            >
+
+                <i class="mdi mdi-delete-outline"></i>
+
+            </button>
+
+        </div>
+
+    `;
+
+    return row;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ADD VARIANT
+|--------------------------------------------------------------------------
+*/
+
+if (addVariantButton) {
+
+    addVariantButton.addEventListener(
+        'click',
+        function () {
+
+            const row =
+                createVariantRow(variantIndex);
+
+            variantsContainer.appendChild(row);
+
+            variantIndex++;
+
+            calculateTotalQuantity();
+
+        }
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| REMOVE VARIANT
+|--------------------------------------------------------------------------
+*/
+
+if (variantsContainer) {
+
+    variantsContainer.addEventListener(
+        'click',
+        function (event) {
+
+            const button =
+                event.target.closest('.remove-variant');
+
+            if (!button) {
+                return;
+            }
+
+
+            const rows =
+                variantsContainer.querySelectorAll(
+                    '.variant-row'
+                );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Keep at least one row
+            |--------------------------------------------------------------------------
+            */
+
+            if (rows.length <= 1) {
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cannot Remove',
+                    text: 'At least one variant row must remain.'
+                });
+
+                return;
+            }
+
+
+            const row =
+                button.closest('.variant-row');
+
+            row.remove();
+
+            calculateTotalQuantity();
+
+        }
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Quantity Change
+    |--------------------------------------------------------------------------
+    */
+
+    variantsContainer.addEventListener(
+        'input',
+        function (event) {
+
+            if (
+                event.target.classList.contains(
+                    'variant-quantity'
+                )
+            ) {
+
+                calculateTotalQuantity();
+
+            }
+
+        }
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| INITIAL TOTAL
+|--------------------------------------------------------------------------
+*/
+
+calculateTotalQuantity();
 
     updateNewImageCount();
 

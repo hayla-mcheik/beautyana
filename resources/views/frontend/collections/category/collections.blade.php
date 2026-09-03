@@ -6,185 +6,167 @@
 @include('layouts.inc.frontend.breadcrumb', [
     'breadcrumbs' => [
         [
-            'title' => 'THE HOUSE OF DEMANTO',
+            'title' => 'THE HOUSE OF Beautyana',
             'url' => '#'
         ]
     ]
 ])
+
 <!-- Signature Collections Section -->
 <section class="signature-collections">
 
-    <div class="container p-4">
-
-
+    <div class="container collections-container">
 
         {{-- ========================= COLLECTIONS ========================= --}}
-  {{-- ========================= COLLECTIONS ========================= --}}
-@if($collections->count())
+        @if($collections->count())
 
-<div class="all-categories">
+        <div class="all-categories">
 
-    <div class="collections-title mb-2">
-        <span>COLLECTIONS</span>
+            <!-- Section title – new style -->
+            <div class="collections-title">
+                <span class="title-main">Collections</span>
+                <div class="title-accent">
+                    <span class="dash"></span>
+                </div>
+                <p class="sub-headline">essential pieces</p>
+            </div>
 
-        <div class="divider">
-            <span></span>
-        </div>
-    </div>
-
-    <div class="position-relative">
-
-        <div class="swiper signature-slider collections-slider">
-
-            <div class="swiper-wrapper">
-
-                @foreach($collections as $categoryItem)
-
-                    <div class="swiper-slide">
-
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
-
-                            <div class="collection-inner">
-
-                                <h3>{{ strtoupper($categoryItem->name) }}</h3>
-
-                                <div class="collection-image">
-                                    <img src="{{ asset($categoryItem->image) }}" alt="{{ $categoryItem->name }}">
-                                </div>
-
+            <div class="collections-slider-wrapper mt-0">
+                <div class="swiper signature-slider collections-slider">
+                    <div class="swiper-wrapper">
+                        @foreach($collections as $categoryItem)
+                            <div class="swiper-slide">
+                                <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
+                                    <div class="collection-inner">
+                                        <div class="collection-image-wrap">
+                                            <div class="collection-image">
+                                                <img src="{{ asset($categoryItem->image) }}" 
+                                                     alt="{{ $categoryItem->name }}"
+                                                     loading="lazy"
+                                                     decoding="async">
+                                                <div class="floating-cta">
+                                                    <span class="plus-icon">+</span>
+                                                    <span class="cta-label">Shop</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <h3>{{ $categoryItem->name }}</h3>
+                                            <span class="view-indicator">explore →</span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-
-                        </a>
-
+                        @endforeach
                     </div>
-
-                @endforeach
-
+                </div>
             </div>
 
         </div>
+        @endif
 
-    </div>
+        {{-- ========================= HIGH JEWELRY ========================= --}}
+        @if($highJewelry->count())
 
-</div>
+        <div class="all-categories mt-5">
 
-@endif
+            <div class="collections-title">
+                <span class="title-main">High Jewelry</span>
+                <div class="title-accent">
+                    <span class="dash"></span>
+                </div>
+                <p class="sub-headline">exceptional craftsmanship</p>
+            </div>
 
-
-{{-- ========================= HIGH JEWELRY ========================= --}}
-@if($highJewelry->count())
-
-<div class="all-categories mt-5">
-
-    <div class="collections-title mb-2">
-        <span>HIGH JEWELRY</span>
-
-        <div class="divider">
-            <span></span>
-        </div>
-    </div>
-
-    <div class="position-relative">
-
-        <div class="swiper signature-slider collections-slider">
-
-            <div class="swiper-wrapper">
-
-                @foreach($highJewelry as $categoryItem)
-
-                    <div class="swiper-slide">
-
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
-
-                            <div class="collection-inner">
-
-                                <h3>{{ strtoupper($categoryItem->name) }}</h3>
-
-                                <div class="collection-image">
-                                    <img src="{{ asset($categoryItem->image) }}" alt="{{ $categoryItem->name }}">
-                                </div>
-
-                           
+            <div class="collections-slider-wrapper mt-0">
+                <div class="swiper signature-slider collections-slider">
+                    <div class="swiper-wrapper">
+                        @foreach($highJewelry as $categoryItem)
+                            <div class="swiper-slide">
+                                <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
+                                    <div class="collection-inner">
+                                        <div class="collection-image-wrap">
+                                            <div class="collection-image">
+                                                <img src="{{ asset($categoryItem->image) }}" 
+                                                     alt="{{ $categoryItem->name }}"
+                                                     loading="lazy"
+                                                     decoding="async">
+                                                <div class="floating-cta">
+                                                    <span class="plus-icon">+</span>
+                                                    <span class="cta-label">Shop</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <h3>{{ $categoryItem->name }}</h3>
+                                            <span class="view-indicator">explore →</span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-
-                        </a>
-
+                        @endforeach
                     </div>
-
-                @endforeach
-
+                </div>
             </div>
 
         </div>
+        @endif
 
-    </div>
+        {{-- ========================= AD SIGNATURE ========================= --}}
+        @if($adSignature->count())
 
-</div>
+        <div class="all-categories mt-5">
 
-@endif
+            <div class="collections-title">
+                <span class="title-main">AD Signature</span>
+                <div class="title-accent">
+                    <span class="dash"></span>
+                </div>
+                <p class="sub-headline">the art of detail</p>
+            </div>
 
-
-{{-- ========================= AD SIGNATURE ========================= --}}
-@if($adSignature->count())
-
-<div class="all-categories mt-5">
-
-    <div class="collections-title mb-2">
-        <span>AD SIGNATURE</span>
-
-        <div class="divider">
-            <span></span>
-        </div>
-    </div>
-
-    <div class="position-relative">
-
-        <div class="swiper signature-slider collections-slider">
-
-            <div class="swiper-wrapper">
-
-                @foreach($adSignature as $categoryItem)
-
-                    <div class="swiper-slide">
-
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
-
-                            <div class="collection-inner">
-
-                                <h3>{{ strtoupper($categoryItem->name) }}</h3>
-
-                                <div class="collection-image">
-                                    <img src="{{ asset($categoryItem->image) }}" alt="{{ $categoryItem->name }}">
-                                </div>
-
-                     
-
+            <div class="collections-slider-wrapper mt-0">
+                <div class="swiper signature-slider collections-slider">
+                    <div class="swiper-wrapper">
+                        @foreach($adSignature as $categoryItem)
+                            <div class="swiper-slide">
+                                <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
+                                    <div class="collection-inner">
+                                        <div class="collection-image-wrap">
+                                            <div class="collection-image">
+                                                <img src="{{ asset($categoryItem->image) }}" 
+                                                     alt="{{ $categoryItem->name }}"
+                                                     loading="lazy"
+                                                     decoding="async">
+                                                <div class="floating-cta">
+                                                    <span class="plus-icon">+</span>
+                                                    <span class="cta-label">Shop</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <h3>{{ $categoryItem->name }}</h3>
+                                            <span class="view-indicator">explore →</span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-
-                        </a>
-
+                        @endforeach
                     </div>
-
-                @endforeach
-
+                </div>
             </div>
 
         </div>
+        @endif
 
     </div>
-
-</div>
-
-@endif
-    </div>
-
 </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Lazy loading for images
-    const images = document.querySelectorAll('.category-card-img img');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    // Lazy load images (using IntersectionObserver)
+    const images = document.querySelectorAll('.collection-image img');
+    const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
@@ -192,14 +174,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.src = img.dataset.src;
                     img.classList.add('loaded');
                 }
-                observer.unobserve(img);
+                // If using src directly, just add loaded class
+                img.closest('.collection-image').classList.add('loaded');
+                imageObserver.unobserve(img);
             }
         });
+    }, { rootMargin: '0px 0px 100px 0px' });
+    images.forEach(img => {
+        // Ensure the parent gets the loaded class after image loads
+        img.addEventListener('load', function() {
+            this.closest('.collection-image').classList.add('loaded');
+        });
+        imageObserver.observe(img);
     });
-    
-    images.forEach(img => imageObserver.observe(img));
-    
-    // Add fade-in animation to sections as they appear
+
+    // Fade-in sections on scroll
     const sections = document.querySelectorAll('.all-categories');
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -209,659 +198,411 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
-    
     sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
-        section.style.transition = 'all 0.5s ease-out';
+        section.style.transition = 'all 0.6s ease-out';
         sectionObserver.observe(section);
     });
 });
 </script>
 
 <style>
-
-/*==================================================
-    LUXURY COLLECTIONS
-==================================================*/
+/* ==================================================
+   CREATIVE LOOKBOOK STYLE – FOR ALL SECTIONS
+   ================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 .signature-collections {
-
-    background: #f7f2eb;
-
-    padding: 0px 0;
-
+    background: #f8f6f3;
+    padding: 10px 0 20px;
     overflow: hidden;
 }
 
-
-/*==================================================
-    CONTAINER
-==================================================*/
-
 .collections-container {
-
     padding-left: 40px;
-
     padding-right: 40px;
 }
 
-
-/*==================================================
-    TITLE
-==================================================*/
-
+/* ==================================================
+   SECTION TITLE – with animated dash
+   ================================================== */
 .collections-title {
-
     text-align: center;
-
-    margin-bottom: 0;
+    margin-bottom: 32px;
 }
 
-
-.collections-title > span {
-
+.collections-title .title-main {
     display: block;
-
-    font-family: 'Roboto';
-
-    font-weight: 600;
-
-    font-size: 30px;
-
-    letter-spacing: 4px;
-
-    color: var(--boutique-dark);
-
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 34px;
+    letter-spacing: 1px;
+    color: #1c1a18;
     text-transform: uppercase;
 }
 
-
-/*==================================================
-    DIVIDER
-==================================================*/
-
-.divider {
-
-    width: 120px;
-
-    height: 25px;
-
-    margin: 0 auto;
-
-    position: relative;
+.title-accent {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
 }
 
+.title-accent .dash {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #d4b8a0;
+    border-radius: 2px;
+    position: relative;
+    transition: width 0.4s ease;
+}
 
-.divider::before {
-
-    content: "";
-
+.title-accent .dash::after {
+    content: '';
     position: absolute;
-
     left: 0;
-
-    right: 0;
-
-    top: 50%;
-
-    height: 1px;
-
-    background: #d7c4a2;
+    top: 0;
+    height: 100%;
+    width: 20%;
+    background: #b3927a;
+    border-radius: 2px;
+    animation: dashMove 3s ease-in-out infinite;
 }
 
-
-.divider span {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 50%;
-
-    width: 12px;
-
-    height: 12px;
-
-    background: #b39256;
-
-    transform: translate(-50%, -50%) rotate(45deg);
+@keyframes dashMove {
+    0%, 100% { left: 0; }
+    50% { left: 80%; }
 }
 
+.collections-title .sub-headline {
+  font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: lowercase;
+    color: #b09884;
+    margin-top: 4px;
+}
 
-/*==================================================
-    SWIPER WRAPPER
-==================================================*/
-
+/* ==================================================
+   SWIPER
+   ================================================== */
 .collections-slider-wrapper {
-
     position: relative;
-
     width: 100%;
-
     overflow: hidden;
 }
-
-
-/*==================================================
-    SWIPER
-==================================================*/
 
 .collections-slider {
-
     position: relative;
-
     width: 100%;
-
     overflow: hidden;
 }
-
-
 .collections-slider .swiper-wrapper {
-
     align-items: stretch;
 }
-
-
 .collections-slider .swiper-slide {
-
     height: auto;
-
     box-sizing: border-box;
 }
 
-
-/*==================================================
-    CARD
-==================================================*/
-
+/* ==================================================
+   CARD – with gradient border on hover
+   ================================================== */
 .collection-card {
-
     display: block;
-
     width: 100%;
-
     height: 100%;
-
     text-decoration: none;
 }
 
-
 .collection-inner {
-
     position: relative;
-
     width: 100%;
-
-    height: 260px;
-
+    height: 100%;
+    background: #ffffff;
+    border-radius: 12px;
     overflow: hidden;
-
-    box-sizing: border-box;
-
-    border-radius: 145px 145px 6px 6px;
-
-    border: 1px solid #c8af7f;
-padding-top: 20px;
-
-    background:
-
-        radial-gradient(
-
-            circle at top,
-
-            rgba(255, 255, 255, .95) 0%,
-
-            rgba(255, 255, 255, .55) 22%,
-
-            rgba(255, 255, 255, 0) 45%
-
-        ),
-
-        linear-gradient(
-
-            180deg,
-
-            #c9a96e40 0%,
-
-            #c9a96e40 45%,
-
-            #c9a96e40 100%
-
-        );
-
-
-    box-shadow:
-
-        inset 0 0 0 6px #faf8f3,
-
-        inset 0 0 0 7px #dbc59b,
-
-        inset 0 -50px 60px rgba(208, 189, 161, .18),
-
-        0 20px 40px rgba(0, 0, 0, .08);
-
-
-    transition:
-
-        transform .45s ease,
-
-        box-shadow .45s ease,
-
-        border-color .45s ease;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
 }
-
-
-/*==================================================
-    INNER BORDER
-==================================================*/
-
-.collection-inner::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 12px;
-
-    border-radius: 132px 132px 3px 3px;
-
-    border: 2px solid #ebe2d4;
-
-
-    box-shadow:
-
-        inset 0 0 0 1px rgba(178, 147, 94, .18),
-
-        inset 0 20px 30px rgba(255, 255, 255, .35);
-
-
-    pointer-events: none;
-
-    z-index: 3;
-}
-
-
-/*==================================================
-    CARD HOVER
-==================================================*/
 
 .collection-card:hover .collection-inner {
-
-    transform: translateY(6px);
-
-    box-shadow:
-
-        inset 0 0 0 6px #faf8f3,
-
-        inset 0 0 0 7px #dbc59b,
-
-        inset 0 -50px 60px rgba(208, 189, 161, .18),
-
-        0 25px 45px rgba(0, 0, 0, .12);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+    border-color: #d4b8a0;
+    background: linear-gradient(#ffffff, #ffffff) padding-box,
+                linear-gradient(135deg, #d4b8a0, #f0d5c0, #d4b8a0) border-box;
+    border-image: linear-gradient(135deg, #d4b8a0, #f0d5c0, #d4b8a0) 1;
 }
 
-
-/*==================================================
-    TITLE
-==================================================*/
-
-.collection-inner h3 {
-
-    position: relative;
-
-    z-index: 4;
-
-    margin-top: 40px;
-
-    margin-bottom: 8px;
-
-    padding: 0 8px;
-
-    font-family: 'Roboto';
-
-    font-size: 16px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.8px;
-
-    color: var(--boutique-dark);
-
-    text-transform: uppercase;
-
-    text-align: center;
+/* Remove all pseudo decorations */
+.collection-inner::before,
+.collection-inner::after {
+    display: none !important;
 }
 
-
-/*==================================================
-    IMAGE
-==================================================*/
+/* ==================================================
+   IMAGE WRAP
+   ================================================== */
+.collection-image-wrap {
+    width: 100%;
+    background: #f3efea;
+    overflow: hidden;
+}
 
 .collection-image {
-
     position: relative;
-
-    height: 190px;
-
+    width: 100%;
+    aspect-ratio: 4 / 5;
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    padding: 0 30px;
+    overflow: hidden;
+    contain: layout paint;
+    background: #f3efea;
 }
 
-
-/*==================================================
-    SHADOW UNDER PRODUCT
-==================================================*/
-
-.collection-image::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-
-    height: 35px;
-
-    left: 50%;
-
-    bottom: 22px;
-
-    transform: translateX(-50%);
-
-
-    background:
-
-        radial-gradient(
-
-            ellipse at center,
-
-            rgba(0, 0, 0, .20) 0%,
-
-            rgba(0, 0, 0, .10) 45%,
-
-            rgba(0, 0, 0, 0) 80%
-
-        );
-
-
-    filter: blur(10px);
-
-    opacity: .45;
-
+.collection-image img {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.6s ease, filter 0.6s ease;
+    position: relative;
     z-index: 1;
 }
 
-
-/*==================================================
-    PRODUCT IMAGE
-==================================================*/
-
-.collection-image img {
-
-    display: block;
-
-    max-width: 100%;
-
-    max-height: 160px;
-
-    object-fit: contain;
-
-    position: relative;
-
-    z-index: 2;
-
-    transform: translateY(-8px) scale(1.04);
-
-
-    transition:
-
-        transform .45s ease,
-
-        filter .45s ease;
-
-
-    filter:
-
-        brightness(1.02)
-
-        drop-shadow(0 10px 10px rgba(0, 0, 0, .08))
-
-        drop-shadow(0 22px 18px rgba(0, 0, 0, .06));
+.collection-image.loaded img {
+    opacity: 1;
+    visibility: visible;
 }
-
 
 .collection-card:hover .collection-image img {
-
-    transform: translateY(-12px) scale(1.07);
+    transform: scale(1.04);
+    filter: drop-shadow(0 20px 30px rgba(180, 140, 120, 0.15));
 }
 
-
-/*==================================================
-    DISCOVER MORE
-==================================================*/
-
-.discover-link {
-
+/* ==================================================
+   FLOATING CTA – bright, no overlay
+   ================================================== */
+.floating-cta {
     position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 8px 16px 8px 12px;
+    border-radius: 40px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: translateY(0) scale(1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+    pointer-events: auto;
+}
 
-    left: 0;
+.floating-cta .plus-icon {
+    font-size: 18px;
+    font-weight: 300;
+    color: #b3927a;
+    transition: transform 0.4s ease, color 0.3s ease;
+    line-height: 1;
+}
 
-    right: 0;
-
-    bottom: 24px;
-
-    z-index: 4;
-
-    text-align: center;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 8px;
-
+.floating-cta .cta-label {
+  font-family: 'Roboto', sans-serif;
     font-weight: 500;
-
-    letter-spacing: 2px;
-
+    font-size: 11px;
+    letter-spacing: 1px;
     text-transform: uppercase;
-
-    color: #76614a;
+    color: #4a413b;
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, max-width 0.4s ease;
 }
 
-
-.discover-link span {
-
-    margin-left: 8px;
-
-    transition: margin-left .3s ease;
+.collection-card:hover .floating-cta {
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 24px rgba(180, 140, 120, 0.15);
 }
 
-
-.collection-card:hover .discover-link span {
-
-    margin-left: 16px;
+.collection-card:hover .floating-cta .cta-label {
+    opacity: 1;
+    max-width: 60px;
 }
 
+.collection-card:hover .floating-cta .plus-icon {
+    transform: rotate(90deg);
+    color: #b3927a;
+}
 
-/*==================================================
-    TABLET
-==================================================*/
+/* ==================================================
+   CARD FOOTER – with sliding underline
+   ================================================== */
+.card-footer {
+    padding: 14px 16px 12px 16px;
+    text-align: left;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0ebe6;
+    transition: border-color 0.3s ease;
+}
 
+.collection-card:hover .card-footer {
+    border-top-color: #d4b8a0;
+}
+
+.card-footer h3 {
+   font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+    color: #1c1a18;
+    text-transform: capitalize;
+    margin: 0;
+    line-height: 1.2;
+    position: relative;
+}
+
+/* Underline that slides from left */
+.card-footer h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #d4b8a0;
+    transition: width 0.4s ease;
+}
+
+.collection-card:hover .card-footer h3::after {
+    width: 100%;
+}
+
+.card-footer .view-indicator {
+  font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b8a894;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.collection-card:hover .view-indicator {
+    color: #b3927a;
+    transform: translateX(4px);
+}
+
+/* ==================================================
+   LEGACY – hidden
+   ================================================== */
+.discover-link,
+.explore-link {
+    display: none;
+}
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
 @media (max-width: 991px) {
-
     .collections-container {
-
         padding-left: 25px;
-
         padding-right: 25px;
     }
-
+    .collections-title .title-main {
+        font-size: 28px;
+    }
+    .card-footer h3 {
+        font-size: 16px;
+    }
+    .floating-cta {
+        padding: 6px 14px 6px 10px;
+        bottom: 14px;
+        right: 14px;
+    }
+    .floating-cta .plus-icon {
+        font-size: 16px;
+    }
 }
-
-
-/*==================================================
-    MOBILE
-==================================================*/
 
 @media (max-width: 767px) {
-
     .signature-collections {
-
-        padding: 2px 0;
+        padding: 10px 0 15px;
     }
-
-
     .collections-container {
-
-        padding-left: 20px;
-
-        padding-right: 20px;
-    }
-
-
-    .collections-slider-wrapper {
-
-        width: 100%;
-margin-top: 20px;
-
-    }
-
-
-    .collections-slider {
-
-        width: 100%;
-
-        overflow: hidden;
-    }
-
-
-    .collection-inner {
-
-        height: 210px;
-
-        border-radius: 110px 110px 6px 6px;
-    }
-
-
-    .collection-inner::before {
-
-        inset: 10px;
-
-        border-radius: 100px 100px 4px 4px;
-    }
-
-
-    .collection-inner h3 {
-
-        margin-top: 30px;
-
-        margin-bottom: 5px;
-
-        padding: 0 10px;
-
-        font-size: 16px;
-
-        letter-spacing: 1.2px;
-    }
-
-
-    .collection-image {
-
-        height: 140px;
-
-        padding: 0 15px;
-    }
-
-
-    .collection-image img {
-
-        max-height: 130px;
-
-        max-width: 100%;
-    }
-
-
-    .collection-image::after {
-
-        width: 105px;
-
-        height: 18px;
-
-        bottom: 20px;
-
-        border-radius: 50%;
-
-        background: #000;
-
-        opacity: .12;
-
-        filter: blur(13px);
-    }
-
-
-    .discover-link {
-
-        bottom: 16px;
-
-        font-size: 7px;
-
-        letter-spacing: 1.2px;
-    }
-
-
-    .collections-title > span {
-
-        font-size: 24px;
-
-        letter-spacing: 3px;
-    }
-
-}
-
-
-/*==================================================
-    SMALL MOBILE
-==================================================*/
-
-@media (max-width: 400px) {
-
-    .collections-container {
-
         padding-left: 15px;
-
         padding-right: 15px;
     }
-
-
-    .collection-inner {
-
-        height: 220px;
+    .collections-title {
+        margin-bottom: 24px;
     }
-
-
-    .collection-inner h3 {
-
+    .collections-title .title-main {
+        font-size: 24px;
+    }
+    .title-accent .dash {
+        width: 40px;
+    }
+    .collections-title .sub-headline {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+    .collection-image {
+        aspect-ratio: 4 / 5;
+    }
+    .floating-cta {
+        padding: 4px 12px 4px 8px;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 30px;
+    }
+    .floating-cta .plus-icon {
         font-size: 14px;
     }
-
-
-    .collection-image {
-
-        height: 140px;
+    .floating-cta .cta-label {
+        font-size: 9px;
     }
-
-
-    .collection-image img {
-
-        max-height: 120px;
+    .card-footer {
+        padding: 10px 12px 10px 12px;
     }
-
+    .card-footer h3 {
+        font-size: 14px;
+    }
+    .card-footer .view-indicator {
+        font-size: 9px;
+    }
 }
 
+@media (max-width: 400px) {
+    .collections-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .card-footer h3 {
+        font-size: 12px;
+    }
+}
 </style>
 @endsection

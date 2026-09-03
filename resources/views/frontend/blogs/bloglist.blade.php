@@ -5,16 +5,7 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
-    :root {
-        --demanto-gold: #B39256;
-        --demanto-gold-light: #F7F4EB;
-        --demanto-dark: #232323;
-        --demanto-bg: #FDFBF7;
-        --demanto-muted: #6E6E6E;
-        --luxury-border: rgba(179, 146, 86, 0.25);
-        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
-    }
+
 
     body {
         background-color: var(--demanto-bg);
@@ -35,7 +26,7 @@
         top: 30px;
         right: 30px;
         font-size: 80px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.03;
         font-family: serif;
         pointer-events: none;
@@ -47,7 +38,7 @@
         bottom: 30px;
         left: 30px;
         font-size: 60px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.03;
         font-family: serif;
         pointer-events: none;
@@ -55,7 +46,7 @@
 
     .section-title-demanto {
         font-family: 'Roboto', sans-serif;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 22px;
         letter-spacing: 1.5px;
         font-weight: 500;
@@ -66,7 +57,7 @@
         font-size: 9px;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-weight: 500;
         display: inline-block;
         position: relative;
@@ -81,7 +72,7 @@
         transform: translateX(-50%);
         width: 25px;
         height: 1.5px;
-        background: var(--demanto-gold);
+        background: var(--demanto-red);
     }
 
     /* Exhibition Cards - Grid Layout - Minimized */
@@ -108,7 +99,7 @@
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--demanto-gold), transparent);
+        background: linear-gradient(90deg, transparent, var(--demanto-red), transparent);
         transform: translateX(-100%);
         transition: transform 0.6s ease;
         z-index: 1;
@@ -121,7 +112,7 @@
     .exhibition-card:hover {
         transform: translateY(-4px);
         box-shadow: var(--box-shadow-luxury);
-        border-color: var(--demanto-gold);
+        border-color: var(--demanto-red);
     }
 
     .exhibition-image {
@@ -170,7 +161,7 @@
     }
 
     .exhibition-icon {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 18px;
         margin-bottom: 8px;
         display: inline-block;
@@ -191,12 +182,12 @@
     }
 
     .exhibition-card:hover .exhibition-content h3 {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
     }
 
     .exhibition-date {
         font-size: 16px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         letter-spacing: 1px;
         margin-bottom: 8px;
         display: flex;
@@ -227,7 +218,7 @@
 
     .empty-state i {
         font-size: 40px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         margin-bottom: 15px;
         opacity: 0.5;
     }
@@ -326,7 +317,7 @@
     }
     
     ::-webkit-scrollbar-thumb {
-        background: var(--demanto-gold);
+        background: var(--demanto-red);
         border-radius: 3px;
     }
     

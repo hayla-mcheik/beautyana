@@ -16,21 +16,20 @@ class ProductFormRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules()
     {
-        // Check if this is a store (create) or update request
+        // Create = POST
         if ($this->isMethod('post')) {
-            // For creating a new product - require at least 2 images
+
             $imageRules = [
                 'required',
                 'array',
-           
             ];
+
         } else {
-            // For updating a product - images are optional
+
+            // Update = images are optional
             $imageRules = [
                 'nullable',
                 'array'
@@ -38,79 +37,112 @@ class ProductFormRequest extends FormRequest
         }
 
         return [
+
             'category_id' => [
                 'required',
                 'integer'
             ],
+
             'name' => [
                 'required',
                 'string'
-            ],  
-            // 'slug' => [
-            //     'required',
-            //     'string'
-            // ],         
-            // 'small_description' => [
-            //     'required',
-            //     'string',
-            // ],           
+            ],
+
             'description' => [
                 'required',
                 'string',
             ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Pricing
+            |--------------------------------------------------------------------------
+            */
+
             'original_price' => [
-                'nullable',
-                'integer',  
-            ],  
-            'selling_price' => [
                 'required',
-                'integer',  
+                'numeric',
+                'min:0',
             ],
+
+            'discount_percentage' => [
+                'nullable',
+                'numeric',
+                'min:0',
+                'max:100',
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | IMPORTANT
+            |--------------------------------------------------------------------------
+            |
+            | selling_price is NOT submitted by the admin anymore.
+            | Laravel calculates it automatically from:
+            |
+            | original_price - discount_percentage
+            |
+            */
+
             'quantity' => [
                 'required',
-                'integer',  
+                'integer',
+                'min:0',
             ],
-            // 'trending' => [
-            //     'nullable', 
-            // ], 
+
             'status' => [
-                'nullable', 
-            ],  
-            // 'meta_title' => [
-            //     'required',
-            //     'string',
-            //     'max:255'  
-            // ],  
-            // 'meta_keyword' => [
-            //     'nullable',
-            //     'string',
-            // ],
-            // 'meta_description' => [
-            //     'nullable',
-            //     'string',
-            // ],
+                'nullable',
+            ],
+
             'image' => $imageRules,
+
             'image.*' => [
                 'image',
                 'mimes:jpeg,png,jpg,gif,webp',
                 'max:2048'
-            ]
+            ],
         ];
     }
 
     /**
      * Get custom messages for validator errors.
-     *
-     * @return array<string, string>
      */
     public function messages()
     {
         return [
-    'image.required' => 'Please upload at least one image.',
-    'image.min' => 'Please upload at least one image.',
-    'image.*.image' => 'Each file must be a valid image.',
-    'image.*.mimes' => 'Images must be jpeg, png, jpg, gif or webp.',
-    'image.*.max' => 'Each image must not exceed 2MB.',
+
+            'image.required' =>
+                'Please upload at least one image.',
+
+            'image.min' =>
+                'Please upload at least one image.',
+
+            'image.*.image' =>
+                'Each file must be a valid image.',
+
+            'image.*.mimes' =>
+                'Images must be jpeg, png, jpg, gif or webp.',
+
+            'image.*.max' =>
+                'Each image must not exceed 2MB.',
+
+            'original_price.required' =>
+                'Please enter the original price.',
+
+            'original_price.numeric' =>
+                'Original price must be a valid number.',
+
+            'original_price.min' =>
+                'Original price cannot be negative.',
+
+            'discount_percentage.numeric' =>
+                'Discount percentage must be a valid number.',
+
+            'discount_percentage.min' =>
+                'Discount percentage cannot be negative.',
+
+            'discount_percentage.max' =>
+                'Discount percentage cannot be greater than 100.',
         ];
     }
 }

@@ -2,16 +2,7 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
-    :root {
-        --demanto-gold: #B39256;
-        --demanto-gold-light: #F7F4EB;
-        --demanto-dark: #232323;
-        --demanto-bg: #FDFBF7;
-        --demanto-muted: #6E6E6E;
-        --luxury-border: rgba(179, 146, 86, 0.25);
-        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
-    }
+
 
     body {
         background-color: var(--demanto-bg);
@@ -32,7 +23,7 @@
         top: 30px;
         right: 30px;
         font-size: 80px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.03;
         font-family: serif;
         pointer-events: none;
@@ -44,7 +35,7 @@
         bottom: 30px;
         left: 30px;
         font-size: 60px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.03;
         font-family: serif;
         pointer-events: none;
@@ -88,7 +79,7 @@
     }
 
     .mobile-categories-header i {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 14px;
         transition: transform 0.3s ease;
     }
@@ -136,14 +127,14 @@
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 14px;
         opacity: 0;
         transition: var(--transition-smooth);
     }
 
     .mobile-categories-list ul li a:hover {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         padding-left: 22px;
     }
 
@@ -158,7 +149,7 @@
         font-weight: 600;
         margin-bottom: 12px;
         padding-bottom: 8px;
-        border-bottom: 2px solid var(--demanto-gold);
+        border-bottom: 2px solid var(--demanto-red);
         position: relative;
     }
 
@@ -169,7 +160,7 @@
     }
 
     .sidebar-title a:hover {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
     }
 
     .category-sub-menu ul {
@@ -200,14 +191,14 @@
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 9px;
         opacity: 0;
         transition: var(--transition-smooth);
     }
 
     .category-sub-menu ul li a:hover {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         padding-left: 22px;
     }
 
@@ -249,7 +240,7 @@
 
     .product-tab-nav li a.active,
     .product-tab-nav li a:hover {
-        background: var(--demanto-gold);
+        background: var(--demanto-red);
         color: #fff;
     }
 
@@ -260,7 +251,7 @@
     }
 
     .total-products p strong {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
     }
 
     /* ============================================================
@@ -280,7 +271,7 @@
     .featured-product-card:hover {
         transform: translateY(-5px);
         box-shadow: var(--box-shadow-luxury);
-        border-color: var(--demanto-gold);
+        border-color: var(--demanto-red);
     }
 
     .featured-image {
@@ -367,7 +358,7 @@
 
     .empty-state i {
         font-size: 40px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         margin-bottom: 15px;
         opacity: 0.5;
     }
@@ -549,7 +540,7 @@
     }
     
     ::-webkit-scrollbar-thumb {
-        background: var(--demanto-gold);
+        background: var(--demanto-red);
         border-radius: 3px;
     }
     

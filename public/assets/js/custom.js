@@ -188,48 +188,212 @@ const signatureSlider = new Swiper('.signature-slider', {
     }
 });
 
-  // Featured Products Luxury Slider
-var featuredProducts = new Swiper('.featured-products-slider', {
 
-    slidesPerView: 4,
-    spaceBetween: 30,
-    loop: true,
-    speed: 1000,
 
-    autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-    },
+var featuredProductsSlider = new Swiper(
+    '.featured-products-slider',
+    {
 
-    navigation: {
-        nextEl: '.featured-next',
-        prevEl: '.featured-prev',
-    },
+        slidesPerView: 4,
 
-    pagination: {
-        el: '.featured-pagination',
-        clickable: true,
-    },
+        spaceBetween: 30,
 
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-            spaceBetween: 15
+        loop: true,
+
+        speed: 900,
+
+        autoplay: {
+            delay: 4000,
+
+            disableOnInteraction: false,
+
+            pauseOnMouseEnter: true
         },
-        576: {
-            slidesPerView: 2,
-            spaceBetween: 20
+
+        navigation: {
+            nextEl: '.featured-next',
+
+            prevEl: '.featured-prev'
         },
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 25
+
+        pagination: {
+            el: '.featured-pagination',
+
+            clickable: true
         },
-        1200: {
-            slidesPerView: 4,
-            spaceBetween: 30
+
+        breakpoints: {
+
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 15
+            },
+
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 22
+            },
+
+            992: {
+                slidesPerView: 3,
+                spaceBetween: 25
+            },
+
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 30
+            }
+
         }
+
     }
-});
+);
+
+
+
+/* ============================================================
+   LATEST ARRIVALS
+============================================================ */
+
+var latestArrivalsSlider = new Swiper(
+    '.latest-arrivals-slider',
+    {
+
+        slidesPerView: 4,
+
+        spaceBetween: 30,
+
+        loop: true,
+
+        speed: 900,
+
+        autoplay: {
+            delay: 4000,
+
+            disableOnInteraction: false,
+
+            pauseOnMouseEnter: true
+        },
+
+        navigation: {
+            nextEl: '.latest-arrivals-next',
+
+            prevEl: '.latest-arrivals-prev'
+        },
+
+        pagination: {
+            el: '.latest-arrivals-pagination',
+
+            clickable: true
+        },
+
+        breakpoints: {
+
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 15
+            },
+
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 22
+            },
+
+            992: {
+                slidesPerView: 3,
+                spaceBetween: 25
+            },
+
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 30
+            }
+
+        }
+
+    }
+);
+
+
+
+/* ============================================================
+   BEST SELLERS
+============================================================ */
+
+var bestSellersSlider = new Swiper(
+    '.best-sellers-slider',
+    {
+
+        slidesPerView: 4,
+
+        spaceBetween: 30,
+
+        loop: true,
+
+        speed: 900,
+
+        autoplay: {
+            delay: 4000,
+
+            disableOnInteraction: false,
+
+            pauseOnMouseEnter: true
+        },
+
+        navigation: {
+            nextEl: '.best-sellers-next',
+
+            prevEl: '.best-sellers-prev'
+        },
+
+        pagination: {
+            el: '.best-sellers-pagination',
+
+            clickable: true
+        },
+
+        breakpoints: {
+
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 15
+            },
+
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 22
+            },
+
+            992: {
+                slidesPerView: 3,
+                spaceBetween: 25
+            },
+
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 30
+            }
+
+        }
+
+    }
+);
+
 
 var exhibitionsSlider = new Swiper('.exhibitions-slider', {
 

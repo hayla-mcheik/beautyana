@@ -173,8 +173,8 @@
                     <li class="nav-item"> <a class="nav-link {{ Request::is('admin/sliders') ? 'active' : '' }}" href="{{ url('admin/sliders') }}">Home Sliders</a></li>
                     {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/banners') ? 'active' : '' }}" href="{{ url('admin/banners') }}">Banner Images</a></li> --}}
                     {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/tickers') ? 'active' : '' }}" href="{{ url('admin/tickers') }}">Top Tickers</a></li> --}}
-                    {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about') ? 'active' : '' }}" href="{{ url('admin/about') }}">About Us</a></li> --}}
-                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about-data') ? 'active' : '' }}" href="{{ route('admin.aboutdata.edit') }}">About Us Data</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about') ? 'active' : '' }}" href="{{ url('admin/about') }}">About Us</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link {{ Request::is('admin/about-data') ? 'active' : '' }}" href="{{ route('admin.aboutdata.edit') }}">About Us Data</a></li> --}}
                 </ul>
             </div>
         </li>

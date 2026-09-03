@@ -19,32 +19,146 @@ use App\Models\Subscriber;
 
 class FrontendController extends Controller
 {
-    public function index()
-    {
-        $sliders = Slider::where('status','0')->get(); 
-        $about = \App\Models\About::first();
-        $aboutData = \App\Models\AboutData::first();
-        $trendingProducts = Product::where('trending','1')->latest()->take(15)->get();
-        $newArrivalsProducts = Product::latest()->take(14)->get();
-        $featuredProducts = Product::where('featured','1')->latest()->take(14)->get();
-    $collections = Category::where('status','0')
-        ->where('menu','Collections')
+public function index()
+{
+    $sliders = Slider::where('status', '0')->get();
+
+    $about = \App\Models\About::first();
+    $aboutData = \App\Models\AboutData::first();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Trending Products
+    |--------------------------------------------------------------------------
+    */
+
+    $trendingProducts = Product::where('trending', '1')
+        ->where('status', '0')
+        ->where('quantity', '>', 0)
+        ->with(['productImages', 'category'])
+        ->latest()
+        ->take(15)
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
+
+    /*
+    |--------------------------------------------------------------------------
+    | Latest Arrivals
+    |--------------------------------------------------------------------------
+    */
+
+    $newArrivalsProducts = Product::where('status', '0')
+        ->where('quantity', '>', 0)
+        ->with(['productImages', 'category'])
+        ->latest()
+        ->take(14)
         ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
+
+    /*
+    |--------------------------------------------------------------------------
+    | Best Sellers
+    |--------------------------------------------------------------------------
+    |
+    | Calculate best sellers from actual purchased quantities.
+    |
+    */
+
+    $bestSellersProducts = Product::where('status', '0')
+        ->where('quantity', '>', 0)
+        ->with(['productImages', 'category'])
+        ->withSum('orderItems', 'quantity')
+        ->orderByDesc('order_items_sum_quantity')
+        ->take(14)
         ->get();
-        $reviews= ReviewsModel::where('status','0')->get();
-        $threecategories = Category::where('status','0')->take(3)->get();
-        $blogs = Blogs::all();
-$banner = Banner::first();
-$instaFeeds = InstagramFeed::where('status','0')->latest()->take(8)->get();
-        return view('frontend.index',compact('sliders','about','aboutData','trendingProducts','newArrivalsProducts','featuredProducts','collections','highJewelry','adSignature','reviews','threecategories','blogs','banner','instaFeeds'));
-    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Featured Products
+    |--------------------------------------------------------------------------
+    */
+
+    $featuredProducts = Product::where('featured', '1')
+        ->where('status', '0')
+        ->where('quantity', '>', 0)
+        ->with(['productImages', 'category'])
+        ->latest()
+        ->take(14)
+        ->get();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Collections
+    |--------------------------------------------------------------------------
+    */
+
+    $collections = Category::where('status', '0')
+        ->where('menu', 'Collections')
+        ->get();
+
+
+    $highJewelry = Category::where('status', '0')
+        ->where('menu', 'High Jewelry')
+        ->get();
+
+
+    $adSignature = Category::where('status', '0')
+        ->where('menu', 'AD Signature')
+        ->get();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Other Homepage Data
+    |--------------------------------------------------------------------------
+    */
+
+    $reviews = ReviewsModel::where('status', '0')->get();
+
+    $threecategories = Category::where('status', '0')
+        ->take(3)
+        ->get();
+
+    $blogs = Blogs::all();
+
+    $banner = Banner::first();
+
+    $instaFeeds = InstagramFeed::where('status', '0')
+        ->latest()
+        ->take(8)
+        ->get();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Homepage
+    |--------------------------------------------------------------------------
+    */
+
+    return view(
+        'frontend.index',
+        compact(
+            'sliders',
+            'about',
+            'aboutData',
+            'trendingProducts',
+            'newArrivalsProducts',
+            'bestSellersProducts',
+            'featuredProducts',
+            'collections',
+            'highJewelry',
+            'adSignature',
+            'reviews',
+            'threecategories',
+            'blogs',
+            'banner',
+            'instaFeeds'
+        )
+    );
+}
 
 
     public function searchProducts(Request $request)

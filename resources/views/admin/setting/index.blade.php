@@ -10,7 +10,11 @@
 <div class="alert alert-success mb-3">{{ session('message') }}</div>
 @endif
 
-<form action="{{ url('/admin/settings') }}" method="POST">
+<form
+    action="{{ url('/admin/settings') }}"
+    method="POST"
+    enctype="multipart/form-data"
+>
     @csrf
 
 <div class="card mb-3">
@@ -30,7 +34,55 @@
             <label>Website URL</label>
             <input type="text" name="website_url" value="{{ $setting->website_url ?? '' }}" class="form-control" />
 </div>
+<div class="col-md-6 mb-3">
 
+    <label>Website Logo</label>
+
+    <input
+        type="file"
+        name="logo"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml"
+    >
+
+    @if(!empty($setting?->logo))
+
+        <div class="mt-3">
+
+            <p class="mb-2">
+                Current Logo
+            </p>
+
+            <div
+                style="
+                    width: 220px;
+                    height: 90px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px;
+                    background: #f8f8f8;
+                    border: 1px solid #ddd;
+                "
+            >
+
+                <img
+                    src="{{ asset($setting->logo) }}"
+                    alt="Website Logo"
+                    style="
+                        max-width: 100%;
+                        max-height: 70px;
+                        object-fit: contain;
+                    "
+                >
+
+            </div>
+
+        </div>
+
+    @endif
+
+</div>
 {{-- <div class="col-md-6 mb-3">
             <label>Page Title</label>
             <input type="text" name="page_title" value="{{ $setting->page_title ?? '' }}" class="form-control" />

@@ -2,16 +2,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
-        :root {
-            --demanto-gold: #B39256;
-            --demanto-gold-light: #F7F4EB;
-            --demanto-dark: #232323;
-            --demanto-bg: #FDFBF7;
-            --demanto-muted: #6E6E6E;
-            --luxury-border: rgba(179, 146, 86, 0.25);
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
-        }
+     
 
         .product-area {
             background: linear-gradient(135deg, #FDFBF7 0%, #fff 100%);
@@ -25,7 +16,7 @@
             top: 30px;
             right: 30px;
             font-size: 80px;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             opacity: 0.03;
             font-family: serif;
             pointer-events: none;
@@ -37,7 +28,7 @@
             bottom: 30px;
             left: 30px;
             font-size: 60px;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             opacity: 0.03;
             font-family: serif;
             pointer-events: none;
@@ -58,7 +49,7 @@
             color: var(--demanto-dark);
             margin-bottom: 12px;
             padding-bottom: 8px;
-            border-bottom: 2px solid var(--demanto-gold);
+            border-bottom: 2px solid var(--demanto-red);
             display: inline-block;
         }
 
@@ -106,11 +97,11 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .product-content .title a:hover {
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
         }
 
         .product-price {
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             font-size: 22px;
             font-weight: 600;
         }
@@ -140,7 +131,7 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .quantity__value:hover {
-            background: var(--demanto-gold);
+            background: var(--demanto-red);
             color: #fff;
         }
 
@@ -171,7 +162,7 @@ font-family:"Cormorant Garamond",serif;
 
         /* Button Styles - Minimized */
         .btn-primary {
-            background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+            background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
             color: #fff;
             font-size: 22px;
             letter-spacing: 1.5px;
@@ -229,7 +220,7 @@ font-family:"Cormorant Garamond",serif;
         }
 
         .btn-checkout {
-            background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+            background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
             color: #fff;
             font-size: 22px;
             letter-spacing: 1.5px;
@@ -258,7 +249,7 @@ font-family:"Cormorant Garamond",serif;
 
         .empty-cart i {
             font-size: 42px;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             opacity: 0.3;
             margin-bottom: 12px;
         }
@@ -330,7 +321,7 @@ font-family:"Cormorant Garamond",serif;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--demanto-gold);
+            background: var(--demanto-red);
             border-radius: 3px;
         }
         
@@ -439,7 +430,7 @@ font-family:"Cormorant Garamond",serif;
                                 <div class="separator"></div>
                                 <div class="card-block-item fw-bold">
                                     <span class="label">Total</span>
-                                    <span class="value" style="color: var(--demanto-gold); font-size: 20px;">${{ number_format($total, 2) }}</span>
+                                    <span class="value" style="color: var(--demanto-red); font-size: 20px;">${{ number_format($total, 2) }}</span>
                                 </div>
                             </div>
                             

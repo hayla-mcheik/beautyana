@@ -27,7 +27,7 @@
         }
 
         .popup-product-list::-webkit-scrollbar-thumb {
-            background: var(--demanto-gold);
+            background: var(--demanto-red);
             border-radius: 4px;
         }
 
@@ -86,7 +86,7 @@
         .product-price {
             font-size: 16px;
             font-weight: 600;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             margin-left: auto;
         }
 
@@ -127,7 +127,7 @@
         .cart-total .value {
             font-size: 16px;
             font-weight: 700;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
         }
 
         /* Checkout Button */
@@ -138,7 +138,7 @@
         .btn-Checkout {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+            background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
             color: #fff;
             text-align: center;
             padding: 8px 15px;
@@ -168,7 +168,7 @@
 
         .empty-cart-message i {
             font-size: 40px;
-            color: var(--demanto-gold);
+            color: var(--demanto-red);
             opacity: 0.3;
             margin-bottom: 10px;
         }

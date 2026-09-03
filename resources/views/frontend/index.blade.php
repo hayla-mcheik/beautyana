@@ -5,2281 +5,1026 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
-
-/* ============================================================
-   DEMANTO HOME PAGE
-============================================================ */
-/* ============================================================
-   DEMANTO HOME PAGE
-============================================================ */
-
+    /* ============================================================
+       ROOT VARIABLES – UPDATED PALETTE
+    ============================================================ */
 :root {
-    --demanto-gold: #C5A15A;
-    --demanto-gold-dark: #9A7B45;
-    --demanto-gold-light: #F7F4EB;
+    /* === REPLACING GOLD WITH HERITAGE RUBY RED === */
+    --demanto-red: #B31B1B;          /* Main accent – vibrant, rich crimson */
+    --demanto-red-dark: #7A1212;     /* Darker shade – for hover states, footers, and depth */
+    --demanto-red-light: #F8F0F0;    /* Very soft rose-tinted white – for backgrounds, borders, or light overlays */
 
-    --demanto-dark: #4F4033;
+    /* Keep your neutrals exactly as they are */
+    --demanto-dark: #2C241E;
+    --demanto-text: #4A3F38;
+    --demanto-muted: #85786D;
     --demanto-bg: #FDFBF7;
-    --demanto-muted: #85715F;
-
-    --luxury-border: rgba(179, 146, 86, 0.25);
-
-    --transition-smooth:
-        all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-    --box-shadow-luxury:
-        0 25px 45px rgba(179, 146, 86, 0.10);
+    --demanto-white: #FFFFFF;
+    --luxury-border: rgba(179, 27, 27, 0.25); /* Updated border to match red */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-
-/* ============================================================
-   GLOBAL
-============================================================ */
-
-html,
-body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-
-body {
-    background: var(--demanto-bg);
-    color: var(--demanto-dark);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 13px;
-}
-
-
-section {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-
-@keyframes fadeInUp {
-
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+    /* ============================================================
+       GLOBAL RESET & BASE
+    ============================================================ */
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* ============================================================
-   GENERAL TYPOGRAPHY
-============================================================ */
-
-.luxury-heading {
-    margin: 0;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-    color: #6E5A46;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--demanto-dark) 0%,
-            var(--demanto-gold) 100%
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    background-clip: text;
-}
-
-
-.luxury-section-title {
-    position: relative;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-
-.luxury-sub {
-    position: relative;
-
-    display: inline-block;
-
-    padding-bottom: 4px;
-
-    color: var(--demanto-gold);
-
-    font-size: 9px;
-    font-weight: 500;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-}
-
-
-.luxury-sub::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    bottom: 0;
-
-    width: 25px;
-    height: 1.5px;
-
-    transform: translateX(-50%);
-
-    background: var(--demanto-gold);
-}
-.swiper-pagination-bullet-active{
-    background: var(--demanto-gold);
-}
-
-/* ============================================================
-   BUTTONS
-============================================================ */
-
-.btn-demanto {
-    position: relative;
-
-    z-index: 1;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 9px 24px;
-
-    overflow: hidden;
-
-    border: 0;
-
-    border-radius: 25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--demanto-dark),
-            var(--demanto-gold-dark)
-        );
-
-    color: #FFFFFF !important;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    line-height: 1.4;
-
-    letter-spacing: 1.5px;
-
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    transition: var(--transition-smooth);
-}
-
-
-.btn-demanto::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: -100%;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: -1;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--demanto-dark),
-            #1A1A1A
-        );
-
-    transition: left 0.5s ease;
-}
-
-
-.btn-demanto:hover::before {
-    left: 0;
-}
-
-
-.btn-demanto:hover {
-    color: #FFFFFF !important;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 15px rgba(179, 146, 86, 0.30);
-}
-
-
-.btn-demanto-outline {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 8px 20px;
-
-    border:
-        1.5px solid var(--demanto-gold);
-
-    border-radius: 25px;
-
-    background: transparent;
-
-    color: var(--demanto-gold);
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 10px;
-    font-weight: 500;
-
-    letter-spacing: 1.5px;
-
-    text-decoration: none;
-    text-transform: uppercase;
-
-    transition: var(--transition-smooth);
-}
-
-
-.btn-demanto-outline:hover {
-    background: var(--demanto-gold);
-
-    color: #FFFFFF !important;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 15px rgba(179, 146, 86, 0.20);
-}
-
-
-/* ============================================================
-   HEADER
-============================================================ */
-
-.header-area.header-default {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    z-index: 1050;
-
-    background: transparent;
-}
-
-
-/* ============================================================
-   HERO
-============================================================ */
-
-/*=========================================================
-                    HERO
-=========================================================*/
-
-.home-banner{
-    position:relative;
-    width:100%;
-    height:54vh;
-    min-height:460px;
-    max-height:54vh;
-    overflow:hidden;
-    z-index:1;
-}
-
-.home-banner .default-slider-container,
-.home-banner .swiper,
-.home-banner .swiper-wrapper,
-.home-banner .swiper-slide{
-    width:100%;
-    height:100%;
-}
-
-.hero-banner-image{
-    position:relative;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    isolation:isolate;
-}
-
-.hero-bg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:top center;
-    z-index:1;
-    transition:transform .8s ease;
-}
-
-.swiper-slide-active .hero-bg{
-    transform:scale(1.03);
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-    z-index:2;
-    background:linear-gradient(
-        90deg,
-        rgba(0,0,0,.35),
-        rgba(0,0,0,.15),
-        rgba(0,0,0,.05)
-    );
-}
-
-.hero-banner-image>.container{
-    position:relative;
-    z-index:3;
-    height:100%;
-}
-
-.slider-content{
-    position:relative;
-    z-index:5;
-    max-width:540px;
-    padding-top:70px;
-}
-
-.slider-title{
-    margin-bottom:18px;
-    color:#F4E5C3;
-    font-size:clamp(62px,4vw,68px);
-    line-height:.95;
-}
-
-.slider-desc{
-    max-width:420px;
-    color:#fff;
-    font-size:20px;
-    line-height:1.8;
-}
-
-/* Pagination */
-
-.default-slider-container .swiper-pagination{
-    bottom:30px !important;
-    z-index:10;
-}
-
-/*==========================
-        LARGE
-==========================*/
-
-@media(min-width:1600px){
-
-.home-banner{
-    height:64vh;
-    min-height:600px;
-}
-
-.slider-content{
-    padding-top:100px;
-}
-
-}
-
-/*==========================
-        TABLET
-==========================*/
-
-@media(max-width:991px){
-
-.home-banner{
-    height:500px;
-    min-height:600px;
-}
-
-.hero-bg{
-    object-position:right;
-}
-
-.slider-content{
-    max-width:430px;
-    padding-top:70px;
-}
-
-.slider-title{
-    font-size:48px;
-}
-
-}
-
-/*==========================
-        MOBILE
-==========================*/
-@media (max-width:767px){
-
-.home-banner{
-    margin-top:80px;
-    height:500px !important;
-    min-height:500px !important;
-    overflow:hidden;
-}
-
-.default-slider-container,
-.default-slider-container .swiper-wrapper,
-.default-slider-container .swiper-slide{
-    height:500px !important;
-}
-
-.hero-banner-image{
-    position:relative;
-    width:100%;
-    height:100%;
-}
-
-.hero-bg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:35% center;
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-}
-
-.hero-banner-image>.container{
-    position:absolute;
-    inset:0;
-    z-index:5;
-}
-
-}
-
-/*==========================
-      SMALL MOBILE
-==========================*/
-
-@media(max-width:480px){
-
-.home-banner{
-    height:480px;
-    min-height:480px;
-}
-
-.hero-bg{
-    object-position:right;
-}
-
-.slider-title{
-    font-size:28px;
-}
-
-.slider-desc{
-    font-size:18px;
-    display: none;
-}
-
-}
-
-
-/* ============================================================
-   FIXED WHATSAPP BUTTON
-============================================================ */
-/* =========================================================
-   WHATSAPP BUTTON
-========================================================= */
-
-.whatsapp-btn {
-    position: fixed !important;
-
-    right: 22px;
-
-    width: 56px;
-    height: 56px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    border-radius: 50%;
-
-    background: green;
-
-    color: #fff !important;
-
-    font-size: 25px;
-    line-height: 1;
-
-    text-decoration: none;
-
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
-
-    z-index: 99999;
-
-    transition:
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-/* =========================================================
-   GLOBAL BUTTON - NON HOME PAGES
-========================================================= */
-
-.whatsapp-global-btn {
-    top: 50% !important;
-
-    transform: translateY(-50%);
-}
-
-
-/* =========================================================
-   ICON
-========================================================= */
-
-.whatsapp-btn i {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin: 0;
-
-    color: #fff;
-
-    line-height: 1;
-}
-
-
-/* =========================================================
-   HOVER
-========================================================= */
-
-.whatsapp-btn:hover {
-    color: #fff !important;
-
-    transform: translateY(-50%) scale(1.08);
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 991px) {
-
-    .whatsapp-btn {
-        right: 18px;
-
-        width: 50px;
-        height: 50px;
-
-        font-size: 24px;
+    body {
+        background: var(--demanto-bg);
+        color: var(--demanto-dark);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 15px;
     }
 
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 767px) {
-
-    .whatsapp-btn {
-        right: 14px;
-
-        width: 47px;
-        height: 47px;
-
-        font-size: 23px;
+    section {
+        animation: fadeInUp 0.6s ease-out;
     }
 
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 575px) {
-
-    .whatsapp-btn {
-        right: 12px;
-
-        width: 45px;
-        height: 45px;
-
-        font-size: 22px;
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
-@media (max-width: 400px) {
-
-    .whatsapp-btn {
-        right: 10px;
-
-        width: 56px;
-        height: 56px;
-
-        font-size: 20px;
-    }
-
-}
-/* ============================================================
-   ABOUT SECTION
-============================================================ */
-
-.about-editorial-section {
-    position: relative;
-
-    padding: 30px 0;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #FBF9F4 0%,
-            #FFFFFF 100%
-        );
-}
-
-
-.about-editorial-section img {
-    display: block;
-
-    width: 100%;
-
-    transition: transform 0.5s ease;
-}
-
-
-.about-editorial-section img:hover {
-    transform: scale(1.025);
-}
-
-
-.about-title {
-    position: relative;
-
-    display: inline-block;
-
-    margin: 0 0 18px;
-
-    color: var(--demanto-dark);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 36px;
-    font-weight: 500;
-
-    line-height: 1.2;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-}
-
-
-.about-title::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: -8px;
-
-    width: 40px;
-    height: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--demanto-gold),
-            transparent
-        );
-}
-
-
-.about-description {
-    max-width: 90%;
-
-    margin-top: 15px;
-
-    color: var(--demanto-dark);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 18px;
-
-    line-height: 1.7;
-}
-
-
-/* ============================================================
-   METRICS
-============================================================ */
-
-.metric-number {
-    margin-bottom: 4px;
-
-    color: var(--demanto-gold);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 22px;
-    font-weight: 600;
-}
-
-
-.metric-item i {
-    color: var(--demanto-gold);
-
-    font-size: 22px;
-
-    transition: transform 0.3s ease;
-}
-
-
-.metric-item:hover i {
-    transform: translateY(-2px);
-}
-
-
-.metric-label {
-    margin-top: 6px;
-
-    color: #333333;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 10px;
-    font-weight: 500;
-
-    line-height: 1.3;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-}
-
-
-/* ============================================================
-   FEATURED PRODUCTS
-============================================================ */
-
-.featured-products {
-    padding: 28px 0 32px;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            180deg,
-            #FFFFFF,
-            #FAF8F3
-        );
-}
-
-
-.featured-products .position-relative {
-    padding: 0 2px;
-}
-
-
-.featured-products-slider {
-    overflow: hidden;
-}
-
-
-.featured-products-slider .swiper-slide {
-    height: auto;
-
-    padding-bottom: 4px;
-}
-
-
-.featured-product-card {
-    height: 100%;
-
-    overflow: hidden;
-
-    border:
-        1px solid rgba(179, 146, 86, 0.15);
-
-    border-radius: 20px;
-
-    background: #FFFFFF;
-
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-}
-
-
-.featured-product-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 15px 30px rgba(179, 146, 86, 0.12);
-}
-
-
-.featured-image {
-    position: relative;
-
-    width: 100%;
-
-    height: 380px;
-
-    overflow: hidden;
-
-    background: #F8F5EF;
-}
-
-
-.featured-image a {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-}
-
-
-.featured-image img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    padding: 20px;
-
-    object-fit: cover;
-
-    transition: transform 0.5s ease;
-}
-
-
-.featured-product-card:hover
-.featured-image img {
-    transform: scale(1.05);
-}
-
-
-.featured-content {
-    padding: 15px;
-
-    text-align: center;
-}
-
-
-.featured-content h4 {
-    margin: 0 0 7px;
-
-    color: var(--demanto-dark);
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 20px;
-    font-weight: 600;
-
-    line-height: 1.3;
-}
-
-
-.featured-content a {
-    color: var(--demanto-muted);
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    letter-spacing: 1px;
-
-    text-decoration: none;
-    text-transform: uppercase;
-
-    transition: color 0.3s ease;
-}
-
-
-.featured-content a:hover {
-    color: var(--demanto-gold);
-}
-
-
-/* ============================================================
-   FEATURED PAGINATION
-============================================================ */
-
-.featured-pagination {
-    position: relative;
-
-    text-align: center;
-}
-
-
-.featured-pagination
-.swiper-pagination-bullet {
-    width: 7px;
-    height: 7px;
-
-    margin: 0 4px !important;
-
-    background: var(--demanto-muted);
-
-    opacity: 0.35;
-
-    transition: all 0.3s ease;
-}
-
-
-.featured-pagination
-.swiper-pagination-bullet-active {
-    width: 22px;
-
-    border-radius: 20px;
-
-    background: var(--demanto-gold);
-
-    opacity: 1;
-}
-
-
-/* ============================================================
-   FEATURED NAVIGATION
-============================================================ */
-
-.featured-prev,
-.featured-next {
-    position: absolute;
-
-    top: 50%;
-
-    z-index: 10;
-
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid rgba(197, 161, 90, 0.35);
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.95);
-
-    color: var(--demanto-gold);
-
-    cursor: pointer;
-
-    transform: translateY(-50%);
-
-    transition: var(--transition-smooth);
-}
-
-
-.featured-prev {
-    left: -14px;
-}
-
-
-.featured-next {
-    right: -14px;
-}
-
-
-.featured-prev:hover,
-.featured-next:hover {
-    border-color: var(--demanto-gold);
-
-    background: var(--demanto-gold);
-
-    color: #FFFFFF;
-}
-
-
-/* ============================================================
-   EXHIBITIONS
-============================================================ */
-
-.exhibitions-area {
-    padding: 28px 0 32px;
-
-    overflow: hidden;
-
-    background: #FBF9F4;
-}
-
-
-.section-title-demanto {
-    color: #B39256;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 28px;
-    font-weight: 500;
-
-    letter-spacing: 1.5px;
-}
-
-
-.demanto-exhibition-link {
-    display: block;
-
-    text-decoration: none;
-}
-
-
-.demanto-exhibition-item {
-    width: 100%;
-
-    overflow: hidden;
-
-    border-radius: 15px;
-
-    background: #F4F0E8;
-}
-
-
-.demanto-exhibition-item img {
-    display: block;
-
-    width: 100%;
-    height: 400px;
-
-    object-fit: cover;
-
-    transition:
-        transform 0.5s ease,
-        opacity 0.5s ease;
-}
-
-
-.demanto-exhibition-item:hover img {
-    transform: scale(1.05);
-}
-
-
-.swiper-slide-prev
-.demanto-exhibition-item img,
-
-.swiper-slide-next
-.demanto-exhibition-item img {
-    opacity: 0.60;
-}
-
-
-/* ============================================================
-   EXHIBITION NAVIGATION
-============================================================ */
-
-.demanto-prev,
-.demanto-next {
-    position: absolute;
-
-    top: 50%;
-
-    z-index: 10;
-
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid #D7C7A4;
-
-    border-radius: 50%;
-
-    background: #FFFFFF;
-
-    color: #B39256;
-
-    cursor: pointer;
-
-    transform: translateY(-50%);
-
-    transition: var(--transition-smooth);
-}
-
-
-.demanto-prev {
-    left: -10px;
-}
-
-
-.demanto-next {
-    right: -10px;
-}
-
-
-.demanto-prev:hover,
-.demanto-next:hover {
-    border-color: #B39256;
-
-    background: #B39256;
-
-    color: #FFFFFF;
-}
-
-
-/* ============================================================
-   APPOINTMENT SECTION
-============================================================ */
-
-.appointment-section {
-    position: relative;
-
-    padding: 45px 0;
-
-    overflow: hidden;
-
-    background:
-        url('assets/img/appoint.jpeg')
-        center center / cover
-        no-repeat;
-}
-
-
-.appointment-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 1;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(14, 14, 14, 0.72),
-            rgba(50, 45, 39, 0.52)
-        );
-}
-
-
-.appointment-section .container {
-    position: relative;
-
-    z-index: 2;
-}
-
-
-.appointment-label {
-    color: #B39256;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 14px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-}
-
-
-.appointment-section h2 {
-    margin: 15px 0;
-
-    color: #FFFFFF;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 42px;
-    font-weight: 500;
-
-    line-height: 1.1;
-}
-
-
-.appointment-section p {
-    max-width: 420px;
-
-    margin: 0;
-
-    color: #E0E0E0;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 20px;
-
-    line-height: 1.9;
-}
-
-
-/* ============================================================
-   APPOINTMENT FORM
-============================================================ */
-
-.appointment-form {
-    padding: 38px;
-
-    border:
-        1px solid rgba(197, 161, 90, 0.14);
-
-    border-radius: 10px;
-
-    background:
-        rgba(255, 255, 255, 0.97);
-
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.12);
-}
-
-
-.appointment-form .form-control {
-    width: 100%;
-
-    height: 50px;
-
-    padding: 10px 12px;
-
-    border: 0;
-
-    border-bottom:
-        1px solid #DDDDDD;
-
-    border-radius: 0;
-
-    background: transparent;
-
-    color: var(--demanto-dark);
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 13px;
-
-    box-shadow: none;
-
-    transition: border-color 0.3s ease;
-}
-
-
-.appointment-form .form-control:focus {
-    border-color: var(--demanto-gold);
-
-    outline: none;
-
-    box-shadow: none;
-}
-
-
-.appointment-form textarea.form-control {
-    height: 120px;
-
-    padding-top: 14px;
-
-    resize: none;
-}
-
-
-.appointment-form .form-control::placeholder {
-    color: #888888;
-
-    opacity: 1;
-}
-
-
-/* ============================================================
-   DATE + TIME
-============================================================ */
-
-.appointment-input-wrapper {
-    position: relative;
-
-    width: 100%;
-}
-
-
-.appointment-input-label {
-    position: absolute;
-
-    top: 7px;
-    left: 12px;
-
-    z-index: 2;
-
-    color: #777777;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 10px;
-
-    line-height: 1;
-
-    pointer-events: none;
-}
-
-
-.appointment-date-time {
-    min-height: 58px;
-
-    padding-top: 23px !important;
-
-    padding-bottom: 7px !important;
-}
-
-
-/* ============================================================
-   SCROLLBAR
-============================================================ */
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-
-::-webkit-scrollbar-track {
-    background: var(--demanto-bg);
-}
-
-
-::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-
-    background: var(--demanto-gold);
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--demanto-gold-dark);
-}
-
-
-/* ============================================================
-   LARGE DESKTOP
-   1600PX+
-============================================================ */
-
-@media (min-width: 1600px) {
-
-    .home-banner {
-        height: 64vh;
-
-        min-height: 600px;
-
-        max-height:64vh;
-    }
-
-
-    .hero-banner-image {
-        background-position: 58% center;
-    }
-
-
-    .slider-content {
-        max-width: 700px;
-
-        padding-top: 100px;
-    }
-
-
-    .slider-title {
-        font-size:
-            clamp(60px, 4vw, 90px);
-    }
-
-
-    .slider-desc {
-        max-width: 520px;
-
-        font-size: 20px;
-    }
-
-
-    .default-slider-container
-    .swiper-pagination {
-        bottom: 40px !important;
-    }
-
-
-    .whatsapp-btn {
-        right: 30px;
-
-        width: 56px;
-        height: 56px;
-
-        font-size: 28px;
-    }
-}
-
-
-/* ============================================================
-   EXTRA LARGE DESKTOP
-   1800PX+
-============================================================ */
-
-@media (min-width: 1800px) {
-
-    .home-banner {
-        height: 66vh;
-
-        min-height: 700px;
-
-        max-height: 66vh;
-    }
-
-
-    .slider-content {
-        max-width: 700px;
-
-        padding-top: 110px;
-    }
-
-
-    .slider-title {
-        font-size: 78px;
-    }
-
-
-    .slider-desc {
-        max-width: 520px;
-
-        font-size: 20px;
-    }
-
-
-    .whatsapp-btn {
-        right: 35px;
-    }
-}
-
-
-/* ============================================================
-   SMALL DESKTOP
-============================================================ */
-
-@media (max-width: 1200px) {
-
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
     .luxury-heading {
-        font-size: 28px;
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 36px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--demanto-text);
+        background: linear-gradient(135deg, var(--demanto-dark), var(--demanto-red));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
-
-
-    .about-title {
-        font-size: 32px;
-    }
-
-
-    .metric-number {
-        font-size: 20px;
-    }
-
-
-    .featured-prev {
-        left: 4px;
-    }
-
-
-    .featured-next {
-        right: 4px;
-    }
-
-
-    .demanto-prev {
-        left: 4px;
-    }
-
-
-    .demanto-next {
-        right: 4px;
-    }
-}
-
-
-/* ============================================================
-   TABLET
-============================================================ */
-
-@media (max-width: 991px) {
-
-    .home-banner {
-        height: 600px;
-
-        min-height: 600px;
-
-        max-height: none;
-    }
-
-
-    .hero-banner-image {
-        background-position: 63% center;
-    }
-
-
-    .slider-content {
-        max-width: 460px;
-
-        padding-top: 70px;
-    }
-
-
-    .slider-title {
-        font-size: 48px;
-    }
-
-
-    .slider-desc {
-        max-width: 350px;
-    }
-
-
-    .default-slider-container
-    .swiper-pagination {
-        bottom: 25px !important;
-    }
-
-
-    .whatsapp-btn {
-        right: 18px;
-
-        width: 56px;
-        height: 56px;
-
-        font-size: 24px;
-    }
-
-
-    .about-description {
-        max-width: 100%;
-
-        font-size: 16px;
-    }
-
-
-    .about-editorial-section
-    .col-lg-6.ps-lg-3 {
-        margin-top: 24px;
-    }
-
-
-    .featured-image {
-        height: 400px;
-    }
-
-
-    .demanto-exhibition-item img {
-        height: 340px;
-    }
-
-
-    .appointment-section {
-        padding: 38px 0;
-    }
-
-
-    .appointment-section h2 {
-        font-size: 32px;
-
-        text-align: center;
-    }
-
-
-    .appointment-section p {
-        max-width: 650px;
-
-        margin: 0 auto;
-
-        text-align: center;
-    }
-
-
-    .appointment-label {
-        display: block;
-
-        text-align: center;
-    }
-
-
-    .appointment-form {
-        padding: 30px;
-    }
-}
-
-
-/* ============================================================
-   MOBILE
-   (Hero: image now shows FULLY, no cropping, no empty space.
-   The banner height follows the image's own aspect ratio
-   instead of a fixed pixel height.)
-============================================================ */
-
-@media (max-width: 767px) {
-
-    .luxury-heading {
-        font-size: 24px;
-    }
-
 
     .luxury-section-title {
-        margin-bottom: 20px;
+        position: relative;
+        margin-bottom: 28px;
+        text-align: center;
     }
 
+    .luxury-sub {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 4px;
+        color: var(--demanto-red);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
 
-    /* HERO — let height follow the image, no forced crop box */
+    .luxury-sub::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 30px;
+        height: 2px;
+        transform: translateX(-50%);
+        background: var(--demanto-red);
+    }
 
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-demanto {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 28px;
+        overflow: hidden;
+        border: 0;
+        border-radius: 30px;
+        background: linear-gradient(135deg, var(--demanto-dark), var(--demanto-red-dark));
+        color: var(--demanto-white) !important;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.4;
+        letter-spacing: 1.5px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+    }
+
+    .btn-demanto::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: inherit;
+        background: linear-gradient(135deg, var(--demanto-dark), #1A1A1A);
+        transition: left 0.5s ease;
+    }
+
+    .btn-demanto:hover::before {
+        left: 0;
+    }
+
+    .btn-demanto:hover {
+        color: var(--demanto-white) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(201, 169, 110, 0.30);
+    }
+
+    /* ============================================================
+       HEADER (unchanged)
+    ============================================================ */
+    .header-area.header-default {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        background: transparent;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
     .home-banner {
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
+        position: relative;
+        width: 100%;
+        height: 70vh;
+        min-height: 660px;
+        max-height: 70vh;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .home-banner .default-slider-container,
+    .home-banner .swiper,
+    .home-banner .swiper-wrapper,
+    .home-banner .swiper-slide {
+        width: 100%;
+        height: 100%;
     }
 
     .hero-banner-image {
         position: relative;
-        height: auto;
-        display: block; /* text/overlay now overlaid via absolute positioning below */
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        isolation: isolate;
     }
 
     .hero-bg {
-        position: static;
+        position: absolute;
+        inset: 0;
         width: 100%;
-        height: 9rlh;
-        object-fit: cover; /* shows the whole image, nothing cropped */
-        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        z-index: 1;
+        transition: transform .8s ease;
+    }
+
+    .swiper-slide-active .hero-bg {
+        transform: scale(1.03);
     }
 
     .hero-overlay {
         position: absolute;
         inset: 0;
+        z-index: 2;
+        background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(0,0,0,.15), rgba(0,0,0,.05));
     }
 
-    .hero-banner-image .container {
-        position: absolute;
-        inset: 0;
+    .hero-banner-image > .container {
+        position: relative;
+        z-index: 3;
         height: 100%;
     }
 
-    /* Swiper JS sets an inline pixel height on these elements at init.
-       Force them to shrink to the image's real height too, or a blank
-       gap (with the pagination dot floating in it) is left below the
-       image. !important is required to beat the inline JS style. */
-    .home-banner .default-slider-container,
-    .default-slider-container .swiper-wrapper,
-    .default-slider-container .swiper-slide {
-        height: auto !important;
-    }
-
-
-    .hero-banner-image > .container {
-        padding-left: 20px !important;
-
-        padding-right: 20px !important;
-    }
-
-
     .slider-content {
-        max-width: 300px;
-
-        padding-top: 72px;
+        position: relative;
+        z-index: 5;
+        max-width: 540px;
+        padding-top: 70px;
     }
-
 
     .slider-title {
-        margin-bottom: 14px;
-
-        font-size: 36px;
-
-        line-height: 1;
-
+        margin-bottom: 20px;
+        color: #F4E5C3;
+        font-size: clamp(62px, 4.5vw, 72px);
+        line-height: .95;
         letter-spacing: 1px;
     }
 
-
     .slider-desc {
-        max-width: 265px;
-
-        font-size: 18px;
-
-        line-height: 1.65;
+        max-width: 420px;
+        color: #fff;
+        font-size: 22px;
+        line-height: 1.8;
     }
 
-
-    .default-slider-container
-    .swiper-pagination {
-        bottom: 20px !important;
+    .default-slider-container .swiper-pagination {
+        bottom: 30px !important;
+        z-index: 10;
     }
 
+    .swiper-pagination-bullet-active {
+        background: var(--demanto-red);
+    }
 
+    /* Hero responsive */
+    @media (min-width: 991px) {
+        .home-banner { margin-top: 3%; }
+    }
+    @media (min-width: 1600px) {
+        .home-banner { height: 64vh; min-height: 600px; }
+        .slider-content { padding-top: 100px; }
+    }
+    @media (max-width: 991px) {
+        .home-banner { height: 500px; min-height: 600px; margin-top: 18%; }
+        .hero-bg { object-position: right; }
+        .slider-content { max-width: 430px; padding-top: 70px; }
+        .slider-title { font-size: 48px; }
+    }
+    @media (max-width: 767px) {
+        .home-banner { margin-top: 80px; height: 500px !important; min-height: 500px !important; overflow: hidden; margin-top: 18%; }
+        .default-slider-container, .default-slider-container .swiper-wrapper, .default-slider-container .swiper-slide { height: 500px !important; }
+        .hero-banner-image { position: relative; width: 100%; height: 100%; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% center; }
+        .hero-overlay { position: absolute; inset: 0; }
+        .hero-banner-image > .container { position: absolute; inset: 0; z-index: 5; }
+    }
+    @media (max-width: 480px) {
+        .home-banner { height: 480px; min-height: 480px; }
+        .hero-bg { object-position: right; }
+        .slider-title { font-size: 32px; }
+        .slider-desc { font-size: 18px; display: none; }
+    }
+
+    /* ============================================================
+       WHATSAPP BUTTON
+    ============================================================ */
     .whatsapp-btn {
-        right: 14px;
-
+        position: fixed !important;
+        right: 22px;
         width: 56px;
         height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+        background: #25D366;
+        color: #fff !important;
+        font-size: 25px;
+        line-height: 1;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+        z-index: 99999;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .whatsapp-global-btn { top: 50% !important; transform: translateY(-50%); }
+    .whatsapp-btn i { display: flex; align-items: center; justify-content: center; margin: 0; color: #fff; line-height: 1; }
+    .whatsapp-btn:hover { color: #fff !important; transform: translateY(-50%) scale(1.08); }
+    @media (max-width: 991px) { .whatsapp-btn { right: 18px; width: 50px; height: 50px; font-size: 24px; } }
+    @media (max-width: 767px) { .whatsapp-btn { right: 14px; width: 47px; height: 47px; font-size: 23px; } }
+    @media (max-width: 575px) { .whatsapp-btn { right: 12px; width: 45px; height: 45px; font-size: 22px; } }
+    @media (max-width: 400px) { .whatsapp-btn { right: 10px; width: 56px; height: 56px; font-size: 20px; } }
 
-        font-size: 23px;
+    /* ============================================================
+       ABOUT – redesigned (merged from inline styles)
+    ============================================================ */
+    .about-editorial-root {
+        background-color: var(--demanto-white);
+        color: var(--demanto-text);
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        min-height: 20vh;
+        display: flex;
+        align-items: center;
+        padding: 40px 0;
+        position: relative;
+        overflow: hidden;
     }
 
-
-    /* ABOUT */
-
-    .about-editorial-section {
-        padding: 26px 0;
+    .art-background-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
     }
 
-
-    .about-title {
-        font-size: 26px;
+    .large-bg-text {
+        position: absolute;
+        top: 50%;
+        left: 13%;
+        transform: translateY(-50%);
+        font-size: 10vw;
+        font-weight: 900;
+        color: #d97da50d !important; /* subtle pink tint */
+        letter-spacing: 1px;
+        line-height: 0.8;
+        white-space: nowrap;
+        z-index: 1;
     }
 
-
-    .about-description {
-        font-size: 16px;
-
-        line-height: 1.65;
+    .botanical-svg {
+        position: absolute;
+        width: 25%;
+        top: 10%;
+        right: -2%;
+        z-index: 1;
+        transform: rotate(-15deg);
     }
 
+    .wide-content-wrapper {
+        width: 100%;
+        z-index: 2;
+        padding: 0 15px;
+    }
 
-    .btndemantodiv {
+    .eyebrow {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #D97DA5 !important;
+        font-weight: 700;
+    }
+
+    .display-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--demanto-text);
+        text-transform: capitalize;
+    }
+
+    .accent-line {
+        width: 40px;
+        height: 1px;
+        background-color: #D97DA5 !important;
+    }
+
+    .editorial-text {
+        font-size: 0.75rem;
+        line-height: 2.2;
+        color: var(--demanto-text);
+        font-weight: 400;
+        letter-spacing: 0.4px;
+    }
+
+    .about-sig-logo {
+        width: 55px;
+        height: auto;
+        opacity: 0.9;
+    }
+
+    .sig-font {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: #1a1a1a;
+    }
+
+    .dot-divider {
+        width: 4px;
+        height: 4px;
+        background-color: #D97DA5 !important;
+        border-radius: 50%;
+    }
+
+    .motto {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #999;
+    }
+
+    @media (max-width: 768px) {
+            .collections-title .title-main {
+                font-size: 24px !important;
+            }
+        .large-bg-text { font-size: 10vw; left: 4%; letter-spacing: 1px; }
+        .display-title { font-size: 1.1rem; margin-top: 20px !important; }
+        .editorial-text { font-size: 0.7rem; max-width: 100%; }
+        .footer-compact { flex-direction: column; align-items: flex-start; gap: 15px; }
+        .dot-divider { display: none; }
+    }
+
+    /* ============================================================
+       SECTION TITLES (unified)
+    ============================================================ */
+    .collections-title {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .collections-title .title-main {
+        display: block;
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 500;
+        font-size: 36px;
+        letter-spacing: 1px;
+        color: var(--demanto-dark);
+        text-transform: uppercase;
+    }
+
+    .divider {
+        width: 80px;
+        height: 2px;
+        margin: 10px auto 0;
+        background: var(--demanto-red);
+        position: relative;
+    }
+    .divider span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        background: var(--demanto-red);
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    /* ============================================================
+       FEATURED PRODUCTS
+    ============================================================ */
+    .featured-products {
+        padding: 10px 0 10px;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--demanto-white), #FAF8F3);
+    }
+
+    .featured-products .position-relative {
+        padding: 0 2px;
+    }
+
+    .featured-products-slider {
+        overflow: hidden;
+    }
+    .featured-products-slider .swiper-slide {
+        height: auto;
+        padding-bottom: 4px;
+    }
+
+    .featured-product-card {
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid var(--luxury-border);
+        border-radius: 20px;
+        background: var(--demanto-white);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .featured-product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(201, 169, 110, 0.12);
+    }
+
+    .featured-image {
+        position: relative;
+        width: 100%;
+        height: 380px;
+        overflow: hidden;
+        background: #F8F5EF;
+    }
+    .featured-image a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .featured-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .featured-product-card:hover .featured-image img {
+        transform: scale(1.05);
+    }
+
+    .featured-content {
+        padding: 18px 15px;
+        text-align: center;
+    }
+    .featured-content h4 {
+        margin: 0 0 8px;
+        color: var(--demanto-dark);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+    .featured-content a {
+        color: var(--demanto-muted);
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+    }
+    .featured-content a:hover {
+        color: var(--demanto-red);
+    }
+
+    .featured-pagination {
+        position: relative;
+        text-align: center;
+    }
+    .featured-pagination .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+        margin: 0 4px !important;
+        background: var(--demanto-muted);
+        opacity: 0.35;
+        transition: all 0.3s ease;
+    }
+    .featured-pagination .swiper-pagination-bullet-active {
+        width: 22px;
+        border-radius: 20px;
+        background: var(--demanto-red);
+        opacity: 1;
+    }
+
+    .featured-prev, .featured-next {
+        position: absolute;
+        top: 50%;
+        z-index: 10;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--luxury-border);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--demanto-red);
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition: var(--transition-smooth);
+    }
+    .featured-prev { left: -14px; }
+    .featured-next { right: -14px; }
+    .featured-prev:hover, .featured-next:hover {
+        border-color: var(--demanto-red);
+        background: var(--demanto-red);
+        color: var(--demanto-white);
+    }
+
+    /* ============================================================
+       LATEST ARRIVALS & BEST SELLERS – gold footers
+    ============================================================ */
+    .latest-arrivals-section,
+    .best-sellers-section {
+        width: 100%;
+        padding: 10px 0 10px;
+        overflow: hidden;
+    }
+    .latest-arrivals-section {
+        background: var(--demanto-white);
+    }
+    .best-sellers-section {
+        background: #faf8f5;
+    }
+
+    .latest-arrivals-grid,
+    .best-sellers-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 30px;
+        width: 100%;
+    }
+
+    .latest-arrival-card,
+    .best-seller-card {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        background: var(--demanto-white);
+        border-radius: 4px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+        transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .latest-arrival-card:hover,
+    .best-seller-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+    }
+
+    .latest-arrival-image-link,
+    .best-seller-image-link {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .latest-arrival-image,
+    .best-seller-image {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        background: #f5f3f0;
+    }
+    .latest-arrival-image img,
+    .best-seller-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform .65s cubic-bezier(.25, .46, .45, .94);
+    }
+    .latest-arrival-card:hover .latest-arrival-image img,
+    .best-seller-card:hover .best-seller-image img {
+        transform: scale(1.045);
+    }
+
+    .latest-arrival-badges,
+    .best-seller-badges {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+    }
+    .latest-stock-badge,
+    .best-seller-stock {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 70px;
+        padding: 6px 10px;
+        border-radius: 5px;
+        background: var(--demanto-red);
+        color: var(--demanto-white);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .latest-stock-badge.out-of-stock,
+    .best-seller-stock.out-of-stock {
+        background: #777777;
+    }
+    .latest-discount-badge,
+    .best-seller-discount {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 55px;
+        padding: 6px 9px;
+        border-radius: 5px;
+        background: #00a51a;
+        color: var(--demanto-white);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .best-seller-label {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 5;
+        padding: 6px 10px;
+        background: rgba(255,255,255,.92);
+        color: var(--demanto-dark);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+    }
+
+    .latest-arrival-footer,
+    .best-seller-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 58px;
+        padding: 0 20px;
+        background: var(--demanto-red);
+        color: var(--demanto-white);
+        text-decoration: none;
+        transition: background .3s ease;
+    }
+    .latest-arrival-card:hover .latest-arrival-footer,
+    .best-seller-card:hover .best-seller-footer {
+        background: var(--demanto-red-dark);
+    }
+    .latest-arrival-name,
+    .best-seller-name {
+        min-width: 0;
+        overflow: hidden;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--demanto-white);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .latest-arrival-arrow,
+    .best-seller-arrow {
+        flex-shrink: 0;
+        margin-left: 15px;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--demanto-white);
+        transition: transform .3s ease;
+    }
+    .latest-arrival-card:hover .latest-arrival-arrow,
+    .best-seller-card:hover .best-seller-arrow {
+        transform: translateX(5px);
+    }
+
+    .latest-arrivals-empty,
+    .best-sellers-empty {
+        grid-column: 1 / -1;
+        padding: 60px 20px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        color: #777777;
+    }
+
+    .latest-arrivals-view-all,
+    .best-sellers-view-all {
+        margin-top: 35px;
         text-align: center;
     }
 
-
-    /* FEATURED */
-
-    .featured-products {
-        padding: 24px 0 28px;
-    }
-
-
-    .featured-image {
-        height: 320px;
-    }
-
-
-    .featured-image img {
-        padding: 15px;
-    }
-
-
-    .featured-prev,
-    .featured-next {
-        width: 32px;
-        height: 32px;
-    }
-
-
-    /* EXHIBITIONS */
-
+    /* ============================================================
+       EXHIBITIONS
+    ============================================================ */
     .exhibitions-area {
-        padding: 24px 0 28px;
+        padding: 32px 0 40px;
+        overflow: hidden;
+        background: #FBF9F4;
     }
 
-
-    .demanto-exhibition-item img {
-        height: 250px;
+    .section-title-demanto {
+        color: var(--demanto-red);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 34px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
     }
 
-
-    .demanto-prev,
-    .demanto-next {
-        width: 32px;
-        height: 32px;
+    .demanto-exhibition-link {
+        display: block;
+        text-decoration: none;
     }
 
-
-    /* APPOINTMENT */
-
-    .appointment-section {
-        padding: 32px 0;
-    }
-
-
-    .appointment-section h2 {
-        font-size: 30px;
-    }
-
-
-    .appointment-section p {
-        font-size: 16px;
-
-        line-height: 1.75;
-    }
-
-
-    .appointment-form {
-        margin-top: 5px;
-
-        padding: 25px 20px;
-    }
-
-
-    .appointment-date-time {
+    .demanto-exhibition-item {
         width: 100%;
-
-        appearance: auto;
-
-        -webkit-appearance: auto;
+        overflow: hidden;
+        border-radius: 15px;
+        background: #F4F0E8;
     }
-
-
-    .appointment-form
-    .btn-demanto {
+    .demanto-exhibition-item img {
+        display: block;
         width: 100%;
+        height: 420px;
+        object-fit: cover;
+        transition: transform 0.5s ease, opacity 0.5s ease;
     }
-}
-
-
-/* ============================================================
-   SMALL MOBILE
-============================================================ */
-
-@media (max-width: 575px) {
-
-    /* HERO — keep height auto (do NOT reintroduce a fixed height here) */
-
-    .home-banner {
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
+    .demanto-exhibition-item:hover img {
+        transform: scale(1.05);
+    }
+    .swiper-slide-prev .demanto-exhibition-item img,
+    .swiper-slide-next .demanto-exhibition-item img {
+        opacity: 0.60;
     }
 
-    .hero-banner-image > .container {
-        padding-left: 16px !important;
-
-        padding-right: 16px !important;
+    .demanto-prev, .demanto-next {
+        position: absolute;
+        top: 50%;
+        z-index: 10;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--luxury-border);
+        border-radius: 50%;
+        background: var(--demanto-white);
+        color: var(--demanto-red);
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition: var(--transition-smooth);
+    }
+    .demanto-prev { left: -10px; }
+    .demanto-next { right: -10px; }
+    .demanto-prev:hover, .demanto-next:hover {
+        border-color: var(--demanto-red);
+        background: var(--demanto-red);
+        color: var(--demanto-white);
     }
 
-
-    .slider-content {
-        max-width: 270px;
-
-        padding-top: 68px;
+    /* ============================================================
+       RESPONSIVE ADJUSTMENTS
+    ============================================================ */
+    @media (max-width: 991px) {
+        .latest-arrivals-grid, .best-sellers-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .latest-arrival-image, .best-seller-image { height: 420px; }
     }
 
-
-    .slider-title {
-        font-size: 32px;
+    @media (max-width: 767px) {
+        .latest-arrivals-section, .best-sellers-section {
+            padding: 10px 0 10px;
+        }
+        .latest-arrivals-grid, .best-sellers-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .latest-arrival-image, .best-seller-image { height: 310px; }
+        .latest-arrival-badges, .best-seller-badges { top: 8px; right: 8px; gap: 5px; }
+        .latest-stock-badge, .best-seller-stock { min-width: 58px; padding: 5px 7px; font-size: 9px; }
+        .latest-discount-badge, .best-seller-discount { min-width: 47px; padding: 5px 6px; font-size: 8px; }
+        .latest-arrival-footer, .best-seller-footer { min-height: 48px; padding: 0 12px; }
+        .latest-arrival-name, .best-seller-name { font-size: 11px; }
+        .latest-arrival-arrow, .best-seller-arrow { font-size: 19px; margin-left: 8px; }
+        .best-seller-label { font-size: 7px; padding: 4px 6px; }
     }
 
-
-    .slider-desc {
-        max-width: 235px;
-
-        font-size: 18px;
-
-        line-height: 1.55;
+    @media (max-width: 480px) {
+        .latest-arrivals-grid, .best-sellers-grid { gap: 10px; }
+        .latest-arrival-image, .best-seller-image { height: 255px; }
+        .latest-arrival-footer, .best-seller-footer { min-height: 45px; padding: 0 10px; }
+        .latest-arrival-name, .best-seller-name { font-size: 10px; }
+        .latest-arrival-arrow, .best-seller-arrow { font-size: 18px; }
     }
 
-
-    .whatsapp-btn {
-        right: 12px;
-
-        width: 56px;
-        height: 56px;
-
-        font-size: 22px;
-    }
-
-
-    /* ABOUT */
-
-    .about-editorial-section {
-        padding: 22px 0;
-    }
-
-
-    .about-title {
-        font-size: 28px;
-    }
-
-
-    .about-description {
-        font-size: 16px;
-    }
-
-
-    /* PRODUCTS */
-
-    .featured-image {
-        height: 255px;
-    }
-
-
-    .featured-content h4 {
-        font-size: 20px;
-    }
-
-
-    /* EXHIBITIONS */
-
-    .demanto-exhibition-item img {
-        height: 215px;
-    }
-
-
-    /* APPOINTMENT */
-
-    .appointment-section h2 {
-        font-size: 32px;
-    }
-
-
-    .appointment-form {
-        padding: 22px 16px;
-    }
-
-
-    .appointment-form
-    .form-control {
-        font-size: 12px;
-    }
-}
-
-
-/* ============================================================
-   VERY SMALL MOBILE
-============================================================ */
-
-@media (max-width: 400px) {
-
-    /* HERO — keep height auto (do NOT reintroduce a fixed height here) */
-
-    .home-banner {
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: none !important;
-    }
-
-
-    .slider-content {
-        max-width: 235px;
-
-        padding-top: 65px;
-    }
-
-
-    .slider-title {
-        font-size: 28px;
-    }
-
-
-    .slider-desc {
-        max-width: 210px;
-
-        font-size: 18px;
-    }
-
-
-    .default-slider-container
-    .swiper-pagination-bullet {
-        width: 7px;
-
-        height: 7px;
-    }
-
-
-    .default-slider-container
-    .swiper-pagination-bullet-active {
-        width: 24px;
-    }
-
-
-    .whatsapp-btn {
-        right: 10px;
-
-        width: 56px;
-        height: 56px;
-
-        font-size: 20px;
-    }
-
-
-    /* ABOUT */
-
-    .about-title {
-        font-size: 28px;
-    }
-
-
-    /* PRODUCTS */
-
-    .featured-image {
-        height: 235px;
-    }
-
-
-    /* EXHIBITIONS */
-
-    .demanto-exhibition-item img {
-        height: 195px;
-    }
-
-
-    /* APPOINTMENT */
-
-    .appointment-section {
-        padding: 28px 0;
-    }
-
-
-    .appointment-section h2 {
-        font-size: 30px;
-    }
-
-
-    .appointment-form {
-        padding: 20px 14px;
-    }
-}
-    </style>
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--demanto-bg); }
+    ::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--demanto-red); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--demanto-red-dark); }
+</style>
 
 <!-- Hero Slider Section -->
-<!-- Hero Slider Section -->
-<!-- Hero Banner -->
 <section class="home-banner">
-
     <div class="swiper default-slider-container">
-
         <div class="swiper-wrapper">
-
             @forelse($sliders as $hero)
-
             <div class="swiper-slide">
-
                 <div class="hero-banner-image">
-
-                    <img
-                        class="hero-bg"
-                        src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}"
-                        alt="{{ $hero->title }}"
-                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
-                        fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
-                        decoding="async">
-
+                    <img class="hero-bg" src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}" alt="{{ $hero->title }}" loading="{{ $loop->first ? 'eager' : 'lazy' }}" fetchpriority="{{ $loop->first ? 'high' : 'auto' }}" decoding="async">
                     <div class="hero-overlay"></div>
-
                     <div class="container h-100 p-4">
-
                         <div class="row h-100 align-items-center">
-
                             <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
-
                                 <div class="slider-content">
-
-                                    <h1 class="slider-title">
-                                        {{ $hero->title }}
-                                    </h1>
-
-                                    <p class="slider-desc">
-                                        {{ $hero->description }}
-                                    </p>
-
+                                    <h1 class="slider-title">{{ $hero->title }}</h1>
+                                    <p class="slider-desc">{{ $hero->description }}</p>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             @empty
-
             <div class="swiper-slide">
-
                 <div class="hero-banner-image">
-
-                    <img
-                        class="hero-bg"
-                        src="{{ asset('assets/img/slider-placeholder.jpg') }}"
-                        alt="Demanto"
-                        loading="eager"
-                        fetchpriority="high">
-
+                    <img class="hero-bg" src="{{ asset('assets/img/slider-placeholder.jpg') }}" alt="Demanto" loading="eager" fetchpriority="high">
                     <div class="hero-overlay"></div>
-
                     <div class="container h-100 p-4">
-
                         <div class="row h-100 align-items-center">
-
                             <div class="col-lg-7">
-
                                 <div class="slider-content">
-
-                                    <h1 class="slider-title">
-                                        Timeless Luxury
-                                    </h1>
-
-                                    <p class="slider-desc">
-                                        Where diamonds become timeless masterpieces.
-                                    </p>
-
+                                    <h1 class="slider-title">Timeless Luxury</h1>
+                                    <p class="slider-desc">Where diamonds become timeless masterpieces.</p>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
             @endforelse
-
         </div>
-
         <div class="swiper-pagination"></div>
-
     </div>
-
 </section>
-    <a
-        href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
-        class="whatsapp-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contact DEMANTO on WhatsApp"
-    >
-        <i class="fab fa-whatsapp"></i>
-    </a>
-<!-- Signature Collections Section -->
-@include('frontend.collections.category.index')
 
-<!-- About Editorial Section -->
-<section class="about-editorial-section">
-    <div class="container p-3">
-        <div class="row align-items-start g-3">
-            <div class="col-lg-6">
-                <div class="row g-2">
-                    <div class="col-7">
-                        <div class="position-relative overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgone) ? asset('storage/'.$aboutData->imgone) : asset('assets/img/craft-1.jpg') }}"
-                                 class="w-100" style="height: 350px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Luxury Craftsmanship" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="mb-2 overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgtwo) ? asset('storage/'.$aboutData->imgtwo) : asset('assets/img/craft-2.jpg') }}"
-                                 class="w-100" style="height: 170px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Fine Jewelry" loading="lazy">
-                        </div>
-                        <div class="overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgthree) ? asset('storage/'.$aboutData->imgthree) : asset('assets/img/craft-3.jpg') }}"
-                                 class="w-100" style="height: 170px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Expert Craftsmanship" loading="lazy">
-                        </div>
-                    </div>
-                </div>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contact DEMANTO on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- About Section -->
+<section>
+    <div class="about-editorial-root">
+        @if($about)
+        <div class="art-background-layer">
+            <div class="large-bg-text">{{ $about->title ?? 'About Us' }}</div>
+            <svg class="botanical-svg" viewBox="0 0 100 100" fill="none">
+                <path d="M10 80C30 80 80 60 90 10M10 80C40 70 80 40 90 10" stroke="#b95c19" stroke-width="0.2" opacity="0.2"/>
+            </svg>
+        </div>
+
+        <div class="wide-content-wrapper px-4 px-md-5 position-relative z-2">
+            <div class="header-minimal mb-4">
+                <h2 class="display-title mt-2">{{ $about->title ?? 'About Us' }}</h2>
             </div>
-
-            <div class="col-lg-6 ps-lg-3">
-                <h2 class="about-title">
-                    {{ $aboutData->title ?? 'Crafting Timeless Elegance Since 2005' }}
-                </h2>
-                <div class="about-description">
-                    {!! nl2br(e($aboutData->description ?? 'With more than 20 years of expertise, DEMANTO is a leading name in fine jewelry manufacturing.')) !!}
-                </div>
-                
-                <hr class="my-2" style="border-color: var(--luxury-border);">
-                
-            
-
-                <div class="mt-3 btndemantodiv">
-                    <a href="{{ url('/aboutus') }}" class="btn-demanto">Discover Our Story</a>
-                </div>
+            <div class="description-full-width">
+                <p class="editorial-text" v-html="">{!! nl2br(e($about->description)) !!}</p>
             </div>
+        </div>
+        @else
+        <div class="container py-5 text-center">
+            <p>About Us content is currently being updated.</p>
+        </div>
+        @endif
+    </div>
+</section>
+
+<!-- Latest Arrivals -->
+<section class="latest-arrivals-section">
+    <div class="container">
+        <div class="collections-title mb-4">
+            <span class="title-main">Latest Arrivals</span>
+            <div class="divider"><span></span></div>
+        </div>
+
+        <div class="latest-arrivals-grid">
+            @forelse($newArrivalsProducts->take(6) as $product)
+                <div class="latest-arrival-card">
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-image-link">
+                        <div class="latest-arrival-image">
+                            @if($product->productImages->count())
+                                <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                            @else
+                                <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $product->name }}" loading="lazy">
+                            @endif
+                            <div class="latest-arrival-badges">
+                                @if($product->quantity > 0)
+                                    <span class="latest-stock-badge">In Stock</span>
+                                @else
+                                    <span class="latest-stock-badge out-of-stock">Out of Stock</span>
+                                @endif
+                                @if($product->original_price > 0 && $product->selling_price < $product->original_price)
+                                    @php $discount = round((($product->original_price - $product->selling_price) / $product->original_price) * 100); @endphp
+                                    <span class="latest-discount-badge">-{{ $discount }}%</span>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-footer">
+                        <span class="latest-arrival-name">{{ $product->name }}</span>
+                        <span class="latest-arrival-arrow">→</span>
+                    </a>
+                </div>
+            @empty
+                <div class="latest-arrivals-empty"><p>No latest arrivals available.</p></div>
+            @endforelse
+        </div>
+
+        <div class="latest-arrivals-view-all">
+            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
         </div>
     </div>
 </section>
 
-<!-- Featured Products Section -->
+<!-- Featured Products -->
 <section class="featured-products">
     <div class="container">
         <div class="collections-title mb-3">
-
-            <span>Featured Pieces</span>
-
-            <div class="divider">
-                <span></span>
-            </div>
-
+            <span class="title-main">Featured Pieces</span>
+            <div class="divider"><span></span></div>
         </div>
 
         <div class="position-relative">
@@ -2291,10 +1036,7 @@ section {
                             <div class="featured-image">
                                 <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
                                     @if($product->productImages->count())
-                                        <img src="{{ asset($product->productImages[0]->image) }}"
-                                            loading="eager"
-    decoding="async"
-                                         wire:click alt="{{ $product->name }}">
+                                        <img src="{{ asset($product->productImages[0]->image) }}" loading="lazy" decoding="async" alt="{{ $product->name }}">
                                     @else
                                         <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="">
                                     @endif
@@ -2320,412 +1062,141 @@ section {
     </div>
 </section>
 
-<!-- Exhibitions Section - UNCHANGED -->
+<!-- Best Sellers -->
+<section class="best-sellers-section">
+    <div class="container">
+        <div class="collections-title mb-4">
+            <span class="title-main">Best Sellers</span>
+            <div class="divider"><span></span></div>
+        </div>
+
+        <div class="best-sellers-grid">
+            @forelse($bestSellersProducts->take(6) as $product)
+                <div class="best-seller-card">
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="best-seller-image-link">
+                        <div class="best-seller-image">
+                            @if($product->productImages->count())
+                                <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                            @else
+                                <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
+                            @endif
+                            <div class="best-seller-badges">
+                                @if($product->quantity > 0)
+                                    <span class="best-seller-stock">In Stock</span>
+                                @else
+                                    <span class="best-seller-stock out-of-stock">Out of Stock</span>
+                                @endif
+                                @if($product->original_price > 0 && $product->selling_price < $product->original_price)
+                                    @php $discount = round((($product->original_price - $product->selling_price) / $product->original_price) * 100); @endphp
+                                    <span class="best-seller-discount">-{{ $discount }}%</span>
+                                @endif
+                            </div>
+                            <span class="best-seller-label">Best Seller</span>
+                        </div>
+                    </a>
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="best-seller-footer">
+                        <span class="best-seller-name">{{ $product->name }}</span>
+                        <span class="best-seller-arrow">→</span>
+                    </a>
+                </div>
+            @empty
+                <div class="best-sellers-empty"><p>Best sellers will appear here once customers start shopping.</p></div>
+            @endforelse
+        </div>
+
+        <div class="best-sellers-view-all">
+            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
+        </div>
+    </div>
+</section>
+
+<!-- Exhibitions -->
 <section class="exhibitions-area">
     <div class="container">
         <div class="collections-title mb-3">
-
-            <span>EXHIBITIONS & EVENTS</span>
-
-            <div class="divider">
-                <span></span>
-            </div>
-
+            <span class="title-main">Exhibitions & Events</span>
+            <div class="divider"><span></span></div>
         </div>
         <div class="position-relative">
             <div class="swiper exhibitions-slider">
                 <div class="swiper-wrapper">
-@foreach($blogs as $exhibition)
-<div class="swiper-slide">
-
-    <a href="{{ url('blog/details/'.$exhibition->id) }}"
-       class="demanto-exhibition-link">
-
-        <div class="demanto-exhibition-item">
-
-            <img src="{{ asset($exhibition->image) }}"
-                 alt="{{ $exhibition->title }}">
-
- 
-
-        </div>
-
-    </a>
-
-</div>
-@endforeach
+                    @foreach($blogs as $exhibition)
+                        <div class="swiper-slide">
+                            <a href="{{ url('blog/details/'.$exhibition->id) }}" class="demanto-exhibition-link">
+                                <div class="demanto-exhibition-item">
+                                    <img src="{{ asset($exhibition->image) }}" alt="{{ $exhibition->title }}">
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div class="demanto-prev"><i class="fa fa-angle-left"></i></div>
             <div class="demanto-next"><i class="fa fa-angle-right"></i></div>
         </div>
-
         <div class="text-center mt-4">
-            <a href="{{ url('/blogs') }}" class="btn-demanto">VIEW ALL </a>
+            <a href="{{ url('/blogs') }}" class="btn-demanto">View All</a>
         </div>
     </div>
-</section>
-
-<!-- Private Appointment Section -->
-<section class="appointment-section">
-
-    <div class="appointment-overlay"></div>
-
-    <div class="container position-relative">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-8 mb-5 mb-lg-0">
-
-                {{-- <span class="appointment-label">
-                    PRIVATE CONSULTATION
-                </span> --}}
-
-                <h2>Book An Appointment</h2>
-
-                <p>
-                    Reserve a private consultation with one of our specialists and discover our exclusive collections in a personalized luxury experience.
-                </p>
-
-            </div>
-
-            <div class="col-lg-4">
-
-            <div class="appointment-form">
-
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-            <i class="fa fa-check-circle me-2"></i>
-            {{ session('success') }}
-
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-            </button>
-        </div>
-    @endif
-
-    @if($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-            <ul class="mb-0 ps-3">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-            </button>
-        </div>
-    @endif
-
-    <form action="{{ url('/book-appointment') }}" method="POST">
-
-        @csrf
-
-        <div class="row">
-
-            <div class="col-md-6 mb-3">
-                <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Full Name"
-                    value="{{ old('name') }}"
-                    required>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    placeholder="Email Address"
-                    value="{{ old('email') }}">
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <input
-                    type="text"
-                    name="phone"
-                    class="form-control"
-                    placeholder="Phone Number"
-                    value="{{ old('phone') }}"
-                    required>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <input
-                    type="text"
-                    name="subject"
-                    class="form-control"
-                    placeholder="Subject"
-                    value="{{ old('subject') }}"
-                    required>
-            </div>
-
-<div class="col-md-6 mb-3">
-
-    <div class="appointment-input-wrapper">
-
-        <span class="appointment-input-label">
-            Appointment Date
-        </span>
-
-        <input
-            type="date"
-            name="appointment_date"
-            class="form-control appointment-date-time"
-            value="{{ old('appointment_date') }}"
-            required>
-
-    </div>
-
-</div>
-
-
-<div class="col-md-6 mb-3">
-
-    <div class="appointment-input-wrapper">
-
-        <span class="appointment-input-label">
-            Appointment Time
-        </span>
-
-        <input
-            type="time"
-            name="appointment_time"
-            class="form-control appointment-date-time"
-            value="{{ old('appointment_time') }}"
-            required>
-
-    </div>
-
-</div>
-
-            <div class="col-12 mb-4">
-                <textarea
-                    class="form-control"
-                    rows="4"
-                    name="message"
-                    placeholder="Your Message"
-                    required>{{ old('message') }}</textarea>
-            </div>
-
-            <div class="col-12">
-                <button type="submit" class="btn-demanto">
-                    BOOK APPOINTMENT
-                </button>
-            </div>
-
-        </div>
-
-    </form>
-
-</div>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
-    /*
-    ============================================================
-    WHATSAPP BUTTON POSITION
-    ============================================================
-    */
-
-const whatsappButton =
-    document.querySelector(
-        '.home-default-wrapper > .whatsapp-btn'
-    );
-
-    const homeBanner =
-        document.querySelector('.home-banner');
-
+    /* ======== WhatsApp Position ======== */
+    const whatsappButton = document.querySelector('.home-default-wrapper > .whatsapp-btn');
+    const homeBanner = document.querySelector('.home-banner');
 
     function positionWhatsappButton() {
-
-        if (!whatsappButton || !homeBanner) {
-            return;
-        }
-
-
-        /*
-        Get slider position relative to browser viewport.
-        */
-
-        const bannerRect =
-            homeBanner.getBoundingClientRect();
-
-
-        /*
-        Desired position:
-
-        Put the CENTER of WhatsApp button
-        20px above the bottom of the slider.
-        */
-
+        if (!whatsappButton || !homeBanner) return;
+        const bannerRect = homeBanner.getBoundingClientRect();
         const distanceFromSliderBottom = -45;
-
-
-        let buttonTop =
-            bannerRect.bottom - distanceFromSliderBottom;
-
-
-        /*
-        Prevent button from disappearing above browser.
-        */
-
+        let buttonTop = bannerRect.bottom - distanceFromSliderBottom;
         const minimumTop = 80;
-
-
-        /*
-        Prevent button from disappearing below browser.
-        */
-
-        const maximumTop =
-            window.innerHeight - 40;
-
-
-        buttonTop = Math.max(
-            minimumTop,
-            Math.min(buttonTop, maximumTop)
-        );
-
-
-        whatsappButton.style.top =
-            buttonTop + 'px';
+        const maximumTop = window.innerHeight - 40;
+        buttonTop = Math.max(minimumTop, Math.min(buttonTop, maximumTop));
+        whatsappButton.style.top = buttonTop + 'px';
     }
-
-
-    /*
-    Run when page loads.
-    */
-
     positionWhatsappButton();
+    window.addEventListener('load', positionWhatsappButton);
+    window.addEventListener('resize', positionWhatsappButton);
+    window.addEventListener('orientationchange', positionWhatsappButton);
 
-
-    /*
-    Run after all images/fonts/resources finish loading.
-    */
-
-    window.addEventListener(
-        'load',
-        positionWhatsappButton
-    );
-
-
-    /*
-    Run when browser size changes.
-    */
-
-    window.addEventListener(
-        'resize',
-        positionWhatsappButton
-    );
-
-
-    /*
-    Run when device orientation changes.
-    */
-
-    window.addEventListener(
-        'orientationchange',
-        positionWhatsappButton
-    );
-
-
-    /*
-    ============================================================
-    LAZY LOADING IMAGES
-    ============================================================
-    */
-
-    const images =
-        document.querySelectorAll('img[data-src]');
-
-
+    /* ======== Lazy Load ======== */
+    const images = document.querySelectorAll('img[data-src]');
     if ('IntersectionObserver' in window) {
-
-        const imageObserver =
-            new IntersectionObserver((entries) => {
-
-                entries.forEach((entry) => {
-
-                    if (entry.isIntersecting) {
-
-                        const img =
-                            entry.target;
-
-                        img.src =
-                            img.dataset.src;
-
-                        img.classList.add(
-                            'loaded'
-                        );
-
-                        imageObserver.unobserve(
-                            img
-                        );
-                    }
-
-                });
-
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
             });
-
-
-        images.forEach((img) => {
-
-            imageObserver.observe(img);
-
         });
-
+        images.forEach(img => imageObserver.observe(img));
     } else {
-
-        images.forEach((img) => {
-
-            img.src =
-                img.dataset.src;
-
-            img.classList.add(
-                'loaded'
-            );
-
+        images.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
         });
-
     }
-document.querySelectorAll('.hero-bg').forEach(function(img){
 
-    function updateHero(){
-
-        if(window.heroSwiper){
-            heroSwiper.update();
-            heroSwiper.updateAutoHeight();
+    /* ======== Hero Swiper Update ======== */
+    document.querySelectorAll('.hero-bg').forEach(function(img){
+        function updateHero(){
+            if(window.heroSwiper){
+                heroSwiper.update();
+                heroSwiper.updateAutoHeight();
+            }
         }
-
-    }
-
-    if(img.complete){
-        updateHero();
-    }else{
-        img.onload = updateHero;
-    }
-
-});
+        if(img.complete){
+            updateHero();
+        }else{
+            img.onload = updateHero;
+        }
+    });
 });
 </script>
-
-
-
 
 @endsection

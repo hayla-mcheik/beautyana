@@ -6,16 +6,6 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
 
-    :root {
-        --demanto-gold: #B39256;
-        --demanto-gold-light: #F7F4EB;
-        --demanto-dark: #232323;
-        --demanto-bg: #FDFBF7;
-        --demanto-muted: #6E6E6E;
-        --luxury-border: rgba(179, 146, 86, 0.25);
-        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        --box-shadow-luxury: 0 25px 45px rgba(179, 146, 86, 0.1);
-    }
 
     body {
         background-color: var(--demanto-bg);
@@ -36,7 +26,7 @@
         bottom: 20px;
         right: 20px;
         font-size: 60px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.04;
         font-family: serif;
         pointer-events: none;
@@ -48,7 +38,7 @@
         top: 20px;
         left: 20px;
         font-size: 50px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         opacity: 0.04;
         font-family: serif;
         pointer-events: none;
@@ -73,7 +63,7 @@
         left: 0;
         width: 40px;
         height: 2px;
-        background: linear-gradient(90deg, var(--demanto-gold), transparent);
+        background: linear-gradient(90deg, var(--demanto-red), transparent);
     }
     
     .about-description {
@@ -84,7 +74,7 @@
     }
     
     .metric-number {
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         font-size: 22px;
         margin-bottom: 4px;
         font-weight: 600;
@@ -102,7 +92,7 @@
     
     .metric-item i {
         font-size: 22px;
-        color: var(--demanto-gold);
+        color: var(--demanto-red);
         transition: all 0.3s ease;
     }
     
@@ -122,7 +112,7 @@
 
     /* Button Styles */
     .btn-demanto {
-        background: linear-gradient(135deg, var(--demanto-gold) 0%, #9a7b45 100%);
+        background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
         color: #fff !important;
         font-size: 14px;
         letter-spacing: 1.5px;
@@ -206,7 +196,7 @@
     }
     
     ::-webkit-scrollbar-thumb {
-        background: var(--demanto-gold);
+        background: var(--demanto-red);
         border-radius: 3px;
     }
     

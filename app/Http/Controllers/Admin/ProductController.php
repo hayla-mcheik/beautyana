@@ -4,21 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Color;
-use App\Models\ProductColor;
 use App\Models\ProductImage;
+use App\Models\Size;
+use App\Models\ProductVariant;
 
 class ProductController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Products
+    |--------------------------------------------------------------------------
+    */
+
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with([
+            'category',
+            'productImages',
+            'productVariants.color',
+            'productVariants.size',
+        ])->get();
 
         return view(
             'admin.products.index',
@@ -27,15 +41,29 @@ class ProductController extends Controller
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | Create Product
+    |--------------------------------------------------------------------------
+    */
+
     public function create()
     {
         $categories = Category::all();
 
-        $colors = Color::where('status', '0')->get();
+        $colors = Color::where('status', '0')
+            ->get();
+
+        $sizes = Size::where('status', '0')
+            ->get();
 
         return view(
             'admin.products.create',
-            compact('categories', 'colors')
+            compact(
+                'categories',
+                'colors',
+                'sizes'
+            )
         );
     }
 
@@ -50,165 +78,311 @@ class ProductController extends Controller
     {
         $validatedData = $request->validated();
 
+/*
+|--------------------------------------------------------------------------
+| Calculate Product Selling Price
+|--------------------------------------------------------------------------
+*/
 
-        /*
-        |--------------------------------------------------------------------------
-        | Require At Least 2 Images
-        |--------------------------------------------------------------------------
-        */
+$originalPrice = (float) $validatedData['original_price'];
 
-      if (!$request->hasFile('image')) {
+$discountPercentage = (float) (
+    $validatedData['discount_percentage'] ?? 0
+);
 
-    return redirect()
-        ->back()
-        ->withErrors([
-            'image' => 'Please upload at least one image.'
-        ])
-        ->withInput();
-}  
+$sellingPrice = $originalPrice;
 
+if ($discountPercentage > 0) {
 
-        /*
-        |--------------------------------------------------------------------------
-        | Find Category
-        |--------------------------------------------------------------------------
-        */
-
-        $category = Category::findOrFail(
-            $validatedData['category_id']
+    $sellingPrice =
+        $originalPrice -
+        (
+            $originalPrice *
+            $discountPercentage /
+            100
         );
+}
 
-
+$sellingPrice = round($sellingPrice, 2);
         /*
         |--------------------------------------------------------------------------
-        | Create Product
+        | Require Product Images
         |--------------------------------------------------------------------------
         */
 
-        $product = $category->products()->create([
+        if (!$request->hasFile('image')) {
 
-            'category_id' =>
-                $validatedData['category_id'],
-
-            'name' =>
-                $validatedData['name'],
-
-
-            /*
-             * Generate slug automatically.
-             */
-
-            'slug' =>
-                $this->generateUniqueSlug(
-                    $validatedData['name']
-                ),
-
-
-            'description' =>
-                $validatedData['description'],
-
-            'original_price' =>
-                $validatedData['original_price'],
-
-            'selling_price' =>
-                $validatedData['selling_price'],
-
-            'quantity' =>
-                $validatedData['quantity'],
-
-            // 'trending' =>
-            //     $request->boolean('trending')
-            //         ? '1'
-            //         : '0',
-
-            'featured' =>
-                $request->boolean('featured')
-                    ? '1'
-                    : '0',
-
-            'status' =>
-                $request->boolean('status')
-                    ? '0'
-                    : '1',
-        ]);
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Upload Product Images
-        |--------------------------------------------------------------------------
-        */
-
-        $uploadPath = 'uploads/products/';
-
-
-        foreach ($request->file('image') as $imageFile) {
-
-            $extension =
-                $imageFile->getClientOriginalExtension();
-
-
-            $filename =
-                Str::uuid()
-                . '.'
-                . $extension;
-
-
-            $imageFile->move(
-                public_path($uploadPath),
-                $filename
-            );
-
-
-            $product->productImages()->create([
-
-                'product_id' =>
-                    $product->id,
-
-                'image' =>
-                    $uploadPath . $filename,
-
-            ]);
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'image' => 'Please upload at least one image.'
+                ])
+                ->withInput();
         }
 
 
         /*
         |--------------------------------------------------------------------------
-        | Product Colors
+        | Create Everything Inside Transaction
         |--------------------------------------------------------------------------
         */
 
-        if ($request->filled('colors')) {
+        DB::beginTransaction();
+
+        try {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Find Category
+            |--------------------------------------------------------------------------
+            */
+
+            $category = Category::findOrFail(
+                $validatedData['category_id']
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Create Product
+            |--------------------------------------------------------------------------
+            */
+
+          $product = $category->products()->create([
+
+    'category_id' =>
+        $validatedData['category_id'],
+
+    'name' =>
+        $validatedData['name'],
+
+    'slug' =>
+        $this->generateUniqueSlug(
+            $validatedData['name']
+        ),
+
+    'description' =>
+        $validatedData['description'],
+
+    'original_price' =>
+        $originalPrice,
+
+    'discount_percentage' =>
+        $discountPercentage,
+
+    'selling_price' =>
+        $sellingPrice,
+
+    'quantity' =>
+        $validatedData['quantity'],
+
+    'featured' =>
+        $request->boolean('featured')
+            ? '1'
+            : '0',
+
+    'status' =>
+        $request->boolean('status')
+            ? '0'
+            : '1',
+]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Upload Product Images
+            |--------------------------------------------------------------------------
+            */
+
+            $uploadPath = 'uploads/products/';
+
 
             foreach (
-                $request->input('colors', [])
-                as $key => $colorId
+                $request->file('image')
+                as $imageFile
             ) {
 
-                $product->productColors()->create([
+                $extension =
+                    $imageFile->getClientOriginalExtension();
+
+
+                $filename =
+                    Str::uuid()
+                    . '.'
+                    . $extension;
+
+
+                $imageFile->move(
+                    public_path($uploadPath),
+                    $filename
+                );
+
+
+                $product->productImages()->create([
 
                     'product_id' =>
                         $product->id,
 
-                    'color_id' =>
-                        $colorId,
-
-                    'quantity' =>
-                        $request->input(
-                            "colorquantity.$key",
-                            0
-                        ),
+                    'image' =>
+                        $uploadPath . $filename,
 
                 ]);
             }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Product Variants
+            |--------------------------------------------------------------------------
+            |
+            | Example:
+            |
+            | Black + S = 5
+            | Black + M = 8
+            | Black + L = 3
+            | White + S = 4
+            |
+            */
+
+            $totalVariantQuantity = 0;
+
+            $usedVariants = [];
+
+
+            if ($request->filled('variants')) {
+
+                foreach (
+                    $request->input('variants', [])
+                    as $variant
+                ) {
+
+                    $colorId =
+                        !empty($variant['color_id'])
+                            ? (int) $variant['color_id']
+                            : null;
+
+
+                    $sizeId =
+                        !empty($variant['size_id'])
+                            ? (int) $variant['size_id']
+                            : null;
+
+
+                    $quantity =
+                        isset($variant['quantity'])
+                            ? (int) $variant['quantity']
+                            : 0;
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Skip Completely Empty Rows
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        $colorId === null &&
+                        $sizeId === null
+                    ) {
+                        continue;
+                    }
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Prevent Duplicate Combinations
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $variantKey =
+                        ($colorId ?? 'null')
+                        . '-'
+                        . ($sizeId ?? 'null');
+
+
+                    if (
+                        isset(
+                            $usedVariants[$variantKey]
+                        )
+                    ) {
+                        continue;
+                    }
+
+
+                    $usedVariants[$variantKey] = true;
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Create Variant
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $product->productVariants()->create([
+
+                        'product_id' =>
+                            $product->id,
+
+                        'color_id' =>
+                            $colorId,
+
+                        'size_id' =>
+                            $sizeId,
+
+                        'quantity' =>
+                            max(0, $quantity),
+
+                    ]);
+
+
+                    $totalVariantQuantity +=
+                        max(0, $quantity);
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Update Product Total Quantity
+            |--------------------------------------------------------------------------
+            |
+            | If variants were added, product quantity becomes
+            | the total quantity of all variants.
+            |
+            */
+
+            if (
+                $request->filled('variants') &&
+                $usedVariants
+            ) {
+
+                $product->quantity =
+                    $totalVariantQuantity;
+
+                $product->save();
+            }
+
+
+            DB::commit();
+
+
+            return redirect('/admin/products')
+                ->with(
+                    'message',
+                    'Product Added Successfully'
+                );
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' =>
+                        'Something went wrong while adding the product.'
+                ])
+                ->withInput();
         }
-
-
-        return redirect('/admin/products')
-            ->with(
-                'message',
-                'Product Added Successfully'
-            );
     }
 
 
@@ -223,23 +397,36 @@ class ProductController extends Controller
         $categories = Category::all();
 
 
-        $product = Product::findOrFail(
-            $product_id
-        );
+        /*
+        |--------------------------------------------------------------------------
+        | Load Product + Variants
+        |--------------------------------------------------------------------------
+        */
+
+        $product = Product::with([
+            'productImages',
+            'productVariants.color',
+            'productVariants.size',
+        ])->findOrFail($product_id);
 
 
-        $productColorIds =
-            $product
-                ->productColors
-                ->pluck('color_id')
-                ->toArray();
-
+        /*
+        |--------------------------------------------------------------------------
+        | Load Active Colors
+        |--------------------------------------------------------------------------
+        */
 
         $colors = Color::where('status', '0')
-            ->whereNotIn(
-                'id',
-                $productColorIds
-            )
+            ->get();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Load Active Sizes
+        |--------------------------------------------------------------------------
+        */
+
+        $sizes = Size::where('status', '0')
             ->get();
 
 
@@ -248,7 +435,8 @@ class ProductController extends Controller
             compact(
                 'categories',
                 'product',
-                'colors'
+                'colors',
+                'sizes'
             )
         );
     }
@@ -264,188 +452,333 @@ class ProductController extends Controller
         ProductFormRequest $request,
         int $product_id
     ) {
-        $validatedData = $request->validated();
 
+        $validatedData =
+            $request->validated();
+/*
+|--------------------------------------------------------------------------
+| Calculate Product Selling Price
+|--------------------------------------------------------------------------
+*/
 
-        /*
-         * Find product directly.
-         *
-         * Do not search through the selected category,
-         * because the admin may change the category.
-         */
+$originalPrice = (float) $validatedData['original_price'];
 
-        $product = Product::findOrFail(
-            $product_id
+$discountPercentage = (float) (
+    $validatedData['discount_percentage'] ?? 0
+);
+
+$sellingPrice = $originalPrice;
+
+if ($discountPercentage > 0) {
+
+    $sellingPrice =
+        $originalPrice -
+        (
+            $originalPrice *
+            $discountPercentage /
+            100
         );
+}
 
+$sellingPrice = round($sellingPrice, 2);
 
-        /*
-        |--------------------------------------------------------------------------
-        | Generate New Slug Only When Name Changes
-        |--------------------------------------------------------------------------
-        */
+        DB::beginTransaction();
 
-        if (
-            $product->name
-            !==
-            $validatedData['name']
-        ) {
+        try {
 
-            $product->slug =
-                $this->generateUniqueSlug(
-                    $validatedData['name'],
-                    $product->id
-                );
-        }
+            /*
+            |--------------------------------------------------------------------------
+            | Find Product
+            |--------------------------------------------------------------------------
+            |
+            | Do not search through the category because
+            | the admin may change the category.
+            |
+            */
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Update Product
-        |--------------------------------------------------------------------------
-        */
-
-        $product->category_id =
-            $validatedData['category_id'];
-
-
-        $product->name =
-            $validatedData['name'];
-
-
-        $product->description =
-            $validatedData['description'];
-
-
-        $product->original_price =
-            $validatedData['original_price'];
-
-
-        $product->selling_price =
-            $validatedData['selling_price'];
-
-
-        $product->quantity =
-            $validatedData['quantity'];
-
-
-        // $product->trending =
-        //     $request->boolean('trending')
-        //         ? '1'
-        //         : '0';
-
-
-        $product->featured =
-            $request->boolean('featured')
-                ? '1'
-                : '0';
-
-
-        $product->status =
-            $request->boolean('status')
-                ? '0'
-                : '1';
-
-
-        $product->save();
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add New Product Images
-        |--------------------------------------------------------------------------
-        |
-        | Existing images are kept.
-        |
-        */
-
-        if ($request->hasFile('image')) {
-
-            $uploadPath =
-                'uploads/products/';
-
-
-            foreach (
-                $request->file('image')
-                as $imageFile
-            ) {
-
-                $extension =
-                    $imageFile
-                        ->getClientOriginalExtension();
-
-
-                $filename =
-                    Str::uuid()
-                    . '.'
-                    . $extension;
-
-
-                $imageFile->move(
-                    public_path($uploadPath),
-                    $filename
+            $product =
+                Product::findOrFail(
+                    $product_id
                 );
 
 
-                $product
-                    ->productImages()
-                    ->create([
+            /*
+            |--------------------------------------------------------------------------
+            | Generate New Slug Only When Name Changes
+            |--------------------------------------------------------------------------
+            */
 
-                        'product_id' =>
-                            $product->id,
-
-                        'image' =>
-                            $uploadPath . $filename,
-
-                    ]);
-            }
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Add New Product Colors
-        |--------------------------------------------------------------------------
-        */
-
-        if ($request->filled('colors')) {
-
-            foreach (
-                $request->input('colors', [])
-                as $key => $colorId
+            if (
+                $product->name !==
+                $validatedData['name']
             ) {
 
-                /*
-                 * Avoid duplicate product/color records.
-                 */
-
-                $product
-                    ->productColors()
-                    ->firstOrCreate(
-
-                        [
-                            'color_id' =>
-                                $colorId,
-                        ],
-
-                        [
-                            'quantity' =>
-                                $request->input(
-                                    "colorquantity.$key",
-                                    0
-                                ),
-                        ]
-
+                $product->slug =
+                    $this->generateUniqueSlug(
+                        $validatedData['name'],
+                        $product->id
                     );
             }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Update Product Information
+            |--------------------------------------------------------------------------
+            */
+
+            $product->category_id =
+                $validatedData['category_id'];
+
+
+            $product->name =
+                $validatedData['name'];
+
+
+            $product->description =
+                $validatedData['description'];
+
+$product->original_price =
+    $originalPrice;
+
+$product->discount_percentage =
+    $discountPercentage;
+
+$product->selling_price =
+    $sellingPrice;
+
+            /*
+             * Keep original quantity for now.
+             *
+             * If variants exist, it will be recalculated
+             * below.
+             */
+
+            $product->quantity =
+                $validatedData['quantity'];
+
+
+            $product->featured =
+                $request->boolean('featured')
+                    ? '1'
+                    : '0';
+
+
+            $product->status =
+                $request->boolean('status')
+                    ? '0'
+                    : '1';
+
+
+            $product->save();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Add New Product Images
+            |--------------------------------------------------------------------------
+            |
+            | Existing images are kept.
+            |
+            */
+
+            if ($request->hasFile('image')) {
+
+                $uploadPath =
+                    'uploads/products/';
+
+
+                foreach (
+                    $request->file('image')
+                    as $imageFile
+                ) {
+
+                    $extension =
+                        $imageFile
+                            ->getClientOriginalExtension();
+
+
+                    $filename =
+                        Str::uuid()
+                        . '.'
+                        . $extension;
+
+
+                    $imageFile->move(
+                        public_path($uploadPath),
+                        $filename
+                    );
+
+
+                    $product
+                        ->productImages()
+                        ->create([
+
+                            'product_id' =>
+                                $product->id,
+
+                            'image' =>
+                                $uploadPath . $filename,
+
+                        ]);
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Replace Product Variants
+            |--------------------------------------------------------------------------
+            |
+            | We delete the existing variants and recreate
+            | them from the submitted form.
+            |
+            | This makes the edit page much easier to manage.
+            |
+            */
+
+            $product
+                ->productVariants()
+                ->delete();
+
+
+            $totalVariantQuantity = 0;
+
+            $usedVariants = [];
+
+
+            if ($request->filled('variants')) {
+
+                foreach (
+                    $request->input('variants', [])
+                    as $variant
+                ) {
+
+                    $colorId =
+                        !empty($variant['color_id'])
+                            ? (int) $variant['color_id']
+                            : null;
+
+
+                    $sizeId =
+                        !empty($variant['size_id'])
+                            ? (int) $variant['size_id']
+                            : null;
+
+
+                    $quantity =
+                        isset($variant['quantity'])
+                            ? (int) $variant['quantity']
+                            : 0;
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Skip Empty Rows
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        $colorId === null &&
+                        $sizeId === null
+                    ) {
+                        continue;
+                    }
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Prevent Duplicate Color + Size
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $variantKey =
+                        ($colorId ?? 'null')
+                        . '-'
+                        . ($sizeId ?? 'null');
+
+
+                    if (
+                        isset(
+                            $usedVariants[$variantKey]
+                        )
+                    ) {
+                        continue;
+                    }
+
+
+                    $usedVariants[$variantKey] = true;
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Create Variant
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $product
+                        ->productVariants()
+                        ->create([
+
+                            'product_id' =>
+                                $product->id,
+
+                            'color_id' =>
+                                $colorId,
+
+                            'size_id' =>
+                                $sizeId,
+
+                            'quantity' =>
+                                max(0, $quantity),
+
+                        ]);
+
+
+                    $totalVariantQuantity +=
+                        max(0, $quantity);
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Update Total Product Quantity
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $usedVariants
+            ) {
+
+                $product->quantity =
+                    $totalVariantQuantity;
+
+                $product->save();
+            }
+
+
+            DB::commit();
+
+
+            return redirect('/admin/products')
+                ->with(
+                    'message',
+                    'Product Updated Successfully'
+                );
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'error' =>
+                        'Something went wrong while updating the product.'
+                ])
+                ->withInput();
         }
-
-
-        return redirect('admin/products')
-            ->with(
-                'message',
-                'Product Updated Successfully'
-            );
     }
 
 
@@ -458,6 +791,7 @@ class ProductController extends Controller
     public function destroyImage(
         int $product_image_id
     ) {
+
         $productImage =
             ProductImage::findOrFail(
                 $product_image_id
@@ -465,15 +799,18 @@ class ProductController extends Controller
 
 
         if (
-            $productImage->image
-            &&
+            $productImage->image &&
             File::exists(
-                public_path($productImage->image)
+                public_path(
+                    $productImage->image
+                )
             )
         ) {
 
             File::delete(
-                public_path($productImage->image)
+                public_path(
+                    $productImage->image
+                )
             );
         }
 
@@ -496,12 +833,24 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function destroy(int $product_id)
-    {
-        $product =
-            Product::with('productImages')
-                ->findOrFail($product_id);
+    public function destroy(
+        int $product_id
+    ) {
 
+        $product =
+            Product::with([
+                'productImages',
+                'productVariants',
+            ])->findOrFail(
+                $product_id
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product Images From Storage
+        |--------------------------------------------------------------------------
+        */
 
         foreach (
             $product->productImages
@@ -509,19 +858,62 @@ class ProductController extends Controller
         ) {
 
             if (
-                $image->image
-                &&
+                $image->image &&
                 File::exists(
-                    public_path($image->image)
+                    public_path(
+                        $image->image
+                    )
                 )
             ) {
 
                 File::delete(
-                    public_path($image->image)
+                    public_path(
+                        $image->image
+                    )
                 );
             }
         }
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product Variants
+        |--------------------------------------------------------------------------
+        */
+
+        $product
+            ->productVariants()
+            ->delete();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Old Product Colors
+        |--------------------------------------------------------------------------
+        |
+        | This is only here for old records from your
+        | previous ProductColor system.
+        |
+        */
+
+        if (
+            method_exists(
+                $product,
+                'productColors'
+            )
+        ) {
+
+            $product
+                ->productColors()
+                ->delete();
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Product
+        |--------------------------------------------------------------------------
+        */
 
         $product->delete();
 
@@ -530,45 +922,80 @@ class ProductController extends Controller
             ->back()
             ->with(
                 'message',
-                'Product Deleted with all its images'
+                'Product Deleted with all its images and variants'
             );
     }
 
 
     /*
     |--------------------------------------------------------------------------
-    | Update Product Color Quantity
+    | Update Product Variant Quantity
     |--------------------------------------------------------------------------
     */
 
-    public function updateProdColorQty(
+    public function updateProdVariantQty(
         Request $request,
-        $prod_color_id
+        int $variant_id
     ) {
-        $productColorData =
-            Product::findOrFail(
-                $request->product_id
-            )
-            ->productColors()
-            ->where(
+
+        $variant =
+            ProductVariant::where(
                 'id',
-                $prod_color_id
+                $variant_id
+            )
+            ->where(
+                'product_id',
+                $request->product_id
             )
             ->firstOrFail();
 
 
-        $productColorData->update([
+        $quantity =
+            max(
+                0,
+                (int) $request->qty
+            );
+
+
+        $variant->update([
 
             'quantity' =>
-                $request->qty
+                $quantity,
 
         ]);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Recalculate Product Total Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $product =
+            Product::findOrFail(
+                $request->product_id
+            );
+
+
+        $product->quantity =
+            $product
+                ->productVariants()
+                ->sum('quantity');
+
+
+        $product->save();
 
 
         return response()->json([
 
             'message' =>
-                'Product Color Qty updated'
+                'Product Variant Quantity Updated',
+
+            'quantity' =>
+                $quantity,
+
+            'total_quantity' =>
+                $product->quantity,
 
         ]);
     }
@@ -576,26 +1003,55 @@ class ProductController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    | Delete Product Color
+    | Delete Product Variant
     |--------------------------------------------------------------------------
     */
 
-    public function deleteProdColor(
-        $prod_color_id
+    public function deleteProdVariant(
+        int $variant_id
     ) {
-        $prodColor =
-            ProductColor::findOrFail(
-                $prod_color_id
+
+        $variant =
+            ProductVariant::findOrFail(
+                $variant_id
             );
 
 
-        $prodColor->delete();
+        $productId =
+            $variant->product_id;
+
+
+        $variant->delete();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Recalculate Product Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $product =
+            Product::findOrFail(
+                $productId
+            );
+
+
+        $product->quantity =
+            $product
+                ->productVariants()
+                ->sum('quantity');
+
+
+        $product->save();
 
 
         return response()->json([
 
             'message' =>
-                'Product Color Deleted'
+                'Product Variant Deleted',
+
+            'total_quantity' =>
+                $product->quantity,
 
         ]);
     }
@@ -613,22 +1069,30 @@ class ProductController extends Controller
     ): string {
 
         /*
-         * Example:
-         *
-         * Diamond Necklace
-         *
-         * becomes:
-         *
-         * diamond-necklace
-         */
+        |--------------------------------------------------------------------------
+        | Convert Product Name To Slug
+        |--------------------------------------------------------------------------
+        |
+        | Example:
+        |
+        | Diamond Necklace
+        |
+        | becomes:
+        |
+        | diamond-necklace
+        |
+        */
 
         $baseSlug =
             Str::slug($name);
 
 
-        if (empty($baseSlug)) {
+        if (
+            empty($baseSlug)
+        ) {
 
-            $baseSlug = 'product';
+            $baseSlug =
+                'product';
         }
 
 
@@ -641,25 +1105,28 @@ class ProductController extends Controller
 
         while (
 
-            Product::where('slug', $slug)
+            Product::where(
+                'slug',
+                $slug
+            )
 
-                ->when(
+            ->when(
 
-                    $ignoreProductId,
+                $ignoreProductId,
 
-                    function ($query)
-                    use ($ignoreProductId) {
+                function ($query)
+                use ($ignoreProductId) {
 
-                        $query->where(
-                            'id',
-                            '!=',
-                            $ignoreProductId
-                        );
-                    }
+                    $query->where(
+                        'id',
+                        '!=',
+                        $ignoreProductId
+                    );
+                }
 
-                )
+            )
 
-                ->exists()
+            ->exists()
 
         ) {
 

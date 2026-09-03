@@ -128,8 +128,8 @@
                 <div class="info">
                     <h5 class="title">Phone:</h5>
                     <p>
-                        <a href="tel:{{ $appSetting->phone1 ?? '00961 3 979504' }}">
-                            {{ $appSetting->phone1 ?? '00961 3 979504' }}
+                        <a href="tel:{{ $appSetting->phone1 ?? '+96178913139' }}">
+                            {{ $appSetting->phone1 ?? '+96178913139' }}
                         </a>
                         @if($appSetting->phone2)
                             <br>
@@ -145,8 +145,8 @@
                 <div class="info">
                     <h5 class="title">Email:</h5>
                     <p>
-                        <a href="mailto:{{ $appSetting->email1 ?? 'info@demanto.com' }}">
-                            {{ $appSetting->email1 ?? 'info@demanto.com' }}
+                        <a href="mailto:{{ $appSetting->email1 ?? 'Beautyana31@gmail.com' }}">
+                            {{ $appSetting->email1 ?? 'Beautyana31@gmail.com' }}
                         </a>
                         @if($appSetting->email2)
                             <br>
@@ -162,7 +162,7 @@
                 <div class="info">
                     <h5 class="title">Address:</h5>
                     <p>
-                        {!! nl2br(e($appSetting->address ?? "PH trading SARL\nMansourieh Maten, main street")) !!}
+                        {!! nl2br(e($appSetting->address ?? "beirut,lebanon")) !!}
                     </p>
                 </div>
             </div>
