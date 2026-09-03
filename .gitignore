@@ -10,7 +10,10 @@
 /public/hot
 /public/storage
 /storage/*.key
-
+/public/uploads/products/*
+/public/uploads/category/*
+/public/uploads/blogs/*
+/public/uploads/sliders/*
 # Environment & Config
 .env
 .env.backup
