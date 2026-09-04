@@ -31,26 +31,26 @@ public function boot(): void
     $websiteSetting = Setting::first();
     View::share('appSetting', $websiteSetting);
 
-    // Share categories and tickers with the frontend layouts
-    View::composer(['layouts.app', 'layouts.inc.frontend.header', 'layouts.inc.frontend.footer'], function ($view) {
-$allCategories = Category::where('status', '0')->get();
+View::composer(['layouts.app', 'layouts.inc.frontend.header', 'layouts.inc.frontend.footer'], function ($view) {
 
-$collections = $allCategories->where('menu', 'Collections');
+    $allCategories = Category::where('status', '0')->get();
 
-$highJewelry = $allCategories->where('menu', 'High Jewelry');
+    $collections = $allCategories->where('menu', 'Collections');
 
-$adSignature = $allCategories->where('menu', 'AD Signature');
+    $accessories = $allCategories->where('menu', 'Accessories');
 
-$tickers = Ticker::take(3)->get();
+    $onSale = $allCategories->where('menu', 'OnSale');
 
-$view->with([
-    'allCategories' => $allCategories,
-    'collections' => $collections,
-    'highJewelry' => $highJewelry,
-    'adSignature' => $adSignature,
-    'tickers' => $tickers,
-]);
-    });
+    $tickers = Ticker::take(3)->get();
+
+    $view->with([
+        'allCategories' => $allCategories,
+        'collections' => $collections,
+        'accessories' => $accessories,
+        'onSale' => $onSale,
+        'tickers' => $tickers,
+    ]);
+});
 
     // Your existing Cart logic
     View::composer('*', function ($view) {

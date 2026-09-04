@@ -95,20 +95,17 @@ public function index()
     |--------------------------------------------------------------------------
     */
 
-    $collections = Category::where('status', '0')
-        ->where('menu', 'Collections')
-        ->get();
+$collections = Category::where('status', '0')
+    ->where('menu', 'Collections')
+    ->get();
 
+$accessories = Category::where('status', '0')
+    ->where('menu', 'Accessories')
+    ->get();
 
-    $highJewelry = Category::where('status', '0')
-        ->where('menu', 'High Jewelry')
-        ->get();
-
-
-    $adSignature = Category::where('status', '0')
-        ->where('menu', 'AD Signature')
-        ->get();
-
+$onSale = Category::where('status', '0')
+    ->where('menu', 'OnSale')
+    ->get();
 
     /*
     |--------------------------------------------------------------------------
@@ -149,8 +146,8 @@ public function index()
             'bestSellersProducts',
             'featuredProducts',
             'collections',
-            'highJewelry',
-            'adSignature',
+            'accessories',
+            'onSale',
             'reviews',
             'threecategories',
             'blogs',
@@ -188,85 +185,96 @@ return redirect()->back()->with('message','Empty Search');
     }
 
 
-  public function categories()
+public function categories()
 {
-    $collections = Category::where('status','0')
-        ->where('menu','Collections')
+    $collections = Category::where('status', '0')
+        ->where('menu', 'Collections')
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
+    $accessories = Category::where('status', '0')
+        ->where('menu', 'Accessories')
         ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
+    $onSale = Category::where('status', '0')
+        ->where('menu', 'OnSale')
         ->get();
 
     return view(
         'frontend.collections.category.index',
         compact(
             'collections',
-            'highJewelry',
-            'adSignature'
+            'accessories',
+            'onSale'
         )
     );
 }
 public function categoriescollections()
 {
-    $collections = Category::where('status','0')
-        ->where('menu','Collections')
+    $collections = Category::where('status', '0')
+        ->where('menu', 'Collections')
         ->get();
 
-    $highJewelry = Category::where('status','0')
-        ->where('menu','High Jewelry')
+    $accessories = Category::where('status', '0')
+        ->where('menu', 'Accessories')
         ->get();
 
-    $adSignature = Category::where('status','0')
-        ->where('menu','AD Signature')
+    $onSale = Category::where('status', '0')
+        ->where('menu', 'OnSale')
         ->get();
 
     return view(
         'frontend.collections.category.collections',
         compact(
             'collections',
-            'highJewelry',
-            'adSignature'
+            'accessories',
+            'onSale'
         )
     );
 }
-    public function products($category_slug)
-    {
-        $inStockCount = Product::where('quantity', '>', 0)->count();
-        $outOfStockCount = Product::where('quantity', '=', 0)->count();
-        $category = Category::where('slug',$category_slug)->withCount('products')->first();
-$collections = Category::where('status','0')
-    ->where('menu','Collections')
-    ->get();
+public function products($category_slug)
+{
+    $inStockCount = Product::where('quantity', '>', 0)->count();
 
-$highJewelry = Category::where('status','0')
-    ->where('menu','High Jewelry')
-    ->get();
+    $outOfStockCount = Product::where('quantity', '=', 0)->count();
 
-$adSignature = Category::where('status','0')
-    ->where('menu','AD Signature')
-    ->get();
-        if($category){
-            // $products = $category->products()->get();
-return view(
-    'frontend.collections.products.index',
-    compact(
-        'category',
-        'collections',
-        'highJewelry',
-        'adSignature',
-        'inStockCount',
-        'outOfStockCount'
-    )
-);
-         } else{
-                return redirect()->back();
-            }
-        }
+    $category = Category::where('slug', $category_slug)
+        ->withCount('products')
+        ->first();
+
+    $collections = Category::where('status', '0')
+        ->where('menu', 'Collections')
+        ->get();
+
+    $accessories = Category::where('status', '0')
+        ->where('menu', 'Accessories')
+        ->get();
+
+    $onSale = Category::where('status', '0')
+        ->where('menu', 'OnSale')
+        ->get();
+
+    if ($category) {
+
+        // $products = $category->products()->get();
+
+        return view(
+            'frontend.collections.products.index',
+            compact(
+                'category',
+                'collections',
+                'accessories',
+                'onSale',
+                'inStockCount',
+                'outOfStockCount'
+            )
+        );
+
+    } else {
+
+        return redirect()->back();
+
+    }
+}
     
 public function productView(string $category_slug , string $product_slug)
 {
