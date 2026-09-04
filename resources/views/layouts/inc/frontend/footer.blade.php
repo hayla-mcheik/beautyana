@@ -85,10 +85,9 @@
                 <h4 class="footer-nav-title">Quick Links</h4>
                 <ul class="footer-nav-list">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/about') }}">About</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
+                    <li><a href="{{ url('/aboutus') }}">About</a></li>
+                    <li><a href="{{ url('/contactus') }}">Contact</a></li>
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
-                    <li><a href="{{ url('/blogs') }}">Blogs</a></li>
                 </ul>
             </nav>
 
@@ -134,17 +133,7 @@
 
         </div>
 
-        {{-- COPYRIGHT & LEGAL --}}
-        <div class="footer-bottom">
-            <span>© {{ date('Y') }} DEMANTO · All rights reserved.</span>
-            <div class="footer-legal">
-                <a href="#">Privacy</a>
-                <span class="dot">·</span>
-                <a href="#">Terms</a>
-                <span class="dot">·</span>
-                <a href="#">Cookies</a>
-            </div>
-        </div>
+ 
 
     </div>
 
