@@ -37,7 +37,9 @@
         <a href="{{ url('/') }}">Home</a>
     </li>
 
-
+    <li>
+        <a href="{{ url('/aboutus') }}">About Us</a>
+    </li>
     {{-- =========================================================
          COLLECTIONS MEGA MENU
     ========================================================== --}}
@@ -268,7 +270,7 @@
 </li>
 
     <li>
-        <a href="{{ url('blogs') }}">News</a>
+        <a href="{{ url('contactus') }}">Contact Us</a>
     </li>
 
 </ul>
@@ -277,35 +279,64 @@
 
 <div class="align-right d-flex align-items-center gap-3">
 
-    <div class="desktop-social d-flex align-items-center">
+<div class="desktop-social d-flex align-items-center">
 
-        @if($appSetting->instagram)
-            <a href="{{ $appSetting->instagram }}"
-               target="_blank"
-               class="desktop-social-icon">
-                <i class="fab fa-instagram"></i>
-            </a>
-        @endif
+    {{-- Instagram --}}
+    @if($appSetting->instagram)
+        <a href="{{ $appSetting->instagram }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="desktop-social-icon"
+           aria-label="Instagram">
 
-        @if($appSetting->youtube)
-            <a href="{{ $appSetting->youtube }}"
-               target="_blank"
-               class="desktop-social-icon">
-              <i class="fa-brands fa-snapchat"></i>
-            </a>
-        @endif
+            <i class="fab fa-instagram"></i>
 
-        @if($appSetting->tiktok)
-            <a href="{{ $appSetting->tiktok }}"
-               target="_blank"
-               class="desktop-social-icon">
-                <i class="fab fa-tiktok"></i>
-            </a>
-        @endif
+        </a>
+    @endif
 
 
+    {{-- Snapchat --}}
+    @if($appSetting->youtube)
+        <a href="{{ $appSetting->youtube }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="desktop-social-icon"
+           aria-label="Snapchat">
 
-    </div>
+            <i class="fa-brands fa-snapchat"></i>
+
+        </a>
+    @endif
+
+
+    {{-- TikTok --}}
+    @if($appSetting->tiktok)
+        <a href="{{ $appSetting->tiktok }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="desktop-social-icon"
+           aria-label="TikTok">
+
+            <i class="fab fa-tiktok"></i>
+
+        </a>
+    @endif
+
+
+    {{-- Facebook --}}
+    @if($appSetting->facebook)
+        <a href="{{ $appSetting->facebook }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="desktop-social-icon"
+           aria-label="Facebook">
+
+            <i class="fab fa-facebook-f"></i>
+
+        </a>
+    @endif
+
+</div>
 
 @guest
 
@@ -442,35 +473,45 @@
              <div class="col-4 text-end">
 
     <div class="header-item justify-content-end boutique-icon-small d-flex align-items-center justify-content-end">
+{{-- Instagram --}}
+@if($appSetting->instagram)
+    <a href="{{ $appSetting->instagram }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fab fa-instagram"></i>
+    </a>
+@endif
 
-        @if($appSetting->instagram)
-            <a href="{{ $appSetting->instagram }}"
-               target="_blank"
-               class="mobile-social-icon me-3">
+{{-- Snapchat --}}
+@if($appSetting->youtube)
+    <a href="{{ $appSetting->youtube }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fa-brands fa-snapchat"></i>
+    </a>
+@endif
 
-                <i class="fab fa-instagram"></i>
-
-            </a>
-        @endif
-
-        @if($appSetting->youtube)
-            <a href="{{ $appSetting->youtube }}"
-               target="_blank"
-               class="mobile-social-icon me-3">
-
-            <i class="fa-brands fa-snapchat"></i>
-
-            </a>
-        @endif
-
-   @if($appSetting->tiktok)
+{{-- TikTok --}}
+@if($appSetting->tiktok)
     <a href="{{ $appSetting->tiktok }}"
        target="_blank"
-       class="mobile-social-icon me-3">
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
         <i class="fab fa-tiktok"></i>
     </a>
 @endif
 
+{{-- Facebook --}}
+@if($appSetting->facebook)
+    <a href="{{ $appSetting->facebook }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+@endif
 {{-- Mobile User --}}
 {{-- @guest
     <a href="{{ url('login') }}" class="mobile-user-icon me-3">
@@ -542,12 +583,15 @@
         {{-- Menu --}}
         <ul class="mobile-main-nav">
 
-            <li>
-                <a href="{{ url('/') }}">Home</a>
-            </li>
+    
 
        
-
+        <li>
+                <a href="{{ url('/') }}">Home</a>
+            </li>
+                    <li>
+                <a href="{{ url('/aboutus') }}">About Us</a>
+            </li>
             {{-- Collections --}}
             <li class="has-mobile-dropdown">
 
@@ -616,7 +660,7 @@
 
 </li>
             <li>
-                <a href="{{ url('blogs') }}">News</a>
+                <a href="{{ url('contactus') }}">Contact Us</a>
             </li>
 
           

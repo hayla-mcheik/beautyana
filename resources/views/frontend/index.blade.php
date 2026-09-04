@@ -163,9 +163,9 @@
     .home-banner {
         position: relative;
         width: 100%;
-        height: 70vh;
-        min-height: 660px;
-        max-height: 70vh;
+        height: 50vh;
+        min-height: 550px;
+        max-height: 50vh;
         overflow: hidden;
         z-index: 1;
     }
@@ -234,6 +234,7 @@
         color: #fff;
         font-size: 22px;
         line-height: 1.8;
+        display: none;
     }
 
     .default-slider-container .swiper-pagination {
@@ -250,11 +251,11 @@
         .home-banner { margin-top: 3%; }
     }
     @media (min-width: 1600px) {
-        .home-banner { height: 64vh; min-height: 600px; }
+        .home-banner { height: 50vh; min-height: 500px; }
         .slider-content { padding-top: 100px; }
     }
     @media (max-width: 991px) {
-        .home-banner { height: 500px; min-height: 600px; margin-top: 18%; }
+        .home-banner { height: 500px; min-height: 500px; margin-top: 18%; }
         .hero-bg { object-position: right; }
         .slider-content { max-width: 430px; padding-top: 70px; }
         .slider-title { font-size: 48px; }
@@ -268,7 +269,7 @@
         .hero-banner-image > .container { position: absolute; inset: 0; z-index: 5; }
     }
     @media (max-width: 480px) {
-        .home-banner { height: 480px; min-height: 480px; }
+        .home-banner { height: 400px; min-height: 400px; }
         .hero-bg { object-position: right; }
         .slider-title { font-size: 32px; }
         .slider-desc { font-size: 18px; display: none; }
@@ -1111,7 +1112,7 @@
 </section>
 
 <!-- Exhibitions -->
-<section class="exhibitions-area">
+{{-- <section class="exhibitions-area">
     <div class="container">
         <div class="collections-title mb-3">
             <span class="title-main">Exhibitions & Events</span>
@@ -1138,7 +1139,7 @@
             <a href="{{ url('/blogs') }}" class="btn-demanto">View All</a>
         </div>
     </div>
-</section>
+</section> --}}
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
