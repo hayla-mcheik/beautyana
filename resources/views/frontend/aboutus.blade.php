@@ -4,205 +4,125 @@
 @section('content')
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap');
-
-
-    body {
-        background-color: var(--demanto-bg);
-        font-family:"Cormorant Garamond",serif;
-    }
-
-    /* About Section - Minimized */
-    .about-editorial-section {
-        background: linear-gradient(135deg, #FBF9F4 0%, #fff 100%);
-        position: relative;
-        overflow: hidden;
-        padding: 30px 0;
-    }
-    
-    .about-editorial-section::before {
-        content: '♦';
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        font-size: 60px;
-        color: var(--demanto-red);
-        opacity: 0.04;
-        font-family: serif;
-        pointer-events: none;
-    }
-
-    .about-editorial-section::after {
-        content: '✧';
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        font-size: 50px;
-        color: var(--demanto-red);
-        opacity: 0.04;
-        font-family: serif;
-        pointer-events: none;
-    }
-    
-    .about-title {
-        font-family:"Cormorant Garamond",serif;
-        font-size: 32px;
-        line-height: 1.2;
-        color: var(--demanto-dark);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    
-    .about-title::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 40px;
-        height: 2px;
-        background: linear-gradient(90deg, var(--demanto-red), transparent);
-    }
-    
-    .about-description {
-        color: #666;
-        font-size: 12px;
-        line-height: 1.6;
-        margin-top: 15px;
-    }
-    
-    .metric-number {
-        color: var(--demanto-red);
-        font-size: 22px;
-        margin-bottom: 4px;
-        font-weight: 600;
-       font-family:"Cormorant Garamond",serif;
-    }
-    
-    .metric-item {
-        text-align: center;
-        transition: transform 0.3s ease;
-    }
-    
-    .metric-item:hover {
-        transform: translateY(-3px);
-    }
-    
-    .metric-item i {
-        font-size: 22px;
-        color: var(--demanto-red);
-        transition: all 0.3s ease;
-    }
-    
-    .metric-item:hover i {
-        transform: scale(1.05);
-    }
-    
-    .metric-label {
-        font-size: 8px;
-        letter-spacing: 1px;
-        color: #333;
-        text-transform: uppercase;
-        line-height: 1.3;
-        font-weight: 500;
-        margin-top: 6px;
-    }
-
-    /* Button Styles */
-    .btn-demanto {
-        background: linear-gradient(135deg, var(--demanto-red) 0%, #9a7b45 100%);
-        color: #fff !important;
-        font-size: 14px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 8px 22px;
-        border: none;
-        border-radius: 25px;
-        transition: var(--transition-smooth);
-        display: inline-block;
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        margin-top: 15px;
-    }
-    
-    .btn-demanto::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
+       /* ============================================================
+       ABOUT – redesigned (merged from inline styles)
+    ============================================================ */
+    .about-editorial-root {
+        background-color: var(--demanto-white);
+        color: var(--demanto-text);
+        font-family: 'Montserrat', sans-serif;
         width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--demanto-dark) 0%, #1a1a1a 100%);
-        transition: all 0.5s ease;
-        z-index: -1;
-        border-radius: 25px;
-    }
-    
-    .btn-demanto:hover::before {
-        left: 0;
-    }
-    
-    .btn-demanto:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(179, 146, 86, 0.3);
+        min-height: 20vh;
+        display: flex;
+        align-items: center;
+        padding: 40px 0;
+        position: relative;
+        overflow: hidden;
     }
 
-    /* Responsive - Minimized */
+    .art-background-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .large-bg-text {
+        position: absolute;
+        top: 50%;
+        left: 13%;
+        transform: translateY(-50%);
+        font-size: 10vw;
+        font-weight: 900;
+        color: #d97da50d !important; /* subtle pink tint */
+        letter-spacing: 1px;
+        line-height: 0.8;
+        white-space: nowrap;
+        z-index: 1;
+    }
+
+    .botanical-svg {
+        position: absolute;
+        width: 25%;
+        top: 10%;
+        right: -2%;
+        z-index: 1;
+        transform: rotate(-15deg);
+    }
+
+    .wide-content-wrapper {
+        width: 100%;
+        z-index: 2;
+        padding: 0 15px;
+    }
+
+    .eyebrow {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #D97DA5 !important;
+        font-weight: 700;
+    }
+
+    .display-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--demanto-text);
+        text-transform: capitalize;
+    }
+
+    .accent-line {
+        width: 40px;
+        height: 1px;
+        background-color: #D97DA5 !important;
+    }
+
+    .editorial-text {
+        font-size: 0.75rem;
+        line-height: 2.2;
+        color: var(--demanto-text);
+        font-weight: 400;
+        letter-spacing: 0.4px;
+    }
+
+    .about-sig-logo {
+        width: 55px;
+        height: auto;
+        opacity: 0.9;
+    }
+
+    .sig-font {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: #1a1a1a;
+    }
+
+    .dot-divider {
+        width: 4px;
+        height: 4px;
+        background-color: #D97DA5 !important;
+        border-radius: 50%;
+    }
+
+    .motto {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #999;
+    }
+
     @media (max-width: 768px) {
-        .about-editorial-section {
-            padding: 20px 0;
-        }
-        .about-title {
-            font-size: 26px;
-        }
-        .metric-number {
-            font-size: 18px;
-        }
-        .metric-item i {
-            font-size: 18px;
-        }
-        .metric-label {
-            font-size: 7px;
-            letter-spacing: 0.5px;
-        }
-        .about-description {
-            font-size: 14px;
-        }
+            .collections-title .title-main {
+                font-size: 24px !important;
+            }
+        .large-bg-text { font-size: 10vw; left: 4%; letter-spacing: 1px; }
+        .display-title { font-size: 1.1rem; margin-top: 20px !important; }
+        .editorial-text { font-size: 0.7rem; max-width: 100%; }
+        .footer-compact { flex-direction: column; align-items: flex-start; gap: 15px; }
+        .dot-divider { display: none; }
     }
 
-    @media (max-width: 576px) {
-        .about-title {
-            font-size: 22px;
-        }
-        .metric-number {
-            font-size: 16px;
-        }
-        .metric-item i {
-            font-size: 16px;
-        }
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--demanto-bg);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: var(--demanto-red);
-        border-radius: 3px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #9a7b45;
-    }
 </style>
 
 <!-- Dynamic Breadcrumb -->
@@ -215,55 +135,30 @@
     ]
 ])
 
-<!-- About Editorial Section -->
-<section class="about-editorial-section">
-    <div class="container">
-        <div class="row align-items-start g-3">
-            <!-- Images -->
-            <div class="col-lg-6">
-                <div class="row g-2">
-                    <div class="col-7">
-                        <div class="position-relative overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgone) ? asset('storage/'.$aboutData->imgone) : asset('assets/img/craft-1.jpg') }}"
-                                 class="w-100" style="height: 350px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Luxury Craftsmanship" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="mb-2 overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgtwo) ? asset('storage/'.$aboutData->imgtwo) : asset('assets/img/craft-2.jpg') }}"
-                                 class="w-100" style="height: 170px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Fine Jewelry" loading="lazy">
-                        </div>
-                        <div class="overflow-hidden" style="border-radius: 12px;">
-                            <img src="{{ ($aboutData && $aboutData->imgthree) ? asset('storage/'.$aboutData->imgthree) : asset('assets/img/craft-3.jpg') }}"
-                                 class="w-100" style="height: 170px; object-fit: cover; transition: transform 0.5s ease;"
-                                 alt="Expert Craftsmanship" loading="lazy">
-                        </div>
-                    </div>
-                </div>
+<!-- About Section -->
+<section>
+    <div class="about-editorial-root">
+        @if($about)
+        <div class="art-background-layer">
+            <div class="large-bg-text">{{ $about->title ?? 'About Us' }}</div>
+            <svg class="botanical-svg" viewBox="0 0 100 100" fill="none">
+                <path d="M10 80C30 80 80 60 90 10M10 80C40 70 80 40 90 10" stroke="#b95c19" stroke-width="0.2" opacity="0.2"/>
+            </svg>
+        </div>
+
+        <div class="wide-content-wrapper px-4 px-md-5 position-relative z-2">
+            <div class="header-minimal mb-4">
+                <h2 class="display-title mt-2">{{ $about->title ?? 'About Us' }}</h2>
             </div>
-
-            <!-- Content -->
-            <div class="col-lg-6 ps-lg-3">
-                <h2 class="about-title">
-                    {{ $aboutData->title ?? 'Crafting Timeless Elegance Since 2005' }}
-                </h2>
-                <div class="about-description">
-                    {!! nl2br(e($aboutData->description ?? 'With more than 20 years of expertise, DEMANTO is a leading name in fine jewelry manufacturing.')) !!}
-                </div>
-                
-                <hr class="my-2" style="border-color: var(--luxury-border);">
-                
-           
-
-                <div class="mt-3">
-                    <a href="{{ url('/contact') }}" class="btn-demanto">
-                        Contact Us
-                    </a>
-                </div>
+            <div class="description-full-width">
+                <p class="editorial-text" v-html="">{!! nl2br(e($about->description)) !!}</p>
             </div>
         </div>
+        @else
+        <div class="container py-5 text-center">
+            <p>About Us content is currently being updated.</p>
+        </div>
+        @endif
     </div>
 </section>
 

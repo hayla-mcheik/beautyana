@@ -28,13 +28,55 @@
 @endif
                 </a>
 
-                {{-- Social Icons --}}
-                <div class="footer-social">
-                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-                    <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                </div>
+
+{{-- Social Icons --}}
+<div class="footer-social">
+
+    {{-- Facebook --}}
+    @if($appSetting->facebook)
+        <a href="{{ $appSetting->facebook }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-icon"
+           aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+    @endif
+
+    {{-- Instagram --}}
+    @if($appSetting->instagram)
+        <a href="{{ $appSetting->instagram }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-icon"
+           aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    @endif
+
+    {{-- Snapchat --}}
+    @if($appSetting->youtube)
+        <a href="{{ $appSetting->youtube }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-icon"
+           aria-label="Snapchat">
+            <i class="fa-brands fa-snapchat"></i>
+        </a>
+    @endif
+
+    {{-- TikTok --}}
+    @if($appSetting->tiktok)
+        <a href="{{ $appSetting->tiktok }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="social-icon"
+           aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+        </a>
+    @endif
+
+</div>
 
             </div>
 

@@ -155,42 +155,70 @@
 
 
 
-
 <div class="card mb-3">
     <div class="card-header bg-primary">
         <h3 class="text-white mb-0">Website - Social Media</h3>
-</div>
+    </div>
 
+    <div class="card-body">
+        <div class="row">
 
-<div class="card-body">
-    <div class="row">
+            {{-- Facebook --}}
+            <div class="col-md-6 mb-3">
+                <label>Facebook (Optional)</label>
+                <input
+                    type="text"
+                    name="facebook"
+                    value="{{ $setting->facebook ?? '' }}"
+                    class="form-control"
+                    placeholder="https://www.facebook.com/..."
+                />
+            </div>
 
-{{-- <div class="col-md-6 mb-3">
-            <label>Facebook (Optional)</label>
-            <input type="text" name="facebook" value="{{ $setting->facebook  ?? '' }}" class="form-control" />
-</div>
-<div class="col-md-6 mb-3">
-<label>Twitter (Optional)</label>
-            <input type="text" name="twitter" value="{{ $setting->twitter  ?? '' }}" class="form-control" />
-</div> --}}
-<div class="col-md-6 mb-3">
-<label>Instagram (Optional)</label>
-            <input type="text" name="instagram" value="{{ $setting->instagram  ?? '' }}" class="form-control" />
-</div>
-<div class="col-md-6 mb-3">
-<label>Snap</label>
-            <input type="text" name="youtube" value="{{ $setting->youtube  ?? '' }}" class="form-control" />
-</div>
+            {{-- Instagram --}}
+            <div class="col-md-6 mb-3">
+                <label>Instagram (Optional)</label>
+                <input
+                    type="text"
+                    name="instagram"
+                    value="{{ $setting->instagram ?? '' }}"
+                    class="form-control"
+                    placeholder="https://www.instagram.com/..."
+                />
+            </div>
 
+            {{-- Snapchat --}}
+            <div class="col-md-6 mb-3">
+                <label>Snapchat (Optional)</label>
+                <input
+                    type="text"
+                    name="youtube"
+                    value="{{ $setting->youtube ?? '' }}"
+                    class="form-control"
+                    placeholder="https://www.snapchat.com/..."
+                />
+            </div>
 
+            {{-- TikTok --}}
+            <div class="col-md-6 mb-3">
+                <label>TikTok (Optional)</label>
+                <input
+                    type="text"
+                    name="tiktok"
+                    value="{{ $setting->tiktok ?? '' }}"
+                    class="form-control"
+                    placeholder="https://www.tiktok.com/@..."
+                />
+            </div>
 
-<div class="text-end">
-    <button type="submit" class="btn btn-primary text-white">Save Settings</button>
-</div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary text-white">
+                    Save Settings
+                </button>
+            </div>
 
-</div>
-</div>
-
+        </div>
+    </div>
 </div>
 
 </form>
