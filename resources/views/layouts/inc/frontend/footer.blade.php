@@ -66,8 +66,8 @@
     @endif
 
     {{-- TikTok --}}
-    @if($appSetting->tiktok)
-        <a href="{{ $appSetting->tiktok }}"
+    @if($appSetting->twitter)
+        <a href="{{ $appSetting->twitter }}"
            target="_blank"
            rel="noopener noreferrer"
            class="social-icon"
