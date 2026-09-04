@@ -115,71 +115,69 @@
     </li>
 
 
-    {{-- =========================================================
-         HIGH JEWELRY MEGA MENU
-    ========================================================== --}}
-    <li class="has-dropdown mega-menu-parent">
+{{-- =========================================================
+     ACCESSORIES MEGA MENU
+========================================================== --}}
+<li class="has-dropdown mega-menu-parent">
 
-        <a href="javascript:void(0)" class="mega-menu-trigger">
-            High Jewelry
-            <i class="ion-ios-arrow-down ms-1"></i>
-        </a>
+    <a href="javascript:void(0)" class="mega-menu-trigger">
+        Accessories
+        <i class="ion-ios-arrow-down ms-1"></i>
+    </a>
 
-        <div class="mega-menu">
+    <div class="mega-menu">
 
-            <div class="container">
+        <div class="container">
 
-                <div class="row align-items-start">
+            <div class="row align-items-start">
 
-                    {{-- TITLE --}}
-                    <div class="col-lg-3">
+                {{-- TITLE --}}
+                <div class="col-lg-4">
 
-                        <div class="mega-menu-intro">
+                    <div class="mega-menu-intro">
 
-                            <span class="mega-menu-eyebrow">
-                                DEMANTO
-                            </span>
+                        <span class="mega-menu-eyebrow">
+                            DEMANTO
+                        </span>
 
-                            <h4>
-                                High Jewelry
-                            </h4>
+                        <h4>
+                            Accessories
+                        </h4>
 
-                            <p>
-                                Explore our finest high jewelry pieces.
-                            </p>
-
-                        </div>
+                        <p>
+                            Discover our exclusive accessories.
+                        </p>
 
                     </div>
 
+                </div>
 
-                    {{-- CATEGORIES --}}
-                    <div class="col-lg-9">
 
-                        <div class="row">
+                {{-- CATEGORIES --}}
+                <div class="col-lg-8">
 
-                            @foreach($highJewelry as $category)
+                    <div class="row">
 
-                                <div class="col-lg-4 col-md-6">
+                        @foreach($accessories as $category)
 
-                                    <a
-                                        href="{{ url('collections/'.$category->slug) }}"
-                                        class="mega-category-link"
-                                    >
+                            <div class="col-lg-4 col-md-6">
 
-                                        <span>
-                                            {{ $category->name }}
-                                        </span>
+                                <a
+                                    href="{{ url('collections/'.$category->slug) }}"
+                                    class="mega-category-link"
+                                >
 
-                                        <i class="ion-ios-arrow-forward"></i>
+                                    <span>
+                                        {{ $category->name }}
+                                    </span>
 
-                                    </a>
+                                    <i class="ion-ios-arrow-forward"></i>
 
-                                </div>
+                                </a>
 
-                            @endforeach
+                            </div>
 
-                        </div>
+                        @endforeach
 
                     </div>
 
@@ -189,74 +187,73 @@
 
         </div>
 
-    </li>
+    </div>
 
+</li>
 
-    {{-- =========================================================
-         AD SIGNATURE MEGA MENU
-    ========================================================== --}}
-    <li class="has-dropdown mega-menu-parent">
+{{-- =========================================================
+     ON SALE MEGA MENU
+========================================================== --}}
+<li class="has-dropdown mega-menu-parent">
 
-        <a href="javascript:void(0)" class="mega-menu-trigger">
-            AD Signature
-            <i class="ion-ios-arrow-down ms-1"></i>
-        </a>
+    <a href="javascript:void(0)" class="mega-menu-trigger">
+        On Sale
+        <i class="ion-ios-arrow-down ms-1"></i>
+    </a>
 
-        <div class="mega-menu">
+    <div class="mega-menu">
 
-            <div class="container">
+        <div class="container">
 
-                <div class="row align-items-start">
+            <div class="row align-items-start">
 
-                    {{-- TITLE --}}
-                    <div class="col-lg-3">
+                {{-- TITLE --}}
+                <div class="col-lg-4">
 
-                        <div class="mega-menu-intro">
+                    <div class="mega-menu-intro">
 
-                            <span class="mega-menu-eyebrow">
-                                DEMANTO
-                            </span>
+                        <span class="mega-menu-eyebrow">
+                            DEMANTO
+                        </span>
 
-                            <h4>
-                                AD Signature
-                            </h4>
+                        <h4>
+                            On Sale
+                        </h4>
 
-                            <p>
-                                Discover the signature collection.
-                            </p>
-
-                        </div>
+                        <p>
+                            Discover our special offers and sale collections.
+                        </p>
 
                     </div>
 
+                </div>
 
-                    {{-- CATEGORIES --}}
-                    <div class="col-lg-9">
 
-                        <div class="row">
+                {{-- CATEGORIES --}}
+                <div class="col-lg-8">
 
-                            @foreach($adSignature as $category)
+                    <div class="row">
 
-                                <div class="col-lg-4 col-md-6">
+                        @foreach($onSale as $category)
 
-                                    <a
-                                        href="{{ url('collections/'.$category->slug) }}"
-                                        class="mega-category-link"
-                                    >
+                            <div class="col-lg-4 col-md-6">
 
-                                        <span>
-                                            {{ $category->name }}
-                                        </span>
+                                <a
+                                    href="{{ url('collections/'.$category->slug) }}"
+                                    class="mega-category-link"
+                                >
 
-                                        <i class="ion-ios-arrow-forward"></i>
+                                    <span>
+                                        {{ $category->name }}
+                                    </span>
 
-                                    </a>
+                                    <i class="ion-ios-arrow-forward"></i>
 
-                                </div>
+                                </a>
 
-                            @endforeach
+                            </div>
 
-                        </div>
+                        @endforeach
 
                     </div>
 
@@ -266,8 +263,9 @@
 
         </div>
 
-    </li>
+    </div>
 
+</li>
 
     <li>
         <a href="{{ url('blogs') }}">News</a>
@@ -570,65 +568,53 @@
 
             </li>
 
-            {{-- High Jewelry --}}
-            <li class="has-mobile-dropdown">
+      {{-- Accessories --}}
+<li class="has-mobile-dropdown">
 
-                <a href="javascript:void(0)" class="mobile-dropdown-trigger">
-                    High Jewelry
-                    <i class="ion-ios-arrow-down float-end mt-1"></i>
+    <a href="javascript:void(0)" class="mobile-dropdown-trigger">
+        Accessories
+        <i class="ion-ios-arrow-down float-end mt-1"></i>
+    </a>
+
+    <ul class="mobile-sub-categories">
+
+        @foreach($accessories as $category)
+
+            <li>
+                <a href="{{ url('collections/'.$category->slug) }}">
+                    {{ $category->name }}
                 </a>
-
-                <ul class="mobile-sub-categories">
-                    @foreach($highJewelry as $category)
-                        <li>
-                            <a href="{{ url('collections/'.$category->slug) }}">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-
             </li>
 
-            {{-- AD Signature --}}
-            <li class="has-mobile-dropdown">
+        @endforeach
 
-                <a href="javascript:void(0)" class="mobile-dropdown-trigger">
-                    AD Signature
-                    <i class="ion-ios-arrow-down float-end mt-1"></i>
+    </ul>
+
+</li>
+
+      {{-- On Sale --}}
+<li class="has-mobile-dropdown">
+
+    <a href="javascript:void(0)" class="mobile-dropdown-trigger">
+        On Sale
+        <i class="ion-ios-arrow-down float-end mt-1"></i>
+    </a>
+
+    <ul class="mobile-sub-categories">
+
+        @foreach($onSale as $category)
+
+            <li>
+                <a href="{{ url('collections/'.$category->slug) }}">
+                    {{ $category->name }}
                 </a>
-
-                <ul class="mobile-sub-categories">
-                    @foreach($adSignature as $category)
-                        <li>
-                            <a href="{{ url('collections/'.$category->slug) }}">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-                             {{-- <ul class="mobile-sub-categories">
-                
-                        <li>
-                            <a >
-                         Menu 4
-                            </a>
-                        </li>
-               
-                </ul>
-
-                                      <ul class="mobile-sub-categories">
-                
-                        <li>
-                            <a >
-                         Menu 5
-                            </a>
-                        </li>
-               
-                </ul> --}}
-
             </li>
 
+        @endforeach
+
+    </ul>
+
+</li>
             <li>
                 <a href="{{ url('blogs') }}">News</a>
             </li>
