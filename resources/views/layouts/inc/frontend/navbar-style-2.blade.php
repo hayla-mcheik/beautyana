@@ -56,30 +56,11 @@
 
                 <div class="row align-items-start">
 
-                    {{-- TITLE --}}
-                    <div class="col-lg-4">
-
-                        <div class="mega-menu-intro">
-
-                            <span class="mega-menu-eyebrow">
-                                DEMANTO
-                            </span>
-
-                            <h4>
-                                Collections
-                            </h4>
-
-                            <p>
-                                Discover our exclusive jewelry collections.
-                            </p>
-
-                        </div>
-
-                    </div>
+           
 
 
                     {{-- CATEGORIES --}}
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
 
                         <div class="row">
 
@@ -133,30 +114,10 @@
 
             <div class="row align-items-start">
 
-                {{-- TITLE --}}
-                <div class="col-lg-4">
-
-                    <div class="mega-menu-intro">
-
-                        <span class="mega-menu-eyebrow">
-                            DEMANTO
-                        </span>
-
-                        <h4>
-                            Accessories
-                        </h4>
-
-                        <p>
-                            Discover our exclusive accessories.
-                        </p>
-
-                    </div>
-
-                </div>
-
+         
 
                 {{-- CATEGORIES --}}
-                <div class="col-lg-8">
+                <div class="col-lg-12">
 
                     <div class="row">
 
@@ -209,30 +170,10 @@
 
             <div class="row align-items-start">
 
-                {{-- TITLE --}}
-                <div class="col-lg-4">
-
-                    <div class="mega-menu-intro">
-
-                        <span class="mega-menu-eyebrow">
-                            DEMANTO
-                        </span>
-
-                        <h4>
-                            On Sale
-                        </h4>
-
-                        <p>
-                            Discover our special offers and sale collections.
-                        </p>
-
-                    </div>
-
-                </div>
-
+         
 
                 {{-- CATEGORIES --}}
-                <div class="col-lg-8">
+                <div class="col-lg-12">
 
                     <div class="row">
 
