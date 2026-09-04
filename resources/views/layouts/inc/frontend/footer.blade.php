@@ -309,7 +309,7 @@
 }
 
 .footer-nav-list li a:hover {
-    color: #FFFFFF;
+    color: #000E;
     padding-left: 6px;
 }
 
