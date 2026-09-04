@@ -12,49 +12,100 @@ use App\Models\Cart;
 class Index extends Component
 {
     use WithPagination;
-    
-public $category;
-public $collections;
-public $highJewelry;
-public $adSignature;
-    public $brandInputs = [], $priceInput;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Category Data
+    |--------------------------------------------------------------------------
+    */
+
+    public $category;
+
+    public $collections;
+
+    public $accessories;
+
+    public $onSale;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Filters
+    |--------------------------------------------------------------------------
+    */
+
+    public $brandInputs = [];
+
+    public $priceInput;
+
     public $perPage = 12;
-    
-    
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Query String
+    |--------------------------------------------------------------------------
+    */
+
     protected $queryString = [
-        'brandInputs' => ['except' => '', 'as' => 'brand'],
-        'priceInput' => ['except' => '', 'as' => 'price'],
+        'brandInputs' => [
+            'except' => '',
+            'as' => 'brand'
+        ],
+
+        'priceInput' => [
+            'except' => '',
+            'as' => 'price'
+        ],
     ];
 
-public function mount(
-    $category,
-    $collections,
-    $highJewelry,
-    $adSignature
-){
-    $this->category = $category;
-    $this->collections = $collections;
-    $this->highJewelry = $highJewelry;
-    $this->adSignature = $adSignature;
-}
 
-    /* ---------------- Wishlist ---------------- */
+    /*
+    |--------------------------------------------------------------------------
+    | Mount
+    |--------------------------------------------------------------------------
+    */
+
+    public function mount(
+        $category,
+        $collections,
+        $accessories,
+        $onSale
+    ) {
+        $this->category = $category;
+
+        $this->collections = $collections;
+
+        $this->accessories = $accessories;
+
+        $this->onSale = $onSale;
+    }
+
+
+    /* ================================================================
+       Wishlist
+    ================================================================ */
 
     public function addToWishList($productId)
     {
         if (!Auth::check()) {
+
             $this->dispatch(
                 'message',
                 text: 'Please Login to Continue',
                 type: 'info',
                 status: 401
             );
+
             return;
         }
 
-        if (Wishlist::where('user_id', auth()->id())
-            ->where('product_id', $productId)
-            ->exists()) {
+
+        if (
+            Wishlist::where('user_id', auth()->id())
+                ->where('product_id', $productId)
+                ->exists()
+        ) {
 
             $this->dispatch(
                 'message',
@@ -62,15 +113,19 @@ public function mount(
                 type: 'warning',
                 status: 409
             );
+
             return;
         }
+
 
         Wishlist::create([
             'user_id' => auth()->id(),
             'product_id' => $productId,
         ]);
 
+
         $this->dispatch('wishlistAddedUpdated');
+
 
         $this->dispatch(
             'message',
@@ -80,47 +135,62 @@ public function mount(
         );
     }
 
-    /* ---------------- Cart ---------------- */
+
+    /* ================================================================
+       Cart
+    ================================================================ */
 
     public function addToCart(int $productId)
     {
         if (!Auth::check()) {
+
             $this->dispatch(
                 'message',
                 text: 'Please Login to add to cart',
                 type: 'info',
                 status: 401
             );
+
             return;
         }
 
+
         if (Auth::user()->role_as == '1') {
+
             $this->dispatch(
                 'message',
                 text: 'Only User can add to cart',
                 type: 'warning',
                 status: 200
             );
+
             return;
         }
+
 
         $product = Product::where('id', $productId)
             ->where('status', '0')
             ->first();
 
+
         if (!$product) {
+
             $this->dispatch(
                 'message',
                 text: 'Product Does not exist',
                 type: 'warning',
                 status: 404
             );
+
             return;
         }
 
-        if (Cart::where('user_id', auth()->id())
-            ->where('product_id', $productId)
-            ->exists()) {
+
+        if (
+            Cart::where('user_id', auth()->id())
+                ->where('product_id', $productId)
+                ->exists()
+        ) {
 
             $this->dispatch(
                 'message',
@@ -128,18 +198,23 @@ public function mount(
                 type: 'warning',
                 status: 200
             );
+
             return;
         }
 
+
         if ($product->quantity <= 0) {
+
             $this->dispatch(
                 'message',
                 text: 'Out of Stock',
                 type: 'warning',
                 status: 404
             );
+
             return;
         }
+
 
         Cart::create([
             'user_id' => auth()->id(),
@@ -147,7 +222,9 @@ public function mount(
             'quantity' => 1,
         ]);
 
+
         $this->dispatch('CartAddedUpdated');
+
 
         $this->dispatch(
             'message',
@@ -157,27 +234,65 @@ public function mount(
         );
     }
 
+
+    /* ================================================================
+       Render
+    ================================================================ */
+
     public function render()
     {
-        $products = Product::where('category_id', $this->category->id)
-            ->when($this->brandInputs, fn ($q) =>
-                $q->whereIn('brand', $this->brandInputs)
+        $products = Product::where(
+                'category_id',
+                $this->category->id
             )
-            ->when($this->priceInput, function ($q) {
-                $q->when(
-                    $this->priceInput === 'high-to-low',
-                    fn ($q2) => $q2->orderBy('selling_price', 'DESC')
-                )->when(
-                    $this->priceInput === 'low-to-high',
-                    fn ($q2) => $q2->orderBy('selling_price', 'ASC')
-                );
-            })
+
+            ->when(
+                $this->brandInputs,
+                fn ($q) =>
+                    $q->whereIn(
+                        'brand',
+                        $this->brandInputs
+                    )
+            )
+
+            ->when(
+                $this->priceInput,
+                function ($q) {
+
+                    $q->when(
+                        $this->priceInput === 'high-to-low',
+
+                        fn ($q2) =>
+                            $q2->orderBy(
+                                'selling_price',
+                                'DESC'
+                            )
+                    )
+
+                    ->when(
+                        $this->priceInput === 'low-to-high',
+
+                        fn ($q2) =>
+                            $q2->orderBy(
+                                'selling_price',
+                                'ASC'
+                            )
+                    );
+                }
+            )
+
             ->where('status', '0')
+
             ->paginate($this->perPage);
 
-        return view('livewire.frontend.product.index', [
-            'products' => $products,
-            'category' => $this->category,
-        ]);
+
+        return view(
+            'livewire.frontend.product.index',
+            [
+                'products' => $products,
+
+                'category' => $this->category,
+            ]
+        );
     }
 }
