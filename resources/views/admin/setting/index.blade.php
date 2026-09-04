@@ -205,7 +205,7 @@
                 <input
                     type="text"
                     name="tiktok"
-                    value="{{ $setting->tiktok ?? '' }}"
+                    value="{{ $setting->twitter ?? '' }}"
                     class="form-control"
                     placeholder="https://www.tiktok.com/@..."
                 />
