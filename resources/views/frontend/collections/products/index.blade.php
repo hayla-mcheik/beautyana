@@ -31,15 +31,14 @@
         ]
     ]
 ])
-<livewire:frontend.product.index
-    :category="$category"
-    :collections="$collections"
-    :highJewelry="$highJewelry"
-    :adSignature="$adSignature"
-    :inStockCount="$inStockCount"
-    :outOfStockCount="$outOfStockCount"
+<livewire:frontend.product.index 
+    :category="$category" 
+    :collections="$collections" 
+    :accessories="$accessories" 
+    :onSale="$onSale" 
+    :inStockCount="$inStockCount" 
+    :outOfStockCount="$outOfStockCount" 
 />
-
       
 
 

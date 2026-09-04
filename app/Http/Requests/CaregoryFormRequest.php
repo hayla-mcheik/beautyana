@@ -26,7 +26,7 @@ class CaregoryFormRequest extends FormRequest
             'required',
             'string'
         ],
-        'menu' => 'required|in:Collections,High Jewelry,AD Signature',
+'menu' => 'required|in:Collections,Accessories,OnSale',
         // 'slug' => [
         //     'required',
         //     'string'

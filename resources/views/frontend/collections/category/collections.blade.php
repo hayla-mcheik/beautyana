@@ -65,13 +65,13 @@
         </div>
         @endif
 
-        {{-- ========================= HIGH JEWELRY ========================= --}}
-        @if($highJewelry->count())
+{{-- ========================= ACCESSORIES ========================= --}}
+@if($accessories->count())
 
         <div class="all-categories mt-5">
 
             <div class="collections-title">
-                <span class="title-main">High Jewelry</span>
+  <span class="title-main">Accessories</span>
                 <div class="title-accent">
                     <span class="dash"></span>
                 </div>
@@ -81,7 +81,7 @@
             <div class="collections-slider-wrapper mt-0">
                 <div class="swiper signature-slider collections-slider">
                     <div class="swiper-wrapper">
-                        @foreach($highJewelry as $categoryItem)
+                @foreach($accessories as $categoryItem)
                             <div class="swiper-slide">
                                 <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
                                     <div class="collection-inner">
@@ -112,13 +112,13 @@
         </div>
         @endif
 
-        {{-- ========================= AD SIGNATURE ========================= --}}
-        @if($adSignature->count())
+ {{-- ========================= ON SALE ========================= --}}
+@if($onSale->count())
 
         <div class="all-categories mt-5">
 
             <div class="collections-title">
-                <span class="title-main">AD Signature</span>
+          <span class="title-main">On Sale</span>
                 <div class="title-accent">
                     <span class="dash"></span>
                 </div>
@@ -128,7 +128,7 @@
             <div class="collections-slider-wrapper mt-0">
                 <div class="swiper signature-slider collections-slider">
                     <div class="swiper-wrapper">
-                        @foreach($adSignature as $categoryItem)
+          @foreach($onSale as $categoryItem)
                             <div class="swiper-slide">
                                 <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
                                     <div class="collection-inner">

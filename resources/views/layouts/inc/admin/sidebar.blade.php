@@ -14,7 +14,7 @@
             </a>
         </li>
         
-  <li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
+<li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
 
     <a
         class="nav-link"
@@ -82,19 +82,19 @@
 
 
 
-            {{-- HIGH JEWELRY --}}
+            {{-- ACCESSORIES --}}
 
             <li class="nav-item">
 
                 <a
                     class="nav-link
-                    {{ request('menu') === 'High Jewelry'
+                    {{ request('menu') === 'Accessories'
                         ? 'active'
                         : '' }}"
-                    href="{{ url('admin/category') }}?menu={{ urlencode('High Jewelry') }}"
+                    href="{{ url('admin/category') }}?menu={{ urlencode('Accessories') }}"
                 >
 
-                    High Jewelry
+                    Accessories
 
                 </a>
 
@@ -102,19 +102,19 @@
 
 
 
-            {{-- AD SIGNATURE --}}
+            {{-- ON SALE --}}
 
             <li class="nav-item">
 
                 <a
                     class="nav-link
-                    {{ request('menu') === 'AD Signature'
+                    {{ request('menu') === 'OnSale'
                         ? 'active'
                         : '' }}"
-                    href="{{ url('admin/category') }}?menu={{ urlencode('AD Signature') }}"
+                    href="{{ url('admin/category') }}?menu={{ urlencode('OnSale') }}"
                 >
 
-                    AD Signature
+                    On Sale
 
                 </a>
 

@@ -14,8 +14,8 @@
 
     $allowedMenus = [
         'Collections',
-        'High Jewelry',
-        'AD Signature',
+        'Accessories',
+        'OnSale',
     ];
 
     if (!in_array($selectedMenu, $allowedMenus, true)) {
@@ -589,21 +589,13 @@
 
 <style>
 
-
 .category-create-card {
-
     overflow: hidden;
-
 }
-
-
 
 .form-label {
-
     margin-bottom: 7px;
-
 }
-
 
 
 /*
@@ -613,66 +605,36 @@
 */
 
 .locked-menu-box {
-
     padding: 15px 17px;
-
-
     border: 1px solid #dee2e6;
-
     border-radius: 9px;
-
-
     background: #f8f9fa;
-
 }
-
 
 .locked-menu-content {
-
     display: flex;
-
     align-items: center;
-
 }
 
-
 .menu-icon-box {
-
     width: 44px;
-
     height: 44px;
-
-
     min-width: 44px;
 
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
 
     margin-right: 14px;
 
-
     border-radius: 8px;
-
-
     background: #eef1f4;
-
-
     font-size: 22px;
-
 }
-
 
 .menu-name {
-
     font-size: 16px;
-
 }
-
 
 
 /*
@@ -682,74 +644,42 @@
 */
 
 .image-preview-box {
-
     display: flex;
-
     align-items: center;
-
-
     gap: 14px;
-
 
     padding: 12px;
 
-
     border: 1px solid #dee2e6;
-
     border-radius: 9px;
 
-
     background: #f8f9fa;
-
 }
 
-
 .image-preview {
-
     width: 75px;
-
     height: 75px;
-
-
     min-width: 75px;
 
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
 
     overflow: hidden;
 
-
     border-radius: 7px;
-
-
     background: #ffffff;
-
 }
-
 
 .image-preview img {
-
     width: 100%;
-
     height: 100%;
-
-
     object-fit: contain;
-
 }
-
 
 .image-preview-info {
-
     min-width: 0;
-
 }
-
 
 
 /*
@@ -759,19 +689,13 @@
 */
 
 .status-card {
-
     padding: 18px 20px;
 
-
     border: 1px solid #dee2e6;
-
     border-radius: 10px;
 
-
     background: #fafafa;
-
 }
-
 
 
 /*
@@ -781,19 +705,14 @@
 */
 
 .status-content {
-
     display: flex;
-
 
     align-items: center;
 
     justify-content: space-between;
 
-
     gap: 30px;
-
 }
-
 
 
 /*
@@ -803,54 +722,32 @@
 */
 
 .status-info {
-
     display: flex;
-
     align-items: center;
-
-
     min-width: 0;
-
 }
 
-
 .status-icon {
-
     width: 44px;
-
     height: 44px;
-
-
     min-width: 44px;
 
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
 
     margin-right: 14px;
 
-
     border-radius: 8px;
-
 
     background: #eef1f4;
 
-
     font-size: 22px;
-
 }
-
 
 .status-text {
-
     min-width: 0;
-
 }
-
 
 
 /*
@@ -860,19 +757,13 @@
 */
 
 .status-actions {
-
     display: flex;
-
     align-items: center;
-
 
     gap: 25px;
 
-
     flex-shrink: 0;
-
 }
-
 
 
 /*
@@ -882,20 +773,14 @@
 */
 
 .status-actions .badge {
-
     min-width: 70px;
-
 
     padding: 7px 12px;
 
-
     text-align: center;
 
-
     font-size: 12px;
-
 }
-
 
 
 /*
@@ -905,16 +790,11 @@
 */
 
 .status-switch-wrapper {
-
     display: flex;
-
     align-items: center;
 
-
     gap: 12px;
-
 }
-
 
 
 /*
@@ -924,22 +804,15 @@
 */
 
 .category-status-switch {
-
     width: 2.8em !important;
-
     height: 1.4em;
-
 
     margin: 0 !important;
 
-
     float: none !important;
 
-
     cursor: pointer;
-
 }
-
 
 
 /*
@@ -949,20 +822,14 @@
 */
 
 .status-switch-label {
-
     margin: 0;
-
 
     font-weight: 600;
 
-
     white-space: nowrap;
 
-
     cursor: pointer;
-
 }
-
 
 
 /*
@@ -972,24 +839,18 @@
 */
 
 .form-actions {
-
     display: flex;
 
     align-items: center;
 
     justify-content: flex-end;
 
-
     gap: 10px;
-
 
     padding-top: 20px;
 
-
     border-top: 1px solid #dee2e6;
-
 }
-
 
 
 /*
@@ -1000,34 +861,23 @@
 
 @media (max-width: 768px) {
 
-
     .status-content {
-
         flex-direction: column;
-
 
         align-items: flex-start;
 
-
         gap: 18px;
-
     }
 
-
     .status-actions {
-
         width: 100%;
-
 
         justify-content: space-between;
 
-
         padding-left: 58px;
-
     }
 
 }
-
 
 
 /*
@@ -1038,88 +888,53 @@
 
 @media (max-width: 480px) {
 
-
     .card-body {
-
         padding: 18px !important;
-
     }
-
 
     .locked-menu-content {
-
         align-items: flex-start;
-
     }
-
 
     .status-card {
-
         padding: 16px;
-
     }
-
 
     .status-info {
-
         align-items: flex-start;
-
     }
 
-
     .status-actions {
-
         width: 100%;
-
 
         padding-left: 0;
 
-
         flex-direction: column;
-
 
         align-items: flex-start;
 
-
         gap: 15px;
-
     }
-
 
     .status-switch-wrapper {
-
         width: 100%;
-
     }
-
 
     .form-actions {
-
         flex-direction: column-reverse;
-
     }
-
 
     .form-actions .btn {
-
         width: 100%;
-
     }
 
-
     .image-preview {
-
         width: 65px;
-
         height: 65px;
-
-
         min-width: 65px;
-
     }
 
 }
-
 
 </style>
 
@@ -1143,14 +958,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const statusSwitch =
         document.getElementById('status');
 
-
     const statusBadge =
         document.getElementById('statusBadge');
 
-
     const statusDescription =
         document.getElementById('statusDescription');
-
 
 
     /*
@@ -1161,36 +973,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateStatusDisplay() {
 
-
         if (statusSwitch.checked) {
-
 
             statusBadge.textContent =
                 'Visible';
 
-
             statusBadge.className =
                 'badge bg-success';
-
 
             statusDescription.textContent =
                 'This category will be visible to customers.';
 
-
         } else {
-
 
             statusBadge.textContent =
                 'Hidden';
 
-
             statusBadge.className =
                 'badge bg-secondary';
 
-
             statusDescription.textContent =
                 'This category will not appear to customers.';
-
 
         }
 
@@ -1201,7 +1004,6 @@ document.addEventListener('DOMContentLoaded', function () {
         'change',
         updateStatusDisplay
     );
-
 
     updateStatusDisplay();
 
@@ -1216,10 +1018,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const categoryImage =
         document.getElementById('categoryImage');
 
-
     const imagePreviewBox =
         document.getElementById('imagePreviewBox');
-
 
     const imagePreview =
         document.getElementById('imagePreview');
@@ -1230,10 +1030,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function (event) {
 
-
             const file =
                 event.target.files[0];
-
 
             if (!file) {
 
@@ -1242,7 +1040,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 imagePreviewBox.classList.add('d-none');
 
                 return;
-
             }
 
 
@@ -1254,7 +1051,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 imagePreview.src =
                     e.target.result;
-
 
                 imagePreviewBox.classList.remove('d-none');
 

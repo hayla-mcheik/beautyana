@@ -568,9 +568,9 @@
                     </li>
                     @endforeach
                 </ul>
-                <h5 class="sidebar-title mt-4">High Jewelry</h5>
-                <ul>
-                    @foreach($highJewelry as $categoryItem)
+<h5 class="sidebar-title mt-4">Accessories</h5>
+<ul>
+    @foreach($accessories as $categoryItem)
                     <li>
                         <a href="{{ url('/collections/'.$categoryItem->slug) }}">
                             {{ $categoryItem->name }}
@@ -578,9 +578,9 @@
                     </li>
                     @endforeach
                 </ul>
-                <h5 class="sidebar-title mt-4">AD Signature</h5>
-                <ul>
-                    @foreach($adSignature as $categoryItem)
+       <h5 class="sidebar-title mt-4">On Sale</h5>
+<ul>
+    @foreach($onSale as $categoryItem)
                     <li>
                         <a href="{{ url('/collections/'.$categoryItem->slug) }}">
                             {{ $categoryItem->name }}
@@ -620,9 +620,9 @@
                                     </li>
                                     @endforeach
                                 </ul>
-                                <h6 class="mt-3">High Jewelry</h6>
-                                <ul>
-                                    @foreach($highJewelry as $categoryItem)
+             <h6 class="mt-3">Accessories</h6>
+<ul>
+    @foreach($accessories as $categoryItem)
                                     <li>
                                         <a href="{{ url('/collections/'.$categoryItem->slug) }}">
                                             {{ $categoryItem->name }}
@@ -630,9 +630,9 @@
                                     </li>
                                     @endforeach
                                 </ul>
-                                <h6 class="mt-3">AD Signature</h6>
-                                <ul>
-                                    @foreach($adSignature as $categoryItem)
+              <h6 class="mt-3">On Sale</h6>
+<ul>
+    @foreach($onSale as $categoryItem)
                                     <li>
                                         <a href="{{ url('/collections/'.$categoryItem->slug) }}">
                                             {{ $categoryItem->name }}
