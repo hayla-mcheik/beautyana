@@ -529,6 +529,20 @@
         animation: fadeInUp 0.5s ease-out;
         animation-fill-mode: backwards;
     }
+    .product-price {
+    color: var(--demanto-red) !important;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+.product-price:hover {
+    color: var(--demanto-dark) !important;
+}
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
@@ -683,9 +697,10 @@
                                         </div>
                                         <div class="featured-content">
                                             <h4>{{ $product->name }}</h4>
-                                            <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
-                                                Discover Details <i class="fa fa-arrow-right"></i>
-                                            </a>
+                                     <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+       class="product-price">
+        ${{ number_format($product->selling_price, 2) }}
+    </a>
                                         </div>
                                     </div>
                                 </div>

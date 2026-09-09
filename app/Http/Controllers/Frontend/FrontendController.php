@@ -52,7 +52,7 @@ public function index()
         ->where('quantity', '>', 0)
         ->with(['productImages', 'category'])
         ->latest()
-        ->take(14)
+        ->take(12)
         ->get();
 
 
@@ -71,7 +71,7 @@ $bestSellersProducts = Product::where('status', '0')
     ->with(['productImages', 'category'])
     ->withSum('orderItems', 'quantity')
     ->orderByDesc('order_items_sum_quantity')
-    ->take(14)
+    ->take(12)
     ->get();
 
 
@@ -86,7 +86,7 @@ $bestSellersProducts = Product::where('status', '0')
         ->where('quantity', '>', 0)
         ->with(['productImages', 'category'])
         ->latest()
-        ->take(14)
+        ->take(12)
         ->get();
 
 

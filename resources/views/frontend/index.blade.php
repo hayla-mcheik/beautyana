@@ -163,9 +163,9 @@
     .home-banner {
         position: relative;
         width: 100%;
-        height: 50vh;
-        min-height: 550px;
-        max-height: 50vh;
+        height: 48vh;
+        min-height: 460px;
+        max-height: 48vh;
         overflow: hidden;
         z-index: 1;
     }
@@ -297,7 +297,7 @@
         z-index: 99999;
         transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
-    .whatsapp-global-btn { top: 50% !important; transform: translateY(-50%); }
+    .whatsapp-global-btn { top: 60% !important; transform: translateY(-50%); }
     .whatsapp-btn i { display: flex; align-items: center; justify-content: center; margin: 0; color: #fff; line-height: 1; }
     .whatsapp-btn:hover { color: #fff !important; transform: translateY(-50%) scale(1.08); }
     @media (max-width: 991px) { .whatsapp-btn { right: 18px; width: 50px; height: 50px; font-size: 24px; } }
@@ -606,7 +606,7 @@
     .latest-arrivals-grid,
     .best-sellers-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 30px;
         width: 100%;
     }
@@ -887,7 +887,30 @@
         .latest-arrival-name, .best-seller-name { font-size: 10px; }
         .latest-arrival-arrow, .best-seller-arrow { font-size: 18px; }
     }
+.latest-arrival-price,
+.best-seller-price {
+    flex-shrink: 0;
+    margin-left: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--demanto-white);
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .latest-arrival-price,
+    .best-seller-price {
+        font-size: 11px;
+        margin-left: 8px;
+    }
+}
 
+@media (max-width: 480px) {
+    .latest-arrival-price,
+    .best-seller-price {
+        font-size: 10px;
+    }
+}
     /* ============================================================
        SCROLLBAR
     ============================================================ */
@@ -941,11 +964,6 @@
     </div>
 </section>
 
-<!-- WhatsApp Button -->
-<a href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contact DEMANTO on WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
 <!-- About Section -->
 <section>
     <div class="about-editorial-root">
@@ -982,7 +1000,7 @@
         </div>
 
         <div class="latest-arrivals-grid">
-            @forelse($newArrivalsProducts->take(6) as $product)
+            @forelse($newArrivalsProducts->take(12) as $product)
                 <div class="latest-arrival-card">
                     <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-image-link">
                         <div class="latest-arrival-image">
@@ -1006,7 +1024,9 @@
                     </a>
                     <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-footer">
                         <span class="latest-arrival-name">{{ $product->name }}</span>
-                        <span class="latest-arrival-arrow">→</span>
+                        <span class="latest-arrival-price">
+        ${{ number_format($product->selling_price, 2) }}
+    </span>
                     </a>
                 </div>
             @empty
@@ -1146,10 +1166,10 @@
                             <span class="best-seller-name">
                                 {{ $product->name }}
                             </span>
+    <span class="best-seller-price">
+        ${{ number_format($product->selling_price, 2) }}
+    </span>
 
-                            <span class="best-seller-arrow">
-                                →
-                            </span>
 
                         </a>
 
@@ -1198,63 +1218,6 @@
     </div>
 </section> --}}
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    /* ======== WhatsApp Position ======== */
-    const whatsappButton = document.querySelector('.home-default-wrapper > .whatsapp-btn');
-    const homeBanner = document.querySelector('.home-banner');
 
-    function positionWhatsappButton() {
-        if (!whatsappButton || !homeBanner) return;
-        const bannerRect = homeBanner.getBoundingClientRect();
-        const distanceFromSliderBottom = -45;
-        let buttonTop = bannerRect.bottom - distanceFromSliderBottom;
-        const minimumTop = 80;
-        const maximumTop = window.innerHeight - 40;
-        buttonTop = Math.max(minimumTop, Math.min(buttonTop, maximumTop));
-        whatsappButton.style.top = buttonTop + 'px';
-    }
-    positionWhatsappButton();
-    window.addEventListener('load', positionWhatsappButton);
-    window.addEventListener('resize', positionWhatsappButton);
-    window.addEventListener('orientationchange', positionWhatsappButton);
-
-    /* ======== Lazy Load ======== */
-    const images = document.querySelectorAll('img[data-src]');
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        images.forEach(img => imageObserver.observe(img));
-    } else {
-        images.forEach(img => {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-        });
-    }
-
-    /* ======== Hero Swiper Update ======== */
-    document.querySelectorAll('.hero-bg').forEach(function(img){
-        function updateHero(){
-            if(window.heroSwiper){
-                heroSwiper.update();
-                heroSwiper.updateAutoHeight();
-            }
-        }
-        if(img.complete){
-            updateHero();
-        }else{
-            img.onload = updateHero;
-        }
-    });
-});
-</script>
 
 @endsection

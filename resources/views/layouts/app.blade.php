@@ -272,29 +272,25 @@ font-family:"Cormorant Garamond",serif;
     <main class="main-content">
         @yield('content')
     </main>
-{{-- WhatsApp button on all pages except Home --}}
-@if (!request()->is('/'))
 
-    <a
-        href="https://wa.me/971508505260?text=Hello%20DEMANTO,%20I%20would%20like%20to%20know%20more%20about%20your%20collections."
-        class="whatsapp-btn whatsapp-global-btn"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contact Beautyana on WhatsApp"
-    >
-        <i class="fab fa-whatsapp"></i>
-    </a>
+@php
+    $whatsappPhone = preg_replace('/[^0-9]/', '', $appSetting->phone1 ?? '');
+@endphp
 
+<a
+    href="https://wa.me/{{ $whatsappPhone }}?text={{ urlencode('Hello Beautyana, I would like to know more about your collections.') }}"
+    class="whatsapp-btn whatsapp-global-btn"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contact Beautyana on WhatsApp"
+>
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-
-@endif
  @include('layouts.inc.frontend.footer')
 
 
-    <!-- Scroll Top Button -->
-    <div id="scroll-to-top" class="scroll-to-top">
-        <i class="fa fa-angle-up fs-4"></i>
-    </div>
+
 </div>
 
 <!-- Scripts -->
