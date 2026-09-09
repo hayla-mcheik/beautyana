@@ -1097,16 +1097,6 @@
                                     <div class="product-description">
 
                                         <ul class="product-desc-list">
-
-                                            @if($product->small_description)
-
-                                                <li>
-                                                    {{ $product->small_description }}
-                                                </li>
-
-                                            @endif
-
-
                                             @if($product->description)
 
                                                 <li>

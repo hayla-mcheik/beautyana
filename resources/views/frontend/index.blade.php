@@ -1063,54 +1063,111 @@
     </div>
 </section>
 
-<!-- Best Sellers -->
-<section class="best-sellers-section">
-    <div class="container">
-        <div class="collections-title mb-4">
-            <span class="title-main">Best Sellers</span>
-            <div class="divider"><span></span></div>
-        </div>
+@if($bestSellersProducts->isNotEmpty())
+    <!-- Best Sellers -->
+    <section class="best-sellers-section">
+        <div class="container">
 
-        <div class="best-sellers-grid">
-            @forelse($bestSellersProducts->take(6) as $product)
-                <div class="best-seller-card">
-                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="best-seller-image-link">
-                        <div class="best-seller-image">
-                            @if($product->productImages->count())
-                                <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
-                            @else
-                                <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
-                            @endif
-                            <div class="best-seller-badges">
-                                @if($product->quantity > 0)
-                                    <span class="best-seller-stock">In Stock</span>
-                                @else
-                                    <span class="best-seller-stock out-of-stock">Out of Stock</span>
-                                @endif
-                                @if($product->original_price > 0 && $product->selling_price < $product->original_price)
-                                    @php $discount = round((($product->original_price - $product->selling_price) / $product->original_price) * 100); @endphp
-                                    <span class="best-seller-discount">-{{ $discount }}%</span>
-                                @endif
-                            </div>
-                            <span class="best-seller-label">Best Seller</span>
-                        </div>
-                    </a>
-                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="best-seller-footer">
-                        <span class="best-seller-name">{{ $product->name }}</span>
-                        <span class="best-seller-arrow">→</span>
-                    </a>
+            <div class="collections-title mb-4">
+                <span class="title-main">Best Sellers</span>
+                <div class="divider">
+                    <span></span>
                 </div>
-            @empty
-                <div class="best-sellers-empty"><p>Best sellers will appear here once customers start shopping.</p></div>
-            @endforelse
-        </div>
+            </div>
 
-        <div class="best-sellers-view-all">
-            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
-        </div>
-    </div>
-</section>
+            <div class="best-sellers-grid">
 
+                @foreach($bestSellersProducts->take(6) as $product)
+
+                    <div class="best-seller-card">
+
+                        <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+                           class="best-seller-image-link">
+
+                            <div class="best-seller-image">
+
+                                @if($product->productImages->count())
+                                    <img
+                                        src="{{ asset($product->productImages[0]->image) }}"
+                                        alt="{{ $product->name }}"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
+                                @else
+                                    <img
+                                        src="{{ asset('assets/img/placeholder.jpg') }}"
+                                        alt="{{ $product->name }}"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
+                                @endif
+
+                                <div class="best-seller-badges">
+
+                                    @if($product->quantity > 0)
+                                        <span class="best-seller-stock">
+                                            In Stock
+                                        </span>
+                                    @else
+                                        <span class="best-seller-stock out-of-stock">
+                                            Out of Stock
+                                        </span>
+                                    @endif
+
+                                    @if(
+                                        $product->original_price > 0 &&
+                                        $product->selling_price < $product->original_price
+                                    )
+                                        @php
+                                            $discount = round(
+                                                (($product->original_price - $product->selling_price)
+                                                / $product->original_price) * 100
+                                            );
+                                        @endphp
+
+                                        <span class="best-seller-discount">
+                                            -{{ $discount }}%
+                                        </span>
+                                    @endif
+
+                                </div>
+
+                                <span class="best-seller-label">
+                                    Best Seller
+                                </span>
+
+                            </div>
+
+                        </a>
+
+                        <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+                           class="best-seller-footer">
+
+                            <span class="best-seller-name">
+                                {{ $product->name }}
+                            </span>
+
+                            <span class="best-seller-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                @endforeach
+
+            </div>
+
+            <div class="best-sellers-view-all">
+                <a href="{{ url('/categories') }}" class="btn-demanto">
+                    View All
+                </a>
+            </div>
+
+        </div>
+    </section>
+@endif
 <!-- Exhibitions -->
 {{-- <section class="exhibitions-area">
     <div class="container">
