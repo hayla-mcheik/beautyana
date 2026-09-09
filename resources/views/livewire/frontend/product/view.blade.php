@@ -1127,7 +1127,7 @@
 
                                     <!-- BOOK APPOINTMENT -->
 
-                                    <div class="product-quick-action">
+                                    {{-- <div class="product-quick-action">
 
                                         <div class="white-bg">
 
@@ -1140,7 +1140,7 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> --}}
 
 
                                 </div>
