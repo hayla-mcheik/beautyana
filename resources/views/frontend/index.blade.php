@@ -316,7 +316,7 @@
         min-height: 15vh;
         display: flex;
         align-items: center;
-        padding: 10px 0 0 0;
+        padding: 16px 0 0 0;
         position: relative;
         overflow: hidden;
     }
@@ -331,7 +331,7 @@
     .large-bg-text {
         position: absolute;
         top: 50%;
-        left: 8%;
+        left: 4%;
         transform: translateY(-50%);
         font-size: 10vw;
         font-weight: 900;
