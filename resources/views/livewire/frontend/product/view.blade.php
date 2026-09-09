@@ -474,7 +474,7 @@
 
 
         .stock-badge.in-stock {
-            background: var(--demanto-gold);
+            background: var(--demanto-bg);
 
             color: #ffffff;
         }

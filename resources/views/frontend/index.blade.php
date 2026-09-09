@@ -969,7 +969,6 @@
     <div class="about-editorial-root">
         @if($about)
         <div class="art-background-layer">
-            <div class="large-bg-text">{{ $about->title ?? 'About Us' }}</div>
             <svg class="botanical-svg" viewBox="0 0 100 100" fill="none">
                 <path d="M10 80C30 80 80 60 90 10M10 80C40 70 80 40 90 10" stroke="#b95c19" stroke-width="0.2" opacity="0.2"/>
             </svg>

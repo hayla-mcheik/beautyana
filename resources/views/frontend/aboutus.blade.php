@@ -12,10 +12,10 @@
         color: var(--demanto-text);
         font-family: 'Montserrat', sans-serif;
         width: 100%;
-        min-height: 20vh;
+        min-height: 15vh;
         display: flex;
         align-items: center;
-        padding: 40px 0;
+        padding: 16px 0 0 0;
         position: relative;
         overflow: hidden;
     }
@@ -53,7 +53,6 @@
     .wide-content-wrapper {
         width: 100%;
         z-index: 2;
-        padding: 0 15px;
     }
 
     .eyebrow {
@@ -140,13 +139,13 @@
     <div class="about-editorial-root">
         @if($about)
         <div class="art-background-layer">
-            <div class="large-bg-text">{{ $about->title ?? 'About Us' }}</div>
+         
             <svg class="botanical-svg" viewBox="0 0 100 100" fill="none">
                 <path d="M10 80C30 80 80 60 90 10M10 80C40 70 80 40 90 10" stroke="#b95c19" stroke-width="0.2" opacity="0.2"/>
             </svg>
         </div>
 
-        <div class="wide-content-wrapper px-4 px-md-5 position-relative z-2">
+        <div class="wide-content-wrapper px-4 px-md-4 position-relative z-2">
             <div class="header-minimal mb-4">
                 <h2 class="display-title mt-2">{{ $about->title ?? 'About Us' }}</h2>
             </div>
