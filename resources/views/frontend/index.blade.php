@@ -333,7 +333,7 @@
         top: 50%;
         left: 4%;
         transform: translateY(-50%);
-        font-size: 4vw;
+        font-size: 3vw;
         font-weight: 800;
         color: #d97da50d !important; /* subtle pink tint */
         letter-spacing: 1px;
@@ -417,7 +417,7 @@
             .collections-title .title-main {
                 font-size: 24px !important;
             }
-        .large-bg-text { font-size: 4vw; left: 2%; letter-spacing: 1px; }
+        .large-bg-text { font-size: 3vw; left: 2%; letter-spacing: 1px; }
         .display-title { font-size: 1.1rem; margin-top: 20px !important; }
         .editorial-text { font-size: 0.7rem; max-width: 100%; }
         .footer-compact { flex-direction: column; align-items: flex-start; gap: 15px; }
