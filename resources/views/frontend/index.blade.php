@@ -313,10 +313,10 @@
         color: var(--demanto-text);
         font-family: 'Montserrat', sans-serif;
         width: 100%;
-        min-height: 20vh;
+        min-height: 15vh;
         display: flex;
         align-items: center;
-        padding: 40px 0;
+        padding: 10px 0 0 0;
         position: relative;
         overflow: hidden;
     }
@@ -331,7 +331,7 @@
     .large-bg-text {
         position: absolute;
         top: 50%;
-        left: 13%;
+        left: 8%;
         transform: translateY(-50%);
         font-size: 10vw;
         font-weight: 900;
@@ -354,7 +354,7 @@
     .wide-content-wrapper {
         width: 100%;
         z-index: 2;
-        padding: 0 15px;
+
     }
 
     .eyebrow {
@@ -417,7 +417,7 @@
             .collections-title .title-main {
                 font-size: 24px !important;
             }
-        .large-bg-text { font-size: 10vw; left: 4%; letter-spacing: 1px; }
+        .large-bg-text { font-size: 10vw; left: 2%; letter-spacing: 1px; }
         .display-title { font-size: 1.1rem; margin-top: 20px !important; }
         .editorial-text { font-size: 0.7rem; max-width: 100%; }
         .footer-compact { flex-direction: column; align-items: flex-start; gap: 15px; }
@@ -975,7 +975,7 @@
             </svg>
         </div>
 
-        <div class="wide-content-wrapper px-4 px-md-5 position-relative z-2">
+        <div class="wide-content-wrapper px-4 px-md-4 position-relative z-2">
             <div class="header-minimal mb-4">
                 <h2 class="display-title mt-2">{{ $about->title ?? 'About Us' }}</h2>
             </div>
