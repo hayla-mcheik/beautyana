@@ -858,36 +858,68 @@
 /* =========================================================
    PRODUCT VARIANTS
 ========================================================= */
+/* =========================================================
+   PRODUCT VARIANTS — LUXURY DESIGN
+========================================================= */
 
 .product-variants {
-    margin: 20px 0;
-    padding: 5px 0 22px;
+    margin: 24px 0 22px;
+    padding: 22px 0 20px;
+    border-top: 1px solid var(--luxury-border);
     border-bottom: 1px solid var(--luxury-border);
 }
 
+/* ---------------------------------------------------------
+   VARIANT GROUP
+--------------------------------------------------------- */
+
 .variant-group {
-    margin-bottom: 22px;
+    margin-bottom: 24px;
 }
+
+.variant-group:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   VARIANT HEADER
+--------------------------------------------------------- */
 
 .variant-title-row {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 14px;
 }
 
 .variant-label {
     font-family: "Cormorant Garamond", serif;
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 600;
     color: var(--demanto-dark);
+    letter-spacing: 0.3px;
 }
 
 .selected-value {
+    position: relative;
+    padding-left: 12px;
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
-    color: #888;
+    font-weight: 400;
+    color: #8b806f;
 }
 
+.selected-value::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--demanto-gold);
+    transform: translateY(-50%);
+}
 
 /* =========================================================
    COLORS
@@ -896,66 +928,108 @@
 .color-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
 }
 
 .color-option {
     position: relative;
-    display: flex;
+
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
 
-    padding: 7px 12px;
+    min-height: 43px;
+    padding: 6px 13px;
 
-    background: #ffffff;
+    background: #fff;
 
-    border: 1px solid #ddd5ca;
-    border-radius: 6px;
+    border: 1px solid #e3ddd3;
+    border-radius: 8px;
 
     color: var(--demanto-dark);
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease,
+        background 0.25s ease;
 }
 
 .color-option:hover {
     border-color: var(--demanto-gold);
+    background: #fffdf9;
     transform: translateY(-1px);
 }
 
 .color-option.selected {
     border-color: var(--demanto-gold);
-    box-shadow: 0 0 0 1px var(--demanto-gold);
+
+    background: #fffdf8;
+
+    box-shadow:
+        0 0 0 1px var(--demanto-gold),
+        0 5px 15px rgba(179, 146, 86, 0.10);
 }
 
+/* Color circle */
 
 .color-circle {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
+
+    flex: 0 0 25px;
 
     border-radius: 50%;
 
-    border: 1px solid #d5d5d5;
+    border: 2px solid #fff;
+
+    box-shadow:
+        0 0 0 1px #d8d1c6,
+        0 2px 5px rgba(0, 0, 0, 0.08);
 
     display: inline-block;
 
-    flex-shrink: 0;
+    transition: transform 0.25s ease;
 }
 
+.color-option:hover .color-circle {
+    transform: scale(1.08);
+}
+
+.color-option.selected .color-circle {
+    box-shadow:
+        0 0 0 2px var(--demanto-gold),
+        0 2px 7px rgba(179, 146, 86, 0.20);
+}
 
 .color-name {
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
+    font-weight: 500;
     line-height: 1;
+    white-space: nowrap;
 }
-
 
 .color-check {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--demanto-gold);
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    width: 16px;
+    height: 16px;
+
+    margin-left: 2px;
+
+    border-radius: 50%;
+
+    background: var(--demanto-gold);
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 700;
+}
 
 /* =========================================================
    SIZE
@@ -964,66 +1038,95 @@
 .size-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 9px;
 }
 
 .size-option {
-    min-width: 52px;
-    height: 42px;
+    position: relative;
 
-    padding: 0 15px;
+    min-width: 58px;
+    height: 43px;
 
-    background: #ffffff;
+    padding: 0 17px;
 
-    border: 1px solid #ddd5ca;
-    border-radius: 6px;
+    background: #fff;
+
+    border: 1px solid #e1dbd2;
+    border-radius: 8px;
 
     color: var(--demanto-dark);
 
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
+    font-weight: 500;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .size-option:hover:not(.disabled) {
     border-color: var(--demanto-gold);
+    background: #fffdf9;
+    transform: translateY(-1px);
 }
 
 .size-option.selected {
     background: var(--demanto-gold);
     border-color: var(--demanto-gold);
-    color: #ffffff;
+
+    color: #fff;
+
+    box-shadow:
+        0 5px 14px rgba(179, 146, 86, 0.22);
 }
 
 .size-option.disabled {
-    opacity: 0.35;
+    opacity: 0.32;
     cursor: not-allowed;
     text-decoration: line-through;
+    background: #f8f7f5;
 }
 
-
 /* =========================================================
-   AVAILABLE QUANTITY
+   AVAILABILITY
 ========================================================= */
 
 .variant-availability {
-    margin-top: 5px;
+    display: flex;
+    align-items: center;
+
+    margin-top: 13px;
+    padding: 9px 12px;
+
+    background: #faf8f3;
+
+    border-left: 3px solid var(--demanto-gold);
+    border-radius: 5px;
+
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
+
     color: #777;
 }
 
 .variant-availability strong {
-    color: var(--demanto-dark);
-    font-weight: 700;
-}
+    margin-left: 4px;
 
-.unavailable-text {
-    color: #999;
+    color: var(--demanto-dark);
+
     font-weight: 600;
 }
 
+.unavailable-text {
+    color: #a34a4a;
+    font-weight: 600;
+}
 
 /* =========================================================
    MOBILE
@@ -1032,12 +1135,24 @@
 @media (max-width: 576px) {
 
     .product-variants {
-        margin-top: 15px;
-        padding-bottom: 17px;
+        margin: 18px 0;
+        padding: 18px 0;
+    }
+
+    .variant-group {
+        margin-bottom: 20px;
+    }
+
+    .variant-title-row {
+        margin-bottom: 11px;
     }
 
     .variant-label {
-        font-size: 17px;
+        font-size: 19px;
+    }
+
+    .selected-value {
+        font-size: 12px;
     }
 
     .color-options {
@@ -1045,23 +1160,41 @@
     }
 
     .color-option {
-        padding: 6px 9px;
+        min-height: 40px;
+        padding: 5px 10px;
+        gap: 7px;
     }
 
     .color-circle {
-        width: 19px;
-        height: 19px;
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
     }
 
     .color-name {
         font-size: 12px;
     }
 
+    .color-check {
+        width: 15px;
+        height: 15px;
+        font-size: 9px;
+    }
+
+    .size-options {
+        gap: 7px;
+    }
+
     .size-option {
-        min-width: 46px;
-        height: 38px;
-        padding: 0 12px;
+        min-width: 50px;
+        height: 39px;
+        padding: 0 13px;
         font-size: 12px;
+    }
+
+    .variant-availability {
+        font-size: 12px;
+        padding: 8px 10px;
     }
 }
     </style>
