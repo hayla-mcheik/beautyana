@@ -181,28 +181,84 @@
     </style>
 
     <ul class="popup-product-list">
-        @forelse($items as $item)
-            <li class="product-list-item" wire:key="cart-{{ $item['id'] }}">
-                <a href="{{ url('collections/'.$item['category_slug'].'/'.$item['slug']) }}">
-                    @if($item['image'])
-                        <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}">
-                    @else
-                        <img src="{{ asset('assets/img/no-image.png') }}" alt="no-image">
-                    @endif
-                    <span class="product-title">{{ Str::limit($item['name'], 25) }}</span>
-                    <span class="product-quantity me-5">{{ $item['quantity'] }}x</span>
-                </a>
-                <span class="product-price ml-2">${{ number_format($item['price'], 2) }}</span>
-                <a class="product-close" href="#" wire:click.prevent="removeItem({{ $item['id'] }})" wire:loading.attr="disabled">
-                    <i class="la la-close"></i>
-                </a>
-            </li>
-        @empty
-            <li class="empty-cart-message">
-                <i class="la la-shopping-cart"></i>
-                <span>Your cart is empty</span>
-            </li>
-        @endforelse
+@forelse($items as $item)
+    <li class="product-list-item" wire:key="cart-{{ $item['id'] }}">
+
+        <a href="{{ url('collections/'.$item['category_slug'].'/'.$item['slug']) }}">
+
+            @if($item['image'])
+                <img
+                    src="{{ asset($item['image']) }}"
+                    alt="{{ $item['name'] }}"
+                >
+            @else
+                <img
+                    src="{{ asset('assets/img/no-image.png') }}"
+                    alt="no-image"
+                >
+            @endif
+
+            <div style="flex: 1; min-width: 0;">
+
+                <span class="product-title">
+                    {{ Str::limit($item['name'], 25) }}
+                </span>
+
+                {{-- Variant --}}
+                @if(!empty($item['color']) || !empty($item['size']))
+                    <div style="
+                        font-size: 13px;
+                        color: #888;
+                        margin-top: 3px;
+                    ">
+
+                        @if(!empty($item['color']))
+                            <span>
+                                Color: {{ $item['color'] }}
+                            </span>
+                        @endif
+
+                        @if(!empty($item['color']) && !empty($item['size']))
+                            <span> | </span>
+                        @endif
+
+                        @if(!empty($item['size']))
+                            <span>
+                                Size: {{ $item['size'] }}
+                            </span>
+                        @endif
+
+                    </div>
+                @endif
+
+                <span class="product-quantity">
+                    {{ $item['quantity'] }}x
+                </span>
+
+            </div>
+
+        </a>
+
+        <span class="product-price ml-2">
+            ${{ number_format($item['price'], 2) }}
+        </span>
+
+        <a
+            class="product-close"
+            href="#"
+          wire:click.prevent="removeItem('{{ $item['id'] }}')"
+            wire:loading.attr="disabled"
+        >
+            <i class="la la-close"></i>
+        </a>
+
+    </li>
+@empty
+    <li class="empty-cart-message">
+        <i class="la la-shopping-cart"></i>
+        <span>Your cart is empty</span>
+    </li>
+@endforelse
     </ul>
 
     @if(count($items) > 0)

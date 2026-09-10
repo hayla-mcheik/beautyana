@@ -3,10 +3,17 @@
 namespace App\Helpers;
 
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Log;
 
 class CartHelper
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Get Guest Cart
+    |--------------------------------------------------------------------------
+    */
+
     public static function getGuestCart()
     {
         $cookieValue = request()->cookie('guest_cart');
@@ -44,6 +51,12 @@ class CartHelper
         return [];
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Set Guest Cart
+    |--------------------------------------------------------------------------
+    */
+
     public static function setGuestCart($cartData)
     {
         $jsonData = json_encode($cartData);
@@ -68,29 +81,84 @@ class CartHelper
     |--------------------------------------------------------------------------
     */
 
-    public static function addItem($productId, $quantity = 1)
+    public static function addItem($productId, $variantId = null, $quantity = 1)
     {
         $product = Product::find($productId);
 
         if (
             !$product ||
-            $product->status != '0' ||
-            $product->quantity <= 0
+            $product->status != '0'
         ) {
+            return false;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Variant Product
+        |--------------------------------------------------------------------------
+        */
+
+        if ($variantId) {
+
+            $variant = ProductVariant::where('id', $variantId)
+                ->where('product_id', $productId)
+                ->first();
+
+            if (!$variant || $variant->quantity <= 0) {
+                return false;
+            }
+
+            $cart = self::getGuestCart();
+
+            /*
+            | Each product + variant combination gets its own cart row.
+            */
+
+            $cartKey = $productId . '_' . $variantId;
+
+            $currentQty = $cart[$cartKey]['quantity'] ?? 0;
+
+            $newQty = min(
+                $currentQty + $quantity,
+                $variant->quantity
+            );
+
+            $cart[$cartKey] = [
+                'product_id' => $productId,
+                'variant_id' => $variantId,
+                'quantity' => $newQty,
+            ];
+
+            self::setGuestCart($cart);
+
+            return true;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Normal Product Without Variant
+        |--------------------------------------------------------------------------
+        */
+
+        if ($product->quantity <= 0) {
             return false;
         }
 
         $cart = self::getGuestCart();
 
-        $currentQty = $cart[$productId]['quantity'] ?? 0;
+        $cartKey = (string) $productId;
+
+        $currentQty = $cart[$cartKey]['quantity'] ?? 0;
 
         $newQty = min(
             $currentQty + $quantity,
             $product->quantity
         );
 
-        $cart[$productId] = [
-            'quantity' => $newQty
+        $cart[$cartKey] = [
+            'product_id' => $productId,
+            'variant_id' => null,
+            'quantity' => $newQty,
         ];
 
         self::setGuestCart($cart);
@@ -104,13 +172,17 @@ class CartHelper
     |--------------------------------------------------------------------------
     */
 
-    public static function removeItem($productId)
+    public static function removeItem($productId, $variantId = null)
     {
         $cart = self::getGuestCart();
 
-        if (isset($cart[$productId])) {
+        $cartKey = $variantId
+            ? $productId . '_' . $variantId
+            : (string) $productId;
 
-            unset($cart[$productId]);
+        if (isset($cart[$cartKey])) {
+
+            unset($cart[$cartKey]);
 
             self::setGuestCart($cart);
         }
@@ -124,28 +196,76 @@ class CartHelper
     |--------------------------------------------------------------------------
     */
 
-    public static function updateQuantity($productId, $quantity)
-    {
+    public static function updateQuantity(
+        $productId,
+        $quantity,
+        $variantId = null
+    ) {
         $cart = self::getGuestCart();
 
-        if (isset($cart[$productId])) {
+        $cartKey = $variantId
+            ? $productId . '_' . $variantId
+            : (string) $productId;
+
+        if (isset($cart[$cartKey])) {
 
             $product = Product::find($productId);
 
             if (
                 !$product ||
-                $product->status != '0' ||
-                $product->quantity <= 0
+                $product->status != '0'
             ) {
 
-                unset($cart[$productId]);
+                unset($cart[$cartKey]);
 
             } else {
 
-                $cart[$productId]['quantity'] = max(
-                    1,
-                    min($quantity, $product->quantity)
-                );
+                /*
+                |--------------------------------------------------------------------------
+                | Variant Quantity
+                |--------------------------------------------------------------------------
+                */
+
+                if ($variantId) {
+
+                    $variant = ProductVariant::where('id', $variantId)
+                        ->where('product_id', $productId)
+                        ->first();
+
+                    if (!$variant || $variant->quantity <= 0) {
+
+                        unset($cart[$cartKey]);
+
+                    } else {
+
+                        $cart[$cartKey]['quantity'] = max(
+                            1,
+                            min($quantity, $variant->quantity)
+                        );
+                    }
+
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Normal Product Quantity
+                |--------------------------------------------------------------------------
+                */
+
+                else {
+
+                    if ($product->quantity <= 0) {
+
+                        unset($cart[$cartKey]);
+
+                    } else {
+
+                        $cart[$cartKey]['quantity'] = max(
+                            1,
+                            min($quantity, $product->quantity)
+                        );
+                    }
+                }
             }
         }
 
@@ -194,23 +314,67 @@ class CartHelper
     {
         $cart = self::getGuestCart();
 
-        foreach ($cart as $productId => $item) {
+        foreach ($cart as $cartKey => $item) {
+
+            $productId = $item['product_id'] ?? null;
+            $variantId = $item['variant_id'] ?? null;
+
+            if (!$productId) {
+                unset($cart[$cartKey]);
+                continue;
+            }
 
             $product = Product::find($productId);
 
             if (
                 !$product ||
-                $product->status != '0' ||
-                $product->quantity <= 0
+                $product->status != '0'
             ) {
 
-                unset($cart[$productId]);
+                unset($cart[$cartKey]);
+                continue;
+            }
 
-            } else {
+            /*
+            |--------------------------------------------------------------------------
+            | Variant
+            |--------------------------------------------------------------------------
+            */
+
+            if ($variantId) {
+
+                $variant = ProductVariant::where('id', $variantId)
+                    ->where('product_id', $productId)
+                    ->first();
+
+                if (!$variant || $variant->quantity <= 0) {
+
+                    unset($cart[$cartKey]);
+                    continue;
+                }
+
+                if ($item['quantity'] > $variant->quantity) {
+                    $cart[$cartKey]['quantity'] = $variant->quantity;
+                }
+
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Normal Product
+            |--------------------------------------------------------------------------
+            */
+
+            else {
+
+                if ($product->quantity <= 0) {
+
+                    unset($cart[$cartKey]);
+                    continue;
+                }
 
                 if ($item['quantity'] > $product->quantity) {
-
-                    $cart[$productId]['quantity'] = $product->quantity;
+                    $cart[$cartKey]['quantity'] = $product->quantity;
                 }
             }
         }
@@ -230,23 +394,67 @@ class CartHelper
     {
         $cart = self::getGuestCart();
 
-        foreach ($cart as $productId => $item) {
+        foreach ($cart as $cartKey => $item) {
+
+            $productId = $item['product_id'] ?? null;
+            $variantId = $item['variant_id'] ?? null;
+
+            if (!$productId) {
+                unset($cart[$cartKey]);
+                continue;
+            }
 
             $product = Product::find($productId);
 
             if (
                 !$product ||
-                $product->status != '0' ||
-                $product->quantity <= 0
+                $product->status != '0'
             ) {
 
-                unset($cart[$productId]);
+                unset($cart[$cartKey]);
+                continue;
+            }
 
-            } else {
+            /*
+            |--------------------------------------------------------------------------
+            | Variant
+            |--------------------------------------------------------------------------
+            */
+
+            if ($variantId) {
+
+                $variant = ProductVariant::where('id', $variantId)
+                    ->where('product_id', $productId)
+                    ->first();
+
+                if (!$variant || $variant->quantity <= 0) {
+
+                    unset($cart[$cartKey]);
+                    continue;
+                }
+
+                if ($item['quantity'] > $variant->quantity) {
+                    $cart[$cartKey]['quantity'] = $variant->quantity;
+                }
+
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Normal Product
+            |--------------------------------------------------------------------------
+            */
+
+            else {
+
+                if ($product->quantity <= 0) {
+
+                    unset($cart[$cartKey]);
+                    continue;
+                }
 
                 if ($item['quantity'] > $product->quantity) {
-
-                    $cart[$productId]['quantity'] = $product->quantity;
+                    $cart[$cartKey]['quantity'] = $product->quantity;
                 }
             }
         }

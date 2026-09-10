@@ -538,16 +538,15 @@
 
                 } else {
 
-                    $variantsToDisplay =
-                        $product->productVariants->map(function ($variant) {
-
-                            return [
-                                'color_id' => $variant->color_id,
-                                'size_id' => $variant->size_id,
-                                'quantity' => $variant->quantity,
-                            ];
-
-                        })->toArray();
+        $variantsToDisplay =
+    $product->productVariants->map(function ($variant) {
+        return [
+            'color_id' => $variant->color_id,
+            'size_id' => $variant->size_id,
+            'quantity' => $variant->quantity,
+            'image' => $variant->image,
+        ];
+    })->toArray();
 
                 }
 
@@ -558,217 +557,220 @@
 
                 @foreach($variantsToDisplay as $index => $variant)
 
-                    <div
-                        class="variant-row row align-items-end mb-3"
-                        data-index="{{ $index }}"
-                    >
+             <div
+    class="variant-row row align-items-end mb-3"
+    data-index="{{ $index }}"
+>
 
-                        {{-- COLOR --}}
+    {{-- COLOR --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Color
+        </label>
 
-                        <div class="col-md-4 mb-2">
+        <select
+            name="variants[{{ $index }}][color_id]"
+            class="form-control variant-color"
+        >
+            <option value="">
+                Select Color
+            </option>
 
-                            <label class="form-label fw-semibold">
-                                Color
-                            </label>
+            @foreach($colors as $color)
+                <option
+                    value="{{ $color->id }}"
+                    {{ (string)($variant['color_id'] ?? '') === (string)$color->id ? 'selected' : '' }}
+                >
+                    {{ $color->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                            <select
-                                name="variants[{{ $index }}][color_id]"
-                                class="form-control variant-color"
-                            >
+    {{-- SIZE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Size
+        </label>
 
-                                <option value="">
-                                    Select Color
-                                </option>
+        <select
+            name="variants[{{ $index }}][size_id]"
+            class="form-control variant-size"
+        >
+            <option value="">
+                Select Size
+            </option>
 
-                                @foreach($colors as $color)
+            @foreach($sizes as $size)
+                <option
+                    value="{{ $size->id }}"
+                    {{ (string)($variant['size_id'] ?? '') === (string)$size->id ? 'selected' : '' }}
+                >
+                    {{ $size->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                                    <option
-                                        value="{{ $color->id }}"
-                                        {{ (string)($variant['color_id'] ?? '') === (string)$color->id ? 'selected' : '' }}
-                                    >
-                                        {{ $color->name }}
-                                    </option>
+    {{-- QUANTITY --}}
+    <div class="col-md-2 mb-2">
+        <label class="form-label fw-semibold">
+            Quantity
+        </label>
 
-                                @endforeach
+        <input
+            type="number"
+            min="0"
+            name="variants[{{ $index }}][quantity]"
+            value="{{ $variant['quantity'] ?? 0 }}"
+            class="form-control variant-quantity"
+        >
+    </div>
 
-                            </select>
+    {{-- VARIANT IMAGE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Variant Image
+        </label>
 
-                        </div>
+        @if(!empty($variant['image']))
+            <div class="mb-2">
+                <img
+                    src="{{ asset($variant['image']) }}"
+                    alt="Variant Image"
+                    style="
+                        width:60px;
+                        height:60px;
+                        object-fit:cover;
+                        border-radius:6px;
+                        border:1px solid #ddd;
+                    "
+                >
+            </div>
+        @endif
 
+        <input
+            type="file"
+            name="variants[{{ $index }}][image]"
+            class="form-control variant-image"
+            accept="image/*"
+        >
 
-                        {{-- SIZE --}}
+        @if(!empty($variant['image']))
+            <small class="text-muted">
+                Leave empty to keep the current image.
+            </small>
+        @endif
+    </div>
 
-                        <div class="col-md-4 mb-2">
+    {{-- REMOVE --}}
+    <div class="col-md-1 mb-2">
+        <button
+            type="button"
+            class="btn btn-outline-danger remove-variant"
+            title="Remove Variant"
+        >
+            <i class="mdi mdi-delete-outline"></i>
+        </button>
+    </div>
 
-                            <label class="form-label fw-semibold">
-                                Size
-                            </label>
-
-                            <select
-                                name="variants[{{ $index }}][size_id]"
-                                class="form-control variant-size"
-                            >
-
-                                <option value="">
-                                    Select Size
-                                </option>
-
-                                @foreach($sizes as $size)
-
-                                    <option
-                                        value="{{ $size->id }}"
-                                        {{ (string)($variant['size_id'] ?? '') === (string)$size->id ? 'selected' : '' }}
-                                    >
-                                        {{ $size->name }}
-                                    </option>
-
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-
-                        {{-- QUANTITY --}}
-
-                        <div class="col-md-3 mb-2">
-
-                            <label class="form-label fw-semibold">
-                                Quantity
-                            </label>
-
-                            <input
-                                type="number"
-                                min="0"
-                                name="variants[{{ $index }}][quantity]"
-                                value="{{ $variant['quantity'] ?? 0 }}"
-                                class="form-control variant-quantity"
-                            >
-
-                        </div>
-
-
-                        {{-- REMOVE --}}
-
-                        <div class="col-md-1 mb-2">
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-danger remove-variant"
-                                title="Remove Variant"
-                            >
-                                <i class="mdi mdi-delete-outline"></i>
-                            </button>
-
-                        </div>
-
-                    </div>
-
+</div>
                 @endforeach
 
             @else
 
                 {{-- EMPTY VARIANT ROW --}}
 
-                <div
-                    class="variant-row row align-items-end mb-3"
-                    data-index="0"
-                >
+     <div
+    class="variant-row row align-items-end mb-3"
+    data-index="0"
+>
 
-                    {{-- COLOR --}}
+    {{-- COLOR --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Color
+        </label>
 
-                    <div class="col-md-4 mb-2">
+        <select
+            name="variants[0][color_id]"
+            class="form-control variant-color"
+        >
+            <option value="">
+                Select Color
+            </option>
 
-                        <label class="form-label fw-semibold">
-                            Color
-                        </label>
+            @foreach($colors as $color)
+                <option value="{{ $color->id }}">
+                    {{ $color->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                        <select
-                            name="variants[0][color_id]"
-                            class="form-control variant-color"
-                        >
+    {{-- SIZE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Size
+        </label>
 
-                            <option value="">
-                                Select Color
-                            </option>
+        <select
+            name="variants[0][size_id]"
+            class="form-control variant-size"
+        >
+            <option value="">
+                Select Size
+            </option>
 
-                            @foreach($colors as $color)
+            @foreach($sizes as $size)
+                <option value="{{ $size->id }}">
+                    {{ $size->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-                                <option value="{{ $color->id }}">
-                                    {{ $color->name }}
-                                </option>
+    {{-- QUANTITY --}}
+    <div class="col-md-2 mb-2">
+        <label class="form-label fw-semibold">
+            Quantity
+        </label>
 
-                            @endforeach
+        <input
+            type="number"
+            min="0"
+            name="variants[0][quantity]"
+            value="0"
+            class="form-control variant-quantity"
+        >
+    </div>
 
-                        </select>
+    {{-- VARIANT IMAGE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Variant Image
+        </label>
 
-                    </div>
+        <input
+            type="file"
+            name="variants[0][image]"
+            class="form-control variant-image"
+            accept="image/*"
+        >
+    </div>
 
+    {{-- REMOVE --}}
+    <div class="col-md-1 mb-2">
+        <button
+            type="button"
+            class="btn btn-outline-danger remove-variant"
+            title="Remove Variant"
+        >
+            <i class="mdi mdi-delete-outline"></i>
+        </button>
+    </div>
 
-                    {{-- SIZE --}}
-
-                    <div class="col-md-4 mb-2">
-
-                        <label class="form-label fw-semibold">
-                            Size
-                        </label>
-
-                        <select
-                            name="variants[0][size_id]"
-                            class="form-control variant-size"
-                        >
-
-                            <option value="">
-                                Select Size
-                            </option>
-
-                            @foreach($sizes as $size)
-
-                                <option value="{{ $size->id }}">
-                                    {{ $size->name }}
-                                </option>
-
-                            @endforeach
-
-                        </select>
-
-                    </div>
-
-
-                    {{-- QUANTITY --}}
-
-                    <div class="col-md-3 mb-2">
-
-                        <label class="form-label fw-semibold">
-                            Quantity
-                        </label>
-
-                        <input
-                            type="number"
-                            min="0"
-                            name="variants[0][quantity]"
-                            value="0"
-                            class="form-control variant-quantity"
-                        >
-
-                    </div>
-
-
-                    {{-- REMOVE --}}
-
-                    <div class="col-md-1 mb-2">
-
-                        <button
-                            type="button"
-                            class="btn btn-outline-danger remove-variant"
-                            title="Remove Variant"
-                        >
-                            <i class="mdi mdi-delete-outline"></i>
-                        </button>
-
-                    </div>
-
-                </div>
+</div>
 
             @endif
 
@@ -1914,20 +1916,15 @@ function calculateTotalQuantity()
 
 function createVariantRow(index)
 {
-    const row =
-        document.createElement('div');
+    const row = document.createElement('div');
 
     row.className =
         'variant-row row align-items-end mb-3';
 
-    row.dataset.index =
-        index;
-
+    row.dataset.index = index;
 
     row.innerHTML = `
-
-        <div class="col-md-4 mb-2">
-
+        <div class="col-md-3 mb-2">
             <label class="form-label fw-semibold">
                 Color
             </label>
@@ -1936,26 +1933,19 @@ function createVariantRow(index)
                 name="variants[${index}][color_id]"
                 class="form-control variant-color"
             >
-
                 <option value="">
                     Select Color
                 </option>
 
                 @foreach($colors as $color)
-
                     <option value="{{ $color->id }}">
                         {{ $color->name }}
                     </option>
-
                 @endforeach
-
             </select>
-
         </div>
 
-
-        <div class="col-md-4 mb-2">
-
+        <div class="col-md-3 mb-2">
             <label class="form-label fw-semibold">
                 Size
             </label>
@@ -1964,26 +1954,19 @@ function createVariantRow(index)
                 name="variants[${index}][size_id]"
                 class="form-control variant-size"
             >
-
                 <option value="">
                     Select Size
                 </option>
 
                 @foreach($sizes as $size)
-
                     <option value="{{ $size->id }}">
                         {{ $size->name }}
                     </option>
-
                 @endforeach
-
             </select>
-
         </div>
 
-
-        <div class="col-md-3 mb-2">
-
+        <div class="col-md-2 mb-2">
             <label class="form-label fw-semibold">
                 Quantity
             </label>
@@ -1995,24 +1978,30 @@ function createVariantRow(index)
                 value="0"
                 class="form-control variant-quantity"
             >
-
         </div>
 
+        <div class="col-md-3 mb-2">
+            <label class="form-label fw-semibold">
+                Variant Image
+            </label>
+
+            <input
+                type="file"
+                name="variants[${index}][image]"
+                class="form-control variant-image"
+                accept="image/*"
+            >
+        </div>
 
         <div class="col-md-1 mb-2">
-
             <button
                 type="button"
                 class="btn btn-outline-danger remove-variant"
                 title="Remove Variant"
             >
-
                 <i class="mdi mdi-delete-outline"></i>
-
             </button>
-
         </div>
-
     `;
 
     return row;

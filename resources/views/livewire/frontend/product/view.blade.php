@@ -471,15 +471,6 @@
 
             margin-top: 10px;
         }
-
-
-        .stock-badge.in-stock {
-            background: var(--demanto-bg);
-
-            color: #ffffff;
-        }
-
-
         .stock-badge.out-stock {
             background: #999999;
 
@@ -864,7 +855,215 @@
         .fancybox-image {
             object-fit: contain !important;
         }
+/* =========================================================
+   PRODUCT VARIANTS
+========================================================= */
 
+.product-variants {
+    margin: 20px 0;
+    padding: 5px 0 22px;
+    border-bottom: 1px solid var(--luxury-border);
+}
+
+.variant-group {
+    margin-bottom: 22px;
+}
+
+.variant-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.variant-label {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--demanto-dark);
+}
+
+.selected-value {
+    font-size: 13px;
+    color: #888;
+}
+
+
+/* =========================================================
+   COLORS
+========================================================= */
+
+.color-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.color-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd5ca;
+    border-radius: 6px;
+
+    color: var(--demanto-dark);
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.color-option:hover {
+    border-color: var(--demanto-gold);
+    transform: translateY(-1px);
+}
+
+.color-option.selected {
+    border-color: var(--demanto-gold);
+    box-shadow: 0 0 0 1px var(--demanto-gold);
+}
+
+
+.color-circle {
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    border: 1px solid #d5d5d5;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+}
+
+
+.color-name {
+    font-size: 13px;
+    line-height: 1;
+}
+
+
+.color-check {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--demanto-gold);
+}
+
+
+/* =========================================================
+   SIZE
+========================================================= */
+
+.size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.size-option {
+    min-width: 52px;
+    height: 42px;
+
+    padding: 0 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd5ca;
+    border-radius: 6px;
+
+    color: var(--demanto-dark);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.size-option:hover:not(.disabled) {
+    border-color: var(--demanto-gold);
+}
+
+.size-option.selected {
+    background: var(--demanto-gold);
+    border-color: var(--demanto-gold);
+    color: #ffffff;
+}
+
+.size-option.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+
+/* =========================================================
+   AVAILABLE QUANTITY
+========================================================= */
+
+.variant-availability {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #777;
+}
+
+.variant-availability strong {
+    color: var(--demanto-dark);
+    font-weight: 700;
+}
+
+.unavailable-text {
+    color: #999;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .product-variants {
+        margin-top: 15px;
+        padding-bottom: 17px;
+    }
+
+    .variant-label {
+        font-size: 17px;
+    }
+
+    .color-options {
+        gap: 8px;
+    }
+
+    .color-option {
+        padding: 6px 9px;
+    }
+
+    .color-circle {
+        width: 19px;
+        height: 19px;
+    }
+
+    .color-name {
+        font-size: 12px;
+    }
+
+    .size-option {
+        min-width: 46px;
+        height: 38px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+}
     </style>
 
 
@@ -919,7 +1118,7 @@
 
                             <div class="col-md-6">
 
-                                <div wire:ignore>
+                         <div>
 
                                     @if($product->productImages && $product->productImages->count())
 
@@ -932,19 +1131,18 @@
 
                                             <div class="single-product-thumb-content">
 
-                                                <a
-                                                    id="main-image-link"
-                                                    href="{{ asset($product->productImages->first()->image) }}"
-                                                    data-fancybox="gallery"
-                                                    data-caption="{{ $product->name }}"
-                                                    class="lightbox-image"
-                                                >
-
-                                                    <img
-                                                        id="main-image"
-                                                        src="{{ asset($product->productImages->first()->image) }}"
-                                                        alt="{{ $product->name }}"
-                                                    >
+                             <a
+    id="main-image-link"
+    href="{{ $selectedColorImage ?: asset($product->productImages->first()->image) }}"
+    data-fancybox="gallery"
+    data-caption="{{ $product->name }}"
+    class="lightbox-image"
+>
+                                  <img
+    id="main-image"
+    src="{{ $selectedColorImage ?: asset($product->productImages->first()->image) }}"
+    alt="{{ $product->name }}"
+>
 
                                                 </a>
 
@@ -1063,6 +1261,188 @@
                                     </div>
 
 
+                                    {{-- =========================================================
+     PRODUCT VARIANTS
+========================================================= --}}
+@if($product->productVariants->count() > 0)
+
+    <div class="product-variants">
+
+        {{-- =====================================================
+             COLOR
+        ====================================================== --}}
+
+        @php
+            $colors = $product->productVariants
+                ->whereNotNull('color_id')
+                ->filter(fn($variant) => $variant->color)
+                ->pluck('color')
+                ->unique('id');
+        @endphp
+
+        @if($colors->count() > 0)
+
+            <div class="variant-group">
+
+                <div class="variant-title-row">
+                    <span class="variant-label">
+                        Color
+                    </span>
+
+                    @if($selectedColorId)
+                        @php
+                            $selectedColor = $colors->firstWhere('id', $selectedColorId);
+                        @endphp
+
+                        @if($selectedColor)
+                            <span class="selected-value">
+                                {{ $selectedColor->name }}
+                            </span>
+                        @endif
+                    @endif
+                </div>
+
+
+                <div class="color-options">
+
+                    @foreach($colors as $color)
+
+                        <button
+                            type="button"
+                            wire:click="selectColor({{ $color->id }})"
+                            wire:key="color-{{ $color->id }}"
+                            class="color-option
+                                {{ $selectedColorId == $color->id ? 'selected' : '' }}"
+                            title="{{ $color->name }}"
+                        >
+
+                            <span
+                                class="color-circle"
+                                style="background-color: {{ $color->code ?: '#ffffff' }};"
+                            ></span>
+
+                            <span class="color-name">
+                                {{ $color->name }}
+                            </span>
+
+                            @if($selectedColorId == $color->id)
+                                <span class="color-check">
+                                    ✓
+                                </span>
+                            @endif
+
+                        </button>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        @endif
+
+
+        {{-- =====================================================
+             SIZE
+        ====================================================== --}}
+
+        @php
+            $sizes = $product->productVariants
+                ->whereNotNull('size_id')
+                ->filter(fn($variant) => $variant->size)
+                ->pluck('size')
+                ->unique('id');
+        @endphp
+
+        @if($sizes->count() > 0)
+
+            <div class="variant-group">
+
+                <div class="variant-title-row">
+
+                    <span class="variant-label">
+                        Size
+                    </span>
+
+                    @if($selectedSizeId)
+
+                        @php
+                            $selectedSize = $sizes->firstWhere('id', $selectedSizeId);
+                        @endphp
+
+                        @if($selectedSize)
+                            <span class="selected-value">
+                                {{ $selectedSize->name }}
+                            </span>
+                        @endif
+
+                    @endif
+
+                </div>
+
+
+                <div class="size-options">
+
+                    @foreach($sizes as $size)
+
+                        @php
+                            $sizeAvailable = $this->isSizeAvailable($size->id);
+                        @endphp
+
+                        <button
+                            type="button"
+                            wire:click="selectSize({{ $size->id }})"
+                            wire:key="size-{{ $size->id }}"
+                            class="size-option
+                                {{ $selectedSizeId == $size->id ? 'selected' : '' }}
+                                {{ !$sizeAvailable ? 'disabled' : '' }}"
+                            @if(!$sizeAvailable)
+                                disabled
+                            @endif
+                        >
+                            {{ $size->name }}
+                        </button>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        @endif
+
+
+        {{-- =====================================================
+             AVAILABLE QUANTITY
+        ====================================================== --}}
+
+        @if($selectedVariantId)
+
+            <div class="variant-availability">
+
+                @if($availableQuantity > 0)
+
+                    <span>
+                        Available Quantity:
+                        <strong>{{ $availableQuantity }}</strong>
+                    </span>
+
+                @else
+
+                    <span class="unavailable-text">
+                        Out of Stock
+                    </span>
+
+                @endif
+
+            </div>
+
+        @endif
+
+    </div>
+
+@endif
+
                                     <!-- STOCK STATUS -->
 
                                     <div class="stock-status">
@@ -1116,9 +1496,11 @@
 
                                         <div class="white-bg mt-4">
 
-                                            <livewire:frontend.cart.add-to-cart
-                                                :product="$product"
-                                            />
+                             <livewire:frontend.cart.add-to-cart
+    :product="$product"
+    :variantId="$selectedVariantId"
+    :quantity="$quantityCount"
+/>
 
                                         </div>
 

@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Livewire\Frontend\Cart;
 
 use Livewire\Component;
 use App\Models\Product;
+use App\Models\Cart;
+use App\Models\ProductVariant;
 use App\Helpers\CartHelper;
 
 class CartItems extends Component
@@ -21,125 +24,357 @@ class CartItems extends Component
         $this->loadCart();
     }
 
-    public function handleCartUpdate($total, $count)
+    /*
+    |--------------------------------------------------------------------------
+    | Handle Cart Update
+    |--------------------------------------------------------------------------
+    */
+
+    public function handleCartUpdate($total = null, $count = null)
     {
-        // If we receive the total from the event, use it directly
         if ($total !== null) {
             $this->total = $total;
             $this->count = $count;
-            // Still reload cart data to ensure items are correct
+
             $this->loadCartData();
         } else {
-            // Fallback to full reload
             $this->loadCart();
         }
     }
 
-public function loadCart()
-{
-    $this->loadCartData();
-    $this->calculateTotals();
+    /*
+    |--------------------------------------------------------------------------
+    | Load Cart
+    |--------------------------------------------------------------------------
+    */
 
-    $this->dispatch(
-        'cartUpdated',
-        total: $this->total,
-        count: $this->count
-    );
-}
+    public function loadCart()
+    {
+        $this->loadCartData();
+        $this->calculateTotals();
 
-public function loadCartData()
-{
-    $items = [];
-
-    if (auth()->check()) {
-
-        $dbCarts = \App\Models\Cart::where('user_id', auth()->id())
-            ->with('product.productImages', 'product.category')
-            ->get();
-
-        foreach ($dbCarts as $cart) {
-
-            // Remove deleted, hidden or out-of-stock products
-            if (
-                !$cart->product ||
-                $cart->product->status != '0' ||
-                $cart->product->quantity <= 0
-            ) {
-                $cart->delete();
-                continue;
-            }
-
-            // Adjust quantity if stock has changed
-            if ($cart->quantity > $cart->product->quantity) {
-
-                $cart->update([
-                    'quantity' => $cart->product->quantity
-                ]);
-
-                $cart->refresh();
-            }
-
-            $items[] = [
-                'id' => $cart->product->id,
-                'name' => $cart->product->name,
-                'slug' => $cart->product->slug,
-                'price' => $cart->product->selling_price,
-                'quantity' => $cart->quantity,
-                'image' => $cart->product->productImages->first()->image ?? null,
-                'category_slug' => $cart->product->category->slug ?? 'all'
-            ];
-        }
-
-    } else {
-
-        $guestCart = CartHelper::getGuestCart();
-
-        foreach ($guestCart as $productId => $data) {
-
-            $product = Product::with('productImages', 'category')->find($productId);
-
-            // Remove invalid products
-            if (
-                !$product ||
-                $product->status != '0' ||
-                $product->quantity <= 0
-            ) {
-                unset($guestCart[$productId]);
-                continue;
-            }
-
-            // Adjust guest cart quantity
-            if ($data['quantity'] > $product->quantity) {
-
-                $guestCart[$productId]['quantity'] = $product->quantity;
-            }
-
-            $items[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'slug' => $product->slug,
-                'price' => $product->selling_price,
-                'quantity' => $guestCart[$productId]['quantity'],
-                'image' => $product->productImages->first()->image ?? null,
-                'category_slug' => $product->category->slug ?? 'all'
-            ];
-        }
-
-        // Save updated guest cart
-        CartHelper::setGuestCart($guestCart);
+        $this->dispatch(
+            'cartUpdated',
+            total: $this->total,
+            count: $this->count
+        );
     }
 
-    $this->cartData = $items;
-}
+    /*
+    |--------------------------------------------------------------------------
+    | Load Cart Data
+    |--------------------------------------------------------------------------
+    */
+
+    public function loadCartData()
+    {
+        $items = [];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Logged In User
+        |--------------------------------------------------------------------------
+        */
+
+        if (auth()->check()) {
+
+            $dbCarts = Cart::where('user_id', auth()->id())
+                ->with([
+                    'product.productImages',
+                    'product.category',
+                    'productVariant.color',
+                    'productVariant.size',
+                ])
+                ->get();
+
+            foreach ($dbCarts as $cart) {
+
+                $product = $cart->product;
+                $variant = $cart->productVariant;
+
+                /*
+                |--------------------------------------------------------------------------
+                | Invalid Product
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    !$product ||
+                    $product->status != '0'
+                ) {
+                    $cart->delete();
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Variant Cart Item
+                |--------------------------------------------------------------------------
+                */
+
+                if ($cart->product_variant_id) {
+
+                    if (
+                        !$variant ||
+                        $variant->product_id != $product->id ||
+                        $variant->quantity <= 0
+                    ) {
+                        $cart->delete();
+                        continue;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Adjust Quantity Based On Variant Stock
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if ($cart->quantity > $variant->quantity) {
+
+                        $cart->update([
+                            'quantity' => $variant->quantity
+                        ]);
+
+                        $cart->refresh();
+                    }
+
+                    $items[] = [
+                        'id' => $cart->id,
+                        'cart_id' => $cart->id,
+                        'product_id' => $product->id,
+                        'variant_id' => $variant->id,
+
+                        'name' => $product->name,
+                        'slug' => $product->slug,
+
+                        'price' => $product->selling_price,
+                        'quantity' => $cart->quantity,
+
+                        'image' => $variant->image
+                            ?: ($product->productImages->first()->image ?? null),
+
+                        'color' => $variant->color->name ?? null,
+                        'size' => $variant->size->name ?? null,
+
+                        'category_slug' =>
+                            $product->category->slug ?? 'all'
+                    ];
+
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Normal Product Without Variant
+                |--------------------------------------------------------------------------
+                */
+
+                if ($product->quantity <= 0) {
+                    $cart->delete();
+                    continue;
+                }
+
+                if ($cart->quantity > $product->quantity) {
+
+                    $cart->update([
+                        'quantity' => $product->quantity
+                    ]);
+
+                    $cart->refresh();
+                }
+
+                $items[] = [
+                    'id' => $cart->id,
+                    'cart_id' => $cart->id,
+                    'product_id' => $product->id,
+                    'variant_id' => null,
+
+                    'name' => $product->name,
+                    'slug' => $product->slug,
+
+                    'price' => $product->selling_price,
+                    'quantity' => $cart->quantity,
+
+                    'image' =>
+                        $product->productImages->first()->image ?? null,
+
+                    'color' => null,
+                    'size' => null,
+
+                    'category_slug' =>
+                        $product->category->slug ?? 'all'
+                ];
+            }
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Guest User
+        |--------------------------------------------------------------------------
+        */
+
+        else {
+
+            $guestCart = CartHelper::getGuestCart();
+
+            foreach ($guestCart as $cartKey => $data) {
+
+                $productId = $data['product_id'] ?? null;
+                $variantId = $data['variant_id'] ?? null;
+
+                if (!$productId) {
+                    unset($guestCart[$cartKey]);
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Load Product
+                |--------------------------------------------------------------------------
+                */
+
+                $product = Product::with([
+                    'productImages',
+                    'category'
+                ])->find($productId);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Invalid Product
+                |--------------------------------------------------------------------------
+                */
+
+                if (
+                    !$product ||
+                    $product->status != '0'
+                ) {
+                    unset($guestCart[$cartKey]);
+                    continue;
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Variant
+                |--------------------------------------------------------------------------
+                */
+
+                $variant = null;
+
+                if ($variantId) {
+
+                    $variant = ProductVariant::with([
+                        'color',
+                        'size'
+                    ])
+                    ->where('id', $variantId)
+                    ->where('product_id', $productId)
+                    ->first();
+
+                    if (
+                        !$variant ||
+                        $variant->quantity <= 0
+                    ) {
+                        unset($guestCart[$cartKey]);
+                        continue;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Adjust Quantity Based On Variant Stock
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if ($data['quantity'] > $variant->quantity) {
+
+                        $guestCart[$cartKey]['quantity'] =
+                            $variant->quantity;
+                    }
+
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Normal Product
+                |--------------------------------------------------------------------------
+                */
+
+                else {
+
+                    if ($product->quantity <= 0) {
+                        unset($guestCart[$cartKey]);
+                        continue;
+                    }
+
+                    if ($data['quantity'] > $product->quantity) {
+
+                        $guestCart[$cartKey]['quantity'] =
+                            $product->quantity;
+                    }
+                }
+
+                /*
+                |--------------------------------------------------------------------------
+                | Add Item
+                |--------------------------------------------------------------------------
+                */
+
+                $items[] = [
+                    'id' => $cartKey,
+                    'cart_id' => $cartKey,
+
+                    'product_id' => $product->id,
+                    'variant_id' => $variant?->id,
+
+                    'name' => $product->name,
+                    'slug' => $product->slug,
+
+                    'price' => $product->selling_price,
+
+                    'quantity' =>
+                        $guestCart[$cartKey]['quantity'],
+
+                    'image' =>
+                        $variant?->image
+                        ?: ($product->productImages->first()->image ?? null),
+
+                    'color' =>
+                        $variant?->color?->name,
+
+                    'size' =>
+                        $variant?->size?->name,
+
+                    'category_slug' =>
+                        $product->category->slug ?? 'all'
+                ];
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Save Cleaned Guest Cart
+            |--------------------------------------------------------------------------
+            */
+
+            CartHelper::setGuestCart($guestCart);
+        }
+
+        $this->cartData = $items;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Calculate Totals
+    |--------------------------------------------------------------------------
+    */
 
     public function calculateTotals()
     {
         $this->total = collect($this->cartData)->sum(function ($item) {
             return $item['price'] * $item['quantity'];
         });
+
         $this->count = count($this->cartData);
-        
-        // Log for debugging (remove in production)
+
         \Log::info('CartItems totals calculated', [
             'total' => $this->total,
             'count' => $this->count,
@@ -147,18 +382,40 @@ public function loadCartData()
         ]);
     }
 
-    public function removeItem($productId)
+    /*
+    |--------------------------------------------------------------------------
+    | Remove Item
+    |--------------------------------------------------------------------------
+    */
+
+    public function removeItem($cartId)
     {
         if (auth()->check()) {
-            \App\Models\Cart::where('user_id', auth()->id())
-                ->where('product_id', $productId)
+
+            Cart::where('user_id', auth()->id())
+                ->where('id', $cartId)
                 ->delete();
+
         } else {
-            CartHelper::removeItem($productId);
+
+            $cart = CartHelper::getGuestCart();
+
+            if (isset($cart[$cartId])) {
+
+                unset($cart[$cartId]);
+
+                CartHelper::setGuestCart($cart);
+            }
         }
-        
-        $this->loadCart(); // This will recalculate and dispatch events
+
+        $this->loadCart();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Render
+    |--------------------------------------------------------------------------
+    */
 
     public function render()
     {

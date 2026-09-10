@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Livewire\Frontend\Cart;
 
 use Livewire\Component;
 use App\Helpers\CartHelper;
+use App\Models\Cart;
+use App\Models\Product;
+use App\Models\ProductVariant;
 
 class TotalAmountCart extends Component
 {
@@ -18,27 +22,84 @@ class TotalAmountCart extends Component
         $this->updateTotal();
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Update Total
+    |--------------------------------------------------------------------------
+    */
+
     public function updateTotal()
     {
+        $total = 0;
+
+        /*
+        |--------------------------------------------------------------------------
+        | Logged In User
+        |--------------------------------------------------------------------------
+        */
+
         if (auth()->check()) {
-            $carts = \App\Models\Cart::where('user_id', auth()->id())->with('product')->get();
-            $this->totalcartamount = $carts->sum(function($cart) {
-                return ($cart->product->selling_price ?? 0) * $cart->quantity;
-            });
-        } else {
-            $guestCart = CartHelper::getGuestCart();
-            $total = 0;
-            
-            foreach ($guestCart as $productId => $data) {
-                $product = \App\Models\Product::find($productId);
-                if ($product) {
-                    $total += $product->selling_price * $data['quantity'];
+
+            $carts = Cart::where('user_id', auth()->id())
+                ->with([
+                    'product',
+                    'productVariant'
+                ])
+                ->get();
+
+            foreach ($carts as $cart) {
+
+                if (!$cart->product) {
+                    continue;
                 }
+
+                $total +=
+                    ($cart->product->selling_price ?? 0)
+                    * $cart->quantity;
             }
-            
-            $this->totalcartamount = $total;
+
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Guest User
+        |--------------------------------------------------------------------------
+        */
+
+        else {
+
+            $guestCart = CartHelper::getGuestCart();
+
+            foreach ($guestCart as $cartKey => $data) {
+
+                $productId = $data['product_id'] ?? null;
+                $variantId = $data['variant_id'] ?? null;
+                $quantity = (int) ($data['quantity'] ?? 0);
+
+                if (!$productId || $quantity <= 0) {
+                    continue;
+                }
+
+                $product = Product::find($productId);
+
+                if (!$product) {
+                    continue;
+                }
+
+                $total +=
+                    ($product->selling_price ?? 0)
+                    * $quantity;
+            }
+        }
+
+        $this->totalcartamount = $total;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Render
+    |--------------------------------------------------------------------------
+    */
 
     public function render()
     {

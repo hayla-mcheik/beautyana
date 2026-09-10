@@ -497,116 +497,109 @@
             class="variants-container"
         >
 
-            {{-- FIRST VARIANT --}}
+   {{-- FIRST VARIANT --}}
+<div
+    class="variant-row row align-items-end mb-3"
+    data-index="0"
+>
 
-            <div
-                class="variant-row row align-items-end mb-3"
-                data-index="0"
-            >
+    {{-- COLOR --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Color
+        </label>
 
-                {{-- COLOR --}}
+        <select
+            name="variants[0][color_id]"
+            class="form-control variant-color"
+        >
+            <option value="">
+                Select Color
+            </option>
 
-                <div class="col-md-4 mb-2">
+            @foreach($colors as $color)
+                <option
+                    value="{{ $color->id }}"
+                    {{ old('variants.0.color_id') == $color->id ? 'selected' : '' }}
+                >
+                    {{ $color->name }}
+                </option>
+            @endforeach
 
-                    <label class="form-label fw-semibold">
-                        Color
-                    </label>
-
-                    <select
-                        name="variants[0][color_id]"
-                        class="form-control variant-color"
-                    >
-
-                        <option value="">
-                            Select Color
-                        </option>
-
-                        @foreach($colors as $color)
-
-                            <option
-                                value="{{ $color->id }}"
-                                {{ old('variants.0.color_id') == $color->id ? 'selected' : '' }}
-                            >
-                                {{ $color->name }}
-                            </option>
-
-                        @endforeach
-
-                    </select>
-
-                </div>
+        </select>
+    </div>
 
 
-                {{-- SIZE --}}
+    {{-- SIZE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Size
+        </label>
 
-                <div class="col-md-4 mb-2">
+        <select
+            name="variants[0][size_id]"
+            class="form-control variant-size"
+        >
+            <option value="">
+                Select Size
+            </option>
 
-                    <label class="form-label fw-semibold">
-                        Size
-                    </label>
+            @foreach($sizes as $size)
+                <option
+                    value="{{ $size->id }}"
+                    {{ old('variants.0.size_id') == $size->id ? 'selected' : '' }}
+                >
+                    {{ $size->name }}
+                </option>
+            @endforeach
 
-                    <select
-                        name="variants[0][size_id]"
-                        class="form-control variant-size"
-                    >
-
-                        <option value="">
-                            Select Size
-                        </option>
-
-                        @foreach($sizes as $size)
-
-                            <option
-                                value="{{ $size->id }}"
-                                {{ old('variants.0.size_id') == $size->id ? 'selected' : '' }}
-                            >
-                                {{ $size->name }}
-                            </option>
-
-                        @endforeach
-
-                    </select>
-
-                </div>
+        </select>
+    </div>
 
 
-                {{-- QUANTITY --}}
+    {{-- QUANTITY --}}
+    <div class="col-md-2 mb-2">
+        <label class="form-label fw-semibold">
+            Quantity
+        </label>
 
-                <div class="col-md-3 mb-2">
-
-                    <label class="form-label fw-semibold">
-                        Quantity
-                    </label>
-
-                    <input
-                        type="number"
-                        min="0"
-                        value="{{ old('variants.0.quantity', 0) }}"
-                        name="variants[0][quantity]"
-                        class="form-control variant-quantity"
-                    >
-
-                </div>
+        <input
+            type="number"
+            min="0"
+            value="{{ old('variants.0.quantity', 0) }}"
+            name="variants[0][quantity]"
+            class="form-control variant-quantity"
+        >
+    </div>
 
 
-                {{-- REMOVE --}}
+    {{-- VARIANT IMAGE --}}
+    <div class="col-md-3 mb-2">
+        <label class="form-label fw-semibold">
+            Variant Image
+        </label>
 
-                <div class="col-md-1 mb-2">
+        <input
+            type="file"
+            name="variants[0][image]"
+            class="form-control variant-image"
+            accept="image/*"
+        >
+    </div>
 
-                    <button
-                        type="button"
-                        class="btn btn-outline-danger remove-variant"
-                        title="Remove Variant"
-                    >
 
-                        <i class="mdi mdi-delete-outline"></i>
+    {{-- REMOVE --}}
+    <div class="col-md-1 mb-2">
+        <button
+            type="button"
+            class="btn btn-outline-danger remove-variant"
+            title="Remove Variant"
+        >
+            <i class="mdi mdi-delete-outline"></i>
+        </button>
+    </div>
 
-                    </button>
-
-                </div>
-
-            </div>
-
+</div>
         </div>
 
 
@@ -1710,22 +1703,16 @@ function calculateTotalQuantity()
 
 function createVariantRow(index)
 {
-    const row =
-        document.createElement('div');
-
+    const row = document.createElement('div');
 
     row.className =
         'variant-row row align-items-end mb-3';
 
-
-    row.dataset.index =
-        index;
-
+    row.dataset.index = index;
 
     row.innerHTML = `
-
-        <div class="col-md-4 mb-2">
-
+        {{-- COLOR --}}
+        <div class="col-md-3 mb-2">
             <label class="form-label fw-semibold">
                 Color
             </label>
@@ -1734,26 +1721,20 @@ function createVariantRow(index)
                 name="variants[${index}][color_id]"
                 class="form-control variant-color"
             >
-
                 <option value="">
                     Select Color
                 </option>
 
                 @foreach($colors as $color)
-
                     <option value="{{ $color->id }}">
                         {{ $color->name }}
                     </option>
-
                 @endforeach
-
             </select>
-
         </div>
 
-
-        <div class="col-md-4 mb-2">
-
+        {{-- SIZE --}}
+        <div class="col-md-3 mb-2">
             <label class="form-label fw-semibold">
                 Size
             </label>
@@ -1762,26 +1743,20 @@ function createVariantRow(index)
                 name="variants[${index}][size_id]"
                 class="form-control variant-size"
             >
-
                 <option value="">
                     Select Size
                 </option>
 
                 @foreach($sizes as $size)
-
                     <option value="{{ $size->id }}">
                         {{ $size->name }}
                     </option>
-
                 @endforeach
-
             </select>
-
         </div>
 
-
-        <div class="col-md-3 mb-2">
-
+        {{-- QUANTITY --}}
+        <div class="col-md-2 mb-2">
             <label class="form-label fw-semibold">
                 Quantity
             </label>
@@ -1793,30 +1768,36 @@ function createVariantRow(index)
                 name="variants[${index}][quantity]"
                 class="form-control variant-quantity"
             >
-
         </div>
 
+        {{-- VARIANT IMAGE --}}
+        <div class="col-md-3 mb-2">
+            <label class="form-label fw-semibold">
+                Variant Image
+            </label>
 
+            <input
+                type="file"
+                name="variants[${index}][image]"
+                class="form-control variant-image"
+                accept="image/*"
+            >
+        </div>
+
+        {{-- REMOVE --}}
         <div class="col-md-1 mb-2">
-
             <button
                 type="button"
                 class="btn btn-outline-danger remove-variant"
                 title="Remove Variant"
             >
-
                 <i class="mdi mdi-delete-outline"></i>
-
             </button>
-
         </div>
-
     `;
-
 
     return row;
 }
-
 
 /* ============================================================
    ADD VARIANT

@@ -366,6 +366,23 @@ font-family:"Cormorant Garamond",serif;
                                             <div class="col-8 col-md-4">
                                                 <div class="product-content">
                                                     <h5 class="title"><a href="{{ url('collections/'.$item['category_slug'].'/'.$item['slug']) }}">{{ $item['name'] }}</a></h5>
+                                                    @if(!empty($item['color']) || !empty($item['size']))
+    <div style="font-size: 14px; color: #888; margin-bottom: 5px;">
+
+        @if(!empty($item['color']))
+            <span>Color: {{ $item['color'] }}</span>
+        @endif
+
+        @if(!empty($item['color']) && !empty($item['size']))
+            <span> | </span>
+        @endif
+
+        @if(!empty($item['size']))
+            <span>Size: {{ $item['size'] }}</span>
+        @endif
+
+    </div>
+@endif
                                                     <h6 class="product-price">${{ number_format($item['price'], 2) }}</h6>
                                                 </div>
                                             </div>
@@ -375,11 +392,11 @@ font-family:"Cormorant Garamond",serif;
                                                         <div class="col-md-6 col-xs-6">
                                                             <div class="product-quick-qty">
                                                                 <div class="quantity__box">
-                                                                    <button type="button" class="quantity__value decrease" wire:click="updateQuantity({{ $item['product_id'] }}, 'decrease')" wire:loading.attr="disabled">−</button>
+                                                                    <button type="button" class="quantity__value decrease" wire:click="updateQuantity('{{ $item['id'] }}', 'decrease')" wire:loading.attr="disabled">−</button>
                                                                     <label>
                                                                         <input type="number" class="quantity__number" value="{{ $item['quantity'] }}" readonly />
                                                                     </label>
-                                                                    <button type="button" class="quantity__value increase" wire:click="updateQuantity({{ $item['product_id'] }}, 'increase')" wire:loading.attr="disabled">+</button>
+                                                                    <button type="button" class="quantity__value increase" wire:click="updateQuantity('{{ $item['id'] }}', 'increase')" wire:loading.attr="disabled">+</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -388,7 +405,7 @@ font-family:"Cormorant Garamond",serif;
                                                         </div>
                                                         <div class="col-md-2 col-xs-2 text-end">
                                                             <div class="product-close">
-                                                                <a href="#" wire:click="removeItem({{ $item['product_id'] }})" wire:loading.attr="disabled">
+                                                                <a href="#" wire:click="removeItem('{{ $item['id'] }}')" wire:loading.attr="disabled">
                                                                   <i class="fa fa-trash"></i>
                                                                 </a>
                                                             </div>

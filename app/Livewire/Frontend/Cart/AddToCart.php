@@ -1,194 +1,293 @@
 <?php
+
 namespace App\Livewire\Frontend\Cart;
 
-use Livewire\Component;
-use App\Models\Product;
 use App\Helpers\CartHelper;
+use App\Models\Cart;
+use App\Models\Product;
+use App\Models\ProductVariant;
+use Livewire\Component;
+use Livewire\Attributes\Reactive;
 
 class AddToCart extends Component
 {
     public $product;
+#[Reactive]
+public $variantId = null;
 
-    public function mount($product) {
+#[Reactive]
+public $quantity = 1;
+    /*
+    |--------------------------------------------------------------------------
+    | Mount
+    |--------------------------------------------------------------------------
+    */
+
+    public function mount($product, $variantId = null, $quantity = 1)
+    {
         $this->product = $product;
-    }
-
-public function addToCart($productId)
-{
-    $product = Product::find($productId);
-
-    if (!$product || $product->status != '0') {
-
-        $this->dispatch(
-            'message',
-            text: 'Product does not exist.',
-            type: 'warning',
-            status: 404
-        );
-
-        return;
-    }
-
-    // Prevent admins from adding products
-    if (auth()->check() && auth()->user()->role_as == 1) {
-
-        $this->dispatch(
-            'message',
-            text: 'Administrators cannot add products to the cart.',
-            type: 'warning',
-            status: 200
-        );
-
-        return;
+        $this->variantId = $variantId;
+        $this->quantity = $quantity;
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Guest User
+    | Add To Cart
     |--------------------------------------------------------------------------
     */
 
-    if (!auth()->check()) {
+    public function addToCart($productId)
+    {
+        $product = Product::find($productId);
 
-        if (!CartHelper::addItem($productId)) {
-
+        if (!$product) {
             $this->dispatch(
-                'message',
-                text: 'This product is currently out of stock.',
-                type: 'warning',
-                status: 200
+                'cartMessage',
+                message: 'Product not found.'
             );
 
             return;
         }
 
-    } else {
-
         /*
         |--------------------------------------------------------------------------
-        | Logged-in User
+        | Product Status
         |--------------------------------------------------------------------------
         */
 
-        $cartItem = \App\Models\Cart::where('user_id', auth()->id())
-            ->where('product_id', $productId)
-            ->first();
+        if ($product->status != '0') {
 
-        if ($cartItem) {
+            $this->dispatch(
+                'cartMessage',
+                message: 'This product is not available.'
+            );
 
-            if ($product->quantity <= 0) {
+            return;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Admin Check
+        |--------------------------------------------------------------------------
+        */
+
+        if (auth()->check() && auth()->user()->is_admin) {
+
+            $this->dispatch(
+                'cartMessage',
+                message: 'Administrators cannot add products to cart.'
+            );
+
+            return;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Quantity
+        |--------------------------------------------------------------------------
+        */
+
+        $quantity = max(1, (int) $this->quantity);
+if ($product->productVariants()->exists() && !$this->variantId) {
+
+    $this->dispatch(
+        'cartMessage',
+        message: 'Please select a color and size first.'
+    );
+
+    return;
+}
+        /*
+        |--------------------------------------------------------------------------
+        | Variant Product
+        |--------------------------------------------------------------------------
+        */
+
+        if ($this->variantId) {
+
+            $variant = ProductVariant::where('id', $this->variantId)
+                ->where('product_id', $productId)
+                ->first();
+
+            if (!$variant) {
 
                 $this->dispatch(
-                    'message',
-                    text: 'This product is currently out of stock.',
-                    type: 'warning',
-                    status: 200
+                    'cartMessage',
+                    message: 'Please select a valid product variant.'
                 );
 
                 return;
             }
 
-            if ($cartItem->quantity >= $product->quantity) {
+            if ($variant->quantity <= 0) {
 
                 $this->dispatch(
-                    'message',
-                    text: "Only {$product->quantity} item(s) available.",
-                    type: 'warning',
-                    status: 200
+                    'cartMessage',
+                    message: 'This variant is out of stock.'
                 );
 
                 return;
             }
 
-            $cartItem->increment('quantity');
+            /*
+            |--------------------------------------------------------------------------
+            | Make sure requested quantity doesn't exceed variant stock
+            |--------------------------------------------------------------------------
+            */
+
+            $quantity = min(
+                $quantity,
+                (int) $variant->quantity
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Guest User
+        |--------------------------------------------------------------------------
+        */
+
+        if (!auth()->check()) {
+
+            $success = CartHelper::addItem(
+                $productId,
+                $this->variantId,
+                $quantity
+            );
+
+            if (!$success) {
+
+                $this->dispatch(
+                    'cartMessage',
+                    message: 'Unable to add this product to cart.'
+                );
+
+                return;
+            }
+
+            $this->dispatch('CartAddedUpdated');
+            $this->dispatch('cartUpdated');
+
+            $this->dispatch(
+                'cartMessage',
+                message: 'Product added to cart successfully.'
+            );
+
+            return;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Logged In User
+        |--------------------------------------------------------------------------
+        */
+
+        $query = Cart::where('user_id', auth()->id())
+            ->where('product_id', $productId);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Match Variant
+        |--------------------------------------------------------------------------
+        */
+
+        if ($this->variantId) {
+
+            $query->where(
+                'product_variant_id',
+                $this->variantId
+            );
 
         } else {
 
-            if ($product->quantity <= 0) {
+            $query->whereNull('product_variant_id');
+        }
+
+        $cart = $query->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Variant Stock
+        |--------------------------------------------------------------------------
+        */
+
+        $maxQuantity = $product->quantity;
+
+        if ($this->variantId) {
+
+            $variant = ProductVariant::find($this->variantId);
+
+            if (!$variant) {
 
                 $this->dispatch(
-                    'message',
-                    text: 'This product is currently out of stock.',
-                    type: 'warning',
-                    status: 200
+                    'cartMessage',
+                    message: 'Variant not found.'
                 );
 
                 return;
             }
 
-            \App\Models\Cart::create([
+            $maxQuantity = (int) $variant->quantity;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Existing Cart Item
+        |--------------------------------------------------------------------------
+        */
+
+        if ($cart) {
+
+            $newQuantity = min(
+                $cart->quantity + $quantity,
+                $maxQuantity
+            );
+
+            $cart->update([
+                'quantity' => $newQuantity,
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | New Cart Item
+        |--------------------------------------------------------------------------
+        */
+
+        else {
+
+            Cart::create([
                 'user_id' => auth()->id(),
                 'product_id' => $productId,
-                'quantity' => 1,
+                'product_variant_id' => $this->variantId,
+                'quantity' => min($quantity, $maxQuantity),
             ]);
         }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Events
+        |--------------------------------------------------------------------------
+        */
+
+        $this->dispatch('CartAddedUpdated');
+        $this->dispatch('cartUpdated');
+
+        $this->dispatch(
+            'cartMessage',
+            message: 'Product added to cart successfully.'
+        );
     }
 
-    $newTotal = $this->calculateNewTotal();
-    $newCount = $this->calculateNewCount();
+    /*
+    |--------------------------------------------------------------------------
+    | Render
+    |--------------------------------------------------------------------------
+    */
 
-    $this->dispatch('CartAddedUpdated');
-
-    $this->dispatch(
-        'cartUpdated',
-        total: $newTotal,
-        count: $newCount
-    );
-
-    $this->dispatch(
-        'message',
-        text: 'Added to Cart',
-        type: 'success',
-        status: 200
-    );
-}
-
-private function calculateNewTotal()
-{
-    if (auth()->check()) {
-
-        $carts = \App\Models\Cart::where('user_id', auth()->id())
-            ->with('product')
-            ->get();
-
-        return $carts->sum(function ($cart) {
-
-            if (!$cart->product) {
-                return 0;
-            }
-
-            return $cart->product->selling_price * $cart->quantity;
-        });
-
-    } else {
-
-        $guestCart = CartHelper::getGuestCart();
-
-        $total = 0;
-
-        foreach ($guestCart as $id => $data) {
-
-            $product = Product::find($id);
-
-            if ($product) {
-                $total += $product->selling_price * $data['quantity'];
-            }
-        }
-
-        return $total;
-    }
-}
-
-    private function calculateNewCount()
+    public function render()
     {
-        if (auth()->check()) {
-            return \App\Models\Cart::where('user_id', auth()->id())->count();
-        } else {
-            return CartHelper::getCartCount();
-        }
-    }
-
-    public function render() {
         return view('livewire.frontend.cart.add-to-cart');
     }
 }
