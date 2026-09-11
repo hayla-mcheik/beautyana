@@ -935,12 +935,8 @@
     padding:
         6px 0px !important;
 
-    font-family:
-        "Cormorant Garamond",
-        serif !important;
-
     font-size:
-        15px !important;
+        14px !important;
 
     font-weight:
         600 !important;
@@ -952,7 +948,7 @@
         0.65px;
 
     text-transform:
-        uppercase;
+        capitalize;
 
     text-decoration:
         none;
@@ -1290,8 +1286,6 @@
 .header-action-area a,
 .target-cart-icon {
 
-    color:
-        #000 !important;
 
     text-decoration:
         none;

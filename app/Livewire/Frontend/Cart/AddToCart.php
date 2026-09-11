@@ -12,11 +12,13 @@ use Livewire\Attributes\Reactive;
 class AddToCart extends Component
 {
     public $product;
-#[Reactive]
-public $variantId = null;
 
-#[Reactive]
-public $quantity = 1;
+    #[Reactive]
+    public $variantId = null;
+
+    #[Reactive]
+    public $quantity = 1;
+
     /*
     |--------------------------------------------------------------------------
     | Mount
@@ -42,8 +44,10 @@ public $quantity = 1;
 
         if (!$product) {
             $this->dispatch(
-                'cartMessage',
-                message: 'Product not found.'
+                'message',
+                text: 'Product not found.',
+                type: 'warning',
+                status: 404
             );
 
             return;
@@ -56,10 +60,11 @@ public $quantity = 1;
         */
 
         if ($product->status != '0') {
-
             $this->dispatch(
-                'cartMessage',
-                message: 'This product is not available.'
+                'message',
+                text: 'This product is not available.',
+                type: 'warning',
+                status: 400
             );
 
             return;
@@ -72,10 +77,11 @@ public $quantity = 1;
         */
 
         if (auth()->check() && auth()->user()->is_admin) {
-
             $this->dispatch(
-                'cartMessage',
-                message: 'Administrators cannot add products to cart.'
+                'message',
+                text: 'Administrators cannot add products to cart.',
+                type: 'warning',
+                status: 400
             );
 
             return;
@@ -88,20 +94,31 @@ public $quantity = 1;
         */
 
         $quantity = max(1, (int) $this->quantity);
-if ($product->productVariants()->exists() && !$this->variantId) {
 
-    $this->dispatch(
-        'cartMessage',
-        message: 'Please select a color and size first.'
-    );
+        /*
+        |--------------------------------------------------------------------------
+        | Product Has Variants
+        |--------------------------------------------------------------------------
+        */
 
-    return;
-}
+        if ($product->productVariants()->exists() && !$this->variantId) {
+            $this->dispatch(
+                'message',
+                text: 'Please select an available product option.',
+                type: 'warning',
+                status: 400
+            );
+
+            return;
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Variant Product
         |--------------------------------------------------------------------------
         */
+
+        $variant = null;
 
         if ($this->variantId) {
 
@@ -110,20 +127,22 @@ if ($product->productVariants()->exists() && !$this->variantId) {
                 ->first();
 
             if (!$variant) {
-
                 $this->dispatch(
-                    'cartMessage',
-                    message: 'Please select a valid product variant.'
+                    'message',
+                    text: 'Please select a valid product variant.',
+                    type: 'warning',
+                    status: 400
                 );
 
                 return;
             }
 
-            if ($variant->quantity <= 0) {
-
+            if ((int) $variant->quantity <= 0) {
                 $this->dispatch(
-                    'cartMessage',
-                    message: 'This variant is out of stock.'
+                    'message',
+                    text: 'This variant is out of stock.',
+                    type: 'warning',
+                    status: 404
                 );
 
                 return;
@@ -131,7 +150,7 @@ if ($product->productVariants()->exists() && !$this->variantId) {
 
             /*
             |--------------------------------------------------------------------------
-            | Make sure requested quantity doesn't exceed variant stock
+            | Limit Quantity To Variant Stock
             |--------------------------------------------------------------------------
             */
 
@@ -156,10 +175,11 @@ if ($product->productVariants()->exists() && !$this->variantId) {
             );
 
             if (!$success) {
-
                 $this->dispatch(
-                    'cartMessage',
-                    message: 'Unable to add this product to cart.'
+                    'message',
+                    text: 'Unable to add this product to cart.',
+                    type: 'warning',
+                    status: 400
                 );
 
                 return;
@@ -169,8 +189,10 @@ if ($product->productVariants()->exists() && !$this->variantId) {
             $this->dispatch('cartUpdated');
 
             $this->dispatch(
-                'cartMessage',
-                message: 'Product added to cart successfully.'
+                'message',
+                text: 'Product added to cart successfully.',
+                type: 'success',
+                status: 200
             );
 
             return;
@@ -192,14 +214,11 @@ if ($product->productVariants()->exists() && !$this->variantId) {
         */
 
         if ($this->variantId) {
-
             $query->where(
                 'product_variant_id',
                 $this->variantId
             );
-
         } else {
-
             $query->whereNull('product_variant_id');
         }
 
@@ -207,26 +226,13 @@ if ($product->productVariants()->exists() && !$this->variantId) {
 
         /*
         |--------------------------------------------------------------------------
-        | Variant Stock
+        | Maximum Stock
         |--------------------------------------------------------------------------
         */
 
-        $maxQuantity = $product->quantity;
+        $maxQuantity = (int) $product->quantity;
 
-        if ($this->variantId) {
-
-            $variant = ProductVariant::find($this->variantId);
-
-            if (!$variant) {
-
-                $this->dispatch(
-                    'cartMessage',
-                    message: 'Variant not found.'
-                );
-
-                return;
-            }
-
+        if ($variant) {
             $maxQuantity = (int) $variant->quantity;
         }
 
@@ -239,7 +245,7 @@ if ($product->productVariants()->exists() && !$this->variantId) {
         if ($cart) {
 
             $newQuantity = min(
-                $cart->quantity + $quantity,
+                (int) $cart->quantity + $quantity,
                 $maxQuantity
             );
 
@@ -247,15 +253,20 @@ if ($product->productVariants()->exists() && !$this->variantId) {
                 'quantity' => $newQuantity,
             ]);
 
-        }
+            $this->dispatch(
+                'message',
+                text: 'Product quantity updated in cart.',
+                type: 'success',
+                status: 200
+            );
 
-        /*
-        |--------------------------------------------------------------------------
-        | New Cart Item
-        |--------------------------------------------------------------------------
-        */
+        } else {
 
-        else {
+            /*
+            |--------------------------------------------------------------------------
+            | New Cart Item
+            |--------------------------------------------------------------------------
+            */
 
             Cart::create([
                 'user_id' => auth()->id(),
@@ -263,6 +274,13 @@ if ($product->productVariants()->exists() && !$this->variantId) {
                 'product_variant_id' => $this->variantId,
                 'quantity' => min($quantity, $maxQuantity),
             ]);
+
+            $this->dispatch(
+                'message',
+                text: 'Product Added to Cart',
+                type: 'success',
+                status: 200
+            );
         }
 
         /*
@@ -273,11 +291,6 @@ if ($product->productVariants()->exists() && !$this->variantId) {
 
         $this->dispatch('CartAddedUpdated');
         $this->dispatch('cartUpdated');
-
-        $this->dispatch(
-            'cartMessage',
-            message: 'Product added to cart successfully.'
-        );
     }
 
     /*

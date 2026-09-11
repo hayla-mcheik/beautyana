@@ -24,17 +24,44 @@ class View extends Component
     public $selectedImageIndex = 0;
 
 
-    public function mount($category, $product)
-    {
-        $this->category = $category;
+public function mount($category, $product)
+{
+    $this->category = $category;
 
-        $this->product = $product->load([
-            'productImages',
-            'productVariants.color',
-            'productVariants.size',
-        ]);
+    $this->product = $product->load([
+        'productImages',
+        'productVariants.color',
+        'productVariants.size',
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | DEFAULT COLOR
+    |--------------------------------------------------------------------------
+    */
+
+    $colors = $this->product->productVariants
+        ->whereNotNull('color_id')
+        ->filter(fn($variant) => $variant->color)
+        ->pluck('color')
+        ->unique('id');
+
+    if ($colors->count() > 0) {
+
+        // Try Black first
+        $defaultColor = $colors->first(function ($color) {
+            return strtolower(trim($color->name)) === 'black';
+        });
+
+        // If Black doesn't exist, use first color
+        if (!$defaultColor) {
+            $defaultColor = $colors->first();
+        }
+
+        // This also automatically selects the default variant
+        $this->selectColor($defaultColor->id);
     }
-
+}
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +72,12 @@ public function selectColor($colorId)
 {
     $this->selectedColorId = $colorId;
 
-    // Find the first variant for this color that has an image
+    /*
+    |--------------------------------------------------------------------------
+    | COLOR IMAGE
+    |--------------------------------------------------------------------------
+    */
+
     $variantWithImage = $this->product->productVariants
         ->where('color_id', $colorId)
         ->first(function ($variant) {
@@ -55,15 +87,70 @@ public function selectColor($colorId)
     if ($variantWithImage) {
         $this->selectedColorImage = asset($variantWithImage->image);
     } else {
-        // Fall back to the main product image
         $this->selectedColorImage = null;
     }
 
-    // Reset size because the available sizes may change
+    /*
+    |--------------------------------------------------------------------------
+    | RESET
+    |--------------------------------------------------------------------------
+    */
+
     $this->selectedSizeId = null;
     $this->selectedVariantId = null;
     $this->availableQuantity = 0;
     $this->quantityCount = 1;
+
+    /*
+    |--------------------------------------------------------------------------
+    | FIND FIRST AVAILABLE VARIANT
+    |--------------------------------------------------------------------------
+    */
+
+    $variants = $this->product->productVariants
+        ->where('color_id', $colorId)
+        ->where('quantity', '>', 0);
+
+    if ($variants->count() === 0) {
+        return;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | IF NO SIZE WAS ENTERED BY ADMIN
+    |--------------------------------------------------------------------------
+    */
+
+    $noSizeVariant = $variants->firstWhere('size_id', null);
+
+    if ($noSizeVariant) {
+
+        $this->selectedSizeId = null;
+        $this->selectedVariantId = $noSizeVariant->id;
+        $this->availableQuantity = (int) $noSizeVariant->quantity;
+
+        if (!empty($noSizeVariant->image)) {
+            $this->selectedColorImage = asset($noSizeVariant->image);
+        }
+
+        return;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | OTHERWISE SELECT FIRST SIZE
+    |--------------------------------------------------------------------------
+    */
+
+    $defaultVariant = $variants->first();
+
+    $this->selectedSizeId = $defaultVariant->size_id;
+    $this->selectedVariantId = $defaultVariant->id;
+    $this->availableQuantity = (int) $defaultVariant->quantity;
+
+    if (!empty($defaultVariant->image)) {
+        $this->selectedColorImage = asset($defaultVariant->image);
+    }
 }
 
 
@@ -265,18 +352,6 @@ public function selectSize($sizeId)
             }
 
 
-            if (!$this->selectedSizeId) {
-
-                $this->dispatch(
-                    'message',
-                    text: 'Please select a size',
-                    type: 'warning',
-                    status: 400
-                );
-
-                return;
-            }
-
 
             if (!$this->selectedVariantId) {
 
@@ -339,22 +414,34 @@ public function selectSize($sizeId)
             return;
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | CART
         |--------------------------------------------------------------------------
         */
 
-        if (
-            Cart::where('user_id', auth()->id())
-                ->where('product_id', $productId)
-                ->exists()
-        ) {
+        $cartQuery = Cart::where('user_id', auth()->id())
+            ->where('product_id', $productId);
+
+        if ($this->selectedVariantId) {
+
+            $cartQuery->where(
+                'product_variant_id',
+                $this->selectedVariantId
+            );
+
+        } else {
+
+            $cartQuery->whereNull('product_variant_id');
+        }
+
+        $existingCart = $cartQuery->exists();
+
+        if ($existingCart) {
 
             $this->dispatch(
                 'message',
-                text: 'Product Already Added',
+                text: 'This product option is already in your cart',
                 type: 'warning',
                 status: 200
             );
@@ -362,13 +449,12 @@ public function selectSize($sizeId)
             return;
         }
 
-
         Cart::create([
             'user_id' => auth()->id(),
             'product_id' => $productId,
+            'product_variant_id' => $this->selectedVariantId,
             'quantity' => $this->quantityCount,
         ]);
-
 
         $this->dispatch('CartAddedUpdated');
 
@@ -379,7 +465,6 @@ public function selectSize($sizeId)
             status: 200
         );
     }
-
 
     public function render()
     {

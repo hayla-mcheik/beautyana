@@ -1,75 +1,54 @@
-/*===================================================================
-[Table Of Content]
-
-    * Imported CSS
-    * Typography CSS
-    * Common CSS
-    * Main Navigation CSS
-    * Header CSS
-    * Home Slider CSS
-    * About CSS
-    * Team CSS
-    * Brand Logo CSS
-    * Form CSS
-    * Blog CSS
-    * Contact CSS
-    * Footer CSS
-
-=====================================================================*/
 /*
 -----------------------------------------------------------------------
   Typography CSS
 -----------------------------------------------------------------------
 */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
-body {
-  color: #707070;
-  font-size: 0.875rem;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  line-height: 1.7143;
-  margin: 0;
-  overflow-x: hidden;
-  -ms-word-wrap: break-word;
-  word-wrap: break-word;
-}
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #51555a;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 10px;
-  margin-top: 0;
-}
+/* =========================================================
+   GOOGLE FONTS
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 
-    body {
-        background-color: var(--demanto-bg);
-        color: var(--demanto-dark);
-        font-family: 'Roboto', sans-serif;
-        overflow-x: hidden;
-    }
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
 
 :root {
-    /* === REPLACING GOLD WITH HERITAGE RUBY RED === */
-    --demanto-red: #B31B1B;          /* Main accent – vibrant, rich crimson */
-    --demanto-red-dark: #7A1212;     /* Darker shade – for hover states, footers, and depth */
-    --demanto-red-light: #F8F0F0;    /* Very soft rose-tinted white – for backgrounds, borders, or light overlays */
 
-    /* Keep your neutrals exactly as they are */
+    /* === BRAND COLORS === */
+
+    --demanto-red: #B31B1B;
+    --demanto-red-dark: #7A1212;
+    --demanto-red-light: #F8F0F0;
+
+    /* === NEUTRALS === */
+
     --demanto-dark: #2C241E;
     --demanto-text: #4A3F38;
     --demanto-muted: #85786D;
     --demanto-bg: #FDFBF7;
     --demanto-white: #FFFFFF;
-    --luxury-border: rgba(179, 27, 27, 0.25); /* Updated border to match red */
-    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --luxury-border: rgba(179, 27, 27, 0.25);
+
+    --transition-smooth:
+        all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+
+/* =========================================================
+   BODY
+   BODY = MONTSERRAT
+========================================================= */
+
+html,
 body {
+
     margin: 0;
+
+    padding: 0;
 
     background: var(--demanto-bg);
 
@@ -84,31 +63,282 @@ body {
     line-height: 1.7;
 
     overflow-x: hidden;
+
+    -ms-word-wrap: break-word;
+
+    word-wrap: break-word;
 }
 
+
+/* =========================================================
+   HEADINGS
+   HEADINGS = CORMORANT GARAMOND
+========================================================= */
 
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: "Cormorant Garamond", serif;
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+
+    margin-top: 0;
+
+    margin-bottom: 10px;
 
     color: var(--demanto-dark);
+
+    font-family: "Cormorant Garamond", serif;
 
     font-weight: 600;
 
     line-height: 1.15;
 }
+
+
+/* =========================================================
+   INDIVIDUAL HEADING SIZES
+========================================================= */
+
+h1,
+.h1 {
+    font-size: 42px;
+}
+
+h2,
+.h2 {
+    font-size: 36px;
+}
+
+h3,
+.h3 {
+    font-size: 30px;
+}
+
+h4,
+.h4 {
+    font-size: 25px;
+}
+
+h5,
+.h5 {
+    font-size: 21px;
+}
+
+h6,
+.h6 {
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+   BODY = MONTSERRAT
+========================================================= */
+
+p {
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   LINKS
+   BODY / NAVIGATION STYLE = MONTSERRAT
+========================================================= */
+
 a {
-  color: #C9A96E;
-  text-decoration: none;
-  transition: 0.3s;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
+
+    color: #C9A96E;
+
+    font-family: "Montserrat", sans-serif;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+
+    -webkit-transition: 0.3s;
+
+    -moz-transition: 0.3s;
+
+    -ms-transition: 0.3s;
+
+    -o-transition: 0.3s;
+}
+
+
+a:hover {
+
+    color: var(--demanto-red);
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   BUTTONS
+   BUTTONS = MONTSERRAT
+========================================================= */
+
+button,
+.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 500;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   FORM TEXT = MONTSERRAT
+========================================================= */
+
+input,
+textarea,
+select {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 400;
+}
+
+
+input::placeholder,
+textarea::placeholder {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   NAVIGATION = MONTSERRAT
+========================================================= */
+
+nav,
+.nav,
+.navbar,
+.navbar-nav,
+.nav-link,
+.menu,
+.menu a {
+
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+ul,
+ol {
+
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* =========================================================
+   SMALL TEXT
+========================================================= */
+
+small,
+.small {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   STRONG / BOLD
+========================================================= */
+
+strong,
+b {
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+label {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+table,
+th,
+td {
+
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* =========================================================
+   PRODUCT TITLES
+========================================================= */
+
+.product-title,
+.product-name,
+.product-heading {
+
+    font-family: "Cormorant Garamond", serif;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.section-title,
+.section-heading {
+
+    font-family: "Cormorant Garamond", serif;
+}
+
+
+/* =========================================================
+   PAGE TITLES
+========================================================= */
+
+.page-title,
+.page-heading {
+
+    font-family: "Cormorant Garamond", serif;
 }
 a:hover, a:active, a:focus {
   -webkit-box-shadow: none;
