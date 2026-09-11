@@ -357,15 +357,37 @@ font-family:"Cormorant Garamond",serif;
                             
                             <div class="order-items">
                                 @foreach($carts as $item)
-                                    <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-                                        <div>
-                                            <h6 class="mb-0" style="font-size: 26px; font-weight: 500;">{{ $item->product->name }}</h6>
-                                            <small class="text-muted" style="font-size: 26px;">Qty: {{ $item->quantity }}</small>
-                                        </div>
-                                        <div class="text-end">
-                                            <span style="font-size: 26px; color: var(--demanto-red);">${{ number_format($item->product->selling_price * $item->quantity, 2) }}</span>
-                                        </div>
-                                    </div>
+                         <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+    <div>
+        <h6 class="mb-0" style="font-size: 20px; font-weight: 500;">
+            {{ $item->product->name }}
+        </h6>
+
+        @if($item->productVariant)
+            @if($item->productVariant->color)
+                <small class="text-muted d-block">
+                    Color: {{ $item->productVariant->color->name }}
+                </small>
+            @endif
+
+            @if($item->productVariant->size)
+                <small class="text-muted d-block">
+                    Size: {{ $item->productVariant->size->name }}
+                </small>
+            @endif
+        @endif
+
+        <small class="text-muted d-block">
+            Qty: {{ $item->quantity }}
+        </small>
+    </div>
+
+    <div class="text-end">
+        <span style="font-size: 20px; color: var(--demanto-red);">
+            ${{ number_format($item->product->selling_price * $item->quantity, 2) }}
+        </span>
+    </div>
+</div>
                                 @endforeach
                             </div>
 
