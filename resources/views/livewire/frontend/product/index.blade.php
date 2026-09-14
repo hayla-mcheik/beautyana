@@ -249,7 +249,7 @@
 
     .total-products p {
         margin: 0;
-        font-size: 18px;
+        font-size: 16px;
         color: var(--demanto-muted);
     }
 
@@ -511,7 +511,7 @@
         
         .product-header-wrap { padding: 10px 12px; }
         .product-tab-nav li a { width: 30px; height: 30px; font-size: 12px; }
-        .total-products p { font-size: 18px; }
+        .total-products p { font-size: 14px; }
         
         .sort-select { font-size: 12px; padding: 4px 10px; }
     }
