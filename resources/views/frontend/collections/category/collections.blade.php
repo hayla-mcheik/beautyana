@@ -463,14 +463,11 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .card-footer h3 {
-   font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    letter-spacing: 0.3px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
     color: #1c1a18;
     text-transform: capitalize;
-    margin: 0;
-    line-height: 1.2;
     position: relative;
 }
 
@@ -533,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
         font-size: 28px;
     }
     .card-footer h3 {
-        font-size: 16px;
+        font-size: 14px;
     }
     .floating-cta {
         padding: 6px 14px 6px 10px;

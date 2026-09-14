@@ -152,6 +152,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
+.demanto-footer a,
+.demanto-footer span,
+.demanto-footer li,
+.demanto-footer p,
+.demanto-footer input,
+.demanto-footer button {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .demanto-footer {
     background: #fff;
     color: #000;
@@ -219,6 +228,7 @@
 }
 
 .brand-tagline {
+    font-family: 'Montserrat', sans-serif;
     margin-top: 12px;
     color: #000;
     font-size: 13px;
@@ -267,11 +277,10 @@
 .footer-nav-title {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-size: 16px;
     color: #000;
     margin: 0 0 14px 0;
-    text-transform: uppercase;
+    text-transform: capitalize;
     border-bottom: 1px solid rgba(201, 169, 110, 0.15);
     padding-bottom: 8px;
     display: inline-block;
@@ -287,6 +296,7 @@
 }
 
 .footer-nav-list li a {
+    font-family: 'Montserrat', sans-serif;
     color: #000;
     text-decoration: none;
     font-size: 15px;
@@ -341,7 +351,6 @@
 
 .footer-contact-item:hover {
     transform: translateY(-2px);
-    color: #FFFFFF;
     text-decoration: none;
 }
 
@@ -359,11 +368,6 @@
     transition: all 0.3s ease;
 }
 
-.footer-contact-item:hover .footer-contact-icon {
-    background: #000;
-    border-color: #000;
-    color: #fff;
-}
 
 .footer-contact-content {
     display: flex;
@@ -373,18 +377,17 @@
 }
 
 .footer-contact-label {
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
 }
 
 .footer-contact-value {
     color: #000;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    line-height: 1.3;
+font-family: "Montserrat", sans-serif;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -398,13 +401,14 @@
 }
 
 .newsletter-label {
+    font-family: 'Montserrat', sans-serif;
     display: block;
     color: #C9A96E;
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 8px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .newsletter-form {
@@ -460,6 +464,7 @@
 ===================================================== */
 
 .footer-bottom {
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -478,6 +483,7 @@
 }
 
 .footer-legal a {
+    font-family: 'Montserrat', sans-serif;
     color: #8A857C;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -664,7 +670,8 @@
     }
 
     .footer-nav-title {
-        margin-bottom: 15px;
+        font-family: 'Cormorant Garamond', serif;
+        margin-bottom: 16px;
         font-size: 20px;
         text-align: center;
     }
@@ -741,19 +748,15 @@
     }
 
     .footer-contact-label {
-        color: #85786D !important;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        line-height: 1.3;
-        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: capitalize;
     }
 
     .footer-contact-value {
         color: #000 !important;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 17px;
-        line-height: 1.35;
+font-family: "Montserrat", sans-serif;
+        font-size: 16px;
         font-weight: 400;
         word-break: break-word;
         overflow-wrap: anywhere;
@@ -869,7 +872,8 @@
     }
 
     .footer-nav-title {
-        font-size: 19px;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 16px;
         margin-bottom: 13px;
     }
 
@@ -899,8 +903,7 @@
     }
 
     .footer-contact-label {
-        font-size: 9px;
-        letter-spacing: 1.3px;
+        font-size: 14px;
     }
 
     .footer-contact-value {
@@ -949,7 +952,7 @@
     }
 
     .footer-contact-value {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .footer-nav-list li a {

@@ -606,8 +606,8 @@
     .latest-arrivals-grid,
     .best-sellers-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
         width: 100%;
     }
 
@@ -964,32 +964,7 @@
     </div>
 </section>
 
-<!-- About Section -->
-<section>
-    <div class="about-editorial-root">
-        @if($about)
-        <div class="art-background-layer">
-            <svg class="botanical-svg" viewBox="0 0 100 100" fill="none">
-                <path d="M10 80C30 80 80 60 90 10M10 80C40 70 80 40 90 10" stroke="#b95c19" stroke-width="0.2" opacity="0.2"/>
-            </svg>
-        </div>
-
-        <div class="wide-content-wrapper px-4 px-md-4 position-relative z-2">
-            <div class="header-minimal mb-4">
-                <h2 class="display-title mt-2">{{ $about->title ?? 'About Us' }}</h2>
-            </div>
-            <div class="description-full-width">
-                <p class="editorial-text" v-html="">{!! nl2br(e($about->description)) !!}</p>
-            </div>
-        </div>
-        @else
-        <div class="container py-5 text-center">
-            <p>About Us content is currently being updated.</p>
-        </div>
-        @endif
-    </div>
-</section>
-
+@include('frontend.collections.category.index')
 <!-- Latest Arrivals -->
 <section class="latest-arrivals-section">
     <div class="container">
@@ -999,7 +974,7 @@
         </div>
 
         <div class="latest-arrivals-grid">
-            @forelse($newArrivalsProducts->take(12) as $product)
+            @forelse($newArrivalsProducts->take(26) as $product)
                 <div class="latest-arrival-card">
                     <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-image-link">
                         <div class="latest-arrival-image">
@@ -1039,48 +1014,6 @@
     </div>
 </section>
 
-<!-- Featured Products -->
-<section class="featured-products">
-    <div class="container">
-        <div class="collections-title mb-3">
-            <span class="title-main">Featured Pieces</span>
-            <div class="divider"><span></span></div>
-        </div>
-
-        <div class="position-relative">
-            <div class="swiper featured-products-slider">
-                <div class="swiper-wrapper">
-                    @foreach($newArrivalsProducts as $product)
-                    <div class="swiper-slide">
-                        <div class="featured-product-card">
-                            <div class="featured-image">
-                                <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">
-                                    @if($product->productImages->count())
-                                        <img src="{{ asset($product->productImages[0]->image) }}" loading="lazy" decoding="async" alt="{{ $product->name }}">
-                                    @else
-                                        <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="">
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="featured-content">
-                                <h4>{{ $product->name }}</h4>
-                                <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}">Discover Details →</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="featured-pagination mt-2"></div>
-            </div>
-            <div class="featured-prev"><i class="fa fa-angle-left"></i></div>
-            <div class="featured-next"><i class="fa fa-angle-right"></i></div>
-        </div>
-
-        <div class="text-center mt-3">
-            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
-        </div>
-    </div>
-</section>
 
 @if($bestSellersProducts->isNotEmpty())
     <!-- Best Sellers -->
@@ -1096,7 +1029,7 @@
 
             <div class="best-sellers-grid">
 
-                @foreach($bestSellersProducts->take(6) as $product)
+                @foreach($bestSellersProducts->take(16) as $product)
 
                     <div class="best-seller-card">
 
