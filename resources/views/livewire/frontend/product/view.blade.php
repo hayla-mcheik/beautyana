@@ -571,11 +571,17 @@
             letter-spacing: 0.5px;
         }
 
+        .product-single-item .product-single-info .product-description .product-desc-list li{
+            font-size: 18px;
+        }
         /* =========================================================
            TABLET
         ========================================================= */
 
         @media (max-width: 991px) {
+            .product-single-item .product-single-info .product-description .product-desc-list li{
+                font-size: 14px !important;
+            }
             .product-single-info {
                 padding-left: 0;
                 margin-top: 30px;
