@@ -181,7 +181,7 @@
         padding: 8px 0;
         color: var(--demanto-muted);
         text-decoration: none;
-        font-size: 16px;
+        font-size: 14px;
         transition: var(--transition-smooth);
         border-bottom: 1px solid var(--luxury-border);
         position: relative;
@@ -347,7 +347,7 @@
         gap: 8px;
     }
 .category-sub-menu h6{
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 600;
 }
     /* Empty State */
