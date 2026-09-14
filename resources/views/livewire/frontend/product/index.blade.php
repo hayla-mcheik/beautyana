@@ -178,7 +178,7 @@
         padding: 8px 0;
         color: var(--demanto-muted);
         text-decoration: none;
-        font-size: 22px;
+        font-size: 16px;
         transition: var(--transition-smooth);
         border-bottom: 1px solid var(--luxury-border);
         position: relative;

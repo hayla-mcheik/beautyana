@@ -8098,7 +8098,7 @@ font-size: 18px;
   padding: 0px 0 0 !important;
 }
 .all-categories h4 , .shop-sidebar-wrapper .sidebar-item .sidebar-title a{
-  font-size: 28px;
+  font-size: 18px;
   color: #000;
 }
 .category-card-body h5 , .shop-sidebar-wrapper .sidebar-item .small-title{
@@ -8114,7 +8114,7 @@ font-weight: 700;
   color: #51555a;
 }
 .shop-sidebar-wrapper .sidebar-item .sidebar-title a , .shop-sidebar-wrapper .sidebar-item .small-title{
-  font-size: 1.6rem;
+  font-size: 1.2rem;
 }
 .category-card-body h5{
 font-size: 12px;
