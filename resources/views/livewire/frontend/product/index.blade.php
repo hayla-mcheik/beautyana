@@ -347,7 +347,7 @@
         gap: 8px;
     }
 .category-sub-menu h6{
-    font-size: 26px;
+    font-size: 17px;
     font-weight: 600;
 }
     /* Empty State */
