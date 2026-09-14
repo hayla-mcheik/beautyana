@@ -33,13 +33,13 @@
                             <div class="header-navigation-area hidden-md-down">
                       <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
 
-    <li>
-        <a href="{{ url('/') }}">Home</a>
-    </li>
+ <li class="{{ request()->is('/') ? 'active' : '' }}">
+    <a href="{{ url('/') }}">Home</a>
+</li>
 
-    <li>
-        <a href="{{ url('/aboutus') }}">About Us</a>
-    </li>
+<li class="{{ request()->is('aboutus') ? 'active' : '' }}">
+    <a href="{{ url('/aboutus') }}">About Us</a>
+</li>
     {{-- =========================================================
          COLLECTIONS MEGA MENU
     ========================================================== --}}
@@ -211,7 +211,8 @@
 </li>
 
     <li>
-        <a href="{{ url('contactus') }}">Contact Us</a>
+        <a class="{{ request()->is('contactus') ? 'active' : '' }}" 
+            href="{{ url('contactus') }}">Contact Us</a>
     </li>
 
 </ul>
@@ -524,17 +525,15 @@
         {{-- Menu --}}
         <ul class="mobile-main-nav">
 
-    
+<li class="{{ request()->is('/') ? 'active' : '' }}">
+    <a href="{{ url('/') }}">Home</a>
+</li>
 
-       
-        <li>
-                <a href="{{ url('/') }}">Home</a>
-            </li>
-                    <li>
-                <a href="{{ url('/aboutus') }}">About Us</a>
-            </li>
+<li class="{{ request()->is('aboutus') ? 'active' : '' }}">
+    <a href="{{ url('/aboutus') }}">About Us</a>
+</li>
             {{-- Collections --}}
-            <li class="has-mobile-dropdown">
+<li class="has-mobile-dropdown {{ request()->is('collections/*') && $collections->contains('slug', request()->segment(2)) ? 'active' : '' }}">
 
                 <a href="javascript:void(0)" class="mobile-dropdown-trigger">
                     Collections
@@ -601,7 +600,8 @@
 
 </li>
             <li>
-                <a href="{{ url('contactus') }}">Contact Us</a>
+                <a class="{{ request()->is('contactus') ? 'active' : '' }}" 
+                    href="{{ url('contactus') }}">Contact Us</a>
             </li>
 
           
@@ -1004,7 +1004,25 @@
         62%;
 }
 
+/* ============================================================
+   MOBILE ACTIVE NAVIGATION
+============================================================ */
 
+.mobile-main-nav > li > a.active,
+.mobile-main-nav > li.active > a {
+    color: var(--demanto-red) !important;
+    background: rgba(197, 161, 90, 0.04);
+}
+
+/* Active mobile dropdown parent */
+.mobile-main-nav > li.has-mobile-dropdown.active > .mobile-dropdown-trigger {
+    color: var(--demanto-red) !important;
+}
+
+/* Active category inside mobile dropdown */
+.mobile-sub-categories > li > a.active {
+    color: var(--demanto-red) !important;
+}
 /* ============================================================
    DESKTOP DROPDOWNS
 ============================================================ */
@@ -2179,8 +2197,7 @@
     border-bottom:
         1px solid rgba(197, 161, 90, 0.18);
 
-    background:
-        var(--demanto-cream);
+    background:white;
 }
 
 
@@ -2428,8 +2445,7 @@
     overflow-y:
         auto;
 
-    background:
-        var(--demanto-cream);
+    background:white;
 
     border-top:
         1px solid rgba(197, 161, 90, 0.18);
@@ -3288,6 +3304,26 @@
 
 }
 
+}
+/* ============================================================
+   ACTIVE NAVIGATION ITEM
+============================================================ */
+
+.boutique-nav > li > a.active,
+.boutique-nav > li.active > a {
+    color: var(--demanto-red) !important;
+}
+
+.boutique-nav > li > a.active::after,
+.boutique-nav > li.active > a::after {
+    width: 62%;
+    background: var(--demanto-red) !important;
+}
+
+/* Keep active item red on sticky header */
+.header-bottom.sticky-on .boutique-nav > li.active > a,
+.header-bottom.sticky-on .boutique-nav > li > a.active {
+    color: var(--demanto-red) !important;
 }
 </style>
 <script>

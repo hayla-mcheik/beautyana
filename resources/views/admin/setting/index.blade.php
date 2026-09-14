@@ -83,6 +83,187 @@
     @endif
 
 </div>
+<div class="col-md-6 mb-3">
+
+    <label>Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_image"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_image))
+
+        <div class="mt-3">
+
+            <p class="mb-2">
+                Current Breadcrumb Image
+            </p>
+
+            <div
+                style="
+                    width: 100%;
+                    max-width: 400px;
+                    height: 140px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 10px;
+                    background: #f8f8f8;
+                    border: 1px solid #ddd;
+                "
+            >
+
+                <img
+                    src="{{ asset($setting->breadcrumb_image) }}"
+                    alt="Breadcrumb Image"
+                    style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    "
+                >
+
+            </div>
+
+        </div>
+
+    @endif
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+    <label>About Us Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_about"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_about))
+        <img
+            src="{{ asset($setting->breadcrumb_about) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <label>Contact Us Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_contact"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_contact))
+        <img
+            src="{{ asset($setting->breadcrumb_contact) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <label>Categories Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_categories"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_categories))
+        <img
+            src="{{ asset($setting->breadcrumb_categories) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <label>Collections Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_collections"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_collections))
+        <img
+            src="{{ asset($setting->breadcrumb_collections) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <label>Accessories Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_accessories"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_accessories))
+        <img
+            src="{{ asset($setting->breadcrumb_accessories) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
+
+
+<div class="col-md-6 mb-3">
+
+    <label>On Sale Breadcrumb Image</label>
+
+    <input
+        type="file"
+        name="breadcrumb_onsale"
+        class="form-control"
+        accept="image/png,image/jpeg,image/jpg,image/webp"
+    >
+
+    @if(!empty($setting?->breadcrumb_onsale))
+        <img
+            src="{{ asset($setting->breadcrumb_onsale) }}"
+            class="mt-2"
+            style="width:100%; max-width:300px; height:100px; object-fit:cover;"
+        >
+    @endif
+
+</div>
 {{-- <div class="col-md-6 mb-3">
             <label>Page Title</label>
             <input type="text" name="page_title" value="{{ $setting->page_title ?? '' }}" class="form-control" />

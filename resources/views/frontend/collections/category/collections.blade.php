@@ -31,11 +31,11 @@
                 <p class="sub-headline">essential pieces</p>
             </div>
 
-            <div class="collections-slider-wrapper mt-0">
-                <div class="swiper signature-slider collections-slider">
-                    <div class="swiper-wrapper">
-                        @foreach($collections as $categoryItem)
-                            <div class="swiper-slide">
+<div class="collections-grid mt-0">
+
+    @foreach($collections as $categoryItem)
+
+        <div class="collection-grid-item">
                                 <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
                                     <div class="collection-inner">
                                         <div class="collection-image-wrap">
@@ -57,10 +57,9 @@
                                     </div>
                                 </a>
                             </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+               @endforeach
+
+    </div>
 
         </div>
         @endif
@@ -78,11 +77,11 @@
                 <p class="sub-headline">exceptional craftsmanship</p>
             </div>
 
-            <div class="collections-slider-wrapper mt-0">
-                <div class="swiper signature-slider collections-slider">
-                    <div class="swiper-wrapper">
-                @foreach($accessories as $categoryItem)
-                            <div class="swiper-slide">
+<div class="collections-grid mt-0">
+
+    @foreach($accessories as $categoryItem)
+
+        <div class="collection-grid-item">
                                 <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
                                     <div class="collection-inner">
                                         <div class="collection-image-wrap">
@@ -106,8 +105,7 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
+            
 
         </div>
         @endif
@@ -124,12 +122,11 @@
                 </div>
                 <p class="sub-headline">the art of detail</p>
             </div>
+<div class="collections-grid mt-0">
 
-            <div class="collections-slider-wrapper mt-0">
-                <div class="swiper signature-slider collections-slider">
-                    <div class="swiper-wrapper">
-          @foreach($onSale as $categoryItem)
-                            <div class="swiper-slide">
+    @foreach($onSale as $categoryItem)
+
+        <div class="collection-grid-item">
                                 <a href="{{ url('/collections/'.$categoryItem->slug) }}" class="collection-card">
                                     <div class="collection-inner">
                                         <div class="collection-image-wrap">
@@ -153,8 +150,7 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
+        
 
         </div>
         @endif
@@ -286,27 +282,20 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 /* ==================================================
-   SWIPER
+   COLLECTIONS GRID
    ================================================== */
-.collections-slider-wrapper {
-    position: relative;
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 20px;
     width: 100%;
-    overflow: hidden;
 }
 
-.collections-slider {
-    position: relative;
+.collection-grid-item {
+    min-width: 0;
     width: 100%;
-    overflow: hidden;
 }
-.collections-slider .swiper-wrapper {
-    align-items: stretch;
-}
-.collections-slider .swiper-slide {
-    height: auto;
-    box-sizing: border-box;
-}
-
 /* ==================================================
    CARD – with gradient border on hover
    ================================================== */
@@ -527,6 +516,14 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ==================================================
    RESPONSIVE
    ================================================== */
+   @media (max-width: 1199px) {
+
+    .collections-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+}
 @media (max-width: 991px) {
     .collections-container {
         padding-left: 25px;
@@ -549,6 +546,10 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 @media (max-width: 767px) {
+    .collections-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
     .signature-collections {
         padding: 10px 0 15px;
     }
@@ -596,6 +597,9 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 @media (max-width: 400px) {
+    .collections-grid {
+    gap: 10px;
+}
     .collections-container {
         padding-left: 10px;
         padding-right: 10px;

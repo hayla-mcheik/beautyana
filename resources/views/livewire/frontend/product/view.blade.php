@@ -617,7 +617,7 @@
                 font-size: 15px;
             }
             .product-desc-list li {
-                font-size: 13px;
+                font-size: 14px !important;
             }
             .single-product-thumb-content {
                 aspect-ratio: 1 / 1 !important;

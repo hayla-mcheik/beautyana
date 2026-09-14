@@ -388,10 +388,6 @@
     font-weight: 400;
 }
 
-.footer-contact-item:hover .footer-contact-value {
-    color: #FFFFFF;
-}
-
 /* =====================================================
    NEWSLETTER
 ===================================================== */
@@ -541,124 +537,423 @@
    RESPONSIVE
 ===================================================== */
 
+/* =====================================================
+   RESPONSIVE FOOTER
+===================================================== */
+
+/* -------------------------
+   TABLET
+------------------------- */
 @media (max-width: 1100px) {
+
+    .footer-container {
+        padding: 0 28px;
+    }
+
     .footer-main-row {
         grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        gap: 35px;
     }
+
     .footer-contact-wrapper {
-        grid-column: span 2;
+        grid-column: 1 / -1;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
     }
+
     .footer-newsletter {
+        width: 100%;
         max-width: 100%;
     }
+
     .newsletter-form {
+        width: 100%;
         max-width: 100%;
     }
 }
 
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media (max-width: 768px) {
+
     .demanto-footer {
-        padding: 40px 0 16px;
+        padding: 40px 0 20px;
     }
 
     .footer-container {
+        width: 100%;
         padding: 0 20px;
     }
 
+    /* One clean column */
     .footer-main-row {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 32px;
+        width: 100%;
         text-align: center;
+    }
+
+
+    /* =========================
+       BRAND
+    ========================= */
+
+    .footer-brand {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-logo-link {
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 
-    .footer-brand {
-        align-items: center;
+    .footer-logo {
+        width: auto;
+        max-width: 150px;
+        height: 55px;
+        object-fit: contain;
+    }
+
+    .brand-tagline {
+        margin-top: 10px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        line-height: 1.5;
+        text-align: center;
     }
 
     .footer-social {
+        display: flex;
         justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 18px;
     }
 
+    .social-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       QUICK LINKS
+    ========================= */
+
     .footer-nav {
-        justify-self: center;
+        width: 100%;
+        justify-self: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
     }
 
     .footer-nav-title {
-        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 20px;
+        text-align: center;
     }
 
     .footer-nav-list {
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        gap: 9px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
 
-    .footer-contact-wrapper {
-        grid-column: span 1;
-        align-items: center;
+    .footer-nav-list li {
+        width: auto;
         text-align: center;
     }
 
-    .footer-contact-item {
-        justify-content: center;
-        max-width: 340px;
-        margin: 0 auto;
+    .footer-nav-list li a {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: center;
     }
 
-    .footer-contact-content {
-        align-items: flex-start;
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .footer-contact-wrapper {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
         text-align: left;
     }
 
+    .footer-contact-item {
+        width: 100%;
+        max-width: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 13px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: left;
+    }
+
+    .footer-contact-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        flex-shrink: 0;
+        font-size: 14px;
+    }
+
+    .footer-contact-content {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 2px;
+        text-align: left;
+    }
+
+    .footer-contact-label {
+        color: #85786D !important;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        line-height: 1.3;
+        text-transform: uppercase;
+    }
+
+    .footer-contact-value {
+        color: #000 !important;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 17px;
+        line-height: 1.35;
+        font-weight: 400;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    /* Don't turn contact text white on hover */
+    .footer-contact-item:hover {
+        color: #000;
+        transform: translateY(-1px);
+    }
+
+
+
+
+    /* =========================
+       NEWSLETTER
+    ========================= */
+
     .footer-newsletter {
-        max-width: 340px;
+        width: 100%;
+        max-width: 380px;
         margin: 0 auto;
     }
 
-    .newsletter-form {
-        max-width: 100%;
+    .newsletter-label {
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: 1.7px;
     }
+
+    .newsletter-form {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .newsletter-form input {
+        min-width: 0;
+        font-size: 13px;
+    }
+
+
+    /* =========================
+       FOOTER BOTTOM
+    ========================= */
 
     .footer-bottom {
+        width: 100%;
+        display: flex;
         flex-direction: column;
-        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding-top: 18px;
         text-align: center;
+        font-size: 11px;
     }
 
+    .footer-legal {
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+
+
+    /* =========================
+       BACK TO TOP
+    ========================= */
+
     .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 44px;
-        height: 44px;
-        font-size: 16px;
+        width: 42px;
+        height: 42px;
+        right: 15px;
+        bottom: 15px;
+        font-size: 14px;
     }
 }
 
-@media (max-width: 420px) {
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .demanto-footer {
+        padding: 35px 0 18px;
+    }
+
     .footer-container {
-        padding: 0 16px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .footer-main-row {
+        gap: 28px;
     }
 
     .footer-logo {
+        max-width: 135px;
         height: 50px;
     }
 
-    .brand-tagline {
-        font-size: 10px;
-        letter-spacing: 2px;
+    .footer-social {
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+
+    .footer-nav-title {
+        font-size: 19px;
+        margin-bottom: 13px;
+    }
+
+    .footer-nav-list {
+        gap: 8px;
+    }
+
+    .footer-nav-list li a {
+        font-size: 13px;
+    }
+
+    .footer-contact-wrapper {
+        max-width: 100%;
+        gap: 14px;
     }
 
     .footer-contact-item {
         max-width: 100%;
+        gap: 11px;
+    }
+
+    .footer-contact-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        font-size: 13px;
+    }
+
+    .footer-contact-label {
+        font-size: 9px;
+        letter-spacing: 1.3px;
     }
 
     .footer-contact-value {
         font-size: 16px;
     }
 
+    .newsletter-form input {
+        padding: 11px 14px;
+        font-size: 12px;
+    }
+
+    .newsletter-form button {
+        padding: 11px 14px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .footer-container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .footer-main-row {
+        gap: 25px;
+    }
+
+    .footer-logo {
+        max-width: 120px;
+        height: 45px;
+    }
+
+    .footer-contact-item {
+        gap: 9px;
+    }
+
+    .footer-contact-icon {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+    }
+
+    .footer-contact-value {
+        font-size: 15px;
+    }
+
     .footer-nav-list li a {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 </style>
