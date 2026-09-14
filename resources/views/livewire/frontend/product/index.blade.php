@@ -152,6 +152,9 @@
         border-bottom: 2px solid var(--demanto-red);
         position: relative;
     }
+    .all-categories h4, .shop-sidebar-wrapper .sidebar-item .sidebar-title a{
+        font-size: 18px !important;
+    }
 
     .sidebar-title a {
         color: var(--demanto-dark);
