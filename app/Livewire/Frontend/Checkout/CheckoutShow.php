@@ -20,7 +20,8 @@ class CheckoutShow extends Component
     public $carts;
 
     public $totalProductAmount = 0;
-
+public $shippingAmount = 4.00;
+public $grandTotal = 0;
     public $fullname;
     public $phone;
     public $address;
@@ -355,6 +356,7 @@ class CheckoutShow extends Component
 
             $this->totalProductAmount +=
                 $price * $cartItem->quantity;
+                $this->grandTotal = $this->totalProductAmount + $this->shippingAmount;
         }
     }
 

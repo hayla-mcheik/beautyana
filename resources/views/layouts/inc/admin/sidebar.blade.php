@@ -221,6 +221,12 @@
         <span class="menu-title">Instagram Shop</span>
     </a>
 </li> --}}
+        <li class="nav-item {{ Request::is('admin/policy') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('admin/policy') }}">
+                <i class="mdi mdi-settings menu-icon"></i>
+                <span class="menu-title">Policy</span>
+            </a>
+        </li>
         <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('admin/settings') }}">
                 <i class="mdi mdi-settings menu-icon"></i>

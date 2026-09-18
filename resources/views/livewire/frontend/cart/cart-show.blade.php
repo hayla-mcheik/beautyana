@@ -435,20 +435,26 @@ font-family:"Cormorant Garamond",serif;
                         <div class="shopping-cart-summary">
                             <h4 class="title mb-2" style="font-size: 16px;">Order Summary</h4>
                             <div class="cart-detailed-totals">
-                                <div class="card-block-item">
-                                    <span class="label">{{ collect($items)->sum('quantity') }} items</span>
-                                    <span class="value">${{ number_format($total, 2) }}</span>
-                                </div>
-                                <div class="separator"></div>
-                                <div class="card-block-item">
-                                    <span class="label">Shipping</span>
-                                    <span class="value text-success">Free</span>
-                                </div>
-                                <div class="separator"></div>
-                                <div class="card-block-item fw-bold">
-                                    <span class="label">Total</span>
-                                    <span class="value" style="color: var(--demanto-red); font-size: 20px;">${{ number_format($total, 2) }}</span>
-                                </div>
+                     <div class="card-block-item">
+    <span class="label">{{ collect($items)->sum('quantity') }} items</span>
+    <span class="value">${{ number_format($total, 2) }}</span>
+</div>
+
+<div class="separator"></div>
+
+<div class="card-block-item">
+    <span class="label">Shipping</span>
+    <span class="value">$4.00</span>
+</div>
+
+<div class="separator"></div>
+
+<div class="card-block-item fw-bold">
+    <span class="label">Total</span>
+    <span class="value" style="color: var(--demanto-red); font-size: 20px;">
+        ${{ number_format($total + 4, 2) }}
+    </span>
+</div>
                             </div>
                             
                             @if($total > 0)

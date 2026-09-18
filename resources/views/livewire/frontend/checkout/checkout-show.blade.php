@@ -393,19 +393,22 @@ font-family:"Cormorant Garamond",serif;
 
                             @if($totalProductAmount != 0)
                                 <div class="cart-detailed-totals">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span class="label" style="font-size: 26px;">Subtotal</span>
-                                        <span class="value" style="font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span class="label" style="font-size: 18px;">Shipping</span>
-                                        <span class="value text-success" style="font-size: 26px;">Free</span>
-                                    </div>
-                                    <hr>
-                                    <div class="d-flex justify-content-between fw-bold">
-                                        <span class="label" style="font-size: 26px;">Total</span>
-                                        <span class="value" style="color: var(--demanto-red); font-size: 26px;">${{ number_format($totalProductAmount, 2) }}</span>
-                                    </div>
+                     <div class="d-flex justify-content-between">
+    <span>Subtotal</span>
+    <span>${{ number_format($totalProductAmount, 2) }}</span>
+</div>
+
+<div class="d-flex justify-content-between">
+    <span>Shipping</span>
+    <span>${{ number_format($shippingAmount, 2) }}</span>
+</div>
+
+<hr>
+
+<div class="d-flex justify-content-between">
+    <strong>Total</strong>
+    <strong>${{ number_format($grandTotal, 2) }}</strong>
+</div>
                                 </div>
                             @endif
                         </div>

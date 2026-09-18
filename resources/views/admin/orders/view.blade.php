@@ -64,6 +64,7 @@
                         <thead>
                             <tr>
                                 <th>Item ID</th>
+                                <th>Product ID</th>
                                 <th>Image</th>
                                 <th>Product</th>
                                 <th>Price</th>
@@ -72,19 +73,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $totalPrice = 0;
-                            @endphp
+                  @php
+    $subtotal = 0;
+    $shippingAmount = 4.00;
+@endphp
                             
                             @foreach($order->orderItems as $orderItem)
-                                @php
-                                    // Calculate item total
-                                    $itemTotal = $orderItem->price * $orderItem->quantity;
-                                    $totalPrice += $itemTotal;
-                                @endphp
+                          @php
+    $itemTotal = $orderItem->price * $orderItem->quantity;
+    $subtotal += $itemTotal;
+@endphp
                                 
                                 <tr>
                                     <td width="10%">{{ $orderItem->id }}</td>
+                                    <td width="10%">
+    <a href="{{ url('admin/products/'.$orderItem->product_id.'/edit') }}"
+       class="text-primary fw-bold"
+       target="_blank">
+        {{ $orderItem->product_id }}
+    </a>
+</td>
                                     <td width="10%">
                           @if($orderItem->product)
 
@@ -140,10 +148,26 @@
                                 </tr>
                             @endforeach
                             
-                            <tr>
-                                <td colspan="5" class="fw-bold">Total Amount:</td>
-                                <td colspan="1" class="fw-bold">${{ number_format($totalPrice, 2) }}</td>
-                            </tr>
+                <tr>
+    <td colspan="5" class="fw-bold">Subtotal:</td>
+    <td colspan="1" class="fw-bold">
+        ${{ number_format($subtotal, 2) }}
+    </td>
+</tr>
+
+<tr>
+    <td colspan="5" class="fw-bold">Shipping:</td>
+    <td colspan="1" class="fw-bold">
+        ${{ number_format($shippingAmount, 2) }}
+    </td>
+</tr>
+
+<tr>
+    <td colspan="5" class="fw-bold">Total Amount:</td>
+    <td colspan="1" class="fw-bold">
+        ${{ number_format($subtotal + $shippingAmount, 2) }}
+    </td>
+</tr>
                         </tbody>
                     </table>
                 </div>

@@ -87,6 +87,7 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('/aboutus') }}">About</a></li>
                     <li><a href="{{ url('/contactus') }}">Contact</a></li>
+                    <li><a href="{{ url('/policy') }}">Policy</a></li>
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
                 </ul>
             </nav>

@@ -167,7 +167,7 @@
 
                 <div class="collection-grid-item view-all-item">
 
-                    <a href="{{ url('/collections') }}" class="view-all-card">
+                    <a href="{{ url('/categories') }}" class="view-all-card">
 
                         <div class="view-all-content">
 
@@ -261,7 +261,7 @@
 
                 <div class="collection-grid-item view-all-item">
 
-                    <a href="{{ url('/collections') }}" class="view-all-card">
+                    <a href="{{ url('/categories') }}" class="view-all-card">
 
                         <div class="view-all-content">
 

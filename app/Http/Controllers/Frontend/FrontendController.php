@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
 use App\Models\Banner;
 use App\Models\InstagramFeed;
+use App\Models\Setting;
 use App\Models\Subscriber;
 
 class FrontendController extends Controller
@@ -300,6 +301,11 @@ public function aboutus()
     $aboutData = \App\Models\AboutData::first();
     return view('frontend.aboutus', compact('about','aboutData'));
 }
+public function policy()
+{
+    $policy = \App\Models\Policy::first();
+    return view('frontend.policy', compact('policy'));
+}
 
 public function blogs()
 {
@@ -374,8 +380,13 @@ public function contactsubmit(Request $request)
         'message' => $request->message,
     ];
 
-    Mail::to('mcheikhayla26@gmail.com')->send(new ContactFormMail($emailData));
-    
+$setting = Setting::first();
+
+if (!$setting || empty($setting->email)) {
+    return back()->with('error', 'Contact email is not configured.');
+}
+
+Mail::to($setting->email)->send(new ContactFormMail($emailData));
     return back()->with('success', 'Your message has been submitted successfully.');
 }
 public function appointment()

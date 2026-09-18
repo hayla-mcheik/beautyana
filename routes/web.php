@@ -66,6 +66,7 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
 Route::get('/new-arrivals', 'newArrival');
 Route::get('/featured-products', 'featuredProducts');
 Route::get('/aboutus', 'aboutus');
+Route::get('policy', 'policy');
 Route::get('/blogs', 'blogs');
 Route::get('/blog/details/{id}', 'blogdetails');
 Route::get('/contactus', 'contactus');
@@ -118,10 +119,14 @@ Route::controller(App\Http\Controllers\Admin\TickerController::class)->group(fun
     Route::post('/tickers', 'store')->name('admin.tickers.store'); // Added this line
     Route::put('/tickers/{id}', 'update')->name('admin.tickers.update');
 });
-// Add this inside Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () { ... });
+
 Route::controller(App\Http\Controllers\Admin\AboutController::class)->group(function () {
     Route::get('/about', 'index')->name('admin.about.index');
     Route::put('/about/update', 'update')->name('admin.about.update');
+});
+Route::controller(App\Http\Controllers\Admin\PolicyController::class)->group(function () {
+    Route::get('/policy', 'index')->name('admin.policy.index');
+    Route::put('/policy/update', 'update')->name('admin.policy.update');
 });
 Route::controller(App\Http\Controllers\Admin\ReviewsController::class)->group(function () {
 Route::get('/reviews','index')->name('admin.reviews.index');

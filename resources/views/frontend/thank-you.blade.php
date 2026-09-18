@@ -52,17 +52,12 @@
                         <hr>
 
                         <div class="row mt-4">
-                            <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="col-md-12 mb-3 mb-md-0">
                                 <a href="{{ url('/categories') }}" class="btn btn-outline-dark w-100 py-2">
                                     Continue Shopping
                                 </a>
                             </div>
 
-                            <div class="col-md-6">
-                                <a href="{{ url('/') }}" class="btn btn-promocode-apply w-100 py-2">
-                                    Back to Home
-                                </a>
-                            </div>
                         </div>
 
                     </div>

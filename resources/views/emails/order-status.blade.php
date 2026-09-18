@@ -29,7 +29,11 @@ switch($order->status_message){
 }
 
 @endphp
-
+@php
+    $shippingAmount = 4.00;
+    $subtotal = $order->total_price;
+    $grandTotal = $subtotal + $shippingAmount;
+@endphp
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,14 +115,32 @@ switch($order->status_message){
                     <td>{{ $order->payment_mode }}</td>
                 </tr>
 
-                <tr>
-                    <td><strong>Total Amount</strong></td>
-                    <td>
-                        <strong>
-                            ${{ number_format($order->total_price,2) }}
-                        </strong>
-                    </td>
-                </tr>
+  <tr>
+    <td><strong>Subtotal</strong></td>
+    <td>
+        <strong>
+            ${{ number_format($subtotal, 2) }}
+        </strong>
+    </td>
+</tr>
+
+<tr style="background:#fafafa;">
+    <td><strong>Shipping</strong></td>
+    <td>
+        <strong>
+            ${{ number_format($shippingAmount, 2) }}
+        </strong>
+    </td>
+</tr>
+
+<tr>
+    <td><strong>Total Amount</strong></td>
+    <td>
+        <strong>
+            ${{ number_format($grandTotal, 2) }}
+        </strong>
+    </td>
+</tr>
 
             </table>
 

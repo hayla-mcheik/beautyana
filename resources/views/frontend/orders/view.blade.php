@@ -53,10 +53,10 @@
                                 <th>Total</th>
 </thead>
 <tbody>
-    @php
-    $totalPrice = 0;
-    @endphp
-
+@php
+    $subtotal = 0;
+    $shippingAmount = 4.00;
+@endphp
 @foreach($order->orderItems as $orderItem)
 <tr>
     <td width="10%">{{ $orderItem->id }}</td>
@@ -75,17 +75,31 @@
 
 </td>
 
-<td width="10%">${{  $orderItem->price }}</td>
+<td width="10%">${{ number_format($orderItem->price, 2) }}</td>
 <td width="10%">{{  $orderItem->quantity }}</td>
-<td width="10%" class="fw-bold">${{  $orderItem->quantity * $orderItem->price + 3 }}</td>
 @php
-    $totalPrice += $orderItem->quantity * $orderItem->price + 3 ;
-    @endphp
+    $itemTotal = $orderItem->quantity * $orderItem->price;
+    $subtotal += $itemTotal;
+@endphp
+
+<td width="10%" class="fw-bold">${{ number_format($itemTotal, 2) }}</td>
 </tr>
 @endforeach
 <tr>
+    <td colspan="5" class="fw-bold">Subtotal:</td>
+    <td colspan="1" class="fw-bold">${{ number_format($subtotal, 2) }}</td>
+</tr>
+
+<tr>
+    <td colspan="5" class="fw-bold">Shipping:</td>
+    <td colspan="1" class="fw-bold">${{ number_format($shippingAmount, 2) }}</td>
+</tr>
+
+<tr>
     <td colspan="5" class="fw-bold">Total Amount:</td>
-    <td colspan="1" class="fw-bold">${{ $totalPrice }}</td>
+    <td colspan="1" class="fw-bold">
+        ${{ number_format($subtotal + $shippingAmount, 2) }}
+    </td>
 </tr>
 </tbody>
 </table>

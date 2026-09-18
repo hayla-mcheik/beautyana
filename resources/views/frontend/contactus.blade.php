@@ -20,8 +20,7 @@
             <div class="col-lg-6">
               <div class="contact-form-wrap">
                 <div class="contact-form-title">
-                  <h5 class="sub-title">Don't worry!</h5>
-                  <h2 class="title">If you have any query? Contact with us.</h2>
+                  <h2 class="title">Need some help? Get in touch with us.</h2>
                 </div>
                 
                 <!-- Display Validation Errors -->
@@ -112,7 +111,7 @@
     </div>
     <div class="col-12">
         <div class="form-group mb--0">
-            <button class="btn-theme" type="submit">Submit Now</button>
+            <button class="btn-demanto" type="submit">Submit Now</button>
         </div>
     </div>
 </div>
@@ -174,3 +173,56 @@
       </section>
       <!--== End Contact Area Wrapper ==-->
 @endsection
+<style>
+    
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-demanto {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 28px;
+        overflow: hidden;
+        border: 0;
+        border-radius: 30px;
+        background: linear-gradient(135deg, var(--demanto-dark), var(--demanto-red-dark));
+        color: var(--demanto-white) !important;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.4;
+        letter-spacing: 1.5px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+    }
+
+    .btn-demanto::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: inherit;
+        background: linear-gradient(135deg, var(--demanto-dark), #1A1A1A);
+        transition: left 0.5s ease;
+    }
+
+    .btn-demanto:hover::before {
+        left: 0;
+    }
+
+    .btn-demanto:hover {
+        color: var(--demanto-white) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(201, 169, 110, 0.30);
+    }
+
+</style>
