@@ -163,9 +163,9 @@
     .home-banner {
         position: relative;
         width: 100%;
-        height: 48vh;
-        min-height: 460px;
-        max-height: 48vh;
+        height: 56vh;
+        min-height: 560px;
+        max-height: 56vh;
         overflow: hidden;
         z-index: 1;
     }
@@ -251,11 +251,11 @@
         .home-banner { margin-top: 3%; }
     }
     @media (min-width: 1600px) {
-        .home-banner { height: 50vh; min-height: 500px; }
+        .home-banner { height: 60vh; min-height: 600px; }
         .slider-content { padding-top: 100px; }
     }
     @media (max-width: 991px) {
-        .home-banner { height: 500px; min-height: 500px; margin-top: 18%; }
+        .home-banner { height: 600px; min-height: 600px; margin-top: 18%; }
         .hero-bg { object-position: right; }
         .slider-content { max-width: 430px; padding-top: 70px; }
         .slider-title { font-size: 48px; }
@@ -269,7 +269,7 @@
         .hero-banner-image > .container { position: absolute; inset: 0; z-index: 5; }
     }
     @media (max-width: 480px) {
-        .home-banner { height: 400px; min-height: 400px; }
+        .home-banner { height: 500px; min-height: 500px; }
         .hero-bg { object-position: right; }
         .slider-title { font-size: 32px; }
         .slider-desc { font-size: 18px; display: none; }
@@ -1123,8 +1123,6 @@
     </div>
 
 </section>
-
-@include('frontend.collections.category.index')
 
 @include('frontend.collections.category.index')
 <!-- Latest Arrivals -->
