@@ -23,7 +23,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #b39256, #d4b87a, #b39256);
+            background: var(--demanto-red) !important;
         }
 
         /* =========================================================
