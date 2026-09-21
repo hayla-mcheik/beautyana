@@ -30,7 +30,9 @@
 
 </div>
                             
-                            <div class="header-navigation-area hidden-md-down">
+                        
+                        </div>
+                            <div class="align-center header-navigation-area hidden-md-down">
                       <ul class="main-menu nav position-relative boutique-nav ul-header-nav align-items-center">
 
  <li class="{{ request()->is('/') ? 'active' : '' }}">
@@ -217,150 +219,80 @@
 
 </ul>
                             </div>
-                        </div>
 
-<div class="align-right d-flex align-items-center gap-3">
-
-<div class="desktop-social d-flex align-items-center">
-
-    {{-- Instagram --}}
-    @if($appSetting->instagram)
-        <a href="{{ $appSetting->instagram }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="desktop-social-icon"
-           aria-label="Instagram">
-
-            <i class="fab fa-instagram"></i>
-
-        </a>
-    @endif
-
-
-    {{-- Snapchat --}}
-    @if($appSetting->youtube)
-        <a href="{{ $appSetting->youtube }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="desktop-social-icon"
-           aria-label="Snapchat">
-
-            <i class="fa-brands fa-snapchat"></i>
-
-        </a>
-    @endif
-
-
-    {{-- TikTok --}}
-    @if($appSetting->twitter)
-        <a href="{{ $appSetting->twitter }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="desktop-social-icon"
-           aria-label="TikTok">
-
-            <i class="fab fa-tiktok"></i>
-
-        </a>
-    @endif
-
-
-    {{-- Facebook --}}
-    @if($appSetting->facebook)
-        <a href="{{ $appSetting->facebook }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="desktop-social-icon"
-           aria-label="Facebook">
-
-            <i class="fab fa-facebook-f"></i>
-
-        </a>
-    @endif
-
-</div>
-
-@guest
-
-{{-- <div class="header-user-icon">
-
-    <a href="{{ url('login') }}" title="Login">
-
-        <i class="far fa-user"></i>
-
+<div class="align-right d-flex align-items-center">
+@if($appSetting->instagram)
+    <a href="{{ $appSetting->instagram }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fab fa-instagram"></i>
     </a>
+@endif
 
-</div> --}}
+{{-- Snapchat --}}
+@if($appSetting->youtube)
+    <a href="{{ $appSetting->youtube }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fa-brands fa-snapchat"></i>
+    </a>
+@endif
 
-@else
+{{-- TikTok --}}
+@if($appSetting->tiktok)
+    <a href="{{ $appSetting->tiktok }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fab fa-tiktok"></i>
+    </a>
+@endif
 
-    {{-- <div class="dropdown-wrapper">
+{{-- Facebook --}}
+@if($appSetting->facebook)
+    <a href="{{ $appSetting->facebook }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="mobile-social-icon">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+@endif
+    {{-- Wishlist --}}
+    <div class="header-action-area d-flex align-items-center">
 
-        <a class="dropdown-btn profile-trigger" href="#">
-            {{ Auth::user()->name }}
-            <i class="ion-ios-arrow-down ms-1"></i>
-        </a>
+        {{-- <div class="shop-button-item wishlist-button-item">
+            <a class="shop-button" href="{{ url('wishlist') }}" aria-label="Wishlist">
+                <div class="position-relative">
+                    <i class="icon-heart icon"></i>
 
-        <ul class="dropdown-content-menu">
+                    <span class="shop-count">
+                        <livewire:frontend.wishlist-count />
+                    </span>
+                </div>
+            </a>
+        </div> --}}
 
-            @if(auth()->user()->role_as == '1')
-                <li><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
-            @else
-                <li><a href="{{ url('account') }}">My Account</a></li>
-            @endif
+        {{-- Cart --}}
+        <div class="shop-button-item position-relative parent-cart-hover cart-button-item">
 
-            <li>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                   document.getElementById('logout-form').submit();">
-
-                    Logout
-
-                </a>
-
-                <form id="logout-form"
-                      action="{{ route('logout') }}"
-                      method="POST"
-                      class="d-none">
-
-                    @csrf
-
-                </form>
-
-            </li>
-
-        </ul>
-
-    </div> --}}
-
-    @endguest
-
-    <div class="theme-currency">
-
-        <a href="#">USD $</a>
-
-    </div>
-
-    <div class="header-action-area">
-
-        <div class="shop-button-item position-relative parent-cart-hover">
-
-            <a class="shop-button cart-toggle" href="javascript:void(0)">
+            <a class="shop-button cart-toggle"
+               href="javascript:void(0)"
+               aria-label="Shopping Cart">
 
                 <div class="position-relative">
-
                     <i class="icon-bag icon target-cart-icon"></i>
-<span class="shop-count">
-    <livewire:frontend.cart.cart-count />
-</span>
+
+                    <span class="shop-count">
+                        <livewire:frontend.cart.cart-count />
+                    </span>
                 </div>
 
             </a>
 
             <div class="popup-cart-content">
-
                 <livewire:frontend.cart.cart-items />
-
             </div>
 
         </div>
@@ -771,7 +703,9 @@
 .align-right {
     flex-shrink: 0;
 }
-
+.desktop-social a , .header-action-area a {
+    color: #000;
+}
 
 /* ============================================================
    DESKTOP STICKY HEADER
@@ -1678,6 +1612,84 @@
         none;
 }
 
+/* ================================
+   Desktop Wishlist & Cart
+================================ */
+
+@media (min-width: 992px) {
+
+    .align-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-action-area {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .shop-button-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .shop-button {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all .25s ease;
+    }
+
+    .shop-button .icon {
+        font-size: 20px;
+        line-height: 1;
+        transition: transform .25s ease;
+    }
+
+    .shop-button:hover .icon {
+        transform: scale(1.08);
+    }
+
+    /* Counter */
+    .shop-button .shop-count {
+        position: absolute;
+        top: -4px;
+        right: -5px;
+
+        min-width: 17px;
+        height: 17px;
+        padding: 0 4px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        font-size: 9px;
+        line-height: 17px;
+        font-weight: 600;
+
+        background: #8b2635;
+        color: #fff;
+    }
+
+    /* Wishlist */
+    .wishlist-button-item .icon-heart {
+        font-size: 20px;
+    }
+
+    /* Cart */
+    .cart-button-item .target-cart-icon {
+        font-size: 20px;
+    }
+
+}
 
 /* ============================================================
    CART COUNT
@@ -3325,6 +3337,7 @@
 .header-bottom.sticky-on .boutique-nav > li > a.active {
     color: var(--demanto-red) !important;
 }
+
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

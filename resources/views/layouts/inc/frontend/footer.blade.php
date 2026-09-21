@@ -277,8 +277,8 @@
 
 .footer-nav-title {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 20px;
     color: #000;
     margin: 0 0 14px 0;
     text-transform: capitalize;

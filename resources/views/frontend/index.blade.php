@@ -276,6 +276,99 @@
     }
 
     /* ============================================================
+   DISCOVER OUR COLLECTIONS - BOTTOM OF HERO
+============================================================ */
+
+.home-banner {
+    position: relative;
+    overflow: hidden;
+}
+
+.discover-collections-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 84px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--demanto-red) !important;
+
+    z-index: 20;
+}
+
+.discover-collections-bar span {
+    color: #fff;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+/* Desktop */
+@media (min-width: 992px) {
+
+    .discover-collections-bar {
+        height: 84px;
+    }
+
+    .discover-collections-bar span {
+        font-size: 42px;
+    }
+
+}
+
+
+/* Tablet */
+@media (max-width: 991px) {
+
+    .discover-collections-bar {
+        height: 70px;
+    }
+
+    .discover-collections-bar span {
+        font-size: 32px;
+    }
+
+}
+
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .discover-collections-bar {
+        height: 60px;
+    }
+
+    .discover-collections-bar span {
+        font-size: 24px;
+        letter-spacing: .5px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .discover-collections-bar {
+        height: 55px;
+    }
+
+    .discover-collections-bar span {
+        font-size: 20px;
+    }
+
+}
+    /* ============================================================
        WHATSAPP BUTTON
     ============================================================ */
     .whatsapp-btn {
@@ -921,48 +1014,117 @@
 </style>
 
 <!-- Hero Slider Section -->
+<!-- Hero Slider Section -->
 <section class="home-banner">
+
     <div class="swiper default-slider-container">
+
         <div class="swiper-wrapper">
+
             @forelse($sliders as $hero)
-            <div class="swiper-slide">
-                <div class="hero-banner-image">
-                    <img class="hero-bg" src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}" alt="{{ $hero->title }}" loading="{{ $loop->first ? 'eager' : 'lazy' }}" fetchpriority="{{ $loop->first ? 'high' : 'auto' }}" decoding="async">
-                    <div class="hero-overlay"></div>
-                    <div class="container h-100 p-4">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
-                                <div class="slider-content">
-                                    <h1 class="slider-title">{{ $hero->title }}</h1>
-                                    <p class="slider-desc">{{ $hero->description }}</p>
+
+                <div class="swiper-slide">
+
+                    <div class="hero-banner-image">
+
+                        <img
+                            class="hero-bg"
+                            src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}"
+                            alt="{{ $hero->title }}"
+                            loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                            fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
+                            decoding="async"
+                        >
+
+                        <div class="hero-overlay"></div>
+
+                        <div class="container h-100 p-4">
+                            <div class="row h-100 align-items-center">
+
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
+
+                                    <div class="slider-content">
+
+                                        <h1 class="slider-title">
+                                            {{ $hero->title }}
+                                        </h1>
+
+                                        <p class="slider-desc">
+                                            {{ $hero->description }}
+                                        </p>
+
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
+
                 </div>
-            </div>
+
             @empty
-            <div class="swiper-slide">
-                <div class="hero-banner-image">
-                    <img class="hero-bg" src="{{ asset('assets/img/slider-placeholder.jpg') }}" alt="Demanto" loading="eager" fetchpriority="high">
-                    <div class="hero-overlay"></div>
-                    <div class="container h-100 p-4">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="slider-title">Timeless Luxury</h1>
-                                    <p class="slider-desc">Where diamonds become timeless masterpieces.</p>
+
+                <div class="swiper-slide">
+
+                    <div class="hero-banner-image">
+
+                        <img
+                            class="hero-bg"
+                            src="{{ asset('assets/img/slider-placeholder.jpg') }}"
+                            alt="Demanto"
+                            loading="eager"
+                            fetchpriority="high"
+                        >
+
+                        <div class="hero-overlay"></div>
+
+                        <div class="container h-100 p-4">
+
+                            <div class="row h-100 align-items-center">
+
+                                <div class="col-lg-7">
+
+                                    <div class="slider-content">
+
+                                        <h1 class="slider-title">
+                                            Timeless Luxury
+                                        </h1>
+
+                                        <p class="slider-desc">
+                                            Where diamonds become timeless masterpieces.
+                                        </p>
+
+                                    </div>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
-            </div>
+
             @endforelse
+
         </div>
+
         <div class="swiper-pagination"></div>
+
     </div>
+
+
+    {{-- Discover Our Collections --}}
+    <div class="discover-collections-bar">
+        <span>DISCOVER OUR COLLECTIONS</span>
+    </div>
+
 </section>
+
+@include('frontend.collections.category.index')
 
 @include('frontend.collections.category.index')
 <!-- Latest Arrivals -->

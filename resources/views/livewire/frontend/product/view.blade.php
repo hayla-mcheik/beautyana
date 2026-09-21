@@ -450,51 +450,84 @@
            COLORS — SMALL SWATCHES
         ========================================================= */
 
-        .color-option {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            padding: 0;
-            margin: 0;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
+ /* =========================================================
+   COLORS — CLEAR ACTIVE SELECTION
+========================================================= */
 
-        .color-option:hover {
-            transform: translateY(-2px);
-            border-color: #d8c7a8;
-        }
+.color-option {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
 
-        .color-circle {
-            display: block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 1px solid #d5cec3;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: all 0.25s ease;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .color-option.selected {
-            border: 1px solid var(--demanto-gold);
-            background: #fffdf9;
-            box-shadow: 0 2px 6px rgba(179, 146, 86, 0.15);
-        }
+    transition: all 0.25s ease;
+}
 
-        .color-option.selected .color-circle {
-            width: 22px;
-            height: 22px;
-            box-shadow: 
-                0 0 0 2px #fff, 
-                0 0 0 3px var(--demanto-gold);
-        }
+.color-option:hover {
+    transform: translateY(-2px);
+    border-color: var(--demanto-gold);
+}
 
+.color-circle {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #d5cec3;
+    transition: all 0.25s ease;
+}
+
+/* SELECTED COLOR */
+.color-option.selected {
+    border: 2px solid var(--demanto-gold);
+    background: #fffdf9;
+    box-shadow: 0 0 0 3px rgba(179, 146, 86, 0.15);
+    transform: scale(1.08);
+}
+
+.color-option.selected .color-circle {
+    width: 26px;
+    height: 26px;
+    box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 3px var(--demanto-gold);
+}
+
+/* Check mark on selected color */
+.color-option.selected::after {
+    content: "✓";
+
+    position: absolute;
+    right: -4px;
+    top: -5px;
+
+    width: 16px;
+    height: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--demanto-gold);
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+
+    border: 2px solid #fff;
+}
         /* Hide the color name beside the circle */
         .color-name {
             display: none !important;
@@ -508,43 +541,90 @@
            SIZE — SMALL BUTTONS
         ========================================================= */
 
-        .size-option {
-            position: relative;
-            min-width: 42px;
-            height: 32px;
-            padding: 0 10px;
-            background: #fff;
-            border: 1px solid #e1dbd2;
-            border-radius: 4px;
-            color: var(--demanto-dark);
-            font-family: "Roboto", sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.25s ease;
-        }
+  /* =========================================================
+   SIZE — CLEAR ACTIVE BUTTON
+========================================================= */
 
-        .size-option:hover:not(.disabled) {
-            border-color: var(--demanto-gold);
-            background: #fffdf9;
-        }
+.size-option {
+    position: relative;
 
-        .size-option.selected {
-            background: var(--demanto-gold);
-            border-color: var(--demanto-gold);
-            color: #ffffff;
-            box-shadow: 0 3px 8px rgba(179, 146, 86, 0.2);
-        }
+    min-width: 48px;
+    height: 36px;
+    padding: 0 14px;
 
-        .size-option.disabled {
-            opacity: 0.32;
-            cursor: not-allowed;
-            text-decoration: line-through;
-            background: #f8f7f5;
-        }
+    background: #fff;
+    border: 1px solid #d9d3ca;
+    border-radius: 5px;
+
+    color: var(--demanto-dark);
+
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.25s ease;
+}
+
+.size-option:hover:not(.disabled) {
+    border-color: var(--demanto-gold);
+    background: #fffdf9;
+    color: var(--demanto-dark);
+}
+
+/* SELECTED SIZE */
+.size-option.selected {
+    background: var(--demanto-gold);
+    border-color: var(--demanto-gold);
+
+    color: #fff;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 3px 8px rgba(179, 146, 86, 0.25);
+
+    transform: translateY(-1px);
+}
+
+/* Small check on selected size */
+.size-option.selected::after {
+    content: "✓";
+
+    position: absolute;
+
+    top: -7px;
+    right: -7px;
+
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--demanto-dark);
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    border: 2px solid #fff;
+}
+
+.size-option.disabled {
+    opacity: 0.32;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    background: #f8f7f5;
+}
 
         /* =========================================================
            AVAILABILITY — COMPACT ROW
@@ -1037,12 +1117,17 @@
                                                                 </button>
                                                             @endforeach
                                                             
-                                                            @if($selectedColorId)
-                                                                @php $selectedColor = $colors->firstWhere('id', $selectedColorId); @endphp
-                                                                @if($selectedColor)
-                                                                    <span class="selected-value">{{ $selectedColor->name }}</span>
-                                                                @endif
-                                                            @endif
+        @if($selectedColorId)
+    @php
+        $selectedColor = $colors->firstWhere('id', $selectedColorId);
+    @endphp
+
+    @if($selectedColor)
+        <span class="selected-value">
+            Selected: {{ $selectedColor->name }}
+        </span>
+    @endif
+@endif
                                                         </div>
                                                     </div>
                                                 @endif
@@ -1084,7 +1169,9 @@
                                                             @if($selectedSizeId)
                                                                 @php $selectedSize = $sizes->firstWhere('id', $selectedSizeId); @endphp
                                                                 @if($selectedSize)
-                                                                    <span class="selected-value">{{ $selectedSize->name }}</span>
+                                                          <span class="selected-value">
+    Selected: {{ $selectedSize->name }}
+</span>
                                                                 @endif
                                                             @endif
                                                         </div>

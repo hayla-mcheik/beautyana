@@ -564,6 +564,28 @@
     ::-webkit-scrollbar-thumb:hover {
         background: var(--boutique-text);
     }
+    .product-colors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 24px;
+    margin-bottom: 8px;
+}
+
+.product-color-swatch {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease;
+}
+
+.product-color-swatch:hover {
+    transform: scale(1.15);
+}
 </style>
 
 <section class="product-area">
@@ -698,13 +720,39 @@
                                                 @endif
                                             </a>
                                         </div>
-                                        <div class="featured-content">
-                                            <h4>{{ $product->name }}</h4>
-                                     <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+       <div class="featured-content">
+
+    {{-- Product Colors --}}
+    @php
+        $productColors = $product->productVariants
+            ->filter(fn($variant) => $variant->color)
+            ->unique('color_id');
+    @endphp
+
+    @if($productColors->count())
+        <div class="product-colors">
+
+            @foreach($productColors as $variant)
+
+                <span
+                    class="product-color-swatch"
+          style="background-color: {{ $variant->color->code }};"
+                    title="{{ $variant->color->name }}">
+                </span>
+
+            @endforeach
+
+        </div>
+    @endif
+
+    <h4>{{ $product->name }}</h4>
+
+    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
        class="product-price">
         ${{ number_format($product->selling_price, 2) }}
     </a>
-                                        </div>
+
+</div>
                                     </div>
                                 </div>
                                 @empty

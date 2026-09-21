@@ -10,19 +10,6 @@
 
         <div class="all-categories">
 
-            <!-- Section title -->
-            <div class="collections-title">
-
-                <span class="title-main">Collections</span>
-
-                <div class="title-accent">
-                    <span class="dash"></span>
-                </div>
-
-                <p class="sub-headline">essential pieces</p>
-
-            </div>
-
 
             <div class="collections-grid mt-0">
 

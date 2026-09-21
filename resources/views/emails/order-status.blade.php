@@ -31,7 +31,11 @@ switch($order->status_message){
 @endphp
 @php
     $shippingAmount = 4.00;
-    $subtotal = $order->total_price;
+
+    $subtotal = $order->orderItems->sum(function ($item) {
+        return $item->price * $item->quantity;
+    });
+
     $grandTotal = $subtotal + $shippingAmount;
 @endphp
 <!DOCTYPE html>
@@ -48,7 +52,7 @@ switch($order->status_message){
     <tr>
         <td style="background:#111;padding:30px;text-align:center;color:#fff;">
             <h1 style="margin:0;font-size:30px;letter-spacing:2px;">
-                DEMANTO
+                Beautyana
             </h1>
 
             <p style="margin:10px 0 0;color:#d8c08b;">

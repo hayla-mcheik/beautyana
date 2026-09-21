@@ -37,7 +37,11 @@ public function index()
     $trendingProducts = Product::where('trending', '1')
         ->where('status', '0')
         ->where('quantity', '>', 0)
-        ->with(['productImages', 'category'])
+->with([
+    'productImages',
+    'category',
+    'productVariants.color',
+])
         ->latest()
         ->take(15)
         ->get();
@@ -51,7 +55,11 @@ public function index()
 
     $newArrivalsProducts = Product::where('status', '0')
         ->where('quantity', '>', 0)
-        ->with(['productImages', 'category'])
+    ->with([
+    'productImages',
+    'category',
+    'productVariants.color',
+])
         ->latest()
         ->take(26)
         ->get();
@@ -69,7 +77,11 @@ public function index()
 $bestSellersProducts = Product::where('status', '0')
     ->where('quantity', '>', 0)
     ->whereHas('orderItems')
-    ->with(['productImages', 'category'])
+->with([
+    'productImages',
+    'category',
+    'productVariants.color',
+])
     ->withSum('orderItems', 'quantity')
     ->orderByDesc('order_items_sum_quantity')
     ->take(16)
@@ -85,7 +97,11 @@ $bestSellersProducts = Product::where('status', '0')
     $featuredProducts = Product::where('featured', '1')
         ->where('status', '0')
         ->where('quantity', '>', 0)
-        ->with(['productImages', 'category'])
+->with([
+    'productImages',
+    'category',
+    'productVariants.color',
+])
         ->latest()
         ->take(12)
         ->get();
@@ -239,9 +255,13 @@ public function products($category_slug)
 
     $outOfStockCount = Product::where('quantity', '=', 0)->count();
 
-    $category = Category::where('slug', $category_slug)
-        ->withCount('products')
-        ->first();
+$category = Category::where('slug', $category_slug)
+    ->withCount('products')
+    ->with([
+        'products.productImages',
+        'products.productVariants.color',
+    ])
+    ->first();
 
     $collections = Category::where('status', '0')
         ->where('menu', 'Collections')
