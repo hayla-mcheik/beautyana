@@ -296,7 +296,7 @@ font-family:"Cormorant Garamond",serif;
                                                         </div>
                                                         <div class="form-group text-end mt-3">
 
-    <div class="checkout-policy-section text-start mb-3">
+    <div class="checkout-policy-section text-start mb-3 mt-0">
 
         <div class="form-check">
 
