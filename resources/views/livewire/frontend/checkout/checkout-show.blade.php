@@ -298,7 +298,7 @@ font-family:"Cormorant Garamond",serif;
 
     <div class="checkout-policy-section text-start mb-3 mt-0">
 
-        <div class="form-check">
+        <div class="form-check mt-0">
 
             <input
                 class="form-check-input"
@@ -308,7 +308,7 @@ font-family:"Cormorant Garamond",serif;
             >
 
             <label
-                class="form-check-label"
+                class="form-check-label pt-0"
                 for="agree_policy"
                 style="font-size: 15px;"
             >
