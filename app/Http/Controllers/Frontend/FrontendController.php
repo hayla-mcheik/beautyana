@@ -402,7 +402,7 @@ public function contactsubmit(Request $request)
 
 
 
-Mail::to('mcheikhayla26@gmail.com')->send(new ContactFormMail($emailData));
+Mail::to('Beautyana31@gmail.com')->send(new ContactFormMail($emailData));
     return back()->with('success', 'Your message has been submitted successfully.');
 }
 public function appointment()
