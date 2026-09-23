@@ -271,7 +271,7 @@ font-family:"Cormorant Garamond",serif;
                                     <div id="collapseTwo" class="accordion-collapse collapse @if(!$isPersonalInfoValid) show @endif" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="checkout-accordion-body">
                                             <div class="personal-addresses">
-                                                <p class="mb-3" style="font-size: 26px; color: var(--demanto-muted);">Please provide your information for order delivery</p>
+                                                <p class="mb-3" style="font-size: 26px; color: var(--demanto-muted);">To arrange delivery, please complete the following information</p>
                                                 <div class="delivery-address-form">
                                                     <form wire:submit.prevent="validatePersonalInformation">
                                                         <div class="form-group">
