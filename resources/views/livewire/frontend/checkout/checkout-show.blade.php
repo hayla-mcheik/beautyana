@@ -294,6 +294,60 @@ font-family:"Cormorant Garamond",serif;
                                                             <input id="frm-email" wire:model="email" class="form-control" type="email" placeholder="Enter your email">
                                                             @error('email') <span class="text-danger small">{{ $message }}</span> @enderror
                                                         </div>
+                                                        <div class="form-group text-end mt-3">
+
+    <div class="checkout-policy-section text-start mb-3">
+
+        <div class="form-check">
+
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="agree_policy"
+                wire:model="agree_policy"
+            >
+
+            <label
+                class="form-check-label"
+                for="agree_policy"
+                style="font-size: 15px;"
+            >
+                I agree to the
+                <a
+                    href="{{ url('/policy') }}"
+                    target="_blank"
+                    style="color: var(--demanto-red); text-decoration: underline;"
+                >
+                    Privacy Policy
+                </a>
+            </label>
+
+        </div>
+
+        @error('agree_policy')
+            <span class="text-danger small">
+                {{ $message }}
+            </span>
+        @enderror
+
+    </div>
+
+    <button
+        type="button"
+        class="btn-promocode-apply"
+        wire:click="codOrder"
+        wire:loading.attr="disabled"
+    >
+        <span wire:loading.remove>
+            Place Order →
+        </span>
+
+        <span wire:loading>
+            Processing...
+        </span>
+    </button>
+
+</div>
                                                         <div class="form-group text-end">
                                                             <button type="submit" class="btn-promocode-apply">Continue →</button>
                                                         </div>
