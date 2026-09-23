@@ -400,11 +400,7 @@ public function contactsubmit(Request $request)
         'message' => $request->message,
     ];
 
-$setting = Setting::first();
 
-if (!$setting || empty($setting->email)) {
-    return back()->with('error', 'Contact email is not configured.');
-}
 
 Mail::to('Beautyana31@gmail.com')->send(new ContactFormMail($emailData));
     return back()->with('success', 'Your message has been submitted successfully.');
