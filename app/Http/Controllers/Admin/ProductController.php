@@ -25,20 +25,22 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function index()
-    {
-        $products = Product::with([
-            'category',
-            'productImages',
-            'productVariants.color',
-            'productVariants.size',
-        ])->get();
+public function index()
+{
+    $products = Product::with([
+        'category',
+        'productImages',
+        'productVariants.color',
+        'productVariants.size',
+    ])
+    ->orderBy('id', 'DESC')
+    ->paginate(10);
 
-        return view(
-            'admin.products.index',
-            compact('products')
-        );
-    }
+    return view(
+        'admin.products.index',
+        compact('products')
+    );
+}
 
 
     /*
