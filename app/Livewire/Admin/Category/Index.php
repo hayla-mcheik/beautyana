@@ -116,32 +116,23 @@ class Index extends Component
     |--------------------------------------------------------------------------
     */
 
-    public function render()
-    {
-        $categories = Category::query()
+public function render()
+{
+    $categories = Category::query()
+        ->when(
+            !empty($this->menu),
+            function ($query) {
+                $query->where('menu', $this->menu);
+            }
+        )
+        ->orderBy('name', 'ASC')
+        ->paginate(10);
 
-            ->when(
-                !empty($this->menu),
-
-                function ($query) {
-
-                    $query->where(
-                        'menu',
-                        $this->menu
-                    );
-                }
-            )
-
-            ->orderBy('name', 'ASC')
-
-            ->paginate(10);
-
-
-        return view(
-            'livewire.admin.category.index',
-            [
-                'categories' => $categories
-            ]
-        );
-    }
+    return view(
+        'livewire.admin.category.index',
+        [
+            'categories' => $categories
+        ]
+    );
+}
 }
