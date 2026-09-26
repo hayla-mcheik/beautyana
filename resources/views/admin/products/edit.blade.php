@@ -307,7 +307,49 @@
 
                     <div class="row">
 
+{{-- ================================================= --}}
+{{-- INITIAL COST --}}
+{{-- ================================================= --}}
 
+<div class="col-md-4 mb-3">
+
+    <label class="form-label fw-semibold">
+        Initial Cost
+        <span class="text-danger">*</span>
+    </label>
+
+    <div class="input-group">
+
+        <span class="input-group-text">
+            $
+        </span>
+
+        <input
+            type="number"
+            step="0.01"
+            min="0"
+            name="initial_cost"
+            value="{{ old('initial_cost', $product->initial_cost) }}"
+            class="form-control @error('initial_cost') is-invalid @enderror"
+            placeholder="0.00"
+            required
+        >
+
+    </div>
+
+    <small class="text-muted">
+        Your purchase cost. This is visible only to the admin.
+    </small>
+
+    @error('initial_cost')
+
+        <div class="text-danger small mt-1">
+            {{ $message }}
+        </div>
+
+    @enderror
+
+</div>
                {{-- ================================================= --}}
 {{-- ORIGINAL PRICE --}}
 {{-- ================================================= --}}

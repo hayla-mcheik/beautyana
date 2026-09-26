@@ -79,6 +79,7 @@ public function store(ProductFormRequest $request)
     | Calculate Product Selling Price
     |--------------------------------------------------------------------------
     */
+$initialCost = (float) $validatedData['initial_cost'];
 
     $originalPrice = (float) $validatedData['original_price'];
 
@@ -161,6 +162,10 @@ public function store(ProductFormRequest $request)
 
             'description' =>
                 $validatedData['description'],
+
+                    'initial_cost' =>
+        $initialCost,
+
 
             'original_price' =>
                 $originalPrice,
@@ -511,6 +516,7 @@ public function update(
     | Calculate Product Selling Price
     |--------------------------------------------------------------------------
     */
+$initialCost = (float) $validatedData['initial_cost'];
 
     $originalPrice = (float) $validatedData['original_price'];
 
@@ -583,6 +589,9 @@ public function update(
         $product->description =
             $validatedData['description'];
 
+            $product->initial_cost =
+    $initialCost;
+    
         $product->original_price =
             $originalPrice;
 

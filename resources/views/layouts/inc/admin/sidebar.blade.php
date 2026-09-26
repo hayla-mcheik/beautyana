@@ -13,7 +13,22 @@
                 <span class="menu-title">Orders</span>
             </a>
         </li>
-        
+        <li class="nav-item {{ Request::is('admin/profit*') ? 'active' : '' }}">
+
+    <a
+        class="nav-link"
+        href="{{ url('admin/profit') }}"
+    >
+
+        <i class="mdi mdi-cash-multiple menu-icon"></i>
+
+        <span class="menu-title">
+            Profit 
+        </span>
+
+    </a>
+
+</li>
 <li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
 
     <a

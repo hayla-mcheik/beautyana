@@ -52,7 +52,11 @@ class ProductFormRequest extends FormRequest
                 'required',
                 'string',
             ],
-
+'initial_cost' => [
+    'required',
+    'numeric',
+    'min:0',
+],
             /*
             |--------------------------------------------------------------------------
             | Pricing

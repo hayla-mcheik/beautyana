@@ -205,7 +205,10 @@ Route::controller(AboutDataController::class)->group(function () {
         Route::get('/invoice/{orderId}/mail', 'mailInvoice'); 
     });
 
-
+Route::get('/profit', [
+    App\Http\Controllers\Admin\ProfitController::class,
+    'index'
+]);
 
     Route::controller(App\Http\Controllers\Admin\UserController::class)->group(function () {
         Route::get('/users', 'index'); 

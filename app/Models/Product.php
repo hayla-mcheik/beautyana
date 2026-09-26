@@ -20,6 +20,7 @@ class Product extends Model
         'slug',
 
         'description',
+    'initial_cost',
 
         'original_price',
   'discount_percentage',
@@ -33,8 +34,13 @@ class Product extends Model
 
     ];
 protected $casts = [
+
+    'initial_cost' => 'decimal:2',
+
     'original_price' => 'decimal:2',
+
     'discount_percentage' => 'decimal:2',
+
     'selling_price' => 'decimal:2',
 ];
 
@@ -43,6 +49,11 @@ protected $casts = [
     | Category
     |--------------------------------------------------------------------------
     */
+    public function getProfitPerItemAttribute()
+{
+    return (float) $this->selling_price
+        - (float) $this->initial_cost;
+}
 
     public function category()
     {
