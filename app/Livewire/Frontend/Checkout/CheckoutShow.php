@@ -14,6 +14,7 @@ use App\Mail\PlaceOrderMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Helpers\CartHelper;
 use Illuminate\Support\Facades\DB;
+use App\Models\Setting;
 
 class CheckoutShow extends Component
 {
@@ -27,8 +28,11 @@ public $grandTotal = 0;
     public $address;
     public $email;
 
-    public $payment_mode = null;
-    public $payment_id = null;
+public $payment_mode = null;
+public $payment_id = null;
+
+public $codEnabled = true;
+public $wishMoneyEnabled = false;
 
     public $promoCode;
     public $promoCodeApplied = false;
@@ -59,26 +63,47 @@ public $grandTotal = 0;
     |--------------------------------------------------------------------------
     */
 
-    public function mount()
-    {
-        if (auth()->check()) {
+public function mount()
+{
+    if (auth()->check()) {
 
-            $user = auth()->user();
+        $user = auth()->user();
 
-            $this->fullname = $user->name;
+        $this->fullname = $user->name;
 
-            $this->email = $user->email;
+        $this->email = $user->email;
 
-            if ($user->userDetail) {
+        if ($user->userDetail) {
 
-                $this->phone = $user->userDetail->phone;
+            $this->phone = $user->userDetail->phone;
 
-                $this->address = $user->userDetail->address;
-            }
+            $this->address = $user->userDetail->address;
         }
-
-        $this->calculateTotal();
     }
+
+    // Load payment method settings
+    $settings = Setting::first();
+
+    $this->codEnabled = (bool) ($settings?->cod_enabled ?? true);
+
+    $this->wishMoneyEnabled = (bool) ($settings?->wish_money_enabled ?? false);
+
+    // Select the first available payment method automatically
+    if ($this->codEnabled) {
+
+        $this->payment_mode = 'cod';
+
+    } elseif ($this->wishMoneyEnabled) {
+
+        $this->payment_mode = 'wish_money';
+
+    } else {
+
+        $this->payment_mode = null;
+    }
+
+    $this->calculateTotal();
+}
 
 
     /*
@@ -914,6 +939,153 @@ public $grandTotal = 0;
     | Cash On Delivery
     |--------------------------------------------------------------------------
     */
+
+    public function placeSelectedOrder()
+{
+    // Get current payment settings
+    $settings = Setting::first();
+
+    $codEnabled = (bool) ($settings?->cod_enabled ?? true);
+    $wishMoneyEnabled = (bool) ($settings?->wish_money_enabled ?? false);
+
+
+    // Check personal information
+    if (!$this->isPersonalInfoValid) {
+
+        $this->dispatch(
+            'message',
+            text: 'Please complete your personal information first.',
+            type: 'warning',
+            status: 200
+        );
+
+        return;
+    }
+
+
+    // Validate selected payment method
+    if ($this->payment_mode === 'cod' && !$codEnabled) {
+
+        $this->dispatch(
+            'message',
+            text: 'Cash on Delivery is currently unavailable.',
+            type: 'error',
+            status: 200
+        );
+
+        return;
+    }
+
+
+    if ($this->payment_mode === 'wish_money' && !$wishMoneyEnabled) {
+
+        $this->dispatch(
+            'message',
+            text: 'Wish Money is currently unavailable.',
+            type: 'error',
+            status: 200
+        );
+
+        return;
+    }
+
+
+    if (!$this->payment_mode) {
+
+        $this->dispatch(
+            'message',
+            text: 'Please select a payment method.',
+            type: 'warning',
+            status: 200
+        );
+
+        return;
+    }
+
+
+    // Set payment mode saved in database
+    if ($this->payment_mode === 'cod') {
+
+        $this->payment_mode = 'Cash on Delivery';
+
+    } elseif ($this->payment_mode === 'wish_money') {
+
+        $this->payment_mode = 'Wish Money';
+    }
+
+
+    try {
+
+        $order = $this->placeOrder();
+
+        if (!$order) {
+            return;
+        }
+
+
+        // Clear cart
+        if (auth()->check()) {
+
+            Cart::where(
+                'user_id',
+                auth()->id()
+            )->delete();
+
+        } else {
+
+            CartHelper::forgetGuestCart();
+        }
+
+
+        // Send confirmation email
+        if (!empty($order->email)) {
+
+            try {
+
+                Mail::to($order->email)
+                    ->send(
+                        new PlaceOrderMailable($order)
+                    );
+
+            } catch (\Exception $mailException) {
+
+                \Log::error(
+                    'Order Confirmation Email Error: ' .
+                    $mailException->getMessage()
+                );
+            }
+        }
+
+
+        $this->dispatch(
+            'message',
+            text: 'Thank you! Your order has been placed successfully.',
+            type: 'success',
+            status: 200
+        );
+
+
+        return redirect()->to('thank-you');
+
+
+    } catch (\Exception $e) {
+
+        \Log::error(
+            'Order Placement Error: ' .
+            $e->getMessage()
+        );
+
+
+        $this->dispatch(
+            'message',
+            text: 'Sorry, we could not place your order. Please try again.',
+            type: 'error',
+            status: 500
+        );
+
+        return;
+    }
+}
 
     public function codOrder()
     {

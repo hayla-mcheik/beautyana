@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutDataController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
@@ -209,6 +210,17 @@ Route::get('/profit', [
     App\Http\Controllers\Admin\ProfitController::class,
     'index'
 ]);
+
+
+Route::get(
+    'payment-methods',
+    [PaymentMethodController::class, 'index']
+)->name('admin.payment-methods');
+
+Route::post(
+    'payment-methods',
+    [PaymentMethodController::class, 'update']
+)->name('admin.payment-methods.update');
 
     Route::controller(App\Http\Controllers\Admin\UserController::class)->group(function () {
         Route::get('/users', 'index'); 

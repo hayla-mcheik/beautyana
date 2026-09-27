@@ -29,6 +29,20 @@
     </a>
 
 </li>
+<li class="nav-item {{ Request::is('admin/payment-methods*') ? 'active' : '' }}">
+
+    <a
+        class="nav-link"
+        href="{{ url('admin/payment-methods') }}"
+    >
+        <i class="mdi mdi-credit-card-outline menu-icon"></i>
+
+        <span class="menu-title">
+            Payment Methods
+        </span>
+    </a>
+
+</li>
 <li class="nav-item {{ Request::is('admin/category*') ? 'active' : '' }}">
 
     <a

@@ -332,20 +332,6 @@ font-family:"Cormorant Garamond",serif;
 
     </div>
 
-    <button
-        type="button"
-        class="btn-promocode-apply"
-        wire:click="codOrder"
-        wire:loading.attr="disabled"
-    >
-        <span wire:loading.remove>
-            Place Order →
-        </span>
-
-        <span wire:loading>
-            Processing...
-        </span>
-    </button>
 
 </div>
                                                         <div class="form-group text-end">
@@ -379,19 +365,105 @@ font-family:"Cormorant Garamond",serif;
                                                     </div>
                                                 @endauth
 
-                                                <div class="payment-method">
-                                                    <h5 style="font-family: 'Cormorant Garamond', serif; font-size: 16px; margin-bottom: 10px;">Select Payment</h5>
-                                                    <div class="form-check mb-2">
-                                                        <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" wire:model="payment_mode" checked>
-                                                        <label class="form-check-label" for="cod">
-                                                            <strong>Cash on Delivery (COD)</strong>
-                                                            <p class="text-muted">Pay when you receive your order</p>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                      <div class="payment-method">
 
+    <h5
+        style="
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+        "
+    >
+        Select Payment
+    </h5>
+
+
+    {{-- Cash on Delivery --}}
+    @if($codEnabled)
+
+        <div class="form-check mb-3">
+
+            <input
+                class="form-check-input"
+                type="radio"
+                name="payment_method"
+                id="cod"
+                value="cod"
+                wire:model="payment_mode"
+            >
+
+            <label
+                class="form-check-label"
+                for="cod"
+            >
+
+                <strong>
+                    Cash on Delivery (COD)
+                </strong>
+
+                <p class="text-muted mb-0">
+                    Pay when you receive your order
+                </p>
+
+            </label>
+
+        </div>
+
+    @endif
+
+
+    {{-- Wish Money --}}
+    @if($wishMoneyEnabled)
+
+        <div class="form-check mb-3">
+
+            <input
+                class="form-check-input"
+                type="radio"
+                name="payment_method"
+                id="wish_money"
+                value="wish_money"
+                wire:model="payment_mode"
+            >
+
+            <label
+                class="form-check-label"
+                for="wish_money"
+            >
+
+                <strong>
+                    Wish Money
+                </strong>
+
+                <p class="text-muted mb-0">
+                    Pay using Wish Money
+                </p>
+
+            </label>
+
+        </div>
+
+    @endif
+
+
+    {{-- No payment method --}}
+    @if(!$codEnabled && !$wishMoneyEnabled)
+
+        <div class="alert alert-warning">
+
+            <strong>No payment method is currently available.</strong>
+
+            <br>
+
+            Please contact us to complete your order.
+
+        </div>
+
+    @endif
+
+</div>
                                                 <div class="form-group text-end mt-3">
-                                                    <button type="button" class="btn-promocode-apply" wire:click="codOrder" wire:loading.attr="disabled">
+                                                    <button type="button" class="btn-promocode-apply" wire:click="placeSelectedOrder" wire:loading.attr="disabled">
                                                         <span wire:loading.remove>Place Order →</span>
                                                         <span wire:loading>Processing...</span>
                                                     </button>

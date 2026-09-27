@@ -31,5 +31,14 @@ protected $fillable = [
     'instagram',
     'twitter',
     'youtube',
+
+    'cod_enabled',
+    'wish_money_enabled',
 ];
+
+protected $casts = [
+    'cod_enabled' => 'boolean',
+    'wish_money_enabled' => 'boolean',
+];
+
 }
