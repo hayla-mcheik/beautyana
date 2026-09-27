@@ -11,18 +11,20 @@ use App\Mail\InvoiceOrderMailable;
 use App\Mail\OrderStatusMail;
 class OrderController extends Controller
 {
-    public function index(Request $request)
-    {
-        $orders = Order::when($request->date != null, function ($q) use ($request) {
+public function index(Request $request)
+{
+    $orders = Order::when($request->date, function ($q) use ($request) {
             return $q->whereDate('created_at', $request->date);
         })
-        ->when($request->status != null, function ($q) use ($request) {
+        ->when($request->status, function ($q) use ($request) {
             return $q->where('status_message', $request->status);
-        })->orderBy('created_at', 'desc') 
-        ->paginate(10);
+        })
+        ->latest('created_at')
+        ->paginate(10)
+        ->withQueryString();
 
-        return view('admin.orders.index', compact('orders'));
-    }
+    return view('admin.orders.index', compact('orders'));
+}
 
     public function show(int $orderId)
     {
