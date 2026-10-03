@@ -602,8 +602,9 @@
         display: block;
         width: 100%;
         height: 100%;
-        padding: 20px;
+        padding: 10px;
         object-fit: cover;
+        border-radius: 10px;
         transition: transform 0.5s ease;
     }
     .featured-product-card:hover .featured-image img {
