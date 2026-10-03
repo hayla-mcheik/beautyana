@@ -42,30 +42,6 @@
                         {!! nl2br(e($about->description)) !!}
                     </div>
 
-
-                    <!-- Signature -->
-                    <div class="about-signature">
-
-                        <div class="signature-brand">
-
-                            <div>
-                                <div class="signature-name">
-                                    Beautyana
-                                </div>
-
-                                <div class="signature-caption">
-                                    Fashion & Lifestyle
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="about-established">
-                            Style · Confidence · Comfort
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
