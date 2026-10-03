@@ -19,27 +19,41 @@ class SliderFormRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
-    {
-        return [
-           'title' => [
+   public function rules(): array
+{
+    return [
+
+        'title' => [
             'required',
             'string',
-            'max:255'
-           ],
-           'description' => [
-            'required',
+            'max:255',
+        ],
+
+        'description' => [
+            'nullable',
             'string',
-            'max:800'
-           ],
-           'image' => [
+        ],
+
+        'desktop_image' => [
+            'required_without_all:image,mobile_image',
             'nullable',
             'image',
-            'mimes:jpg,jpeg,png,webp'
-           ],
-           'status' => [
+            'mimes:jpg,jpeg,png,webp',
+            'max:5120',
+        ],
+
+        'mobile_image' => [
+            'required_without_all:image,desktop_image',
             'nullable',
-           ],
-        ];
-    }
+            'image',
+            'mimes:jpg,jpeg,png,webp',
+            'max:5120',
+        ],
+
+        'status' => [
+            'nullable',
+        ],
+
+    ];
+}
 }

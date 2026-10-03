@@ -25,23 +25,52 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
-public function index()
+public function index(Request $request)
 {
+    $search = $request->input('search');
+
     $products = Product::with([
         'category',
         'productImages',
         'productVariants.color',
         'productVariants.size',
     ])
+    ->when($search, function ($query) use ($search) {
+
+        $query->where(function ($q) use ($search) {
+
+            // Search by Product ID
+            if (is_numeric($search)) {
+                $q->orWhere('id', $search);
+            }
+
+            // Search by Product Name
+            $q->orWhere('name', 'LIKE', '%' . $search . '%');
+
+            // Search by Product Slug
+            $q->orWhere('slug', 'LIKE', '%' . $search . '%');
+
+            // Search by Category Name
+            $q->orWhereHas('category', function ($categoryQuery) use ($search) {
+                $categoryQuery->where(
+                    'name',
+                    'LIKE',
+                    '%' . $search . '%'
+                );
+            });
+
+        });
+
+    })
     ->orderBy('id', 'DESC')
-    ->paginate(10);
+    ->paginate(10)
+    ->withQueryString();
 
     return view(
         'admin.products.index',
-        compact('products')
+        compact('products', 'search')
     );
 }
-
 
     /*
     |--------------------------------------------------------------------------

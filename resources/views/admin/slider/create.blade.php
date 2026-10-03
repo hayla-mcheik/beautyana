@@ -137,75 +137,118 @@
                 </div>
 
 
+{{-- ============================================================
+     DESKTOP IMAGE
+============================================================ --}}
 
-                {{-- IMAGE --}}
-                <div class="mb-4">
+<div class="mb-4">
 
-                    <label class="form-label fw-semibold">
+    <label class="form-label fw-semibold">
+        Desktop Slider Image
+        <span class="text-danger">*</span>
+    </label>
 
-                        Slider Image
+    <div class="slider-upload-card">
 
-                        <span class="text-danger">*</span>
+        <div class="slider-upload-icon">
+            <i class="mdi mdi-monitor"></i>
+        </div>
 
-                    </label>
+        <div class="slider-upload-content">
 
+            <input
+                type="file"
+                name="desktop_image"
+                id="desktopImage"
+                accept="image/*"
+                class="form-control @error('desktop_image') is-invalid @enderror"
+            >
 
-                    <div class="slider-upload-card">
+            <small class="text-muted d-block mt-2">
+                Upload the desktop version of the hero image.
+                Recommended: 1920 × 700 px.
+            </small>
 
-
-                        <div class="slider-upload-icon">
-
-                            <i class="mdi mdi-image-plus"></i>
-
-                        </div>
-
-
-                        <div class="slider-upload-content">
-
-                            <input
-                                type="file"
-                                name="image"
-                                id="sliderImage"
-                                accept="image/*"
-                                class="form-control @error('image') is-invalid @enderror">
-
-
-                            <small class="text-muted d-block mt-2">
-
-                                Upload a high-quality landscape image suitable for the homepage hero slider.
-
-                            </small>
-
-
-                            @error('image')
-
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-
-                            @enderror
-
-
-                            {{-- Image Preview --}}
-
-                            <div
-                                id="imagePreviewContainer"
-                                class="image-preview-container d-none">
-
-                                <img
-                                    src=""
-                                    id="imagePreview"
-                                    alt="Slider Preview">
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
+            @error('desktop_image')
+                <div class="invalid-feedback">
+                    {{ $message }}
                 </div>
+            @enderror
 
+            <div
+                id="desktopPreviewContainer"
+                class="image-preview-container d-none">
+
+                <img
+                    src=""
+                    id="desktopPreview"
+                    alt="Desktop Slider Preview"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{{-- ============================================================
+     MOBILE IMAGE
+============================================================ --}}
+
+<div class="mb-4">
+
+    <label class="form-label fw-semibold">
+        Mobile Slider Image
+        <span class="text-danger">*</span>
+    </label>
+
+    <div class="slider-upload-card">
+
+        <div class="slider-upload-icon mobile-icon">
+            <i class="mdi mdi-cellphone"></i>
+        </div>
+
+        <div class="slider-upload-content">
+
+            <input
+                type="file"
+                name="mobile_image"
+                id="mobileImage"
+                accept="image/*"
+                class="form-control @error('mobile_image') is-invalid @enderror"
+            >
+
+            <small class="text-muted d-block mt-2">
+                Upload the mobile version of the hero image.
+                Recommended: 750 × 1000 px.
+            </small>
+
+            @error('mobile_image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+
+            <div
+                id="mobilePreviewContainer"
+                class="image-preview-container mobile-preview d-none">
+
+                <img
+                    src=""
+                    id="mobilePreview"
+                    alt="Mobile Slider Preview"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
                 {{-- VISIBILITY --}}
@@ -767,53 +810,62 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     updateVisibility();
+/*
+|--------------------------------------------------------------------------
+| Desktop Image Preview
+|--------------------------------------------------------------------------
+*/
+
+const desktopImage = document.getElementById('desktopImage');
+const desktopPreview = document.getElementById('desktopPreview');
+const desktopPreviewContainer =
+    document.getElementById('desktopPreviewContainer');
+
+desktopImage.addEventListener('change', function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+
+        desktopPreview.src = '';
+        desktopPreviewContainer.classList.add('d-none');
+
+        return;
+    }
+
+    desktopPreview.src = URL.createObjectURL(file);
+
+    desktopPreviewContainer.classList.remove('d-none');
+});
 
 
+/*
+|--------------------------------------------------------------------------
+| Mobile Image Preview
+|--------------------------------------------------------------------------
+*/
 
-    /*
-    |--------------------------------------------------------------------------
-    | Image Preview
-    |--------------------------------------------------------------------------
-    */
+const mobileImage = document.getElementById('mobileImage');
+const mobilePreview = document.getElementById('mobilePreview');
+const mobilePreviewContainer =
+    document.getElementById('mobilePreviewContainer');
 
+mobileImage.addEventListener('change', function () {
 
-    const imageInput =
-        document.getElementById('sliderImage');
+    const file = this.files[0];
 
+    if (!file) {
 
-    const imagePreview =
-        document.getElementById('imagePreview');
+        mobilePreview.src = '';
+        mobilePreviewContainer.classList.add('d-none');
 
+        return;
+    }
 
-    const imagePreviewContainer =
-        document.getElementById('imagePreviewContainer');
+    mobilePreview.src = URL.createObjectURL(file);
 
-
-    imageInput.addEventListener('change', function () {
-
-
-        const file = this.files[0];
-
-
-        if (!file) {
-
-            imagePreview.src = '';
-
-            imagePreviewContainer.classList.add('d-none');
-
-            return;
-
-        }
-
-
-        imagePreview.src =
-            URL.createObjectURL(file);
-
-
-        imagePreviewContainer.classList.remove('d-none');
-
-    });
-
+    mobilePreviewContainer.classList.remove('d-none');
+});
 
 });
 

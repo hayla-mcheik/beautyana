@@ -1011,9 +1011,95 @@
     ::-webkit-scrollbar-track { background: var(--demanto-bg); }
     ::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--demanto-red); }
     ::-webkit-scrollbar-thumb:hover { background: var(--demanto-red-dark); }
+    /* =========================================
+   INFINITE IMAGE LOADER
+========================================= */
+
+.latest-arrival-image,
+.best-seller-image {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Loader */
+.infinite-image-loader {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f8f8f8;
+
+    z-index: 5;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* Rotating circle */
+.infinite-image-loader span {
+    width: 28px;
+    height: 28px;
+
+    border: 2px solid #dedede;
+    border-top-color: #222;
+
+    border-radius: 50%;
+
+    animation: infiniteImageLoader 0.8s linear infinite;
+}
+
+
+/* Infinite rotation */
+@keyframes infiniteImageLoader {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* Hide loader after image loads */
+.infinite-image-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* Product images start hidden */
+.latest-arrival-image > img,
+.best-seller-image > img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+}
+
+
+/* Show image after loading */
+.latest-arrival-image > img.loaded,
+.best-seller-image > img.loaded {
+    opacity: 1;
+}
 </style>
 
-<!-- Hero Slider Section -->
 <!-- Hero Slider Section -->
 <section class="home-banner">
 
@@ -1027,18 +1113,49 @@
 
                     <div class="hero-banner-image">
 
-                        <img
-                            class="hero-bg"
-                            src="{{ $hero->image ? asset($hero->image) : asset('assets/img/slider-placeholder.jpg') }}"
-                            alt="{{ $hero->title }}"
-                            loading="{{ $loop->first ? 'eager' : 'lazy' }}"
-                            fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
-                            decoding="async"
-                        >
+                        <picture>
+
+                            {{-- ==================================================
+                                 MOBILE IMAGE
+                            =================================================== --}}
+
+                            <source
+                                media="(max-width: 767px)"
+                                srcset="{{ $hero->mobile_image
+                                    ? asset($hero->mobile_image)
+                                    : ($hero->desktop_image
+                                        ? asset($hero->desktop_image)
+                                        : asset('assets/img/slider-placeholder.jpg'))
+                                }}"
+                            >
+
+
+                            {{-- ==================================================
+                                 DESKTOP IMAGE
+                            =================================================== --}}
+
+                            <img
+                                class="hero-bg"
+                                src="{{ $hero->desktop_image
+                                    ? asset($hero->desktop_image)
+                                    : ($hero->image
+                                        ? asset($hero->image)
+                                        : asset('assets/img/slider-placeholder.jpg'))
+                                }}"
+                                alt="{{ $hero->title }}"
+                                loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                fetchpriority="{{ $loop->first ? 'high' : 'auto' }}"
+                                decoding="async"
+                            >
+
+                        </picture>
+
 
                         <div class="hero-overlay"></div>
 
+
                         <div class="container h-100 p-4">
+
                             <div class="row h-100 align-items-center">
 
                                 <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
@@ -1058,6 +1175,7 @@
                                 </div>
 
                             </div>
+
                         </div>
 
                     </div>
@@ -1070,30 +1188,42 @@
 
                     <div class="hero-banner-image">
 
-                        <img
-                            class="hero-bg"
-                            src="{{ asset('assets/img/slider-placeholder.jpg') }}"
-                            alt="Demanto"
-                            loading="eager"
-                            fetchpriority="high"
-                        >
+                        <picture>
+
+                            <source
+                                media="(max-width: 767px)"
+                                srcset="{{ asset('assets/img/slider-placeholder.jpg') }}"
+                            >
+
+                            <img
+                                class="hero-bg"
+                                src="{{ asset('assets/img/slider-placeholder.jpg') }}"
+                                alt="Beautyana"
+                                loading="eager"
+                                fetchpriority="high"
+                                decoding="async"
+                            >
+
+                        </picture>
+
 
                         <div class="hero-overlay"></div>
+
 
                         <div class="container h-100 p-4">
 
                             <div class="row h-100 align-items-center">
 
-                                <div class="col-lg-7">
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-6">
 
                                     <div class="slider-content">
 
                                         <h1 class="slider-title">
-                                            Timeless Luxury
+                                            Timeless Style
                                         </h1>
 
                                         <p class="slider-desc">
-                                            Where diamonds become timeless masterpieces.
+                                            Discover fashion designed to make you feel confident, stylish and comfortable.
                                         </p>
 
                                     </div>
@@ -1112,6 +1242,7 @@
 
         </div>
 
+
         <div class="swiper-pagination"></div>
 
     </div>
@@ -1119,73 +1250,179 @@
 
     {{-- Discover Our Collections --}}
     <div class="discover-collections-bar">
-        <span>DISCOVER OUR COLLECTIONS</span>
+
+        <span>
+            DISCOVER OUR COLLECTIONS
+        </span>
+
     </div>
 
 </section>
 
 @include('frontend.collections.category.index')
+@include('frontend.aboutdata')
 <!-- Latest Arrivals -->
 <section class="latest-arrivals-section">
     <div class="container">
+
         <div class="collections-title mb-4">
             <span class="title-main">Latest Arrivals</span>
-            <div class="divider"><span></span></div>
+            <div class="divider">
+                <span></span>
+            </div>
         </div>
 
         <div class="latest-arrivals-grid">
+
             @forelse($newArrivalsProducts->take(26) as $product)
+
                 <div class="latest-arrival-card">
-                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-image-link">
+
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+                       class="latest-arrival-image-link">
+
                         <div class="latest-arrival-image">
-                            @if($product->productImages->count())
-                                <img src="{{ asset($product->productImages[0]->image) }}" alt="{{ $product->name }}" loading="lazy" decoding="async">
-                            @else
-                                <img src="{{ asset('assets/img/placeholder.jpg') }}" alt="{{ $product->name }}" loading="lazy">
-                            @endif
-                            <div class="latest-arrival-badges">
-                                @if($product->quantity > 0)
-                                    <span class="latest-stock-badge">In Stock</span>
-                                @else
-                                    <span class="latest-stock-badge out-of-stock">Out of Stock</span>
-                                @endif
-                                @if($product->original_price > 0 && $product->selling_price < $product->original_price)
-                                    @php $discount = round((($product->original_price - $product->selling_price) / $product->original_price) * 100); @endphp
-                                    <span class="latest-discount-badge">-{{ $discount }}%</span>
-                                @endif
+
+                            {{-- Infinite Image Loader --}}
+                            <div class="infinite-image-loader">
+                                <span></span>
                             </div>
+
+                            {{-- Product Image --}}
+                            @if($product->productImages->count())
+
+                                <img
+                                    src="{{ asset($product->productImages[0]->image) }}"
+                                    alt="{{ $product->name }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onload="
+                                        this.classList.add('loaded');
+                                        this.previousElementSibling.classList.add('hidden');
+                                    "
+                                    onerror="
+                                        this.onerror=null;
+                                        this.src='{{ asset('assets/img/placeholder.jpg') }}';
+                                        this.classList.add('loaded');
+                                        this.previousElementSibling.classList.add('hidden');
+                                    "
+                                >
+
+                            @else
+
+                                <img
+                                    src="{{ asset('assets/img/placeholder.jpg') }}"
+                                    alt="{{ $product->name }}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onload="
+                                        this.classList.add('loaded');
+                                        this.previousElementSibling.classList.add('hidden');
+                                    "
+                                >
+
+                            @endif
+
+
+                            {{-- Badges --}}
+                            <div class="latest-arrival-badges">
+
+                                @if($product->quantity > 0)
+
+                                    <span class="latest-stock-badge">
+                                        In Stock
+                                    </span>
+
+                                @else
+
+                                    <span class="latest-stock-badge out-of-stock">
+                                        Out of Stock
+                                    </span>
+
+                                @endif
+
+
+                                @if(
+                                    $product->original_price > 0 &&
+                                    $product->selling_price < $product->original_price
+                                )
+
+                                    @php
+                                        $discount = round(
+                                            (($product->original_price - $product->selling_price)
+                                            / $product->original_price) * 100
+                                        );
+                                    @endphp
+
+                                    <span class="latest-discount-badge">
+                                        -{{ $discount }}%
+                                    </span>
+
+                                @endif
+
+                            </div>
+
                         </div>
+
                     </a>
-                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}" class="latest-arrival-footer">
-                        <span class="latest-arrival-name">{{ $product->name }}</span>
+
+
+                    {{-- Product Information --}}
+                    <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
+                       class="latest-arrival-footer">
+
+                        <span class="latest-arrival-name">
+                            {{ $product->name }}
+                        </span>
+
                         <span class="latest-arrival-price">
-        ${{ number_format($product->selling_price, 2) }}
-    </span>
+                            ${{ number_format($product->selling_price, 2) }}
+                        </span>
+
                     </a>
+
                 </div>
+
             @empty
-                <div class="latest-arrivals-empty"><p>No latest arrivals available.</p></div>
+
+                <div class="latest-arrivals-empty">
+                    <p>No latest arrivals available.</p>
+                </div>
+
             @endforelse
+
         </div>
 
+
         <div class="latest-arrivals-view-all">
-            <a href="{{ url('/categories') }}" class="btn-demanto">View All</a>
+            <a href="{{ url('/categories') }}" class="btn-demanto">
+                View All
+            </a>
         </div>
+
     </div>
 </section>
 
 
 @if($bestSellersProducts->isNotEmpty())
+
     <!-- Best Sellers -->
     <section class="best-sellers-section">
+
         <div class="container">
 
             <div class="collections-title mb-4">
-                <span class="title-main">Best Sellers</span>
+
+                <span class="title-main">
+                    Best Sellers
+                </span>
+
                 <div class="divider">
                     <span></span>
                 </div>
+
             </div>
+
 
             <div class="best-sellers-grid">
 
@@ -1198,38 +1435,71 @@
 
                             <div class="best-seller-image">
 
+                                {{-- Infinite Image Loader --}}
+                                <div class="infinite-image-loader">
+                                    <span></span>
+                                </div>
+
+
+                                {{-- Product Image --}}
                                 @if($product->productImages->count())
+
                                     <img
                                         src="{{ asset($product->productImages[0]->image) }}"
                                         alt="{{ $product->name }}"
                                         loading="lazy"
                                         decoding="async"
+                                        onload="
+                                            this.classList.add('loaded');
+                                            this.previousElementSibling.classList.add('hidden');
+                                        "
+                                        onerror="
+                                            this.onerror=null;
+                                            this.src='{{ asset('assets/img/placeholder.jpg') }}';
+                                            this.classList.add('loaded');
+                                            this.previousElementSibling.classList.add('hidden');
+                                        "
                                     >
+
                                 @else
+
                                     <img
                                         src="{{ asset('assets/img/placeholder.jpg') }}"
                                         alt="{{ $product->name }}"
                                         loading="lazy"
                                         decoding="async"
+                                        onload="
+                                            this.classList.add('loaded');
+                                            this.previousElementSibling.classList.add('hidden');
+                                        "
                                     >
+
                                 @endif
 
+
+                                {{-- Best Seller Badges --}}
                                 <div class="best-seller-badges">
 
                                     @if($product->quantity > 0)
+
                                         <span class="best-seller-stock">
                                             In Stock
                                         </span>
+
                                     @else
+
                                         <span class="best-seller-stock out-of-stock">
                                             Out of Stock
                                         </span>
+
                                     @endif
+
 
                                     @if(
                                         $product->original_price > 0 &&
                                         $product->selling_price < $product->original_price
                                     )
+
                                         @php
                                             $discount = round(
                                                 (($product->original_price - $product->selling_price)
@@ -1240,9 +1510,11 @@
                                         <span class="best-seller-discount">
                                             -{{ $discount }}%
                                         </span>
+
                                     @endif
 
                                 </div>
+
 
                                 <span class="best-seller-label">
                                     Best Seller
@@ -1252,16 +1524,18 @@
 
                         </a>
 
+
+                        {{-- Product Information --}}
                         <a href="{{ url('/collections/'.$product->category->slug.'/'.$product->slug) }}"
                            class="best-seller-footer">
 
                             <span class="best-seller-name">
                                 {{ $product->name }}
                             </span>
-    <span class="best-seller-price">
-        ${{ number_format($product->selling_price, 2) }}
-    </span>
 
+                            <span class="best-seller-price">
+                                ${{ number_format($product->selling_price, 2) }}
+                            </span>
 
                         </a>
 
@@ -1271,15 +1545,27 @@
 
             </div>
 
+
             <div class="best-sellers-view-all">
-                <a href="{{ url('/categories') }}" class="btn-demanto">
+
+                <a href="{{ url('/categories') }}"
+                   class="btn-demanto">
+
                     View All
+
                 </a>
+
             </div>
 
         </div>
+
     </section>
+
 @endif
+
+
+
+
 <!-- Exhibitions -->
 {{-- <section class="exhibitions-area">
     <div class="container">

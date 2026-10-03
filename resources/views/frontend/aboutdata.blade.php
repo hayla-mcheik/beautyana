@@ -1,8 +1,128 @@
-@extends('layouts.app')
-@section('title', 'About Us')
+<section class="beautyana-about">
 
-@section('content')
+    <div class="about-inner">
 
+        @if($about)
+
+            <!-- Small editorial label -->
+            <div class="about-kicker">
+                <div class="about-kicker-line"></div>
+                <span>The House of Beautyana</span>
+            </div>
+
+
+            <div class="about-grid">
+
+                <!-- LEFT -->
+                <div class="about-left">
+
+                    <h1 class="about-heading">
+                        Fashion
+                        <em>that feels</em>
+                        like you.
+                    </h1>
+
+                    <div class="about-number">
+                        About Beautyana
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT -->
+                <div class="about-content">
+
+                    @if($about->title)
+                        <h2 class="about-content-title">
+                            {{ $about->title }}
+                        </h2>
+                    @endif
+
+                    <div class="about-description">
+                        {!! nl2br(e($about->description)) !!}
+                    </div>
+
+
+                    <!-- Signature -->
+                    <div class="about-signature">
+
+                        <div class="signature-brand">
+
+                            <div>
+                                <div class="signature-name">
+                                    Beautyana
+                                </div>
+
+                                <div class="signature-caption">
+                                    Fashion & Lifestyle
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="about-established">
+                            Style · Confidence · Comfort
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Decorative botanical element -->
+            <div class="about-decoration">
+
+                <svg viewBox="0 0 200 200" fill="none">
+
+                    <path
+                        d="M20 180C55 145 90 110 178 20"
+                        stroke="#b95c19"
+                        stroke-width="1"
+                    />
+
+                    <path
+                        d="M55 145C45 125 48 105 65 92"
+                        stroke="#b95c19"
+                        stroke-width="1"
+                    />
+
+                    <path
+                        d="M80 120C75 95 85 76 106 65"
+                        stroke="#b95c19"
+                        stroke-width="1"
+                    />
+
+                    <path
+                        d="M108 92C105 67 118 48 140 40"
+                        stroke="#b95c19"
+                        stroke-width="1"
+                    />
+
+                    <path
+                        d="M42 158C65 158 80 147 88 130"
+                        stroke="#b95c19"
+                        stroke-width="1"
+                    />
+
+                </svg>
+
+            </div>
+
+        @else
+
+            <div class="text-center py-5">
+                <p>
+                    About Us content is currently being updated.
+                </p>
+            </div>
+
+        @endif
+
+    </div>
+
+</section>
 <style>
     /* ============================================================
        BEAUTYANA - ABOUT US / EDITORIAL DESIGN
@@ -313,147 +433,3 @@
         }
     }
 </style>
-
-
-<!-- Dynamic Breadcrumb -->
-@include('layouts.inc.frontend.breadcrumb', [
-    'breadcrumbs' => [
-        [
-            'title' => 'About Us',
-            'url' => '#'
-        ]
-    ]
-])
-
-
-<!-- ============================================================
-     ABOUT US
-============================================================ -->
-
-<section class="beautyana-about">
-
-    <div class="about-inner">
-
-        @if($about)
-
-            <!-- Small editorial label -->
-            <div class="about-kicker">
-                <div class="about-kicker-line"></div>
-                <span>The House of Beautyana</span>
-            </div>
-
-
-            <div class="about-grid">
-
-                <!-- LEFT -->
-                <div class="about-left">
-
-                    <h1 class="about-heading">
-                        Fashion
-                        <em>that feels</em>
-                        like you.
-                    </h1>
-
-                    <div class="about-number">
-                        About Beautyana
-                    </div>
-
-                </div>
-
-
-                <!-- RIGHT -->
-                <div class="about-content">
-
-                    @if($about->title)
-                        <h2 class="about-content-title">
-                            {{ $about->title }}
-                        </h2>
-                    @endif
-
-                    <div class="about-description">
-                        {!! nl2br(e($about->description)) !!}
-                    </div>
-
-
-                    <!-- Signature -->
-                    <div class="about-signature">
-
-                        <div class="signature-brand">
-
-                            <div>
-                                <div class="signature-name">
-                                    Beautyana
-                                </div>
-
-                                <div class="signature-caption">
-                                    Fashion & Lifestyle
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="about-established">
-                            Style · Confidence · Comfort
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Decorative botanical element -->
-            <div class="about-decoration">
-
-                <svg viewBox="0 0 200 200" fill="none">
-
-                    <path
-                        d="M20 180C55 145 90 110 178 20"
-                        stroke="#b95c19"
-                        stroke-width="1"
-                    />
-
-                    <path
-                        d="M55 145C45 125 48 105 65 92"
-                        stroke="#b95c19"
-                        stroke-width="1"
-                    />
-
-                    <path
-                        d="M80 120C75 95 85 76 106 65"
-                        stroke="#b95c19"
-                        stroke-width="1"
-                    />
-
-                    <path
-                        d="M108 92C105 67 118 48 140 40"
-                        stroke="#b95c19"
-                        stroke-width="1"
-                    />
-
-                    <path
-                        d="M42 158C65 158 80 147 88 130"
-                        stroke="#b95c19"
-                        stroke-width="1"
-                    />
-
-                </svg>
-
-            </div>
-
-        @else
-
-            <div class="text-center py-5">
-                <p>
-                    About Us content is currently being updated.
-                </p>
-            </div>
-
-        @endif
-
-    </div>
-
-</section>
-
-@endsection

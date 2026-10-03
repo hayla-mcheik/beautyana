@@ -710,7 +710,7 @@ font-family: "Montserrat", sans-serif;
         max-width: 420px;
         margin: 0 auto;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         gap: 16px;

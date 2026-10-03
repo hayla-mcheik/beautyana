@@ -17,7 +17,63 @@
 </div>
 
 <div class="card-body">
+<div class="mb-4">
 
+    <form method="GET"
+          action="{{ url('admin/products') }}"
+          class="row g-2">
+
+        <div class="col-md-8">
+
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                class="form-control"
+                placeholder="Search by product ID, name, slug or category..."
+            >
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100"
+            >
+                Search
+            </button>
+
+        </div>
+
+        <div class="col-md-2">
+
+            @if(request('search'))
+
+                <a
+                    href="{{ url('admin/products') }}"
+                    class="btn btn-secondary w-100"
+                >
+                    Clear
+                </a>
+
+            @else
+
+                <button
+                    type="button"
+                    class="btn btn-secondary w-100"
+                    disabled
+                >
+                    Clear
+                </button>
+
+            @endif
+
+        </div>
+
+    </form>
+
+</div>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>

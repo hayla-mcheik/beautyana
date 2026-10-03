@@ -8,44 +8,86 @@
 
         @if($collections->count())
 
-        <div class="all-categories">
+            <div class="all-categories">
 
+                <div class="collections-grid mt-0">
 
-            <div class="collections-grid mt-0">
+                    @foreach($collections as $categoryItem)
 
-                @foreach($collections as $categoryItem)
+                        <div class="collection-grid-item">
 
-                    <div class="collection-grid-item">
+                            <a href="{{ url('/collections/'.$categoryItem->slug) }}"
+                               class="collection-card">
 
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}"
-                           class="collection-card">
+                                <div class="collection-inner">
 
-                            <div class="collection-inner">
+                                    <div class="collection-image-wrap">
 
-                                <div class="collection-image-wrap">
+                                        <div class="collection-image">
 
-                                    <div class="collection-image">
+                                            {{-- Infinite Image Loader --}}
+                                            <div class="infinite-image-loader">
+                                                <span></span>
+                                            </div>
 
-                                        <img src="{{ asset($categoryItem->image) }}"
-                                             alt="{{ $categoryItem->name }}"
-                                             loading="lazy"
-                                             decoding="async">
+                                            {{-- Category Image --}}
+                                            <img
+                                                src="{{ asset($categoryItem->image) }}"
+                                                alt="{{ $categoryItem->name }}"
+                                                loading="lazy"
+                                                decoding="async"
+                                                onload="
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                                onerror="
+                                                    this.onerror=null;
+                                                    this.src='{{ asset('assets/img/placeholder.jpg') }}';
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                            >
 
-                                        <div class="floating-cta">
-                                            <span class="plus-icon">+</span>
-                                            <span class="cta-label">Shop</span>
+                                            <div class="floating-cta">
+                                                <span class="plus-icon">+</span>
+                                                <span class="cta-label">Shop</span>
+                                            </div>
+
                                         </div>
 
                                     </div>
 
-                                </div>
-
-
-                                <div class="card-footer">
-
-                                    <h3>{{ $categoryItem->name }}</h3>
+                                    <div class="card-footer">
+                                        <h3>{{ $categoryItem->name }}</h3>
+                                    </div>
 
                                 </div>
+
+                            </a>
+
+                        </div>
+
+                    @endforeach
+
+
+                    {{-- VIEW ALL --}}
+
+                    <div class="collection-grid-item view-all-item">
+
+                        <a href="{{ url('/categories') }}"
+                           class="view-all-card">
+
+                            <div class="view-all-content">
+
+                                <span class="view-all-text">
+                                    View All
+                                </span>
+
+                                <span class="view-all-arrow">
+                                    →
+                                </span>
 
                             </div>
 
@@ -53,93 +95,123 @@
 
                     </div>
 
-                @endforeach
-
-
-                {{-- VIEW ALL --}}
-
-                <div class="collection-grid-item view-all-item">
-
-                    <a href="{{ url('/categories') }}" class="view-all-card">
-
-                        <div class="view-all-content">
-
-                            <span class="view-all-text">View All</span>
-
-                            <span class="view-all-arrow">→</span>
-
-                        </div>
-
-                    </a>
-
                 </div>
 
             </div>
 
-        </div>
-
         @endif
-
 
 
         {{-- ========================= ACCESSORIES ========================= --}}
 
         @if($accessories->count())
 
-        <div class="all-categories mt-5">
+            <div class="all-categories mt-5">
 
-            <div class="collections-title">
+                <div class="collections-title">
 
-                <span class="title-main">Accessories</span>
+                    <span class="title-main">
+                        Accessories
+                    </span>
 
-                <div class="title-accent">
-                    <span class="dash"></span>
+                    <div class="title-accent">
+                        <span class="dash"></span>
+                    </div>
+
+                    <p class="sub-headline">
+                        exceptional craftsmanship
+                    </p>
+
                 </div>
 
-                <p class="sub-headline">exceptional craftsmanship</p>
 
-            </div>
+                <div class="collections-grid mt-0">
 
+                    @foreach($accessories as $categoryItem)
 
-            <div class="collections-grid mt-0">
+                        <div class="collection-grid-item">
 
-                @foreach($accessories as $categoryItem)
+                            <a href="{{ url('/collections/'.$categoryItem->slug) }}"
+                               class="collection-card">
 
-                    <div class="collection-grid-item">
+                                <div class="collection-inner">
 
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}"
-                           class="collection-card">
+                                    <div class="collection-image-wrap">
 
-                            <div class="collection-inner">
+                                        <div class="collection-image">
 
-                                <div class="collection-image-wrap">
+                                            {{-- Infinite Image Loader --}}
+                                            <div class="infinite-image-loader">
+                                                <span></span>
+                                            </div>
 
-                                    <div class="collection-image">
+                                            {{-- Category Image --}}
+                                            <img
+                                                src="{{ asset($categoryItem->image) }}"
+                                                alt="{{ $categoryItem->name }}"
+                                                loading="lazy"
+                                                decoding="async"
+                                                onload="
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                                onerror="
+                                                    this.onerror=null;
+                                                    this.src='{{ asset('assets/img/placeholder.jpg') }}';
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                            >
 
-                                        <img src="{{ asset($categoryItem->image) }}"
-                                             alt="{{ $categoryItem->name }}"
-                                             loading="lazy"
-                                             decoding="async">
+                                            <div class="floating-cta">
+                                                <span class="plus-icon">+</span>
+                                                <span class="cta-label">Shop</span>
+                                            </div>
 
-                                        <div class="floating-cta">
-                                            <span class="plus-icon">+</span>
-                                            <span class="cta-label">Shop</span>
                                         </div>
+
+                                    </div>
+
+
+                                    <div class="card-footer">
+
+                                        <h3>
+                                            {{ $categoryItem->name }}
+                                        </h3>
+
+                                        <span class="view-indicator">
+                                            explore →
+                                        </span>
 
                                     </div>
 
                                 </div>
 
+                            </a>
 
-                                <div class="card-footer">
+                        </div>
 
-                                    <h3>{{ $categoryItem->name }}</h3>
+                    @endforeach
 
-                                    <span class="view-indicator">
-                                        explore →
-                                    </span>
 
-                                </div>
+                    {{-- VIEW ALL --}}
+
+                    <div class="collection-grid-item view-all-item">
+
+                        <a href="{{ url('/categories') }}"
+                           class="view-all-card">
+
+                            <div class="view-all-content">
+
+                                <span class="view-all-text">
+                                    View All
+                                </span>
+
+                                <span class="view-all-arrow">
+                                    →
+                                </span>
 
                             </div>
 
@@ -147,93 +219,123 @@
 
                     </div>
 
-                @endforeach
-
-
-                {{-- VIEW ALL --}}
-
-                <div class="collection-grid-item view-all-item">
-
-                    <a href="{{ url('/categories') }}" class="view-all-card">
-
-                        <div class="view-all-content">
-
-                            <span class="view-all-text">View All</span>
-
-                            <span class="view-all-arrow">→</span>
-
-                        </div>
-
-                    </a>
-
                 </div>
 
             </div>
 
-        </div>
-
         @endif
-
 
 
         {{-- ========================= ON SALE ========================= --}}
 
         @if($onSale->count())
 
-        <div class="all-categories mt-5">
+            <div class="all-categories mt-5">
 
-            <div class="collections-title">
+                <div class="collections-title">
 
-                <span class="title-main">On Sale</span>
+                    <span class="title-main">
+                        On Sale
+                    </span>
 
-                <div class="title-accent">
-                    <span class="dash"></span>
+                    <div class="title-accent">
+                        <span class="dash"></span>
+                    </div>
+
+                    <p class="sub-headline">
+                        the art of detail
+                    </p>
+
                 </div>
 
-                <p class="sub-headline">the art of detail</p>
 
-            </div>
+                <div class="collections-grid mt-0">
 
+                    @foreach($onSale as $categoryItem)
 
-            <div class="collections-grid mt-0">
+                        <div class="collection-grid-item">
 
-                @foreach($onSale as $categoryItem)
+                            <a href="{{ url('/collections/'.$categoryItem->slug) }}"
+                               class="collection-card">
 
-                    <div class="collection-grid-item">
+                                <div class="collection-inner">
 
-                        <a href="{{ url('/collections/'.$categoryItem->slug) }}"
-                           class="collection-card">
+                                    <div class="collection-image-wrap">
 
-                            <div class="collection-inner">
+                                        <div class="collection-image">
 
-                                <div class="collection-image-wrap">
+                                            {{-- Infinite Image Loader --}}
+                                            <div class="infinite-image-loader">
+                                                <span></span>
+                                            </div>
 
-                                    <div class="collection-image">
+                                            {{-- Category Image --}}
+                                            <img
+                                                src="{{ asset($categoryItem->image) }}"
+                                                alt="{{ $categoryItem->name }}"
+                                                loading="lazy"
+                                                decoding="async"
+                                                onload="
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                                onerror="
+                                                    this.onerror=null;
+                                                    this.src='{{ asset('assets/img/placeholder.jpg') }}';
+                                                    this.classList.add('loaded');
+                                                    this.parentElement.classList.add('image-loaded');
+                                                    this.previousElementSibling.classList.add('hidden');
+                                                "
+                                            >
 
-                                        <img src="{{ asset($categoryItem->image) }}"
-                                             alt="{{ $categoryItem->name }}"
-                                             loading="lazy"
-                                             decoding="async">
+                                            <div class="floating-cta">
+                                                <span class="plus-icon">+</span>
+                                                <span class="cta-label">Shop</span>
+                                            </div>
 
-                                        <div class="floating-cta">
-                                            <span class="plus-icon">+</span>
-                                            <span class="cta-label">Shop</span>
                                         </div>
+
+                                    </div>
+
+
+                                    <div class="card-footer">
+
+                                        <h3>
+                                            {{ $categoryItem->name }}
+                                        </h3>
+
+                                        <span class="view-indicator">
+                                            explore →
+                                        </span>
 
                                     </div>
 
                                 </div>
 
+                            </a>
 
-                                <div class="card-footer">
+                        </div>
 
-                                    <h3>{{ $categoryItem->name }}</h3>
+                    @endforeach
 
-                                    <span class="view-indicator">
-                                        explore →
-                                    </span>
 
-                                </div>
+                    {{-- VIEW ALL --}}
+
+                    <div class="collection-grid-item view-all-item">
+
+                        <a href="{{ url('/categories') }}"
+                           class="view-all-card">
+
+                            <div class="view-all-content">
+
+                                <span class="view-all-text">
+                                    View All
+                                </span>
+
+                                <span class="view-all-arrow">
+                                    →
+                                </span>
 
                             </div>
 
@@ -241,37 +343,15 @@
 
                     </div>
 
-                @endforeach
-
-
-                {{-- VIEW ALL --}}
-
-                <div class="collection-grid-item view-all-item">
-
-                    <a href="{{ url('/categories') }}" class="view-all-card">
-
-                        <div class="view-all-content">
-
-                            <span class="view-all-text">View All</span>
-
-                            <span class="view-all-arrow">→</span>
-
-                        </div>
-
-                    </a>
-
                 </div>
 
             </div>
-
-        </div>
 
         @endif
 
     </div>
 
 </section>
-
 
 
 <style>
@@ -350,7 +430,8 @@
 
 @keyframes dashMove {
 
-    0%, 100% {
+    0%,
+    100% {
         left: 0;
     }
 
@@ -429,7 +510,8 @@
 
     transform: translateY(-8px);
 
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 20px 40px -12px rgba(0, 0, 0, 0.08);
 
     border-color: #d4b8a0;
 
@@ -452,8 +534,6 @@
 }
 
 
-/* Remove pseudo decorations */
-
 .collection-inner::before,
 .collection-inner::after {
     display: none !important;
@@ -472,28 +552,108 @@
 
 
 .collection-image {
+
     position: relative;
+
     width: 100%;
+
     aspect-ratio: 4 / 5;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     overflow: hidden;
+
     contain: layout paint;
 
     background: #f3efea;
 }
 
 
+/* ==================================================
+   INFINITE IMAGE LOADER
+   ================================================== */
+
+.infinite-image-loader {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f3efea;
+
+    z-index: 5;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+.infinite-image-loader span {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: 2px solid #ded6cf;
+
+    border-top-color: #b3927a;
+
+    border-radius: 50%;
+
+    animation: infiniteCollectionLoader 0.8s linear infinite;
+}
+
+
+@keyframes infiniteCollectionLoader {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.infinite-image-loader.hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+}
+
+
+/* ==================================================
+   IMAGE
+   ================================================== */
+
 .collection-image img {
+
     display: block;
 
     opacity: 0;
+
     visibility: hidden;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: cover;
@@ -501,21 +661,31 @@
     transform: scale(1);
 
     transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease,
         transform 0.6s ease,
         filter 0.6s ease;
 
     position: relative;
+
     z-index: 1;
 }
 
 
-.collection-image.loaded img {
+/* Image loaded */
+
+.collection-image.image-loaded img {
+
     opacity: 1;
+
     visibility: visible;
 }
 
 
+/* Hover */
+
 .collection-card:hover .collection-image img {
+
     transform: scale(1.04);
 
     filter:
@@ -534,17 +704,21 @@
     position: absolute;
 
     bottom: 20px;
+
     right: 20px;
 
-    z-index: 3;
+    z-index: 6;
 
     display: flex;
+
     align-items: center;
+
     gap: 6px;
 
     background: rgba(255, 255, 255, 0.85);
 
     backdrop-filter: blur(6px);
+
     -webkit-backdrop-filter: blur(6px);
 
     padding: 8px 16px 8px 12px;
@@ -571,6 +745,7 @@
 .floating-cta .plus-icon {
 
     font-size: 18px;
+
     font-weight: 300;
 
     color: #b3927a;
@@ -628,6 +803,7 @@
 .collection-card:hover .floating-cta .cta-label {
 
     opacity: 1;
+
     max-width: 60px;
 }
 
@@ -635,6 +811,7 @@
 .collection-card:hover .floating-cta .plus-icon {
 
     transform: rotate(90deg);
+
     color: #b3927a;
 }
 
@@ -666,12 +843,15 @@
 
 
 .collection-card:hover .card-footer {
+
     border-top-color: #d4b8a0;
 }
 
 
 .card-footer h3 {
+
     font-family: "Montserrat", sans-serif;
+
     font-weight: 600;
 
     font-size: 14px;
@@ -684,8 +864,6 @@
 }
 
 
-/* Underline */
-
 .card-footer h3::after {
 
     content: '';
@@ -693,9 +871,11 @@
     position: absolute;
 
     bottom: -2px;
+
     left: 0;
 
     width: 0;
+
     height: 2px;
 
     background: #d4b8a0;
@@ -706,6 +886,7 @@
 
 
 .collection-card:hover .card-footer h3::after {
+
     width: 100%;
 }
 
@@ -743,6 +924,7 @@
    ================================================== */
 
 .view-all-item {
+
     display: flex;
 }
 
@@ -750,11 +932,15 @@
 .view-all-card {
 
     width: 100%;
+
     height: 100%;
+
     min-height: 100%;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-decoration: none;
@@ -775,9 +961,11 @@
 .view-all-content {
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 10px;
@@ -828,6 +1016,7 @@
 
 
 .view-all-card:hover .view-all-text {
+
     color: #ffffff;
 }
 
@@ -872,16 +1061,19 @@
     .collections-container {
 
         padding-left: 25px;
+
         padding-right: 25px;
     }
 
 
     .collections-title .title-main {
+
         font-size: 28px;
     }
 
 
     .card-footer h3 {
+
         font-size: 14px;
     }
 
@@ -891,11 +1083,13 @@
         padding: 6px 14px 6px 10px;
 
         bottom: 14px;
+
         right: 14px;
     }
 
 
     .floating-cta .plus-icon {
+
         font-size: 16px;
     }
 
@@ -914,6 +1108,7 @@
 
 
     .signature-collections {
+
         padding: 10px 0 15px;
     }
 
@@ -921,21 +1116,25 @@
     .collections-container {
 
         padding-left: 15px;
+
         padding-right: 15px;
     }
 
 
     .collections-title {
+
         margin-bottom: 24px;
     }
 
 
     .collections-title .title-main {
+
         font-size: 24px;
     }
 
 
     .title-accent .dash {
+
         width: 40px;
     }
 
@@ -949,7 +1148,16 @@
 
 
     .collection-image {
+
         aspect-ratio: 4 / 5;
+    }
+
+
+    .infinite-image-loader span {
+
+        width: 24px;
+
+        height: 24px;
     }
 
 
@@ -958,6 +1166,7 @@
         padding: 4px 12px 4px 8px;
 
         bottom: 10px;
+
         right: 10px;
 
         border-radius: 30px;
@@ -965,39 +1174,45 @@
 
 
     .floating-cta .plus-icon {
+
         font-size: 14px;
     }
 
 
     .floating-cta .cta-label {
+
         font-size: 9px;
     }
 
 
     .card-footer {
+
         padding: 10px 12px 10px 12px;
     }
 
 
     .card-footer h3 {
+
         font-size: 14px;
     }
 
 
     .card-footer .view-indicator {
+
         font-size: 9px;
     }
 
 
-    /* View All on mobile */
-
     .view-all-text {
+
         font-size: 10px;
+
         letter-spacing: 1.5px;
     }
 
 
     .view-all-arrow {
+
         font-size: 18px;
     }
 
@@ -1007,6 +1222,7 @@
 @media (max-width: 400px) {
 
     .collections-grid {
+
         gap: 10px;
     }
 
@@ -1014,11 +1230,13 @@
     .collections-container {
 
         padding-left: 10px;
+
         padding-right: 10px;
     }
 
 
     .card-footer h3 {
+
         font-size: 12px;
     }
 
